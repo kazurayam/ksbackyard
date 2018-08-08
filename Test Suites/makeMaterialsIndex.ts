@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS1</name>
+   <name>makeMaterialsIndex</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <lastRun>2018-08-08T20:11:31</lastRun>
@@ -10,11 +10,11 @@
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>2d173bf0-ef51-434a-b94d-f3891c265c33</testSuiteGuid>
+   <testSuiteGuid>492d34eb-726e-43e6-bdf2-0796ac9120eb</testSuiteGuid>
    <testCaseLink>
-      <guid>dc2a36dd-9bf6-48a6-845d-04c486ca34bd</guid>
+      <guid>32209406-ce13-46e8-a672-5d083c5a6e7d</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/TC1</testCaseId>
+      <testCaseId>Test Cases/makeMaterialsIndex</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

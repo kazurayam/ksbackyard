@@ -9,4 +9,14 @@
       <initValue>'https://katalon-demo-cura.herokuapp.com'</initValue>
       <name>URL</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>null</initValue>
+      <name>MATERIAL_REPOSITORY</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>CURRENT_TESTCASE_ID</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

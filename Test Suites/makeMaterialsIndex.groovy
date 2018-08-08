@@ -19,11 +19,11 @@ import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 
 import internal.GlobalVariable as GlobalVariable
 
+
 import com.kms.katalon.core.annotation.SetUp
 import com.kms.katalon.core.annotation.SetupTestCase
 import com.kms.katalon.core.annotation.TearDown
 import com.kms.katalon.core.annotation.TearDownTestCase
-
 
 /**
  * Some methods below are samples for using SetUp/TearDown in a test suite.

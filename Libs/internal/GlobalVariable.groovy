@@ -18,17 +18,29 @@ public class GlobalVariable {
      */
     public static Object URL
      
+    /**
+     * <p></p>
+     */
+    public static Object MATERIAL_REPOSITORY
+     
+    /**
+     * <p></p>
+     */
+    public static Object CURRENT_TESTCASE_ID
+     
 
     static {
         def allVariables = [:]        
-        allVariables.put('default', ['URL' : 'https://katalon-demo-cura.herokuapp.com'])
-        allVariables.put('demo', allVariables['default'] + ['URL' : 'http://demoaut-mimic.kazurayam.com'])
-        allVariables.put('product', allVariables['default'] + ['URL' : 'https://katalon-demo-cura.herokuapp.com'])
+        allVariables.put('default', ['URL' : 'https://katalon-demo-cura.herokuapp.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
+        allVariables.put('demo', allVariables['default'] + ['URL' : 'http://demoaut-mimic.kazurayam.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
+        allVariables.put('product', allVariables['default'] + ['URL' : 'https://katalon-demo-cura.herokuapp.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
         
         String profileName = RunConfiguration.getExecutionProfile()
         
         def selectedVariables = allVariables[profileName]
         URL = selectedVariables['URL']
+        MATERIAL_REPOSITORY = selectedVariables['MATERIAL_REPOSITORY']
+        CURRENT_TESTCASE_ID = selectedVariables['CURRENT_TESTCASE_ID']
         
     }
 }
