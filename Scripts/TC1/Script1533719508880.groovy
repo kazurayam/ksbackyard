@@ -23,7 +23,7 @@ WebUI.delay(1)
 MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
-Path pngFile = mr.resolveScreenshotMaterialPath(
+Path pngFile = mr.resolveMaterialPath(
 	GlobalVariable.CURRENT_TESTCASE_ID, 'CURA_Healthcare_Searvice.png')
 
 CustomKeywords.'com.kazurayam.ksbackyard.AShotDriver.takeEntirePage'(
