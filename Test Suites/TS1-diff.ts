@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>makeMaterialsIndex</name>
+   <name>TS1-diff</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-08-09T10:41:00</lastRun>
+   <lastRun>2018-08-09T13:45:08</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>492d34eb-726e-43e6-bdf2-0796ac9120eb</testSuiteGuid>
+   <testSuiteGuid>7218adf1-803e-49c8-a89f-029a927f8543</testSuiteGuid>
    <testCaseLink>
-      <guid>32209406-ce13-46e8-a672-5d083c5a6e7d</guid>
+      <guid>fd378647-4c21-4dc7-a5ed-d878e28503f7</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/makeMaterialsIndex</testCaseId>
+      <testCaseId>Test Cases/TC1-diff</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

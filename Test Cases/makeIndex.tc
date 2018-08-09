@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>makeMaterialsIndex</name>
+   <name>makeIndex</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>839d473b-eee4-4be7-ac0b-03135c96ae21</testCaseGuid>

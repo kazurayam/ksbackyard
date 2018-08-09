@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>evaluateImageDiff</name>
+   <name>TC1-diff</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>78d55c8f-ef1b-4f7f-9b8e-3ef400e769f7</testCaseGuid>
