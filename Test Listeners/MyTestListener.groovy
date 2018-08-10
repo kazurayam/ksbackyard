@@ -53,8 +53,7 @@ class MyTestListener {
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
 		mr.putCurrentTestSuite(testSuiteId, testSuiteTimestamp)	
 		GlobalVariable.MATERIAL_REPOSITORY = mr
-		
-		WebUI.comment(">>> testSuiteId is '${testSuiteId}', testSuiteTimestamp is '${testSuiteTimestamp}'")
+		WebUI.comment(">>> testSuiteId is '${mr.getCurrentTestSuiteId()}', testSuiteTimestamp is '${mr.getCurrentTestSuiteId()}'")
 		WebUI.comment(">>> Instance of MaterialRepository(${mr.getBaseDir().toString()})" +
 			" is set to GlobalVariable.MATERIAL_REPOSITORY")
 	}
@@ -69,6 +68,9 @@ class MyTestListener {
 		if (GlobalVariable.MATERIAL_REPOSITORY == null) {
 			MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder)
 			GlobalVariable.MATERIAL_REPOSITORY = mr
+			WebUI.comment(">>> testSuiteId is '${mr.getCurrentTestSuiteId()}', testSuiteTimestamp is '${mr.getCurrentTestSuiteId()}'")
+			WebUI.comment(">>> Instance of MaterialRepository(${mr.getBaseDir().toString()})" +
+			" is set to GlobalVariable.MATERIAL_REPOSITORY")
 		}
 		GlobalVariable.CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId()   //  e.g., 'Test Cases/TC1'
 	}

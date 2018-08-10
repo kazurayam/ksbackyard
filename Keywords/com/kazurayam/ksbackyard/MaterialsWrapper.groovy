@@ -63,6 +63,8 @@ class MaterialsWrapper {
 			String testSuiteId     /* 'Test Suites/TS1' */) {
 
 		List<MaterialPair> list = mr_.getRecentMaterialPairs(expectedProfile, actualProfile, testSuiteId)
+		WebUI.comment(">>> list.size() is ${list.size()}")
+		
 		List<MaterialPair> result =
 				list.stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG

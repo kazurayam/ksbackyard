@@ -19,11 +19,17 @@ import com.kazurayam.material.Material
 import com.kazurayam.material.MaterialPair
 
 String profileExpected   = 'product'
-String profileActual     = 'demo'
+String profileActual     = 'develop'
 String tSuiteName        = 'TS1'
 
 List<MaterialPair> materialPairs = CustomKeywords.'com.kazurayam.ksbackyard.MaterialsWrapper.getScreenshotPairs'(
 	profileExpected, profileActual, 'TS1')
+
+CustomKeywords.'com.kazurayam.ksbackyard.Assert.assertTrue'(
+	">>> materialPairs.size() is 0", materialPairs.size() > 0)
+
+MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+assert mr != null
 
 for (MaterialPair pair : materialPairs) {
 	Material expMate = pair.getExpected()
