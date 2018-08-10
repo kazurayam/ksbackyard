@@ -24,7 +24,7 @@ MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 assert mr != null
 
 Path pngFile = mr.resolveMaterialPath(
-	GlobalVariable.CURRENT_TESTCASE_ID, 'CURA_Healthcare_Searvice.png')
+	GlobalVariable.CURRENT_TESTCASE_ID, 'CURA_Healthcare_Service.png')
 
 CustomKeywords.'com.kazurayam.ksbackyard.AShotDriver.takeEntirePage'(
 	DriverFactory.getWebDriver(), pngFile.toFile())

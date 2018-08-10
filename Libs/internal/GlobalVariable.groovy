@@ -32,7 +32,7 @@ public class GlobalVariable {
     static {
         def allVariables = [:]        
         allVariables.put('default', ['URL' : 'https://katalon-demo-cura.herokuapp.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
-        allVariables.put('demo', allVariables['default'] + ['URL' : 'http://demoaut-mimic.kazurayam.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
+        allVariables.put('develop', allVariables['default'] + ['URL' : 'http://demoaut-mimic.kazurayam.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
         allVariables.put('product', allVariables['default'] + ['URL' : 'https://katalon-demo-cura.herokuapp.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
         
         String profileName = RunConfiguration.getExecutionProfile()
