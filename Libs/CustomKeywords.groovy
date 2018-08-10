@@ -9,8 +9,6 @@ import java.lang.Boolean
 
 import com.kms.katalon.core.testobject.TestObject
 
-import com.kazurayam.material.ExecutionProfile
-
 import org.openqa.selenium.WebDriver
 
 import java.io.File
@@ -43,8 +41,8 @@ def static "com.kazurayam.ksbackyard.Assert.getHtmlTableRows"(
 }
 
 def static "com.kazurayam.ksbackyard.MaterialsWrapper.getScreenshotPairs"(
-    	ExecutionProfile expectedProfile	
-     , 	ExecutionProfile actualProfile	
+    	String expectedProfile	
+     , 	String actualProfile	
      , 	String testSuiteId	) {
     (new com.kazurayam.ksbackyard.MaterialsWrapper()).getScreenshotPairs(
         	expectedProfile

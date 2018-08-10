@@ -22,7 +22,7 @@ public class AShotDriver {
 				takeScreenshot(webDriver)
 		ImageIO.write(screenshot.getImage(), "PNG", file)
 	}
-	
+
 	@Keyword
 	static boolean hasSignificantDiff(ImageDiff diff, Float criteriaPercent) {
 		boolean hasDiff = diff.hasDiff()

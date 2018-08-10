@@ -58,15 +58,15 @@ class MaterialsWrapper {
 
 	@Keyword
 	List<MaterialPair> getScreenshotPairs(
-			ExecutionProfile expectedProfile /* 'product' */,
-			ExecutionProfile actualProfile   /* 'develop' */,
+			String expectedProfile /* 'product' */,
+			String actualProfile   /* 'develop' */,
 			String testSuiteId     /* 'Test Suites/TS1' */) {
 
 		List<MaterialPair> list = mr_.getRecentMaterialPairs(expectedProfile, actualProfile, testSuiteId)
-		List<MaterialPair> result = 
-			list.stream().filter {
-				mp -> mp.getLeft().getFileType() == FileType.PNG
-			}.collect(Collectors.toList())
+		List<MaterialPair> result =
+				list.stream().filter { mp ->
+					mp.getLeft().getFileType() == FileType.PNG
+				}.collect(Collectors.toList())
 		return result
 	}
 
