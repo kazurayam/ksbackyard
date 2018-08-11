@@ -15,4 +15,3 @@ MaterialRepository mr = MaterialRepositoryFactory.createInstance(materialsFolder
 Path index = mr.makeIndex()
 
 WebUI.comment(">>> ${index.toString()} is updated")
-WebUI.openBrowser(index.toUri().toURL().toString(), FailureHandling.CONTINUE_ON_FAILURE)

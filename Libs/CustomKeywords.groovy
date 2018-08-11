@@ -24,6 +24,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
          , 	file)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.diffRatioPercent"(
+    	ImageDiff diff	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).diffRatioPercent(
+        	diff)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.hasSignificantDiff"(
     	ImageDiff diff	
      , 	Float criteriaPercent	) {
@@ -36,12 +42,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(
     	String profileExpected	
      , 	String profileActual	
      , 	String tSuiteName	
-     , 	Float criteria	) {
+     , 	Float criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).makeDiffs(
         	profileExpected
          , 	profileActual
          , 	tSuiteName
-         , 	criteria)
+         , 	criteriaPercent)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(

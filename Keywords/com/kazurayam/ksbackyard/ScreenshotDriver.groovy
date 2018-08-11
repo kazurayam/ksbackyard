@@ -42,20 +42,22 @@ public class ScreenshotDriver {
 		ImageIO.write(screenshot.getImage(), "PNG", file)
 	}
 
+
 	@Keyword
-	static boolean hasSignificantDiff(ImageDiff diff, Float criteriaPercent) {
+	static Float diffRatioPercent(ImageDiff diff) {
 		boolean hasDiff = diff.hasDiff()
+		if (!hasDiff) {
+			return 0.0
+		}
 		int diffSize = diff.getDiffSize()
 		int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
 		Float diffRatio = diff.getDiffSize() / area * 100
-		//
-		StringBuilder sb = new StringBuilder()
-		sb.append("hasDiff is ${hasDiff}, ")
-		sb.append("diffSize is ${diffSize}, ")
-		sb.append("area is ${area}, ")
-		sb.append("diffRatio is ${diffRatio}%")
-		WebUI.comment(">>> " + sb.toString())
-		//
+		return diffRatio
+	}
+
+	@Keyword
+	static boolean hasSignificantDiff(ImageDiff diff, Float criteriaPercent) {
+		Float diffRatio = ScreenshotDriver.diffRatioPercent(diff)
 		if (diffRatio > criteriaPercent) {
 			KeywordUtil.markFailed("diffRatio = ${diffRatio} is exceeding criteria = ${criteriaPercent}")
 		}
@@ -64,7 +66,7 @@ public class ScreenshotDriver {
 
 
 	@Keyword
-	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName, Float criteria = 3.0) {
+	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName, Float criteriaPercent = 3.0) {
 
 		if (tSuiteName == null) {
 			throw new IllegalArgumentException('#doDiff argument tSuiteName is required')
@@ -86,6 +88,9 @@ public class ScreenshotDriver {
 			// get diff of the pair of images
 			ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
 
+			// get diffRatioPercent
+			Float diffRatioPercent = ScreenshotDriver.diffRatioPercent(diff)
+
 			// save the diff image into file
 			BufferedImage markedImage = diff.getMarkedImage()
 			String fileName = expMate.getPath().getFileName().toString()
@@ -94,10 +99,14 @@ public class ScreenshotDriver {
 			String actTimestamp = actMate.getParent().getParent().getTSuiteTimestamp().format()
 			Path pngFile = mr.resolveMaterialPath(
 					GlobalVariable.CURRENT_TESTCASE_ID,
-					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}.png")
+					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}" +
+					".(${String.format('%.2f', diffRatioPercent)}).png")
 			ImageIO.write(markedImage, "PNG", pngFile.toFile())
+
 			// verify the diff-ratio, fail the test if the ratio is greater than criteria
-			def result = ScreenshotDriver.hasSignificantDiff(diff, criteria)
+			if (diffRatioPercent > criteriaPercent) {
+				KeywordUtil.markFailed("diffRatio = ${diffRatioPercent} is exceeding criteria = ${criteriaPercent}")
+			}
 		}
 	}
 
@@ -115,5 +124,4 @@ public class ScreenshotDriver {
 		KeywordUtil.markPassed("returning MaterialPairs successfully")
 		return result
 	}
-
 }
