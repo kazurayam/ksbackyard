@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>ImageDiff</name>
+   <name>makeDiffs</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-08-11T07:54:09</lastRun>
+   <lastRun>2018-08-11T12:24:42</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
@@ -15,6 +15,6 @@
       <guid>fd378647-4c21-4dc7-a5ed-d878e28503f7</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/ImageDiff</testCaseId>
+      <testCaseId>Test Cases/makeDiffs</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

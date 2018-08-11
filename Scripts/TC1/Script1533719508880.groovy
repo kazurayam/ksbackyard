@@ -26,7 +26,7 @@ assert mr != null
 Path pngFile = mr.resolveMaterialPath(
 	GlobalVariable.CURRENT_TESTCASE_ID, 'CURA_Healthcare_Service.png')
 
-CustomKeywords.'com.kazurayam.ksbackyard.AShotDriver.takeEntirePage'(
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(
 	DriverFactory.getWebDriver(), pngFile.toFile())
 
 
