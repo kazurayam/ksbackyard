@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>makeIndex</name>
+   <name>clearMaterials</name>
    <tag></tag>
    <isRerun>false</isRerun>
-   <lastRun>2018-08-12T08:15:14</lastRun>
+   <lastRun>2018-08-12T08:15:13</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>492d34eb-726e-43e6-bdf2-0796ac9120eb</testSuiteGuid>
+   <testSuiteGuid>1a692112-e22e-4905-9480-f3dea437bb58</testSuiteGuid>
    <testCaseLink>
-      <guid>32209406-ce13-46e8-a672-5d083c5a6e7d</guid>
+      <guid>bde07251-53ab-40ab-b178-1cbc2682042e</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/makeIndex</testCaseId>
+      <testCaseId>Test Cases/clearMaterials</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

@@ -9,7 +9,7 @@ import java.io.File
 
 import ru.yandex.qatools.ashot.comparison.ImageDiff
 
-import java.lang.Float
+import java.lang.Double
 
 import java.lang.String
 
@@ -32,7 +32,7 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.diffRatioPercent"(
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.hasSignificantDiff"(
     	ImageDiff diff	
-     , 	Float criteriaPercent	) {
+     , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).hasSignificantDiff(
         	diff
          , 	criteriaPercent)
@@ -42,7 +42,7 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(
     	String profileExpected	
      , 	String profileActual	
      , 	String tSuiteName	
-     , 	Float criteriaPercent	) {
+     , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).makeDiffs(
         	profileExpected
          , 	profileActual

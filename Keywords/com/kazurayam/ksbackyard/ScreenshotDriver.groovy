@@ -44,20 +44,20 @@ public class ScreenshotDriver {
 
 
 	@Keyword
-	static Float diffRatioPercent(ImageDiff diff) {
+	static Double diffRatioPercent(ImageDiff diff) {
 		boolean hasDiff = diff.hasDiff()
 		if (!hasDiff) {
 			return 0.0
 		}
 		int diffSize = diff.getDiffSize()
 		int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
-		Float diffRatio = diff.getDiffSize() / area * 100
+		Double diffRatio = diff.getDiffSize() / area * 100
 		return diffRatio
 	}
 
 	@Keyword
-	static boolean hasSignificantDiff(ImageDiff diff, Float criteriaPercent) {
-		Float diffRatio = ScreenshotDriver.diffRatioPercent(diff)
+	static boolean hasSignificantDiff(ImageDiff diff, Double criteriaPercent) {
+		Double diffRatio = ScreenshotDriver.diffRatioPercent(diff)
 		if (diffRatio > criteriaPercent) {
 			KeywordUtil.markFailed("diffRatio = ${diffRatio} is exceeding criteria = ${criteriaPercent}")
 		}
@@ -65,8 +65,16 @@ public class ScreenshotDriver {
 
 
 
+	/**
+	 * 
+	 * @param profileExpected e.g., 'product'
+	 * @param profileAcutual  e.g., 'develop'
+	 * @param tSuiteName      e.g., 'TS1'
+	 * @param criteriaPercent e.g.,  3.83
+	 * @return
+	 */
 	@Keyword
-	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName, Float criteriaPercent = 3.0) {
+	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName, Double criteriaPercent = 3.0) {
 
 		if (tSuiteName == null) {
 			throw new IllegalArgumentException('#doDiff argument tSuiteName is required')
@@ -77,6 +85,8 @@ public class ScreenshotDriver {
 
 		MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 		assertTrue(">>> GlobalVariable.MATERIAL_REPOSITORY is null", mr != null)
+
+		List<Double> ratios = new ArrayList<Double>()
 
 		for (MaterialPair pair : materialPairs) {
 			Material expMate = pair.getExpected()
@@ -90,6 +100,7 @@ public class ScreenshotDriver {
 
 			// get diffRatioPercent
 			Float diffRatioPercent = ScreenshotDriver.diffRatioPercent(diff)
+			ratios.add(diffRatioPercent)
 
 			// save the diff image into file
 			BufferedImage markedImage = diff.getMarkedImage()
@@ -108,9 +119,58 @@ public class ScreenshotDriver {
 				KeywordUtil.markFailed("diffRatio = ${diffRatioPercent} is exceeding criteria = ${criteriaPercent}")
 			}
 		}
+		// show statistics
+		printRatios(ratios)
+		Double averageValue = average(ratios)
+		println ">>> #makeDiffs averate of diffRatios is ${String.format('%.2f', averageValue)}"
+		Double stddevValue = evalStandardDeviation(ratios)
+		println ">>> #makeDiffs standard deviation of diffRatio is ${String.format('%.2f', stddevValue)}"
+		Double recommendedCriteria = evalRecommendedCriteria(ratios, 1.6)
+		println ">>> #makeDiffs recommended criteria is ${String.format('%.2f', recommendedCriteria)}"	
 	}
-
-
+	static void printRatios(List<Double> data) {
+		StringBuilder sb = new StringBuilder()
+		sb.append(">>> #makeIndex ratios is ")
+		sb.append("[")
+		def count = 0
+		for (Double d : data) {
+			if (count > 0) {
+				sb.append(", ")
+			}
+			sb.append(String.format('%.2f', d))
+			count += 1
+		}
+		sb.append("] percent")
+		println sb.toString()
+	}
+	static Double average(List<Double> data) {
+		Double sum = 0.0
+		for (Double d : data) {
+			sum += d
+		}
+		return sum / data.size()
+	}
+	static Double evalStandardDeviation(List<Double> data) {
+		Double average = average(data)
+		Double s = 0.0
+		for (Double d : data) {
+			s += (average - d) * (average - d)
+		}
+		return Math.sqrt(s / data.size)
+	}
+	static Double evalRecommendedCriteria(List<Double> data, Double factor = 1.5) {
+		Double average = average(data)
+		Double stddevi = evalStandardDeviation(data)
+		return average + stddevi * factor
+	}
+	
+	/**
+	 * 
+	 * @param expectedProfile
+	 * @param actualProfile
+	 * @param testSuiteId
+	 * @return
+	 */
 	static List<MaterialPair> getScreenshotPairs(
 			String expectedProfile /* 'product' */,
 			String actualProfile   /* 'develop' */,
