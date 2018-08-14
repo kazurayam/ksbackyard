@@ -15,6 +15,10 @@ import java.lang.String
 
 import java.lang.Boolean
 
+import com.kms.katalon.core.model.FailureHandling
+
+import java.lang.Number
+
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
     	WebDriver webDriver	
@@ -74,10 +78,70 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(
         	tSuiteName)
 }
 
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
+def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
+    	String message	
+     , 	Boolean condition	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.Assert()).assertTrue(
+        	message
+         , 	condition
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
+    	String message	
+     , 	String expected	
+     , 	String actual	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.Assert()).assertEquals(
+        	message
+         , 	expected
+         , 	actual
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
+    	String message	
+     , 	Number expected	
+     , 	Number actual	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.Assert()).assertEquals(
+        	message
+         , 	expected
+         , 	actual
+         , 	flowControl)
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	) {
     (new com.kazurayam.ksbackyard.Assert()).assertTrue(
         	message
          , 	condition)
+}
+
+def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
+    	String message	
+     , 	String expected	
+     , 	String actual	) {
+    (new com.kazurayam.ksbackyard.Assert()).assertEquals(
+        	message
+         , 	expected
+         , 	actual)
+}
+
+def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
+    	String message	
+     , 	Number expected	
+     , 	Number actual	) {
+    (new com.kazurayam.ksbackyard.Assert()).assertEquals(
+        	message
+         , 	expected
+         , 	actual)
 }

@@ -126,7 +126,7 @@ public class ScreenshotDriver {
 		Double stddevValue = evalStandardDeviation(ratios)
 		println ">>> #makeDiffs standard deviation of diffRatio is ${String.format('%.2f', stddevValue)}"
 		Double recommendedCriteria = evalRecommendedCriteria(ratios, 1.6)
-		println ">>> #makeDiffs recommended criteria is ${String.format('%.2f', recommendedCriteria)}"	
+		println ">>> #makeDiffs recommended criteria is ${String.format('%.2f', recommendedCriteria)}"
 	}
 	static void printRatios(List<Double> data) {
 		StringBuilder sb = new StringBuilder()
@@ -163,7 +163,7 @@ public class ScreenshotDriver {
 		Double stddevi = evalStandardDeviation(data)
 		return average + stddevi * factor
 	}
-	
+
 	/**
 	 * 
 	 * @param expectedProfile
@@ -184,4 +184,5 @@ public class ScreenshotDriver {
 		KeywordUtil.markPassed("returning MaterialPairs successfully")
 		return result
 	}
+
 }
