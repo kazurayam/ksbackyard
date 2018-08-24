@@ -10,10 +10,10 @@ import javax.imageio.ImageIO
 
 import org.openqa.selenium.WebDriver
 
-import com.kazurayam.material.FileType
-import com.kazurayam.material.Material
-import com.kazurayam.material.MaterialPair
-import com.kazurayam.material.MaterialRepository
+import com.kazurayam.materials.FileType
+import com.kazurayam.materials.Material
+import com.kazurayam.materials.MaterialPair
+import com.kazurayam.materials.MaterialRepository
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -116,7 +116,7 @@ public class ScreenshotDriver {
 			Path pngFile = mr.resolveMaterialPath(
 					GlobalVariable.CURRENT_TESTCASE_ID,
 					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}" +
-					".(${String.format('%.2f', diffRatioPercent)})${(failed)?'F':''}.png")
+					".(${String.format('%.2f', diffRatioPercent)})${(failed) ? 'FAILED' : ''}.png")
 			ImageIO.write(markedImage, "PNG", pngFile.toFile())
 
 
