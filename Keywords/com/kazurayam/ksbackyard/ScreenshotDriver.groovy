@@ -25,7 +25,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff
 import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
-
 public class ScreenshotDriver {
 
 	static MaterialRepository mr_ = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
@@ -66,7 +65,7 @@ public class ScreenshotDriver {
 
 
 	/**
-	 * 
+	 *
 	 * @param profileExpected e.g., 'product'
 	 * @param profileAcutual  e.g., 'develop'
 	 * @param tSuiteName      e.g., 'TS1'
@@ -74,14 +73,15 @@ public class ScreenshotDriver {
 	 * @return
 	 */
 	@Keyword
-	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName, Double criteriaPercent = 3.0) {
+	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName,
+			Double criteriaPercent = 3.0) {
 
 		if (tSuiteName == null) {
 			throw new IllegalArgumentException('#doDiff argument tSuiteName is required')
 		}
 
 		List<MaterialPair> materialPairs = ScreenshotDriver.getScreenshotPairs(profileExpected, profileActual, tSuiteName)
-		Assert.assertTrue(">>> materialPairs.size() is 0", materialPairs.size() > 0)
+		assertTrue(">>> materialPairs.size() is 0", materialPairs.size() > 0)
 
 		MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
 		assertTrue(">>> GlobalVariable.MATERIAL_REPOSITORY is null", mr != null)
@@ -108,16 +108,18 @@ public class ScreenshotDriver {
 			String fileId = fileName.substring(0, fileName.lastIndexOf('.'))
 			String expTimestamp = expMate.getParent().getParent().getTSuiteTimestamp().format()
 			String actTimestamp = actMate.getParent().getParent().getTSuiteTimestamp().format()
+			Boolean failed = (diffRatioPercent > criteriaPercent)
+			// verify the diff-ratio, fail the test if the ratio is greater than criteria
+			if (failed) {
+				KeywordUtil.markFailed("diffRatio = ${diffRatioPercent} is exceeding criteria = ${criteriaPercent}")
+			}
 			Path pngFile = mr.resolveMaterialPath(
 					GlobalVariable.CURRENT_TESTCASE_ID,
 					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}" +
-					".(${String.format('%.2f', diffRatioPercent)}).png")
+					".(${String.format('%.2f', diffRatioPercent)})${(failed)?'F':''}.png")
 			ImageIO.write(markedImage, "PNG", pngFile.toFile())
 
-			// verify the diff-ratio, fail the test if the ratio is greater than criteria
-			if (diffRatioPercent > criteriaPercent) {
-				KeywordUtil.markFailed("diffRatio = ${diffRatioPercent} is exceeding criteria = ${criteriaPercent}")
-			}
+
 		}
 		// show statistics
 		printRatios(ratios)
@@ -128,6 +130,7 @@ public class ScreenshotDriver {
 		Double recommendedCriteria = evalRecommendedCriteria(ratios, 1.6)
 		println ">>> #makeDiffs recommended criteria is ${String.format('%.2f', recommendedCriteria)}"
 	}
+
 	static void printRatios(List<Double> data) {
 		StringBuilder sb = new StringBuilder()
 		sb.append(">>> #makeIndex ratios is ")
@@ -143,6 +146,7 @@ public class ScreenshotDriver {
 		sb.append("] percent")
 		println sb.toString()
 	}
+
 	static Double average(List<Double> data) {
 		Double sum = 0.0
 		for (Double d : data) {
@@ -150,6 +154,7 @@ public class ScreenshotDriver {
 		}
 		return sum / data.size()
 	}
+
 	static Double evalStandardDeviation(List<Double> data) {
 		Double average = average(data)
 		Double s = 0.0
@@ -158,6 +163,7 @@ public class ScreenshotDriver {
 		}
 		return Math.sqrt(s / data.size)
 	}
+
 	static Double evalRecommendedCriteria(List<Double> data, Double factor = 1.5) {
 		Double average = average(data)
 		Double stddevi = evalStandardDeviation(data)
@@ -165,7 +171,7 @@ public class ScreenshotDriver {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param expectedProfile
 	 * @param actualProfile
 	 * @param testSuiteId
@@ -184,5 +190,4 @@ public class ScreenshotDriver {
 		KeywordUtil.markPassed("returning MaterialPairs successfully")
 		return result
 	}
-
 }

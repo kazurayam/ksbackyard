@@ -14,7 +14,7 @@ class Assert {
 	private static KeywordLogger logger = new KeywordLogger()
 
 	/**
-	 * Refresh browser
+	 *
 	 */
 	@Keyword
 	static def assertTrue(String message, Boolean condition,
@@ -24,6 +24,9 @@ class Assert {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Keyword
 	static def assertEquals(String message, String expected, String actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
@@ -32,6 +35,9 @@ class Assert {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Keyword
 	static def assertEquals(String message, Number expected, Number actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
@@ -40,7 +46,7 @@ class Assert {
 		}
 	}
 
-	static def stepFailed(String message, FailureHandling flowControl) {
+	private static def stepFailed(String message, FailureHandling flowControl) {
 		if (flowControl == FailureHandling.OPTIONAL) {
 			logger.logWarning(message)
 		} else if (flowControl == FailureHandling.CONTINUE_ON_FAILURE) {
