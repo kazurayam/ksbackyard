@@ -15,6 +15,6 @@
       <guid>32209406-ce13-46e8-a672-5d083c5a6e7d</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/makeIndex</testCaseId>
+      <testCaseId>Test Cases/main/makeIndex</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

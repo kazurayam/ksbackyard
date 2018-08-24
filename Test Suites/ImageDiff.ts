@@ -15,6 +15,6 @@
       <guid>fd378647-4c21-4dc7-a5ed-d878e28503f7</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/ImageDiff</testCaseId>
+      <testCaseId>Test Cases/main/ImageDiff</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
