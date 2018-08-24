@@ -12,12 +12,12 @@ import com.kms.katalon.core.util.KeywordUtil
 class Assert {
 
 	private static KeywordLogger logger = new KeywordLogger()
-	
+
 	/**
 	 * Refresh browser
 	 */
 	@Keyword
-	static def assertTrue(String message, Boolean condition, 
+	static def assertTrue(String message, Boolean condition,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
 		if (!condition) {
 			stepFailed(message, flowControl)
@@ -31,7 +31,7 @@ class Assert {
 			stepFailed(message, flowControl)
 		}
 	}
-	
+
 	@Keyword
 	static def assertEquals(String message, Number expected, Number actual,
 			FailureHandling flowControl = CONTINUE_ON_FAILURE) {
@@ -39,7 +39,7 @@ class Assert {
 			stepFailed(message, flowControl)
 		}
 	}
-		
+
 	static def stepFailed(String message, FailureHandling flowControl) {
 		if (flowControl == FailureHandling.OPTIONAL) {
 			logger.logWarning(message)
