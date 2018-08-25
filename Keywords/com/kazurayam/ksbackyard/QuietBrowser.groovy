@@ -19,7 +19,7 @@ import com.kms.katalon.core.webui.driver.WebUIDriverType
 
 
 class QuietBrowser {
-	
+
 	@Keyword
 	def openBrowser() {
 		WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
@@ -43,7 +43,7 @@ class QuietBrowser {
 				throw new UnsupportedOperationException("Unsuported WebUIDriverType ${executedBrowser}")
 		}
 	}
-	
+
 	def createChromeDriver() {
 		Map<String, Object> chromePreferences = new HashMap<>()
 		// Below two preference settings will disable popup dialog when download file
@@ -54,7 +54,10 @@ class QuietBrowser {
 		chromePreferences.put('download.default_directory', downloads.toString())
 		// disable flash and pdf viewer
 		chromePreferences.put('plugins.plugins_disabled',
-			['Adobe Flash Player', 'Chrome PDF Viewer'])
+				[
+					'Adobe Flash Player',
+					'Chrome PDF Viewer'
+				])
 		//
 		ChromeOptions chromeOptions = new ChromeOptions()
 		chromeOptions.setExperimentalOption('prefs', chromePreferences)
@@ -64,7 +67,7 @@ class QuietBrowser {
 		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions)
 		return new ChromeDriver(cap)
 	}
-	
+
 	def createChromeHeadlessDriver() {
 		ChromeOptions o = new ChromeOptions()
 		o.addArguments('headless')
@@ -101,41 +104,41 @@ class QuietBrowser {
 		options.setProfile(profile)
 		return new FirefoxDriver(options)
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/**
 	 * Refresh browser
 	 *
-	@Keyword
-	def refreshBrowser() {
-		KeywordUtil.logInfo("Refreshing")
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		webDriver.navigate().refresh()
-		KeywordUtil.markPassed("Refresh successfully")
-	}
+	 @Keyword
+	 def refreshBrowser() {
+	 KeywordUtil.logInfo("Refreshing")
+	 WebDriver webDriver = DriverFactory.getWebDriver()
+	 webDriver.navigate().refresh()
+	 KeywordUtil.markPassed("Refresh successfully")
+	 }
 	 */
 
 	/**
 	 * Click element
 	 * @param to Katalon test object
 	 *
-	@Keyword
-	def clickElement(TestObject to) {
-		try {
-			WebElement element = WebUiBuiltInKeywords.findWebElement(to);
-			KeywordUtil.logInfo("Clicking element")
-			element.click()
-			KeywordUtil.markPassed("Element has been clicked")
-		} catch (WebElementNotFoundException e) {
-			KeywordUtil.markFailed("Element not found")
-		} catch (Exception e) {
-			KeywordUtil.markFailed("Fail to click on element")
-		}
-	}
+	 @Keyword
+	 def clickElement(TestObject to) {
+	 try {
+	 WebElement element = WebUiBuiltInKeywords.findWebElement(to);
+	 KeywordUtil.logInfo("Clicking element")
+	 element.click()
+	 KeywordUtil.markPassed("Element has been clicked")
+	 } catch (WebElementNotFoundException e) {
+	 KeywordUtil.markFailed("Element not found")
+	 } catch (Exception e) {
+	 KeywordUtil.markFailed("Fail to click on element")
+	 }
+	 }
 	 */
 
 	/**
@@ -144,11 +147,11 @@ class QuietBrowser {
 	 * @param outerTagName outer tag name of TR tag, usually is TBODY
 	 * @return All rows inside HTML table
 	 *
-	@Keyword
-	def List<WebElement> getHtmlTableRows(TestObject table, String outerTagName) {
-		WebElement mailList = WebUiBuiltInKeywords.findWebElement(table)
-		List<WebElement> selectedRows = mailList.findElements(By.xpath("./" + outerTagName + "/tr"))
-		return selectedRows
-	}
+	 @Keyword
+	 def List<WebElement> getHtmlTableRows(TestObject table, String outerTagName) {
+	 WebElement mailList = WebUiBuiltInKeywords.findWebElement(table)
+	 List<WebElement> selectedRows = mailList.findElements(By.xpath("./" + outerTagName + "/tr"))
+	 return selectedRows
+	 }
 	 */
 }

@@ -52,6 +52,7 @@ class Assert {
 		} else if (flowControl == FailureHandling.CONTINUE_ON_FAILURE) {
 			logger.logFailed(message)
 		} else {// flowControl == FailureHandling.STOP_ON_FAILURE
+			logger.logFailed(message)
 			KeywordUtil.markFailedAndStop(message)
 		}
 	}

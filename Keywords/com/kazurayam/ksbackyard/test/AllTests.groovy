@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses
 
 @RunWith(Suite.class)
 @SuiteClasses([
-	URLParserTest.class
+	AssertTest.class, URLParserTest.class
 ])
 // please note. Difference of Groovy and Java here.
 // In Java, this will be written as @SuiteClasses({...}). Difference of Java and Groovy here.

@@ -84,6 +84,10 @@ def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
         	urlString)
 }
 
+def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
+    (new com.kazurayam.ksbackyard.QuietBrowser()).openBrowser()
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -144,8 +148,4 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
-}
-
-def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
-    (new com.kazurayam.ksbackyard.QuietBrowser()).openBrowser()
 }
