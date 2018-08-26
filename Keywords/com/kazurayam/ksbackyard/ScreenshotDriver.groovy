@@ -36,7 +36,7 @@ public class ScreenshotDriver {
 	@Keyword
 	static void takeEntirePage(WebDriver webDriver, File file) {
 		Screenshot screenshot = new AShot().
-				shootingStrategy(ShootingStrategies.viewportPasting(100)).
+				shootingStrategy(ShootingStrategies.viewportPasting(500)).
 				takeScreenshot(webDriver)
 		ImageIO.write(screenshot.getImage(), "PNG", file)
 	}
