@@ -1,6 +1,8 @@
 Katalon Studio Backyard
 =======================
 
+Current version is 0.6
+
 This project is a [Katalon Studio]() project where I develop a few Custom Keywords
 to share with other Katalon Studio projects. The custom keywords belongs to
 the Java package name `com.kazurayam.ksbackyard`.
