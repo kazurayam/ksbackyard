@@ -21,30 +21,32 @@ import com.kms.katalon.core.webui.driver.WebUIDriverType
 class QuietBrowser {
 
 	@Keyword
-	def openBrowser() {
+	static WebDriver openBrowser() {
 		WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
+		WebDriver driver
 		switch (executedBrowser) {
 			case WebUIDriverType.CHROME_DRIVER:
 				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createChromeDriver()
+				driver = createChromeDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			case WebUIDriverType.HEADLESS_DRIVER:
 				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createChromeHeadlessDriver()
+				driver = createChromeHeadlessDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			case WebUIDriverType.FIREFOX_DRIVER:
-				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
-				WebDriver driver = createFirefoxDriver()
+				System.setProperty('webdriver.gecko.driver', DriverFactory.getGeckoDriverPath())
+				driver = createFirefoxDriver()
 				DriverFactory.changeWebDriver(driver)
 				break
 			default:
 				throw new UnsupportedOperationException("Unsuported WebUIDriverType ${executedBrowser}")
 		}
+		return driver
 	}
 
-	def createChromeDriver() {
+	static ChromeDriver createChromeDriver() {
 		Map<String, Object> chromePreferences = new HashMap<>()
 		// Below two preference settings will disable popup dialog when download file
 		chromePreferences.put('profile.default_content_settings.popups', 0)
@@ -68,13 +70,13 @@ class QuietBrowser {
 		return new ChromeDriver(cap)
 	}
 
-	def createChromeHeadlessDriver() {
+	static ChromeDriver createChromeHeadlessDriver() {
 		ChromeOptions o = new ChromeOptions()
 		o.addArguments('headless')
 		return new ChromeDriver(o)
 	}
 
-	def createFirefoxDriver() {
+	static FirefoxDriver createFirefoxDriver() {
 		/**
 		 * see https://stackoverflow.com/questions/36309314/set-firefox-profile-to-download-files-automatically-using-selenium-and-java
 		 *

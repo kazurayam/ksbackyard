@@ -157,3 +157,7 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
          , 	expected
          , 	actual)
 }
+
+def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
+    (new com.kazurayam.ksbackyard.QuietBrowser()).openBrowser()
+}

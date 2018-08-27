@@ -9,14 +9,14 @@ import com.kazurayam.ksbackyard.URLParser
 
 class URLParserTest {
 
-	def url = 'https://fnhp.qhit.net/fn/fundDetail.html?corp=ecza&code=59311102'
+	def url = 'https://foo.bar.com/app.html?corp=efgh&code=59311102'
 
 	@Test
 	void test_queryParameters() {
 		def params = URLParser.queryParameters(url)
 		assertThat(params.size(), is(2))
 		assertTrue(params.containsKey('corp'))
-		assertThat(params.corp, is('ecza'))
+		assertThat(params.corp, is('efgh'))
 		assertTrue(params.containsKey('code'))
 		assertThat(params.code, is('59311102'))
 	}
@@ -24,12 +24,12 @@ class URLParserTest {
 	@Test
 	void test_queryParameter_corp() {
 		def corpValue = URLParser.queryParameter(url, 'corp')
-		assertThat(corpValue, is('ecza'))
+		assertThat(corpValue, is('efgh'))
 	}
 
 	@Test
 	void test_queryParameter_code() {
-		def codeValue = URLParser.queryParameter(url, 'code')
+		def codeValue = URLParser.queryParameter(url, 'efgh')
 		assertThat(codeValue, is('59311102'))
 	}
 }
