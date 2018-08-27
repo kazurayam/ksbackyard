@@ -2,7 +2,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
-import com.kazurayam.material.MaterialRepository
+import com.kazurayam.materials.MaterialRepository
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -27,7 +27,7 @@ Path pngFile = mr.resolveMaterialPath(
 	GlobalVariable.CURRENT_TESTCASE_ID, 'CURA_Healthcare_Service.png')
 
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(
-	DriverFactory.getWebDriver(), pngFile.toFile())
+	DriverFactory.getWebDriver(), pngFile.toFile(), 500)
 
 
 WebUI.closeBrowser()

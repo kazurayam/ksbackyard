@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver
 
 import java.io.File
 
+import java.lang.Integer
+
 import ru.yandex.qatools.ashot.comparison.ImageDiff
 
 import java.lang.Double
@@ -22,10 +24,12 @@ import java.lang.Number
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
     	WebDriver webDriver	
-     , 	File file	) {
+     , 	File file	
+     , 	Integer timeout	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
         	webDriver
-         , 	file)
+         , 	file
+         , 	timeout)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.diffRatioPercent"(
@@ -52,6 +56,14 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(
          , 	profileActual
          , 	tSuiteName
          , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
+    	WebDriver webDriver	
+     , 	File file	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
+        	webDriver
+         , 	file)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs"(

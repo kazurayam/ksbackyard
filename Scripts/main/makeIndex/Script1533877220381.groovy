@@ -1,11 +1,10 @@
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.material.MaterialRepository
-import com.kazurayam.material.MaterialRepositoryFactory
+import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.materials.MaterialRepositoryFactory
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
 
 /**
  * update ./Materials/index.html file

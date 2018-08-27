@@ -1,5 +1,5 @@
 import java.nio.file.Paths
 
-import com.kazurayam.material.Helpers
+import com.kazurayam.materials.Helpers
 
 Helpers.deleteDirectory(Paths.get('./Materials'))

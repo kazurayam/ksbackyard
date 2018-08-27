@@ -1,6 +1,7 @@
 package com.kazurayam.ksbackyard.test
 
 import org.junit.Test
+
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 
 class AssertTest {
