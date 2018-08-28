@@ -161,3 +161,7 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
     (new com.kazurayam.ksbackyard.QuietBrowser()).openBrowser()
 }
+
+def static "com.kazurayam.ksbackyard.QuietBrowser.getProxyInformation"() {
+    (new com.kazurayam.ksbackyard.QuietBrowser()).getProxyInformation()
+}
