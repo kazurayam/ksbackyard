@@ -3,6 +3,8 @@
  * This class is generated automatically by Katalon Studio and should not be modified or deleted.
  */
 
+import java.lang.String
+
 import org.openqa.selenium.WebDriver
 
 import java.io.File
@@ -13,14 +15,22 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff
 
 import java.lang.Double
 
-import java.lang.String
-
 import java.lang.Boolean
 
 import com.kms.katalon.core.model.FailureHandling
 
 import java.lang.Number
 
+
+def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
+    (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).getProjectDir()
+}
+
+def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.resolveAgainstProjectDir"(
+    	String pathString	) {
+    (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).resolveAgainstProjectDir(
+        	pathString)
+}
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
     	WebDriver webDriver	
