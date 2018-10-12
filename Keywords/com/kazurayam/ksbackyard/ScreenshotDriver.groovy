@@ -79,12 +79,9 @@ class ScreenshotDriver {
 	 * @param output
 	 */
 	@Keyword
-	static void saveElementImage(WebDriver webDriver, WebElement webElement, Path output) {
-		if (!Files.exists(output.getParent())) {
-			Files.createDirectories(output.getParent())
-		}
+	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
-		ImageIO.write(image, "PNG", output.toFile())
+		ImageIO.write(image, "PNG", file)
 	}
 
 
@@ -95,6 +92,7 @@ class ScreenshotDriver {
 	 *
 	 * @param webDriver
 	 * @param webElement
+	 * @param timeout millisecond, wait for page to be displayed after scrolling downward to view next viewport
 	 * @return BufferedImage
 	 */
 	@Keyword
@@ -132,6 +130,10 @@ class ScreenshotDriver {
 	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = 300) {
 		saveEntirePageImage(webDriver, file, timeout)
 	}
+
+
+
+
 
 
 	/**

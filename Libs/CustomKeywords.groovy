@@ -7,11 +7,9 @@ import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
-import java.nio.file.Path
+import java.io.File
 
 import java.lang.Integer
-
-import java.io.File
 
 import java.awt.image.BufferedImage
 
@@ -37,11 +35,11 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
     	WebDriver webDriver	
      , 	WebElement webElement	
-     , 	Path output	) {
+     , 	File file	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveElementImage(
         	webDriver
          , 	webElement
-         , 	output)
+         , 	file)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
