@@ -6,6 +6,7 @@ import java.util.stream.Collectors
 import javax.imageio.ImageIO
 
 import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
+import com.kazurayam.materials.ExecutionProfile
 import com.kazurayam.materials.FileType
 import com.kazurayam.materials.Material
 import com.kazurayam.materials.MaterialPair
@@ -37,9 +38,7 @@ class ImageCollectionDiffer {
 	 * Non-argument constructor is required to pass "Test Cases/Test/Prologue" 
 	 * which calls `CustomKeywords."${className}.getClass"().getName()`
 	 */
-	ImageCollectionDiffer() {
-		mr_ = null
-	}
+	ImageCollectionDiffer() {}
 
 	void setVTListener(VisualTestingListener listener) {
 		listener_ = listener
@@ -49,35 +48,41 @@ class ImageCollectionDiffer {
 	 *
 	 * @param profileExpected e.g. 'product'
 	 * @param profileAcutual  e.g. 'develop'
-	 * @param tSuiteId        e.g. 'Test Suites/Main/TS1'
-	 * @param tCaseId         e.g. 'Test Cases/main/ImageDiff'
+	 * @param tSuiteName        e.g. new TSuiteName('Test Suites/Main/TS1')
+	 * @param tCaseName         e.g. new TCaseName('Test Cases/main/ImageDiff')
 	 * @param criteriaPercent e.g.  3.83
 	 * @return
 	 */
-	def makeDiffs(String profileExpected = 'product',
-			String profileActual = 'develop',
-			String tSuiteId,
-			String tCaseId,
+	def makeDiffs(ExecutionProfile profileExpected,
+			ExecutionProfile profileActual,
+			TSuiteName tSuiteName,
+			TCaseName tCaseName,
 			Double criteriaPercent = 3.0) {
 
-		assert mr_ != null
+		if (mr_ == null) {
+			throw new IllegalStateException('mr_ is null')
+		}
 
-		if (tSuiteId == null) {
-			throw new IllegalArgumentException('tSuiteId is required')
+		if (profileExpected == null) {
+			throw new IllegalArgumentException('profileExcpected is required')
 		}
-		if (tCaseId == null) {
-			throw new IllegalArgumentException('tCaseId is required')
+		if (profileActual == null) {
+			throw new IllegalArgumentException('profileActual is required')
 		}
-		String tSuiteName = new TSuiteName(tSuiteId).getValue() // 'Test Suites/Main/TS1' -> 'Main.TS1'
-		String tCaseName  = new TCaseName(tCaseId).getValue()   // 'Test Cases/ImageDiff' -> 'ImageDiff'
+		if (tSuiteName == null) {
+			throw new IllegalArgumentException('tSuiteName is required')
+		}
+		if (tCaseName == null) {
+			throw new IllegalArgumentException('tCaseName is required')
+		}
 
 		List<MaterialPair> materialPairs =
 				mr_.getRecentMaterialPairs(profileExpected, profileActual, tSuiteName).
 				stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
 				}.collect(Collectors.toList())
-		if (materialPairs.size() > 0) {
-			listener_.fatal(">>> materialPairs.size() is 0")
+		if (materialPairs.size() == 0) {
+			listener_.fatal(">>> materialPairs.size() is 0. there must be something wrong.")
 		}
 
 		Statistics stats = new Statistics()
@@ -123,8 +128,9 @@ class ImageCollectionDiffer {
 	 *
 	 * @return
 	 */
-	String resolveImageDiffFilename(String profileExpected,
-			String profileActual,
+	String resolveImageDiffFilename(
+			ExecutionProfile profileExpected,
+			ExecutionProfile profileActual,
 			Material expMate,
 			Material actMate,
 			ImageDifference diff,

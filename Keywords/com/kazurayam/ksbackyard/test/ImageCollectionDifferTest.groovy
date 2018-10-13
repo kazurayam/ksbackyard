@@ -11,8 +11,11 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.kazurayam.ksbackyard.ImageCollectionDiffer
+import com.kazurayam.materials.ExecutionProfile
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialRepositoryFactory
+import com.kazurayam.materials.TCaseName
+import com.kazurayam.materials.TSuiteName
 
 class ImageCollectionDifferTest {
 
@@ -35,22 +38,19 @@ class ImageCollectionDifferTest {
 	@AfterClass
 	static void afterClass() {}
 
-	/**
-	 * test makeDiffs(String profileExpected = 'product',
-	 String profileActual = 'develop',
-	 String tSuiteName,
-	 String tCaseName,
-	 Double criteriaPercent = 3.0) {
-	 */
 	@Test
 	void test_makeDiff() {
 		Path materials = fixture.resolve('Materials')
 		MaterialRepository mr = MaterialRepositoryFactory.createInstance(materials)
-		mr.putCurrentTestSuite('Test Suites/Main/TS1', '20181013_141200')
+		mr.putCurrentTestSuite('Test Suites/ImageDiff', '20181014_060501')
 		//
 		ImageCollectionDiffer icd = new ImageCollectionDiffer(mr)
-		icd.makeDiffs('product', 'develop',
-				'Test Suites/Main/TS1', 'Test Cases/ImageDiff', 3.0)
+		icd.makeDiffs(
+				new ExecutionProfile('product'),
+				new ExecutionProfile('develop'),
+				new TSuiteName('Test Suites/Main/TS1'),
+				new TCaseName('Test Cases/ImageDiff'),
+				7.0)
 		//
 	}
 }

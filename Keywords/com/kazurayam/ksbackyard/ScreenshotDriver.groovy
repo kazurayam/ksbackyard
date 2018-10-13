@@ -9,7 +9,10 @@ import javax.imageio.ImageIO
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
+import com.kazurayam.materials.ExecutionProfile
 import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.materials.TCaseName
+import com.kazurayam.materials.TSuiteName
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -36,7 +39,7 @@ class ScreenshotDriver {
 
 
 	/**
-	 * @deprecated do no use this method. use CollectiveXImageDiffer instead.
+	 * @deprecated do no use this method. Katalon Test Case should directly call ImageCollectionDiffer.
 	 * 
 	 * @param profileExpected e.g., 'product'
 	 * @param profileAcutual  e.g., 'develop'
@@ -44,11 +47,18 @@ class ScreenshotDriver {
 	 * @param criteriaPercent e.g.,  3.83
 	 * @return
 	 */
-	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName,
+	static def makeDiffs(
+			String profileExpected = 'product',
+			String profileActual = 'develop',
+			String tSuiteId,
 			Double criteriaPercent = 3.0) {
-
 		ImageCollectionDiffer icd = new ImageCollectionDiffer(mr_)
-		icd.makeDiffs(profileExpected, profileActual, tSuiteName, GlobalVariable.CURRENT_TESTCASE_ID, criteriaPercent)
+		icd.makeDiffs(
+				new ExecutionProfile(profileExpected),
+				new ExecutionProfile(profileActual),
+				new TSuiteName(tSuiteId),
+				new TCaseName(GlobalVariable.CURRENT_TESTCASE_ID),
+				criteriaPercent)
 	}
 
 

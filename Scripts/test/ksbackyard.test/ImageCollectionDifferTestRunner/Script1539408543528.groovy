@@ -17,3 +17,4 @@ Result result = JUnitCore.runClasses(ImageCollectionDifferTest.class)
 // print test result
 WebUI.callTestCase(findTestCase('test/Epilogue'), ['result':result],
 	FailureHandling.CONTINUE_ON_FAILURE)
+
