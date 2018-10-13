@@ -10,6 +10,8 @@ import com.kazurayam.materials.FileType
 import com.kazurayam.materials.Material
 import com.kazurayam.materials.MaterialPair
 import com.kazurayam.materials.MaterialRepository
+import com.kazurayam.materials.TCaseName
+import com.kazurayam.materials.TSuiteName
 import com.kms.katalon.core.logging.KeywordLogger
 import com.kms.katalon.core.util.KeywordUtil
 
@@ -26,11 +28,11 @@ class ImageCollectionDiffer {
 	private MaterialRepository mr_
 	private VisualTestingListener listener_ = new DefaultVisualTestingListener()
 
-	
+
 	ImageCollectionDiffer(MaterialRepository mr) {
 		mr_ = mr
 	}
-	
+
 	/*
 	 * Non-argument constructor is required to pass "Test Cases/Test/Prologue" 
 	 * which calls `CustomKeywords."${className}.getClass"().getName()`
@@ -45,26 +47,29 @@ class ImageCollectionDiffer {
 
 	/**
 	 *
-	 * @param profileExpected e.g., 'product'
-	 * @param profileAcutual  e.g., 'develop'
-	 * @param tSuiteName      e.g., 'TS1'
-	 * @param criteriaPercent e.g.,  3.83
+	 * @param profileExpected e.g. 'product'
+	 * @param profileAcutual  e.g. 'develop'
+	 * @param tSuiteId        e.g. 'Test Suites/Main/TS1'
+	 * @param tCaseId         e.g. 'Test Cases/main/ImageDiff'
+	 * @param criteriaPercent e.g.  3.83
 	 * @return
 	 */
 	def makeDiffs(String profileExpected = 'product',
 			String profileActual = 'develop',
-			String tSuiteName,
-			String tCaseName,
+			String tSuiteId,
+			String tCaseId,
 			Double criteriaPercent = 3.0) {
 
 		assert mr_ != null
-		
-		if (tSuiteName == null) {
-			throw new IllegalArgumentException('tSuiteName is required')
+
+		if (tSuiteId == null) {
+			throw new IllegalArgumentException('tSuiteId is required')
 		}
-		if (tCaseName == null) {
-			throw new IllegalArgumentException('tCaseName is required')
+		if (tCaseId == null) {
+			throw new IllegalArgumentException('tCaseId is required')
 		}
+		String tSuiteName = new TSuiteName(tSuiteId).getValue() // 'Test Suites/Main/TS1' -> 'Main.TS1'
+		String tCaseName  = new TCaseName(tCaseId).getValue()   // 'Test Cases/ImageDiff' -> 'ImageDiff'
 
 		List<MaterialPair> materialPairs =
 				mr_.getRecentMaterialPairs(profileExpected, profileActual, tSuiteName).

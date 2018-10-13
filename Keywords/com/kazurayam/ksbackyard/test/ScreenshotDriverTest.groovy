@@ -120,7 +120,7 @@ class ScreenshotDriverTest {
 		ScreenshotDriver.saveEntirePageImage(driver_, output.toFile(), 100)
 		assertTrue("${output.toString()} does not exist", Files.exists(output))
 	}
-	
+
 	/**
 	 * test verifyImages(BufferedImage, BufferedImage, Double)
 	 */
@@ -133,7 +133,7 @@ class ScreenshotDriverTest {
 		BufferedImage expectedImage = ScreenshotDriver.takeEntirePageImage(driver_)
 		//
 		String actualUrl = 'http://demoaut-mimic.kazurayam.com'
-		driver_.get(actualUrl) 
+		driver_.get(actualUrl)
 		WebDriverWait wait2 = new WebDriverWait(driver_, 10);
 		wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='btn-make-appointment']")))
 		BufferedImage actualImage = ScreenshotDriver.takeEntirePageImage(driver_)
@@ -146,12 +146,12 @@ class ScreenshotDriverTest {
 		assertTrue("difference returned null actualImage", difference.getActualImage() != null)
 		assertTrue("difference returned null diffImage", difference.getDiffImage() != null)
 		assertTrue("difference returned criteria ${difference.getCriteria()} != 3.0",
-			difference.getCriteria() == 3.0)
+				difference.getCriteria() == 3.0)
 		assertTrue("difference returned ratio ${difference.getRatio()} which is unexpected",
-			difference.getRatio() > 0 && difference.getRatio() < 10.0)
+				difference.getRatio() > 0 && difference.getRatio() < 10.0)
 		assertTrue("difference returned ratioAsString ${difference.getRatioAsString()}",
-			difference.getRatioAsString() == '6.05')
+				difference.getRatioAsString() == '6.05')
 		assertTrue("difference returned ${difference.imagesAreDifferent()} for imagesAreDifferent()",
-			difference.imagesAreDifferent())
+				difference.imagesAreDifferent())
 	}
 }

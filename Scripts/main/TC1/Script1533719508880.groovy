@@ -29,6 +29,5 @@ Path pngFile = mr.resolveMaterialPath(
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage'(
 	DriverFactory.getWebDriver(), pngFile.toFile(), 500)
 
-
 WebUI.closeBrowser()
 
