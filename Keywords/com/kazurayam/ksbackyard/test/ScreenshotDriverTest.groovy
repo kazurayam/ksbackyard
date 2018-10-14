@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertTrue
 
+import java.awt.image.BufferedImage
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.awt.image.BufferedImage
 
 import org.junit.After
 import org.junit.AfterClass
