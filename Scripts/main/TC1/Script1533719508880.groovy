@@ -11,7 +11,7 @@ import internal.GlobalVariable as GlobalVariable
 
 WebUI.openBrowser('')
 
-WebUI.maximizeWindow()
+WebUI.setViewPortSize(1024, 768)
 
 WebUI.navigateToUrl(GlobalVariable.URL)
 
