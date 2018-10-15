@@ -21,10 +21,10 @@ assert mr != null
 // The list will be filtered to include PNG files only.
 List<MaterialPair> materialPairs =
 // we use Java 8 Stream API to filter entries
-mr.getRecentMaterialPairs(
+mr.createMaterialPairs(
+	new TSuiteName('Test Suites/TS1'),
 	new ExecutionProfile('product'),
-	new ExecutionProfile('develop'),
-	new TSuiteName('Test Suites/TS1')
+	new ExecutionProfile('develop')
 	).stream().filter { mp ->
 		mp.getLeft().getFileType() == FileType.PNG
 		}.collect(Collectors.toList())
