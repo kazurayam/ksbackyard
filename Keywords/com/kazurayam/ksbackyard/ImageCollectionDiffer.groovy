@@ -48,7 +48,7 @@ class ImageCollectionDiffer {
 	 * which calls `CustomKeywords."${className}.getClass"().getName()`
 	 */
 	ImageCollectionDiffer() {}
-	
+
 	void setImageDifferenceFilenameResolver(ImageDifferenceFilenameResolver idfResolver) {
 		idfResolver_ = idfResolver
 	}
@@ -57,55 +57,7 @@ class ImageCollectionDiffer {
 		listener_ = listener
 	}
 
-	/**
-	 *
-	 * @param profileExpected e.g. 'product'
-	 * @param profileAcutual  e.g. 'develop'
-	 * @param tSuiteName        e.g. new TSuiteName('Test Suites/Main/TS1')
-	 * @param tCaseName         e.g. new TCaseName('Test Cases/main/ImageDiff')
-	 * @param criteriaPercent e.g.  3.83
-	 * @return
-	 */
-	def makeDiffs(ExecutionProfile profileExpected,
-			ExecutionProfile profileActual,
-			TSuiteName tSuiteName,
-			TCaseName tCaseName,
-			Double criteriaPercent = 3.0) {
 
-		if (mr_ == null) {
-			throw new IllegalStateException('mr_ is null')
-		}
-
-		if (profileExpected == null) {
-			throw new IllegalArgumentException('profileExcpected is required')
-		}
-		if (profileActual == null) {
-			throw new IllegalArgumentException('profileActual is required')
-		}
-		if (tSuiteName == null) {
-			throw new IllegalArgumentException('tSuiteName is required')
-		}
-		if (tCaseName == null) {
-			throw new IllegalArgumentException('tCaseName is required')
-		}
-
-		// find out the list of pairs of PNG Materials.
-		// we will compare the 2 images to and find difference
-		List<MaterialPair> materialPairs =
-				// we use Java 8 Stream API to filter entries
-				mr_.getRecentMaterialPairs(
-					profileExpected, profileActual, tSuiteName).
-				stream().filter { mp ->
-					mp.getLeft().getFileType() == FileType.PNG
-				}.collect(Collectors.toList())
-
-		if (materialPairs.size() == 0) {
-			listener_.fatal(">>> materialPairs.size() is 0. there must be something wrong.")
-		}
-		
-		this.makeImageCollectionDifferences(materialPairs, tCaseName, criteriaPercent)
-	}
-	
 	/**
 	 * 	
 	 * @param materialParis
@@ -116,7 +68,7 @@ class ImageCollectionDiffer {
 			List<MaterialPair> materialPairs,
 			TCaseName tCaseName,
 			Double criteriaPercent) {
-			
+
 		Statistics stats = new Statistics()
 
 		// iterate over the list of Materials
