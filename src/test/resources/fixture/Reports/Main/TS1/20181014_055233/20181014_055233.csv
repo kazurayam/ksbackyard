@@ -1,0 +1,41 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+TS1,Firefox 62.0,,2018-10-14 05:53:34,2018-10-14 05:54:11,36.844s,FAILED
+,,,,,,
+Test Cases/Main/Basic,Firefox 62.0,,2018-10-14 05:53:37,2018-10-14 05:54:10,33.208s,FAILED
+Start listener action : beforeTestCase,Firefox 62.0,,2018-10-14 05:53:37,2018-10-14 05:53:37,0.057s,PASSED
+Statement - mr = MATERIAL_REPOSITORY,Firefox 62.0,,2018-10-14 05:53:38,2018-10-14 05:53:38,0.010s,PASSED
+Statement - assert mr != null,Firefox 62.0,,2018-10-14 05:53:38,2018-10-14 05:53:38,0.004s,PASSED
+openBrowser,Firefox 62.0,,2018-10-14 05:53:38,2018-10-14 05:53:48,10.065s,PASSED
+setViewPortSize,Firefox 62.0,,2018-10-14 05:53:48,2018-10-14 05:53:48,0.232s,PASSED
+Statement - driver = com.kms.katalon.core.webui.driver.DriverFactory.getWebDriver(),Firefox 62.0,,2018-10-14 05:53:48,2018-10-14 05:53:48,0.021s,PASSED
+"Statement - If (com.kms.katalon.core.configuration.RunConfiguration.getExecutionProfile() == ""develop"")",Firefox 62.0,,2018-10-14 05:53:48,2018-10-14 05:53:54,5.347s,PASSED
+verifyElementPresent,Firefox 62.0,,2018-10-14 05:53:54,2018-10-14 05:53:54,0.285s,PASSED
+"Statement - png1 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, ""CURA_Homepage.png"")",Firefox 62.0,,2018-10-14 05:53:54,2018-10-14 05:53:54,0.080s,PASSED
+com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage,Firefox 62.0,,2018-10-14 05:53:54,2018-10-14 05:53:59,4.562s,PASSED
+callTestCase,Firefox 62.0,,2018-10-14 05:53:59,2018-10-14 05:54:04,5.423s,PASSED
+selectOptionByValue,Firefox 62.0,,2018-10-14 05:54:04,2018-10-14 05:54:05,0.601s,PASSED
+click,Firefox 62.0,,2018-10-14 05:54:05,2018-10-14 05:54:05,0.256s,PASSED
+click,Firefox 62.0,,2018-10-14 05:54:05,2018-10-14 05:54:05,0.265s,PASSED
+Statement - visitDate = java.time.LocalDateTime.now().plusWeeks(1),Firefox 62.0,,2018-10-14 05:54:05,2018-10-14 05:54:05,0.015s,PASSED
+"Statement - visitDateStr = java.time.format.DateTimeFormatter.ofPattern(""dd/MM/yyyy"").format(visitDate)",Firefox 62.0,,2018-10-14 05:54:05,2018-10-14 05:54:05,0.002s,PASSED
+setText,Firefox 62.0,,2018-10-14 05:54:05,2018-10-14 05:54:06,0.454s,PASSED
+sendKeys,Firefox 62.0,,2018-10-14 05:54:06,2018-10-14 05:54:06,0.161s,PASSED
+setText,Firefox 62.0,,2018-10-14 05:54:06,2018-10-14 05:54:06,0.156s,PASSED
+"Statement - png3 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, ""CURA_Appointment.png"")",Firefox 62.0,,2018-10-14 05:54:06,2018-10-14 05:54:06,0.004s,PASSED
+com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage,Firefox 62.0,,2018-10-14 05:54:06,2018-10-14 05:54:09,3.190s,PASSED
+click,Firefox 62.0,,2018-10-14 05:54:09,2018-10-14 05:54:10,0.596s,PASSED
+verifyElementPresent,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.041s,PASSED
+Statement - facility = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_facility)),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.104s,PASSED
+verifyMatch,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.014s,PASSED
+Statement - readmission = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_hospital_readmission)),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.065s,PASSED
+verifyMatch,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.004s,PASSED
+Statement - program = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_program)),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.064s,PASSED
+verifyMatch,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.003s,PASSED
+Statement - visitDateStr2 = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_visit_date)),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.041s,PASSED
+verifyMatch,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.002s,PASSED
+"Statement - parsed = java.time.format.DateTimeFormatter.ofPattern(""dd/MM/uuuu"").parse(visitDateStr2)",Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.003s,PASSED
+Statement - visitDate2 = java.time.LocalDate.from(parsed).atStartOfDay(),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.014s,PASSED
+Statement - isAfterNow = visitDate2.isAfter(java.time.LocalDateTime.now()),Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.002s,PASSED
+verifyEqual,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.024s,PASSED
+"Statement - dayOfWeek = java.time.format.DateTimeFormatter.ofPattern(""E"").withLocale(US).format(parsed)",Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.035s,PASSED
+verifyNotEqual,Firefox 62.0,,2018-10-14 05:54:10,2018-10-14 05:54:10,0.014s,FAILED

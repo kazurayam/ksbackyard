@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="TS1" time="34" tests="1" failures="0" errors="0">
+   <testsuite name="TS1" tests="1" failures="0" errors="0" time="34" timestamp="2018-10-03 06:45:20" hostname="urayamakazuaki - 10.0.1.5" id="Test Suites/Main/TS1">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/Main/TS1/20181003_064511"/>
+         <property name="logFiles" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/Main/TS1/20181003_064511/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="urayamakazuaki - 10.0.1.5"/>
+         <property name="os" value="Mac OS X 64bit"/>
+         <property name="katalonVersion" value="5.7.1.1"/>
+         <property name="browser" value="Firefox 62.0"/>
+         <property name="hostAddress" value="10.0.1.5"/>
+         <property name="sessionId" value="4e94a476-2daa-7244-b4d2-4c677eb2a53e"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Mac OS X"/>
+      </properties>
+      <testcase name="Test Cases/Main/Basic" classname="Test Cases/Main/Basic" status="PASSED">
+         <system-out><![CDATA[2018-10-03 06:45:21 - [TEST_CASE][PASSED] - Test Cases/Main/Basic: Test Cases/Main/Basic
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - Start listener action : beforeTestCase: Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - Statement - If (MATERIAL_REPOSITORY == null): null
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - Statement - CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId(): Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - Statement - mr = MATERIAL_REPOSITORY: null
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - Statement - assert mr != null: null
+
+2018-10-03 06:45:21 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-10-03 06:45:29 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-10-03 06:45:30 - [TEST_STEP][PASSED] - setViewPortSize: Viewport is set to new size with width = 1024 and height = 768
+
+2018-10-03 06:45:32 - [MESSAGE][PASSED] - Viewport is set to new size with width = 1024 and height = 768
+
+2018-10-03 06:45:32 - [TEST_STEP][PASSED] - Statement - driver = com.kms.katalon.core.webui.driver.DriverFactory.getWebDriver(): null
+
+2018-10-03 06:45:32 - [TEST_STEP][PASSED] - Statement - If (com.kms.katalon.core.configuration.RunConfiguration.getExecutionProfile() == "develop"): null
+
+2018-10-03 06:45:32 - [TEST_STEP][PASSED] - Statement - Else: Navigate to 'http://demoaut.katalon.com/' successfully
+
+2018-10-03 06:45:32 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'http://demoaut.katalon.com/' successfully
+
+2018-10-03 06:45:35 - [MESSAGE][PASSED] - Navigate to 'http://demoaut.katalon.com/' successfully
+
+2018-10-03 06:45:35 - [TEST_STEP][PASSED] - verifyElementPresent: Object 'Object Repository/Page_CuraHomepage/a_Make Appointment' is present
+
+2018-10-03 06:45:35 - [MESSAGE][PASSED] - Object 'Object Repository/Page_CuraHomepage/a_Make Appointment' is present
+
+2018-10-03 06:45:35 - [TEST_STEP][PASSED] - Statement - png1 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, "CURA_Homepage.png"): null
+
+2018-10-03 06:45:35 - [TEST_STEP][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage: com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:38 - [MESSAGE][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:38 - [TEST_STEP][PASSED] - callTestCase: Call Test Case 'Test Cases/Common/Login' successfully
+
+2018-10-03 06:45:38 - [TEST_CASE][PASSED] - Test Cases/Common/Login: Test Cases/Common/Login
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - Statement - mr = MATERIAL_REPOSITORY: null
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - Statement - assert mr != null: null
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - Statement - driver = com.kms.katalon.core.webui.driver.DriverFactory.getWebDriver(): null
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_CuraHomepage/a_Make Appointment' is clicked on
+
+2018-10-03 06:45:39 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_CuraHomepage/a_Make Appointment' is clicked on
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - verifyElementPresent: Object 'Object Repository/Page_Login/button_Login' is present
+
+2018-10-03 06:45:39 - [MESSAGE][PASSED] - Object 'Object Repository/Page_Login/button_Login' is present
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - setText: Text 'John Doe' is set on object 'Object Repository/Page_Login/input_username'
+
+2018-10-03 06:45:39 - [MESSAGE][PASSED] - Text 'John Doe' is set on object 'Object Repository/Page_Login/input_username'
+
+2018-10-03 06:45:39 - [TEST_STEP][PASSED] - setText: Text 'ThisIsNotAPassword' is set on object 'Object Repository/Page_Login/input_password'
+
+2018-10-03 06:45:40 - [MESSAGE][PASSED] - Text 'ThisIsNotAPassword' is set on object 'Object Repository/Page_Login/input_password'
+
+2018-10-03 06:45:40 - [TEST_STEP][PASSED] - Statement - png2 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, "CURA_Login.png"): null
+
+2018-10-03 06:45:40 - [TEST_STEP][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage: com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:42 - [MESSAGE][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:42 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Login/button_Login' is clicked on
+
+2018-10-03 06:45:43 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Login/button_Login' is clicked on
+
+2018-10-03 06:45:43 - [TEST_STEP][PASSED] - verifyElementPresent: Object 'Object Repository/Page_CuraAppointment/button_Book Appointment' is present
+
+2018-10-03 06:45:43 - [MESSAGE][PASSED] - Object 'Object Repository/Page_CuraAppointment/button_Book Appointment' is present
+
+2018-10-03 06:45:43 - [MESSAGE][PASSED] - Call Test Case 'Test Cases/Common/Login' successfully
+
+2018-10-03 06:45:43 - [TEST_STEP][PASSED] - selectOptionByValue: All options with value 'Hongkong CURA Healthcare Center' are selected in object 'Object Repository/Page_CuraAppointment/select_Tokyo CURA Healthcare C'  using regular expression
+
+2018-10-03 06:45:43 - [MESSAGE][PASSED] - All options with value 'Hongkong CURA Healthcare Center' are selected in object 'Object Repository/Page_CuraAppointment/select_Tokyo CURA Healthcare C'  using regular expression
+
+2018-10-03 06:45:43 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_CuraAppointment/input_hospital_readmission' is clicked on
+
+2018-10-03 06:45:44 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_CuraAppointment/input_hospital_readmission' is clicked on
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_CuraAppointment/input_programs' is clicked on
+
+2018-10-03 06:45:44 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_CuraAppointment/input_programs' is clicked on
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - Statement - visitDate = java.time.LocalDateTime.now().plusWeeks(1): null
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - Statement - visitDateStr = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy").format(visitDate): null
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - setText: Text '10/10/2018' is set on object 'Object Repository/Page_CuraAppointment/input_visit_date'
+
+2018-10-03 06:45:44 - [MESSAGE][PASSED] - Text '10/10/2018' is set on object 'Object Repository/Page_CuraAppointment/input_visit_date'
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - sendKeys: Keys 'ENTER + ' sent to object: 'Object Repository/Page_CuraAppointment/input_visit_date'
+
+2018-10-03 06:45:44 - [MESSAGE][PASSED] - Keys 'ENTER + ' sent to object: 'Object Repository/Page_CuraAppointment/input_visit_date'
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - setText: Text 'This is a comment' is set on object 'Object Repository/Page_CuraAppointment/textarea_comment'
+
+2018-10-03 06:45:44 - [MESSAGE][PASSED] - Text 'This is a comment' is set on object 'Object Repository/Page_CuraAppointment/textarea_comment'
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - Statement - png3 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, "CURA_Appointment.png"): null
+
+2018-10-03 06:45:44 - [TEST_STEP][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage: com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:47 - [MESSAGE][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:47 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_CuraAppointment/button_Book Appointment' is clicked on
+
+2018-10-03 06:45:47 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_CuraAppointment/button_Book Appointment' is clicked on
+
+2018-10-03 06:45:47 - [TEST_STEP][PASSED] - verifyElementPresent: Object 'Object Repository/Page_AppointmentConfirmation/a_Go to Homepage' is present
+
+2018-10-03 06:45:47 - [MESSAGE][PASSED] - Object 'Object Repository/Page_AppointmentConfirmation/a_Go to Homepage' is present
+
+2018-10-03 06:45:47 - [TEST_STEP][PASSED] - Statement - facility = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_facility)): Text of object 'Object Repository/Page_AppointmentConfirmation/p_facility' is: 'Hongkong CURA Healthcare Center'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Text of object 'Object Repository/Page_AppointmentConfirmation/p_facility' is: 'Hongkong CURA Healthcare Center'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyMatch: Actual text 'Hongkong CURA Healthcare Center' and expected text '^(Tokyo|Hongkong|Seoul) CURA Healthcare Center$' are matched  using regular expression
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual text 'Hongkong CURA Healthcare Center' and expected text '^(Tokyo|Hongkong|Seoul) CURA Healthcare Center$' are matched  using regular expression
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - readmission = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_hospital_readmission)): Text of object 'Object Repository/Page_AppointmentConfirmation/p_hospital_readmission' is: 'Yes'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Text of object 'Object Repository/Page_AppointmentConfirmation/p_hospital_readmission' is: 'Yes'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyMatch: Actual text 'Yes' and expected text '(Yes|No)' are matched  using regular expression
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual text 'Yes' and expected text '(Yes|No)' are matched  using regular expression
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - program = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_program)): Text of object 'Object Repository/Page_AppointmentConfirmation/p_program' is: 'Medicaid'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Text of object 'Object Repository/Page_AppointmentConfirmation/p_program' is: 'Medicaid'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyMatch: Actual text 'Medicaid' and expected text '(Medicare|Medicaid|None)' are matched  using regular expression
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual text 'Medicaid' and expected text '(Medicare|Medicaid|None)' are matched  using regular expression
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - visitDateStr2 = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_visit_date)): Text of object 'Object Repository/Page_AppointmentConfirmation/p_visit_date' is: '10/10/2018'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Text of object 'Object Repository/Page_AppointmentConfirmation/p_visit_date' is: '10/10/2018'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyMatch: Actual text '10/10/2018' and expected text '[0-9]{2}/[0-9]{2}/[0-9]{4}' are matched  using regular expression
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual text '10/10/2018' and expected text '[0-9]{2}/[0-9]{2}/[0-9]{4}' are matched  using regular expression
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - parsed = java.time.format.DateTimeFormatter.ofPattern("dd/MM/uuuu").parse(visitDateStr2): null
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - visitDate2 = java.time.LocalDate.from(parsed).atStartOfDay(): null
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - isAfterNow = visitDate2.isAfter(java.time.LocalDateTime.now()): null
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyEqual: Actual object 'true' and expected object 'true' are equal
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual object 'true' and expected object 'true' are equal
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - dayOfWeek = java.time.format.DateTimeFormatter.ofPattern("E").withLocale(US).format(parsed): null
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyNotEqual: Actual object 'Wed' and expected object 'Sun' are not equal
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual object 'Wed' and expected object 'Sun' are not equal
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - comment = com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords.getText(com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_AppointmentConfirmation/p_comment)): Text of object 'Object Repository/Page_AppointmentConfirmation/p_comment' is: 'This is a comment'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Text of object 'Object Repository/Page_AppointmentConfirmation/p_comment' is: 'This is a comment'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - If (comment != null): Actual number '17' is less than expected number '400'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - verifyLessThan: Actual number '17' is less than expected number '400'
+
+2018-10-03 06:45:48 - [MESSAGE][PASSED] - Actual number '17' is less than expected number '400'
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - Statement - png4 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, "CURA_AppointmentConfirmation.png"): null
+
+2018-10-03 06:45:48 - [TEST_STEP][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage: com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:50 - [MESSAGE][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:50 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_AppointmentConfirmation/a_Go to Homepage' is clicked on
+
+2018-10-03 06:45:51 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_AppointmentConfirmation/a_Go to Homepage' is clicked on
+
+2018-10-03 06:45:51 - [TEST_STEP][PASSED] - verifyElementPresent: Object 'Object Repository/Page_CuraHomepage/a_Make Appointment' is present
+
+2018-10-03 06:45:51 - [MESSAGE][PASSED] - Object 'Object Repository/Page_CuraHomepage/a_Make Appointment' is present
+
+2018-10-03 06:45:51 - [TEST_STEP][PASSED] - Statement - png5 = mr.resolveMaterialPath(CURRENT_TESTCASE_ID, "CURA_Homepage_revisited.png"): null
+
+2018-10-03 06:45:51 - [TEST_STEP][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage: com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:53 - [MESSAGE][PASSED] - com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage is PASSED
+
+2018-10-03 06:45:53 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+
+2018-10-03 06:45:54 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-10-03 06:45:20 - [TEST_SUITE][PASSED] - TS1: Test Cases/Main/Basic]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
