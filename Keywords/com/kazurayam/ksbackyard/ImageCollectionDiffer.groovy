@@ -80,7 +80,7 @@ class ImageCollectionDiffer {
 		List<MaterialPair> materialPairs =
 				// we use Java 8 Stream API to filter entries
 				mr_.getRecentMaterialPairs(
-					profileExpected, profileActual, tSuiteName).
+				profileExpected, profileActual, tSuiteName).
 				stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
 				}.collect(Collectors.toList())
@@ -93,10 +93,10 @@ class ImageCollectionDiffer {
 
 		// iterate over the list of Materials
 		for (MaterialPair pair : materialPairs) {
-			
+
 			Material expMate = pair.getExpected()
 			Material actMate = pair.getActual()
-			
+
 			// look up the difference of 2 images
 			ImageDifference diff = new ImageDifference(
 					ImageIO.read(expMate.getPath().toFile()),
@@ -107,18 +107,18 @@ class ImageCollectionDiffer {
 
 			// resolve the name of output file to save the ImageDiff
 			String fileName = resolveImageDiffFilename(
-								profileExpected,
-								profileActual,
-								expMate,
-								actMate,
-								diff,
-								criteriaPercent)
+					profileExpected,
+					profileActual,
+					expMate,
+					actMate,
+					diff,
+					criteriaPercent)
 
 			// resolve the path of output file to save the ImageDiff
 			Path pngFile = mr_.resolveMaterialPath(
-								tCaseName,
-								expMate.getDirpathRelativeToTSuiteResult(),
-								fileName)
+					tCaseName,
+					expMate.getDirpathRelativeToTSuiteResult(),
+					fileName)
 
 			// write the ImageDiff into the output file
 			ImageIO.write(diff.getDiffImage(), "PNG", pngFile.toFile())
