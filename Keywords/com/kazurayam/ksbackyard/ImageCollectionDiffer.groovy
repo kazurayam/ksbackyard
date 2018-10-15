@@ -6,6 +6,7 @@ import java.util.stream.Collectors
 import javax.imageio.ImageIO
 
 import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
+
 import com.kazurayam.materials.ExecutionProfile
 import com.kazurayam.materials.FileType
 import com.kazurayam.materials.Material
@@ -27,11 +28,19 @@ import com.kms.katalon.core.util.KeywordUtil
 class ImageCollectionDiffer {
 
 	private MaterialRepository mr_
+	private ImageDifferenceFilenameResolver idfResolver_
 	private VisualTestingListener listener_ = new DefaultVisualTestingListener()
 
 
+	/**
+	 * constructor
+	 * 
+	 * @param mr
+	 * @author kazurayam
+	 */
 	ImageCollectionDiffer(MaterialRepository mr) {
 		mr_ = mr
+		idfResolver_ = new DefaultImageDifferenceFilenameResolver()
 	}
 
 	/*
@@ -39,6 +48,10 @@ class ImageCollectionDiffer {
 	 * which calls `CustomKeywords."${className}.getClass"().getName()`
 	 */
 	ImageCollectionDiffer() {}
+	
+	void setImageDifferenceFilenameResolver(ImageDifferenceFilenameResolver idfResolver) {
+		idfResolver_ = idfResolver
+	}
 
 	void setVTListener(VisualTestingListener listener) {
 		listener_ = listener
@@ -76,11 +89,12 @@ class ImageCollectionDiffer {
 			throw new IllegalArgumentException('tCaseName is required')
 		}
 
-		// find out the list of pair of PNG Material to compare to find difference
+		// find out the list of pairs of PNG Materials.
+		// we will compare the 2 images to and find difference
 		List<MaterialPair> materialPairs =
 				// we use Java 8 Stream API to filter entries
 				mr_.getRecentMaterialPairs(
-				profileExpected, profileActual, tSuiteName).
+					profileExpected, profileActual, tSuiteName).
 				stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
 				}.collect(Collectors.toList())
@@ -88,7 +102,21 @@ class ImageCollectionDiffer {
 		if (materialPairs.size() == 0) {
 			listener_.fatal(">>> materialPairs.size() is 0. there must be something wrong.")
 		}
-
+		
+		this.makeImageCollectionDifferences(materialPairs, tCaseName, criteriaPercent)
+	}
+	
+	/**
+	 * 	
+	 * @param materialParis
+	 * @param tCaseName
+	 * @param criteriaPercent
+	 */
+	void makeImageCollectionDifferences(
+			List<MaterialPair> materialPairs,
+			TCaseName tCaseName,
+			Double criteriaPercent) {
+			
 		Statistics stats = new Statistics()
 
 		// iterate over the list of Materials
@@ -97,7 +125,7 @@ class ImageCollectionDiffer {
 			Material expMate = pair.getExpected()
 			Material actMate = pair.getActual()
 
-			// look up the difference of 2 images
+			// create ImageDifference of the 2 given images
 			ImageDifference diff = new ImageDifference(
 					ImageIO.read(expMate.getPath().toFile()),
 					ImageIO.read(actMate.getPath().toFile()))
@@ -106,9 +134,7 @@ class ImageCollectionDiffer {
 			stats.add(diff)
 
 			// resolve the name of output file to save the ImageDiff
-			String fileName = resolveImageDiffFilename(
-					profileExpected,
-					profileActual,
+			String fileName = idfResolver_.resolveImageDifferenceFilename(
 					expMate,
 					actMate,
 					diff,
@@ -140,42 +166,59 @@ class ImageCollectionDiffer {
 
 
 	/**
-	 * Given with the following arguments:
-	 *     ExecutionProfile profileExpected: 'product',
-	 *     ExecutionProfile profileActual:   'develop',
-	 *     Material expMate:                 'Materials/Main/TS1/20181014_131314/CURA_Homepage'
-	 *     Material actMate:                 'Materials/Main/TS1/20181014_131315/CURA_Homepage'
-	 *     ImageDifference:                  6.71
-	 *     Double criteriaPercent:           3.0
-	 *      
-	 * @return 'CURA_Homepage.20181014_131314_product-20181014_131315_develop.(6.71)FAILED.png'
+	 * 
+	 * @author kazurayam
+	 *
 	 */
-	String resolveImageDiffFilename(
-			ExecutionProfile profileExpected,
-			ExecutionProfile profileActual,
-			Material expMate,
-			Material actMate,
-			ImageDifference diff,
-			Double criteriaPercent) {
-		//
-		String fileName = expMate.getPath().getFileName().toString()
-		String fileId = fileName.substring(0, fileName.lastIndexOf('.'))
-		String expTimestamp = expMate.getParent().getParent().getTSuiteTimestamp().format()
-		String actTimestamp = actMate.getParent().getParent().getTSuiteTimestamp().format()
-		//
-		StringBuilder sb = new StringBuilder()
-		sb.append("${fileId}.")
-		sb.append("${expTimestamp}_${profileExpected}")
-		sb.append("-")
-		sb.append("${actTimestamp}_${profileActual}")
-		sb.append(".")
-		sb.append("(${diff.getRatioAsString()})")
-		sb.append("${(diff.imagesAreSimilar()) ? '' : 'FAILED'}")
-		sb.append(".png")
-		return sb.toString()
+	static interface ImageDifferenceFilenameResolver {
+		String resolveImageDifferenceFilename(
+				Material expectedMaterial,
+				Material actualMaterial,
+				ImageDifference imageDifference,
+		Double criteriaPercent)
 	}
 
+	/**
+	 * 
+	 * @author kazurayam
+	 *
+	 */
+	static class DefaultImageDifferenceFilenameResolver implements ImageDifferenceFilenameResolver {
+		/**
+		 * Given with the following arguments:
+		 *     Material expMate:                 'Materials/Main/TS1/20181014_131314/CURA_Homepage' created by TSuiteResult with 'product' profile
+		 *     Material actMate:                 'Materials/Main/TS1/20181014_131315/CURA_Homepage' created by TSuiteResult with 'develop' profile
+		 *     ImageDifference:                  6.71
+		 *     Double criteriaPercent:           3.0
+		 *      
+		 * @return 'CURA_Homepage.20181014_131314_product-20181014_131315_develop.(6.71)FAILED.png'
+		 */
+		String resolveImageDifferenceFilename(
+				Material expMate,
+				Material actMate,
+				ImageDifference diff,
+				Double criteriaPercent) {
 
+			ExecutionProfile profileExpected = expMate.getParent().getParent().getExecutionPropertiesWrapper().getExecutionProfile()
+			ExecutionProfile profileActual   = actMate.getParent().getParent().getExecutionPropertiesWrapper().getExecutionProfile()
+			//
+			String fileName = expMate.getPath().getFileName().toString()
+			String fileId = fileName.substring(0, fileName.lastIndexOf('.'))
+			String expTimestamp = expMate.getParent().getParent().getTSuiteTimestamp().format()
+			String actTimestamp = actMate.getParent().getParent().getTSuiteTimestamp().format()
+			//
+			StringBuilder sb = new StringBuilder()
+			sb.append("${fileId}.")
+			sb.append("${expTimestamp}_${profileExpected}")
+			sb.append("-")
+			sb.append("${actTimestamp}_${profileActual}")
+			sb.append(".")
+			sb.append("(${diff.getRatioAsString()})")
+			sb.append("${(diff.imagesAreSimilar()) ? '' : 'FAILED'}")
+			sb.append(".png")
+			return sb.toString()
+		}
+	}
 
 
 	/**
