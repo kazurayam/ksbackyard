@@ -7,6 +7,9 @@
 /bin/lib/Temp*.class
 /libs/Temp*.groovy
 
-Materials/
-Reports/
+/Materials/
+/Reports/
 /bin/
+/tmp/
+
+.DS_Store

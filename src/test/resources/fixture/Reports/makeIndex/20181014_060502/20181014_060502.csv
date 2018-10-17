@@ -1,0 +1,9 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+makeIndex,,,2018-10-14 06:07:32,2018-10-14 06:07:36,4.587s,PASSED
+,,,,,,
+Test Cases/makeIndex,,,2018-10-14 06:07:35,2018-10-14 06:07:36,1.326s,PASSED
+Start listener action : beforeTestCase,,,2018-10-14 06:07:35,2018-10-14 06:07:35,0.030s,PASSED
+"Statement - materialsFolder = java.nio.file.Paths.get(com.kms.katalon.core.configuration.RunConfiguration.getProjectDir()).resolve(""Materials"")",,,2018-10-14 06:07:35,2018-10-14 06:07:35,0.013s,PASSED
+Statement - mr = com.kazurayam.materials.MaterialRepositoryFactory.createInstance(materialsFolder),,,2018-10-14 06:07:35,2018-10-14 06:07:35,0.200s,PASSED
+Statement - index = mr.makeIndex(),,,2018-10-14 06:07:35,2018-10-14 06:07:36,0.824s,PASSED
+comment,,,2018-10-14 06:07:36,2018-10-14 06:07:36,0.011s,PASSED

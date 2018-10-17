@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="makeIndex" time="4" tests="1" failures="0" errors="0">
+   <testsuite name="makeIndex" tests="1" failures="0" errors="0" time="4" timestamp="2018-10-14 06:07:32" hostname="urayamakazuaki - 10.0.1.5" id="Test Suites/makeIndex">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/makeIndex/20181014_060502"/>
+         <property name="logFiles" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/makeIndex/20181014_060502/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="urayamakazuaki - 10.0.1.5"/>
+         <property name="hostAddress" value="10.0.1.5"/>
+         <property name="os" value="Mac OS X 64bit"/>
+         <property name="katalonVersion" value="5.7.1.1"/>
+      </properties>
+      <testcase name="Test Cases/makeIndex" classname="Test Cases/makeIndex" status="PASSED">
+         <system-out><![CDATA[2018-10-14 06:07:35 - [TEST_CASE][PASSED] - Test Cases/makeIndex: Test Cases/makeIndex
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Start listener action : beforeTestCase: Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Statement - If (MATERIAL_REPOSITORY == null): null
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Statement - CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId(): Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Statement - materialsFolder = java.nio.file.Paths.get(com.kms.katalon.core.configuration.RunConfiguration.getProjectDir()).resolve("Materials"): null
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Statement - mr = com.kazurayam.materials.MaterialRepositoryFactory.createInstance(materialsFolder): null
+
+2018-10-14 06:07:35 - [TEST_STEP][PASSED] - Statement - index = mr.makeIndex(): null
+
+2018-10-14 06:07:36 - [TEST_STEP][PASSED] - comment: >>> /Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Materials/index.html is updated]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-10-14 06:07:32 - [TEST_SUITE][PASSED] - makeIndex: Test Cases/makeIndex]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

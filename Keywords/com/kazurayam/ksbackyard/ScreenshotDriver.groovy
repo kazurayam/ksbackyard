@@ -1,193 +1,256 @@
 package com.kazurayam.ksbackyard
 
-import static com.kazurayam.ksbackyard.Assert.assertTrue
-
 import java.awt.image.BufferedImage
-import java.nio.file.Path
-import java.util.stream.Collectors
 
 import javax.imageio.ImageIO
 
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.WebElement
 
-import com.kazurayam.materials.FileType
-import com.kazurayam.materials.Material
-import com.kazurayam.materials.MaterialPair
-import com.kazurayam.materials.MaterialRepository
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-import internal.GlobalVariable
 import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.comparison.ImageDiff
 import ru.yandex.qatools.ashot.comparison.ImageDiffer
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
-public class ScreenshotDriver {
+/**
+ * 
+ * @author kazurayam
+ *
+ */
+class ScreenshotDriver {
 
-	static MaterialRepository mr_ = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
+	/**
+	 * takes screenshot of the specified WebElement in the target WebPage,
+	 * returns it as a BufferedImage object
+	 * 
+	 * @param webDriver
+	 * @param webElement
+	 * @return BufferedImage
+	 */
+	@Keyword
+	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
+		Screenshot screenshot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				takeScreenshot(webDriver, webElement)
+		return screenshot.getImage()
+	}
 
-	static {
-		assert mr_ != null
+	/**
+	 * provides the same function as takeElementImage(WebDriver, WebElement)
+	 * 
+	 * @param testObject
+	 * @return
+	 */
+	@Keyword
+	static BufferedImage takeElementImage(TestObject testObject) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject, 30)
+		return takeElementImage(webDriver, webElement)
 	}
 
 	@Keyword
-	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = 300) {
+	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
+		BufferedImage image = takeElementImage(webDriver, webElement)
+		ImageIO.write(image, "PNG", file)
+	}
+
+	/**
+	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
+	 * @param testObject
+	 * @param file
+	 */
+	@Keyword
+	static void saveElementImage(TestObject testObject, File file) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject,30)
+		saveElementImage(webDriver, webElement, file)
+	}
+
+
+	/**
+	 * takes screenshot of the entire page targeted,
+	 * returns it as a BufferedImage object
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
+	 * @return BufferedImage
+	 */
+	@Keyword
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = 300) {
 		Screenshot screenshot = new AShot().
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
 				takeScreenshot(webDriver)
-		ImageIO.write(screenshot.getImage(), "PNG", file)
+		return screenshot.getImage()
 	}
 
 
+	/**
+	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
+	 * 
+	 * @timeout millisecond, wait for page to displayed stable after scrolling downward
+	 * @return
+	 */
 	@Keyword
-	static Double diffRatioPercent(ImageDiff diff) {
-		boolean hasDiff = diff.hasDiff()
-		if (!hasDiff) {
-			return 0.0
-		}
-		int diffSize = diff.getDiffSize()
-		int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
-		Double diffRatio = diff.getDiffSize() / area * 100
-		return diffRatio
+	static BufferedImage takeEntirePageImage(Integer timeout = 300) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		return takeEntirePageImage(webDriver, timeout)
 	}
 
+	/**
+	 * take the screenshot of the entire page targeted,
+	 * and save it into the output file in PNG format.
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param output
+	 */
 	@Keyword
-	static boolean hasSignificantDiff(ImageDiff diff, Double criteriaPercent) {
-		Double diffRatio = ScreenshotDriver.diffRatioPercent(diff)
-		if (diffRatio > criteriaPercent) {
-			KeywordUtil.markFailed("diffRatio = ${diffRatio} is exceeding criteria = ${criteriaPercent}")
-		}
+	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = 300) {
+		BufferedImage image = takeEntirePageImage(webDriver, timeout)
+		ImageIO.write(image, "PNG", file)
+	}
+
+	/**
+	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
+	 * @param file
+	 */
+	@Keyword
+	static void saveEntirePageImage(File file, Integer timeout = 300) {
+		WebDriver driver = DriverFactory.getWebDriver()
+		saveEntirePageImage(driver, file, timeout)
 	}
 
 
 
 	/**
-	 *
-	 * @param profileExpected e.g., 'product'
-	 * @param profileAcutual  e.g., 'develop'
-	 * @param tSuiteName      e.g., 'TS1'
-	 * @param criteriaPercent e.g.,  3.83
-	 * @return
+	 * similar to saveEntirePageImage(WebDriver, File, Integer)
+	 * @deprecated use saveEntirePageImage(File, Integer) instead
+	 * @param webDriver
+	 * @param file
 	 */
 	@Keyword
-	static def makeDiffs(String profileExpected = 'product', String profileActual = 'develop', String tSuiteName,
-			Double criteriaPercent = 3.0) {
-
-		if (tSuiteName == null) {
-			throw new IllegalArgumentException('#doDiff argument tSuiteName is required')
-		}
-
-		List<MaterialPair> materialPairs = ScreenshotDriver.getScreenshotPairs(profileExpected, profileActual, tSuiteName)
-		assertTrue(">>> materialPairs.size() is 0", materialPairs.size() > 0)
-
-		MaterialRepository mr = (MaterialRepository)GlobalVariable.MATERIAL_REPOSITORY
-		assertTrue(">>> GlobalVariable.MATERIAL_REPOSITORY is null", mr != null)
-
-		List<Double> ratios = new ArrayList<Double>()
-
-		for (MaterialPair pair : materialPairs) {
-			Material expMate = pair.getExpected()
-			Material actMate = pair.getActual()
-			BufferedImage expectedImage = ImageIO.read(expMate.getPath().toFile())
-			BufferedImage actualImage   = ImageIO.read(actMate.getPath().toFile())
-			Screenshot expectedScreenshot = new Screenshot(expectedImage)
-			Screenshot actualScreenshot   = new Screenshot(actualImage)
-			// get diff of the pair of images
-			ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
-
-			// get diffRatioPercent
-			Float diffRatioPercent = ScreenshotDriver.diffRatioPercent(diff)
-			ratios.add(diffRatioPercent)
-
-			// save the diff image into file
-			BufferedImage markedImage = diff.getMarkedImage()
-			String fileName = expMate.getPath().getFileName().toString()
-			String fileId = fileName.substring(0, fileName.lastIndexOf('.'))
-			String expTimestamp = expMate.getParent().getParent().getTSuiteTimestamp().format()
-			String actTimestamp = actMate.getParent().getParent().getTSuiteTimestamp().format()
-			Boolean failed = (diffRatioPercent > criteriaPercent)
-			// verify the diff-ratio, fail the test if the ratio is greater than criteria
-			if (failed) {
-				KeywordUtil.markFailed("diffRatio = ${diffRatioPercent} is exceeding criteria = ${criteriaPercent}")
-			}
-			Path pngFile = mr.resolveMaterialPath(
-					GlobalVariable.CURRENT_TESTCASE_ID,
-					expMate.getDirpathRelativeToTSuiteResult(),
-					"${fileId}.${expTimestamp}_${profileExpected}-${actTimestamp}_${profileActual}" +
-					".(${String.format('%.2f', diffRatioPercent)})${(failed) ? 'FAILED' : ''}.png")
-			ImageIO.write(markedImage, "PNG", pngFile.toFile())
-
-
-		}
-		// show statistics
-		printRatios(ratios)
-		Double averageValue = average(ratios)
-		println ">>> #makeDiffs averate of diffRatios is ${String.format('%.2f', averageValue)}"
-		Double stddevValue = evalStandardDeviation(ratios)
-		println ">>> #makeDiffs standard deviation of diffRatio is ${String.format('%.2f', stddevValue)}"
-		Double recommendedCriteria = evalRecommendedCriteria(ratios, 1.6)
-		println ">>> #makeDiffs recommended criteria is ${String.format('%.2f', recommendedCriteria)}"
+	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = 300) {
+		saveEntirePageImage(webDriver, file, timeout)
 	}
 
-	static void printRatios(List<Double> data) {
-		StringBuilder sb = new StringBuilder()
-		sb.append(">>> #makeIndex ratios is ")
-		sb.append("[")
-		def count = 0
-		for (Double d : data) {
-			if (count > 0) {
-				sb.append(", ")
-			}
-			sb.append(String.format('%.2f', d))
-			count += 1
-		}
-		sb.append("] percent")
-		println sb.toString()
-	}
-
-	static Double average(List<Double> data) {
-		Double sum = 0.0
-		for (Double d : data) {
-			sum += d
-		}
-		return sum / data.size()
-	}
-
-	static Double evalStandardDeviation(List<Double> data) {
-		Double average = average(data)
-		Double s = 0.0
-		for (Double d : data) {
-			s += (average - d) * (average - d)
-		}
-		return Math.sqrt(s / data.size)
-	}
-
-	static Double evalRecommendedCriteria(List<Double> data, Double factor = 1.5) {
-		Double average = average(data)
-		Double stddevi = evalStandardDeviation(data)
-		return average + stddevi * factor
-	}
 
 	/**
-	 *
-	 * @param expectedProfile
-	 * @param actualProfile
-	 * @param testSuiteId
-	 * @return
+	 * compare 2 images, calcuralte the magnitude of difference between the two
+	 * 
+	 * @param BufferedImage expectedImage
+	 * @param BufferedImage actualImage
+	 * @param Double criteriaPercentage, e.g. 90.0%
+	 * @return ImageDifference object which represents how much different the input 2 images are
 	 */
-	static List<MaterialPair> getScreenshotPairs(
-			String expectedProfile /* 'product' */,
-			String actualProfile   /* 'develop' */,
-			String testSuiteId     /* 'Test Suites/TS1' */) {
+	@Keyword
+	static ImageDifference verifyImages(BufferedImage expectedImage,
+			BufferedImage actualImage, Double criteriaPercent) {
+		ImageDifference difference =
+				new ImageDifference(expectedImage, actualImage)
+		difference.setCriteria(criteriaPercent)
+		return difference
+	}
 
-		List<MaterialPair> list = mr_.getRecentMaterialPairs(expectedProfile, actualProfile, testSuiteId)
-		KeywordUtil.logInfo(">>> list.size() is ${list.size()}")
-		List<MaterialPair> result = list.stream().filter { mp ->
-			mp.getLeft().getFileType() == FileType.PNG
-		}.collect(Collectors.toList())
-		KeywordUtil.markPassed("returning MaterialPairs successfully")
-		return result
+
+
+	/**
+	 * accepts 2 BufferedImages as input, compare them, make a difference image,
+	 * and calcurate the ratio of difference of the 2 input images.
+	 */
+	static class ImageDifference {
+
+		private BufferedImage expectedImage_
+		private BufferedImage actualImage_
+		private BufferedImage diffImage_
+		private Double ratio_ = 0.0        // percentage
+		private Double criteria_ = 1.0     // percentage
+
+		ImageDifference(BufferedImage expected, BufferedImage actual) {
+			expectedImage_ = expected
+			actualImage_ = actual
+			ImageDiff imgDiff = makeImageDiff(expectedImage_, actualImage_)
+			ratio_ = calculateRatioPercent(imgDiff)
+			diffImage_ = imgDiff.getMarkedImage()
+		}
+
+		private ImageDiff makeImageDiff(BufferedImage expected, BufferedImage actual) {
+			Screenshot expectedScreenshot = new Screenshot(expected)
+			Screenshot actualScreenshot = new Screenshot(actual)
+			ImageDiff imgDiff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
+			return imgDiff
+		}
+
+		BufferedImage getExpectedImage() {
+			expectedImage_
+		}
+
+		BufferedImage getActualImage() {
+			actualImage_
+		}
+
+		BufferedImage getDiffImage() {
+			return diffImage_
+		}
+
+		void setCriteria(Double criteria) {
+			criteria_ = criteria
+		}
+
+		Double getCriteria() {
+			return criteria_
+		}
+
+		/**
+		 * 
+		 * @return e.g. 0.23% or 90.0%
+		 */
+		Double getRatio() {
+			return ratio_
+		}
+
+		/**
+		 * @return e.g. "0.23" or "90.00"
+		 */
+		String getRatioAsString(String fmt = '%1$.2f') {
+			return String.format(fmt, this.getRatio())
+		}
+
+		private Double calculateRatioPercent(ImageDiff diff) {
+			boolean hasDiff = diff.hasDiff()
+			if (!hasDiff) {
+				return 0.0
+			}
+			int diffSize = diff.getDiffSize()
+			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
+			Double diffRatio = diff.getDiffSize() / area * 100
+			return diffRatio
+		}
+
+
+		/**
+		 * @return true if the expected image and the actual image pair has 
+		 *         greater difference than the criteria = these are different enough,
+		 *         otherwise false.
+		 */
+		Boolean imagesAreDifferent() {
+			return (ratio_ > criteria_)
+		}
+
+		/**
+		 * @return true if the expected image and the actual image pair has
+		 *         smaller difference than the criteria = these are similar enough,
+		 *         otherwise false.
+		 */
+		Boolean imagesAreSimilar() {
+			return (ratio_ <= criteria_)
+		}
 	}
 }
