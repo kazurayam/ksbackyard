@@ -1,14 +1,13 @@
-Katalon Studio Backyard
+Katalon Studio Backyard developed by kazurayam
 =======================
 
-Current version is 0.6
+This project is a [Katalon Studio]() project where I develop a few Custom Keywords to share with other Katalon Studio projects. The custom keywords belongs to
+the Groovy package name `com.kazurayam.ksbackyard`.
 
-This project is a [Katalon Studio]() project where I develop a few Custom Keywords
-to share with other Katalon Studio projects. The custom keywords belongs to
-the Java package name `com.kazurayam.ksbackyard`.
 
-## `com.kazurayam.ksbackyard.Assert`
-
-## `com.kazurayam.ksbackyard.ScreenshotDriver`
-
-## `com.kazurayam.ksbackyard.URLParser`
+Groovy classes includes:
+- `com.kazurayam.ksbackyard.Assert` --- Synonym to `org.junit.Assert` but reports to Katalon Studio's Logging system.
+- `com.kazurayam.ksbackyard.ImageCollectionDiffer` --- A bridge between aShot and Materials.
+- `com.kazurayam.ksbackyard.ScreenshotDriver` --- A wrapper class of aShot, plus ImageDifference class
+- `com.kazurayam.ksbackyard.URLParser`
+- `com.kazurayam.ksbackyard.YouTubeVideoVerifier`
