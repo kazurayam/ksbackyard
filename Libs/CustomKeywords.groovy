@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
+import com.kms.katalon.core.testobject.TestObject
+
 import java.io.File
 
 import java.lang.Integer
@@ -32,6 +34,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
          , 	webElement)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
+    	TestObject testObject	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage(
+        	testObject)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
     	WebDriver webDriver	
      , 	WebElement webElement	
@@ -39,6 +47,14 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveElementImage(
         	webDriver
          , 	webElement
+         , 	file)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
+    	TestObject testObject	
+     , 	File file	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveElementImage(
+        	testObject
          , 	file)
 }
 
@@ -50,6 +66,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
          , 	timeout)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
+    	Integer timeout	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
+        	timeout)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
     	WebDriver webDriver	
      , 	File file	
@@ -57,6 +79,14 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
         	webDriver
          , 	file
+         , 	timeout)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
+    	File file	
+     , 	Integer timeout	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
+        	file
          , 	timeout)
 }
 
@@ -80,38 +110,14 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImages"(
          , 	criteriaPercent)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyVideoInMotion"(
-    	WebDriver driver	
-     , 	WebElement video	
-     , 	WebElement playButton	
-     , 	Integer gapTimeSecs	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyVideoInMotion(
-        	driver
-         , 	video
-         , 	playButton
-         , 	gapTimeSecs
-         , 	criteriaPercent)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyVideoStartsStill"(
-    	WebDriver driver	
-     , 	WebElement video	
-     , 	WebElement playButton	
-     , 	Integer gapTimeSecs	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyVideoStartsStill(
-        	driver
-         , 	video
-         , 	playButton
-         , 	gapTimeSecs
-         , 	criteriaPercent)
-}
-
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	WebDriver webDriver	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
         	webDriver)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"() {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage()
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
@@ -122,42 +128,18 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
          , 	file)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
+    	File file	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
+        	file)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
     	WebDriver webDriver	
      , 	File file	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
         	webDriver
          , 	file)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyVideoStartsStill"(
-    	WebDriver driver	
-     , 	WebElement video	
-     , 	WebElement playButton	
-     , 	Integer gapTimeSecs	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyVideoStartsStill(
-        	driver
-         , 	video
-         , 	playButton
-         , 	gapTimeSecs)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyVideoStartsStill"(
-    	WebDriver driver	
-     , 	WebElement video	
-     , 	WebElement playButton	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyVideoStartsStill(
-        	driver
-         , 	video
-         , 	playButton)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyVideoStartsStill"(
-    	WebDriver driver	
-     , 	WebElement video	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyVideoStartsStill(
-        	driver
-         , 	video)
 }
 
 def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
@@ -254,6 +236,86 @@ def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.resolveAgainstProje
     	String pathString	) {
     (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).resolveAgainstProjectDir(
         	pathString)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	WebElement playButton	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoInMotion(
+        	driver
+         , 	video
+         , 	playButton
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
+    	TestObject video	
+     , 	TestObject playButton	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoInMotion(
+        	video
+         , 	playButton
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	Integer gapTimeSecs	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video
+         , 	gapTimeSecs)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	
+     , 	Integer gapTimeSecs	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video
+         , 	gapTimeSecs)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
