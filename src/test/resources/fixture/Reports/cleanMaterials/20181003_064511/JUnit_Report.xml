@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="cleanMaterials" time="1" tests="1" failures="0" errors="0">
+   <testsuite name="cleanMaterials" tests="1" failures="0" errors="0" time="1" timestamp="2018-10-03 06:45:15" hostname="urayamakazuaki - 10.0.1.5" id="Test Suites/cleanMaterials">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/cleanMaterials/20181003_064511"/>
+         <property name="logFiles" value="/Users/urayamakazuaki/katalon-workspace/VisualTestingInKatalonStudio/Reports/cleanMaterials/20181003_064511/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="urayamakazuaki - 10.0.1.5"/>
+         <property name="hostAddress" value="10.0.1.5"/>
+         <property name="os" value="Mac OS X 64bit"/>
+         <property name="katalonVersion" value="5.7.1.1"/>
+      </properties>
+      <testcase name="Test Cases/cleanMaterials" classname="Test Cases/cleanMaterials" status="PASSED">
+         <system-out><![CDATA[2018-10-03 06:45:17 - [TEST_CASE][PASSED] - Test Cases/cleanMaterials: Test Cases/cleanMaterials
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Start listener action : beforeTestCase: Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Statement - If (MATERIAL_REPOSITORY == null): null
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Statement - CURRENT_TESTCASE_ID = testCaseContext.getTestCaseId(): Invoke 'com.kms.katalon.core.annotation.BeforeTestCase' method: 'TL.beforeTestCase(...)' completed.
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Statement - mr = MATERIAL_REPOSITORY: null
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Statement - assert mr != null: null
+
+2018-10-03 06:45:17 - [TEST_STEP][PASSED] - Statement - com.kazurayam.materials.Helpers.deleteDirectoryContents(mr.getBaseDir()): null]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-10-03 06:45:15 - [TEST_SUITE][PASSED] - cleanMaterials: Test Cases/cleanMaterials]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
