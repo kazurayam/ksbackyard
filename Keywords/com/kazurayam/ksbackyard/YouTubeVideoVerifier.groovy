@@ -12,6 +12,8 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
+ * This class implements Custom Keywords operational in Katalon Studio.
+ * The keywords are useful to verify how a YouTube video is working. 
  *
  * @author kazurayam
  *
@@ -19,10 +21,11 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 class YouTubeVideoVerifier {
 
 	/**
-	 * return a Map object containing 'evaluated': true when the video is autoplayed,
-	 * otherwise false.
-	 *
-	 * 1. when the video is loaded, push the playButton so that the vido is stopped
+	 * This method accepts a WebDriver instance and a WebElement object as video.
+	 * This method checks if the video is autoplayed or not.
+	 * 
+	 * What it actually does is as follows:
+	 * 1. when the video is loaded, push the playButton so that the video will stopped
 	 * 2. 1st screenshot is taken.
 	 * 3. push the playButton so that the video is restarted, wait for some seconds so that the video goes forward
 	 * 4. 2nd screenshot is taken.
@@ -92,9 +95,10 @@ class YouTubeVideoVerifier {
 
 
 	/**
-	 * return a Map object containing 'evaluated': true when the video is staying still = is not autoplayed,
-	 * otherwise false.
-	 *
+	 * This method accepts a WebDriver instance and a WebElement object as video.
+	 * This method checks if the video starts and stay still (no motion)or not.
+	 * 
+	 * What it actually does is as follows:
 	 * 1. when the video is loaded, 1st screenshot is taken.
 	 * 2. wait for some seconds
 	 * 3. 2nd screenshot is taken.
