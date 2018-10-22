@@ -223,6 +223,13 @@ class ScreenshotDriver {
 			return String.format(fmt, this.getRatio())
 		}
 
+		/**
+		 * 
+		 * Round up 0.0001 to 0.01
+		 * 
+		 * @param diff
+		 * @return
+		 */
 		private Double calculateRatioPercent(ImageDiff diff) {
 			boolean hasDiff = diff.hasDiff()
 			if (!hasDiff) {
@@ -231,7 +238,9 @@ class ScreenshotDriver {
 			int diffSize = diff.getDiffSize()
 			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
 			Double diffRatio = diff.getDiffSize() / area * 100
-			return diffRatio
+			BigDecimal bd = new BigDecimal(diffRatio)
+			BigDecimal bdUP = bd.setScale(1, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
+			return bdUP.doubleValue()
 		}
 
 
