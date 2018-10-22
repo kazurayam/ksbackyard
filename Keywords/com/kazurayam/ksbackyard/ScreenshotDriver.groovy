@@ -20,6 +20,8 @@ import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
 /**
+ * Wraps the AShot API, WebDriver Screenshot utility. 
+ * Provides some add-on features used in "Visual Testing in Katalon Studio"
  * 
  * @author kazurayam
  *
@@ -43,7 +45,8 @@ class ScreenshotDriver {
 	}
 
 	/**
-	 * provides the same function as takeElementImage(WebDriver, WebElement)
+	 * provides the same function as takeElementImage(WebDriver, WebElement).
+	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
 	 * 
 	 * @param testObject
 	 * @return
@@ -54,15 +57,28 @@ class ScreenshotDriver {
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
 	}
-
+	
+	
+	
+	/**
+	 * takes screenshot of the specified WebElement in the target WebPage,
+	 * and save it into the output file in PNG format.
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param file
+	 */
 	@Keyword
 	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
 		ImageIO.write(image, "PNG", file)
 	}
 
+	
 	/**
 	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
+	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
+	 * 
 	 * @param testObject
 	 * @param file
 	 */
@@ -94,6 +110,7 @@ class ScreenshotDriver {
 
 	/**
 	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
+	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
 	 * 
 	 * @timeout millisecond, wait for page to displayed stable after scrolling downward
 	 * @return
@@ -120,6 +137,8 @@ class ScreenshotDriver {
 
 	/**
 	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
+	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
+	 * 
 	 * @param file
 	 */
 	@Keyword
@@ -142,8 +161,9 @@ class ScreenshotDriver {
 	}
 
 
+	
 	/**
-	 * compare 2 images, calcuralte the magnitude of difference between the two
+	 * compare 2 images, calculate the magnitude of difference between the two
 	 * 
 	 * @param BufferedImage expectedImage
 	 * @param BufferedImage actualImage
