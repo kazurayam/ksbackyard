@@ -64,6 +64,9 @@ class ImageCollectionDiffer {
 
 
 	/**
+	 * compare 2 Material files in each MaterialPair object, create ImageDiff and
+	 * store the diff image files under the directory ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
+	 * The difference ratio is compared with the criteriaPercent given. marked FAILED if greater.
 	 * 
 	 * @param materialPairs created by com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
 	 * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)
