@@ -57,9 +57,9 @@ class ScreenshotDriver {
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
 	}
-	
-	
-	
+
+
+
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
 	 * and save it into the output file in PNG format.
@@ -74,7 +74,7 @@ class ScreenshotDriver {
 		ImageIO.write(image, "PNG", file)
 	}
 
-	
+
 	/**
 	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -161,7 +161,7 @@ class ScreenshotDriver {
 	}
 
 
-	
+
 	/**
 	 * compare 2 images, calculate the magnitude of difference between the two
 	 * 
@@ -259,7 +259,7 @@ class ScreenshotDriver {
 			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
 			Double diffRatio = diff.getDiffSize() / area * 100
 			BigDecimal bd = new BigDecimal(diffRatio)
-			BigDecimal bdUP = bd.setScale(1, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
+			BigDecimal bdUP = bd.setScale(2, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
 			return bdUP.doubleValue()
 		}
 
