@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -162,6 +163,27 @@ class ScreenshotDriver {
 
 
 
+
+
+
+
+
+
+
+
+	/**
+	 * @deprecated use compareImages(BufferedImage, BufferedImage, Double)
+	 * @param expectedImage
+	 * @param actualImage
+	 * @param criteriaPercent
+	 * @return
+	 */
+	@Keyword
+	static ImageDifference verifyImages(BufferedImage expectedImage,
+			BufferedImage actualImage, Double criteriaPercent) {
+		return compareImages(expectedImage, actualImage, criteriaPercent)
+	}
+
 	/**
 	 * compare 2 images, calculate the magnitude of difference between the two
 	 * 
@@ -171,15 +193,60 @@ class ScreenshotDriver {
 	 * @return ImageDifference object which represents how much different the input 2 images are
 	 */
 	@Keyword
-	static ImageDifference verifyImages(BufferedImage expectedImage,
-			BufferedImage actualImage, Double criteriaPercent) {
+	static ImageDifference compareImages(
+			BufferedImage expectedImage,
+			BufferedImage actualImage,
+			Double criteriaPercent) {
 		ImageDifference difference =
 				new ImageDifference(expectedImage, actualImage)
 		difference.setCriteria(criteriaPercent)
 		return difference
 	}
 
+	/**
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return ImageDifference object which contains comparison result
+	 */
+	@Keyword
+	static ImageDifference compareImages(
+			File expectedImage,
+			TestObject actualImage,
+			Double criteriaPercent) {
+		BufferedImage exp = ImageIO.read(expectedImage)
+		BufferedImage act = takeElementImage(actualImage)
+		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
+		return imgDifference
+	}
 
+	/**
+	 * 
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return true if expectedImage and actualImage are similar enough; difference ratio < criteriaPercent
+	 */
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			File expectedImage,
+			TestObject actualImage,
+			Double criteriaPercent = 5.0) {
+		ImageDifference imgDifference = compareImages(expectedImage, actualImage, criteriaPercent)
+		return imgDifference.imagesAreSimilar()
+	}
+
+	/**
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return true if expecteImage and actualImage are different enough; differenece ratio > criteriaPercent
+	 */
+	@Keyword
+	static Boolean verifyImagesAreDifferent(
+			File expectedImage,
+			TestObject actualImage,
+			Double criteriaPercent = 50.0) {
+		ImageDifference imgDifference = compareImages(expectedImage, actualImage, criteriaPercent)
+		return imgDifference.imagesAreDifferent()
+	}
 
 	/**
 	 * accepts 2 BufferedImages as input, compare them, make a difference image,

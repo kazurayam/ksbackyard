@@ -110,6 +110,46 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImages"(
          , 	criteriaPercent)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
+    	BufferedImage expectedImage	
+     , 	BufferedImage actualImage	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
+        	expectedImage
+         , 	actualImage
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
+    	File expectedImage	
+     , 	TestObject actualImage	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
+        	expectedImage
+         , 	actualImage
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
+    	File expectedImage	
+     , 	TestObject actualImage	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expectedImage
+         , 	actualImage
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expectedImage	
+     , 	TestObject actualImage	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expectedImage
+         , 	actualImage
+         , 	criteriaPercent)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	WebDriver webDriver	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
@@ -140,6 +180,22 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
         	webDriver
          , 	file)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
+    	File expectedImage	
+     , 	TestObject actualImage	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expectedImage
+         , 	actualImage)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expectedImage	
+     , 	TestObject actualImage	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expectedImage
+         , 	actualImage)
 }
 
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
