@@ -1,4 +1,4 @@
-package com.kazurayam.ashot.cropper
+package com.kazurayam.ksbackyard.test.ashot.cropper
 
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.coordinates.Coords;
@@ -22,6 +22,8 @@ public class DefaultCropper_mock extends ImageCropper {
 
 		Coords imageIntersection = Coords.ofImage(image).intersection(cropArea);
 
+		println ">>> DefaultCropper_mock#cropScreenthsot imageIntersection is ${imageIntersection.toString()}"
+		
 		if (imageIntersection.isEmpty()) {
 			println ">>> DefaultCropper_mock#cropScreenshot imageIntersecion is empty!"
 			return new Screenshot(image);

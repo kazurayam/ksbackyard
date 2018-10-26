@@ -20,7 +20,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
-import com.kazurayam.ashot.AShotMock
+import com.kazurayam.ksbackyard.test.ashot.AShotMock
 
 /**
  * Wraps the AShot API, WebDriver Screenshot utility. 
@@ -44,16 +44,30 @@ class ScreenshotDriver {
 	 */
 	@Keyword
 	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
+		int timeout = 500
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
 				takeScreenshot(webDriver, webElement)
 		return screenshot.getImage()
 	}
 
+
+	/**
+	 * This method is solely for DEBUGGING purpose.
+	 * This method calls com.kazurayam.ksbackyard.test.ashot.AshotMock class which is a copy of real AShot.
+	 * We will insert print statements to investigate the behavior of AShot.
+	 * 
+	 * @param webDriver
+	 * @param webElement
+	 * @return
+	 */
 	@Keyword
 	static BufferedImage takeElementImage_mock(WebDriver webDriver, WebElement webElement) {
+		int timeout = 500
 		Screenshot screenshot = new AShotMock().
 				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
 				takeScreenshot(webDriver, webElement)
 		return screenshot.getImage()
 	}
@@ -77,8 +91,6 @@ class ScreenshotDriver {
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage_mock(webDriver, webElement)
 	}
-
-
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
@@ -108,6 +120,9 @@ class ScreenshotDriver {
 		WebElement webElement = WebUI.findWebElement(testObject,30)
 		saveElementImage(webDriver, webElement, file)
 	}
+
+
+
 
 
 	/**

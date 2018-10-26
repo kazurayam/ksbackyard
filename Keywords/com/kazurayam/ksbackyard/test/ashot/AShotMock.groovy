@@ -1,4 +1,4 @@
-package com.kazurayam.ashot
+package com.kazurayam.ksbackyard.test.ashot
 
 import static java.util.Collections.singletonList;
 import static ru.yandex.qatools.ashot.coordinates.CoordsPreparationStrategy.intersectingWith;
@@ -18,7 +18,8 @@ import ru.yandex.qatools.ashot.cropper.ImageCropper;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 import ru.yandex.qatools.ashot.shooting.SimpleShootingStrategy;
 
-import com.kazurayam.ashot.cropper.DefaultCropper_mock;
+import com.kazurayam.ksbackyard.test.ashot.cropper.DefaultCropper_mock;
+
 
 public class AShotMock extends AShot implements Serializable {
 
@@ -123,7 +124,7 @@ public class AShotMock extends AShot implements Serializable {
 		Set<Coords> cds = shootingStrategy.prepareCoords(elementCoords)
 		println ">>> AShotMock#takeScreenshot cds.size()=${cds.size()}"
 		for (Coords cd: cds) {
-			println ">>> cd.toString()=${cd.toString()}"
+			println ">>> AShotMock#takeScreenshot cd.toString()=${cd.toString()}"
 		}
 
 
