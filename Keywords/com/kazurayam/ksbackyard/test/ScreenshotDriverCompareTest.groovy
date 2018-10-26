@@ -72,15 +72,16 @@ class ScreenshotDriverCompareTest {
 		WebElement photo = driver_.findElement(By.xpath(xpath))
 		scrollToElement(driver_, photo)
 		Path output = workdir_.resolve("kazurayam.png")
+		println ">>> test_saveKazurayamProfilePicture is calling ScreenshotDriver"
 		BufferedImage bi = ScreenshotDriver.takeElementImage(driver_, photo)
 		ImageIO.write(bi, "PNG", output.toFile())
 		assertTrue("${output.toString()} does not exist", Files.exists(output))
 	}
-	
+
 	private void scrollToElement(WebDriver driver, WebElement el) {
 		if (driver instanceof JavascriptExecutor) {
 			((JavascriptExecutor) driver)
-				.executeScript("arguments[0].scrollIntoView(true);", el);
+					.executeScript("arguments[0].scrollIntoView(true);", el);
 		}
 	}
 }

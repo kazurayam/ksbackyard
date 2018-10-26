@@ -54,6 +54,8 @@ class ScreenshotDriver {
 	 */
 	@Keyword
 	static BufferedImage takeElementImage(TestObject testObject) {
+		println ">>> testObject: " + com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties(testObject)
+		
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
