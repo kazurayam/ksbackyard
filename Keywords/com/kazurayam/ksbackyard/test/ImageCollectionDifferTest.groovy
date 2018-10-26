@@ -47,20 +47,20 @@ class ImageCollectionDifferTest {
 		mr.putCurrentTestSuite('Test Suites/ImageDiff', '20181014_060501')
 		//
 		List<MaterialPair> materialPairs =
-			// we use Java 8 Stream API to filter entries
-			mr.createMaterialPairs(
+				// we use Java 8 Stream API to filter entries
+				mr.createMaterialPairs(
 				new TSuiteName('Test Suites/Main/TS1'),
 				new ExecutionProfile('product'),
 				new ExecutionProfile('develop')
 				).stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
-					}.collect(Collectors.toList())
+				}.collect(Collectors.toList())
 
 		ImageCollectionDiffer icd = new ImageCollectionDiffer(mr)
 		icd.makeImageCollectionDifferences(
-			materialPairs,
-			new TCaseName('Test Cases/ImageDiff'),
-			7.0)
+				materialPairs,
+				new TCaseName('Test Cases/ImageDiff'),
+				7.0)
 		//
 	}
 }

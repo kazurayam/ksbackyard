@@ -22,7 +22,7 @@ class QuietBrowserTest {
 		Thread.sleep(1000)
 		webdriver.quit()
 	}
-	
+
 	@Test
 	void test_getProxyInformation() {
 		def info = QuietBrowser.getProxyInformation()

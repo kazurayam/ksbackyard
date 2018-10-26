@@ -10,7 +10,6 @@ import org.junit.Test
 
 import com.kazurayam.ksbackyard.RunConfigurationWrapper
 
-
 class RunConfigurationWrapperTest {
 
 	@Test

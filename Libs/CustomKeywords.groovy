@@ -34,6 +34,14 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
          , 	webElement)
 }
 
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage_mock"(
+    	WebDriver webDriver	
+     , 	WebElement webElement	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage_mock(
+        	webDriver
+         , 	webElement)
+}
+
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage(

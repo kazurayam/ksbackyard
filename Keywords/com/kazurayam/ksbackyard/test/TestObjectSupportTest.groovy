@@ -37,6 +37,5 @@ public class TestObjectSupportTest {
 		assertTrue("condition is missing", json.contains('condition'))
 		assertTrue("value is missing", json.contains('value'))
 		assertTrue("isActive is missing", json.contains('isActive'))
-		
 	}
 }

@@ -17,6 +17,7 @@ import com.kazurayam.materials.TSuiteName
 import com.kms.katalon.core.logging.KeywordLogger
 import com.kms.katalon.core.util.KeywordUtil
 
+
 /**
  * This class is designed to implement the "Visual Testing in Katalon Studio" feature.
  * 

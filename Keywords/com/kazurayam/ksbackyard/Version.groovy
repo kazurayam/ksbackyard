@@ -7,29 +7,24 @@ package com.kazurayam.ksbackyard
  * @author kazurayam
  */
 class Version {
-	
-	static String getVersion()
-	{
-	    return "${getProduct()} ${getMajorVersionNum()}.${getReleaseVersionNum()}.${getDevelopmentVersionNum()}"
+
+	static String getVersion() {
+		return "${getProduct()} ${getMajorVersionNum()}.${getReleaseVersionNum()}.${getDevelopmentVersionNum()}"
 	}
-	
-	static String getProduct()
-	{
+
+	static String getProduct() {
 		return 'ksbackyard'
 	}
-	
-	static int getMajorVersionNum()
-	{
+
+	static int getMajorVersionNum() {
 		return 0
 	}
-	
-	static int getReleaseVersionNum()
-	{
+
+	static int getReleaseVersionNum() {
 		return 12
 	}
-	
-	static int getDevelopmentVersionNum()
-	{
+
+	static int getDevelopmentVersionNum() {
 		return 0
 	}
 }

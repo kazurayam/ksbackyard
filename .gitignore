@@ -1,15 +1,43 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+Libs/TempTestCase*.groovy
+Libs/TempTestSuite*.groovy
+/Reports/
+/Materials/
+settings/internal/com.kms.katalon.integration.analytics.properties
+settings/internal/com.kms.katalon.integration.jira.properties
+
+
+
+
+# eamcs
 *~
+
+# vim
 *.swp
 
-.classpath
-.project
-
-/bin/lib/Temp*.class
-/libs/Temp*.groovy
-
-/Materials/
-/Reports/
-/bin/
-/tmp/
-
+# OS X
 .DS_Store
+
+/tmp

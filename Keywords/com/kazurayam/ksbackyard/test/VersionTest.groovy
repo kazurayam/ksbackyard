@@ -14,5 +14,4 @@ public class VersionTest {
 		assertNotNull("Version.getVersion() returned null", version)
 		assertTrue("version:\'${}\' should starts with ksbackyard", version.contains('ksbackyard'))
 	}
-
 }

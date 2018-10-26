@@ -20,6 +20,8 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
+import com.kazurayam.ashot.AShotMock
+
 /**
  * Wraps the AShot API, WebDriver Screenshot utility. 
  * Provides some add-on features used in "Visual Testing in Katalon Studio"
@@ -31,7 +33,10 @@ class ScreenshotDriver {
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
-	 * returns it as a BufferedImage object
+	 * returns it as a BufferedImage object.
+	 * 
+	 * If the specified webElement is not found, then screenshot of whole page
+	 * will be returned.
 	 * 
 	 * @param webDriver
 	 * @param webElement
@@ -40,6 +45,14 @@ class ScreenshotDriver {
 	@Keyword
 	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
 		Screenshot screenshot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				takeScreenshot(webDriver, webElement)
+		return screenshot.getImage()
+	}
+
+	@Keyword
+	static BufferedImage takeElementImage_mock(WebDriver webDriver, WebElement webElement) {
+		Screenshot screenshot = new AShotMock().
 				coordsProvider(new WebDriverCoordsProvider()).
 				takeScreenshot(webDriver, webElement)
 		return screenshot.getImage()
@@ -54,11 +67,15 @@ class ScreenshotDriver {
 	 */
 	@Keyword
 	static BufferedImage takeElementImage(TestObject testObject) {
-		println ">>> testObject: " + com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties(testObject)
-		
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
+	}
+
+	static BufferedImage takeElementImage_mock(TestObject testObject) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject, 30)
+		return takeElementImage_mock(webDriver, webElement)
 	}
 
 
