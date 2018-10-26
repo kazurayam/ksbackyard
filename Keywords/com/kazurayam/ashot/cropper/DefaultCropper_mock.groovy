@@ -23,6 +23,7 @@ public class DefaultCropper_mock extends ImageCropper {
 		Coords imageIntersection = Coords.ofImage(image).intersection(cropArea);
 
 		if (imageIntersection.isEmpty()) {
+			println ">>> DefaultCropper_mock#cropScreenshot imageIntersecion is empty!"
 			return new Screenshot(image);
 		}
 
