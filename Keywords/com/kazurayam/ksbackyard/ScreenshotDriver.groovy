@@ -258,6 +258,22 @@ class ScreenshotDriver {
 		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
 		return imgDifference
 	}
+	
+	/**
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return ImageDifference object which contains comparison result
+	 */
+	@Keyword
+	static ImageDifference compareImages(
+			TestObject expected,
+			TestObject actual,
+			Double criteriaPercent) {
+		BufferedImage exp = takeElementImage(expected)
+		BufferedImage act = takeElementImage(actual)
+		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
+		return imgDifference
+	}
 
 	/**
 	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
@@ -326,7 +342,35 @@ class ScreenshotDriver {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS").format(now)
 	}
+	
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			TestObject expected,
+			TestObject actual,
+			Double criteriaPercent = 5.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreSimilar()
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be similar but different",
+				result, flowControl)
+		return result
+	}
 
+	@Keyword
+	static Boolean verifyImagesAreDiffenet(
+			TestObject expected,
+			TestObject actual,
+			Double criteriaPercent = 5.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreDifferent()
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be different but similar",
+				result, flowControl)
+		return result
+	}
+		
 	/**
 	 * accepts 2 BufferedImages as input, compare them, make a difference image,
 	 * and calcurate the ratio of difference of the 2 input images.
