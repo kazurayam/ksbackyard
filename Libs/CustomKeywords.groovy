@@ -17,11 +17,11 @@ import java.awt.image.BufferedImage
 
 import java.lang.Double
 
+import com.kms.katalon.core.model.FailureHandling
+
 import java.lang.String
 
 import java.lang.Boolean
-
-import com.kms.katalon.core.model.FailureHandling
 
 import java.lang.Number
 
@@ -30,14 +30,6 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	WebDriver webDriver	
      , 	WebElement webElement	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage(
-        	webDriver
-         , 	webElement)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage_mock"(
-    	WebDriver webDriver	
-     , 	WebElement webElement	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage_mock(
         	webDriver
          , 	webElement)
 }
@@ -129,33 +121,37 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
-    	File expectedImage	
-     , 	TestObject actualImage	
+    	File expected	
+     , 	TestObject actual	
      , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
-        	expectedImage
-         , 	actualImage
+        	expected
+         , 	actual
          , 	criteriaPercent)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
-    	File expectedImage	
-     , 	TestObject actualImage	
-     , 	Double criteriaPercent	) {
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
-        	expectedImage
-         , 	actualImage
-         , 	criteriaPercent)
+        	expected
+         , 	actual
+         , 	criteriaPercent
+         , 	flowControl)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
-    	File expectedImage	
-     , 	TestObject actualImage	
-     , 	Double criteriaPercent	) {
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
-        	expectedImage
-         , 	actualImage
-         , 	criteriaPercent)
+        	expected
+         , 	actual
+         , 	criteriaPercent
+         , 	flowControl)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
@@ -191,19 +187,39 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
-    	File expectedImage	
-     , 	TestObject actualImage	) {
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
-        	expectedImage
-         , 	actualImage)
+        	expected
+         , 	actual
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
+    	File expected	
+     , 	TestObject actual	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expected
+         , 	actual)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
-    	File expectedImage	
-     , 	TestObject actualImage	) {
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
-        	expectedImage
-         , 	actualImage)
+        	expected
+         , 	actual
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expected	
+     , 	TestObject actual	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expected
+         , 	actual)
 }
 
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(

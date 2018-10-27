@@ -4,7 +4,7 @@ import org.junit.runner.JUnitCore
 import org.junit.runner.Result
 import org.junit.internal.TextListener
 
-import com.kazurayam.ksbackyard.test.ScreenshotDriverCompareTest
+import com.kazurayam.ksbackyard.test.ScreenshotDriverCompareImagesTest
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.driver.DriverFactory
@@ -16,7 +16,7 @@ WebUI.callTestCase(findTestCase('test/Prologue'), [:],
 // run CalculatorTest
 JUnitCore junit = new JUnitCore()
 junit.addListener(new TextListener(System.out))
-Result result = junit.run(ScreenshotDriverCompareTest.class)
+Result result = junit.run(ScreenshotDriverCompareImagesTest.class)
 
 // print test result
 WebUI.callTestCase(findTestCase('test/Epilogue'), ['result':result],

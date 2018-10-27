@@ -1,6 +1,11 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 import javax.imageio.ImageIO
 
@@ -20,7 +25,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
-import com.kazurayam.ksbackyard.test.ashot.AShotMock
+// import com.kazurayam.ksbackyard.test.ashot.AShotMock
 
 /**
  * Wraps the AShot API, WebDriver Screenshot utility. 
@@ -61,16 +66,17 @@ class ScreenshotDriver {
 	 * @param webDriver
 	 * @param webElement
 	 * @return
+	 *
+	 @Keyword
+	 static BufferedImage takeElementImage_mock(WebDriver webDriver, WebElement webElement) {
+	 int timeout = 500
+	 Screenshot screenshot = new AShotMock().
+	 coordsProvider(new WebDriverCoordsProvider()).
+	 shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
+	 takeScreenshot(webDriver, webElement)
+	 return screenshot.getImage()
+	 }
 	 */
-	@Keyword
-	static BufferedImage takeElementImage_mock(WebDriver webDriver, WebElement webElement) {
-		int timeout = 500
-		Screenshot screenshot = new AShotMock().
-				coordsProvider(new WebDriverCoordsProvider()).
-				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
-				takeScreenshot(webDriver, webElement)
-		return screenshot.getImage()
-	}
 
 	/**
 	 * provides the same function as takeElementImage(WebDriver, WebElement).
@@ -244,16 +250,19 @@ class ScreenshotDriver {
 	 */
 	@Keyword
 	static ImageDifference compareImages(
-			File expectedImage,
-			TestObject actualImage,
+			File expected,
+			TestObject actual,
 			Double criteriaPercent) {
-		BufferedImage exp = ImageIO.read(expectedImage)
-		BufferedImage act = takeElementImage(actualImage)
+		BufferedImage exp = ImageIO.read(expected)
+		BufferedImage act = takeElementImage(actual)
 		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
 		return imgDifference
 	}
 
 	/**
+	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
+	 * and check if images are SIMILAR enough.
+	 * When failed, the actual image is saved into file of which path is shown in the error message.
 	 * 
 	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
 	 * @param actualImage of TestObject which points HTML element in question
@@ -261,25 +270,61 @@ class ScreenshotDriver {
 	 */
 	@Keyword
 	static Boolean verifyImagesAreSimilar(
-			File expectedImage,
-			TestObject actualImage,
-			Double criteriaPercent = 5.0) {
-		ImageDifference imgDifference = compareImages(expectedImage, actualImage, criteriaPercent)
-		return imgDifference.imagesAreSimilar()
+			File expected,
+			TestObject actual,
+			Double criteriaPercent = 5.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		Path actualImagePath = Paths.get(System.getProperty('user.dir'),
+				'tmp', "ScreenshotDriver_verifyImagesAreSimilar_actual_${getTimestampNow()}.png")
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreSimilar()
+		if (!result) {
+			Files.createDirectories(actualImagePath.getParent())
+			ImageIO.write(imgDifference.getActualImage(), "PNG", actualImagePath.toFile())
+		}
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"acutual image (saved into ${actualImagePath.toString()}) is not " +
+				"similar enough to ${expected.toString()}",
+				result, flowControl)
+		return result
 	}
 
 	/**
+	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
+	 * and check if images are DIFFERENT enough.
+	 * When failed, the actual image is saved into file of which path is shown in the error message.
+	 * 
 	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
 	 * @param actualImage of TestObject which points HTML element in question
 	 * @return true if expecteImage and actualImage are different enough; differenece ratio > criteriaPercent
 	 */
 	@Keyword
 	static Boolean verifyImagesAreDifferent(
-			File expectedImage,
-			TestObject actualImage,
-			Double criteriaPercent = 50.0) {
-		ImageDifference imgDifference = compareImages(expectedImage, actualImage, criteriaPercent)
-		return imgDifference.imagesAreDifferent()
+			File expected,
+			TestObject actual,
+			Double criteriaPercent = 95.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		Path actualImagePath = Paths.get(System.getProperty('user.dir'),
+				'tmp', "ScreenshotDriver_verifyImagesAreDifferent_actual_${getTimestampNow()}.png")
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreDifferent()
+		if (!result) {
+			Files.createDirectories(actualImagePath.getParent())
+			ImageIO.write(imgDifference.getActualImage(), "PNG", actualImagePath.toFile())
+		}
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"actual image (saved into ${actualImagePath.toString()}) is not " +
+				"different enough from ${expected.toString()}",
+				result, flowControl)
+		return result
+	}
+
+	/**
+	 * @return timestamp string of now in the format yyyyMMdd_HHmmss_SSS 	
+	 */
+	private static getTimestampNow() {
+		ZonedDateTime now = ZonedDateTime.now()
+		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS").format(now)
 	}
 
 	/**

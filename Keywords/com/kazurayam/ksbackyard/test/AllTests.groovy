@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses
 	QuietBrowserTest.class,
 	RunConfigurationWrapperTest.class,
 	ScreenshotDriverTest.class,
-	ScreenshotDriverCompareTest.class,
+	ScreenshotDriverCompareImagesTest.class,
 	TestObjectSupportTest.class,
 	URLParserTest.class,
 	VersionTest.class

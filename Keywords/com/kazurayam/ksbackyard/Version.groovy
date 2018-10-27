@@ -21,7 +21,7 @@ class Version {
 	}
 
 	static int getReleaseVersionNum() {
-		return 12
+		return 13
 	}
 
 	static int getDevelopmentVersionNum() {
