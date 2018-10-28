@@ -149,7 +149,7 @@ class ScreenshotDriverCompareImagesTest {
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
 		assertFalse("image in ${url_} at ${xpathStr} is expected to besimilar to the image at ${expectedImage.toString()} but different in fact", result)
 	}
-	
+
 	@Ignore
 	@Test
 	void test_verifyImagesAreDifferent() {
@@ -165,7 +165,7 @@ class ScreenshotDriverCompareImagesTest {
 		assertTrue("image in ${url_} at ${xpathStr} is not different enought from to the image at ${expectedImage.toString()}", result)
 	}
 
-	
+
 	@Test
 	void test_verifyImagesAreDifferent_willFail() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),

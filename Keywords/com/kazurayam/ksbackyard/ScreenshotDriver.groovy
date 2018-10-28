@@ -36,7 +36,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies
  *
  */
 class ScreenshotDriver {
-	
+
 	static Path snapshotsDir = Paths.get(RunConfiguration.getProjectDir(), 'tmp')
 
 	/**
@@ -325,7 +325,7 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreDifferent()
 		File actualSnapshot
 		if (!result) {
-			actualSnapshot = saveActualImageSnapshot(imgDifference, 'verifyImagesAreDifferent(File,TestObject)')
+			actualSnapshot = saveActualImageSnapshot(imgDifference, 'verifyImagesAreDifferent_File_TestObject_')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"actual image (saved into ${actualSnapshot.toString()}) is not " +
@@ -346,12 +346,12 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreSimilar()
 		File expectedSnapshot, actualSnapshot
 		if (!result) {
-			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
-			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilar(TestObject,TestObject)')
+			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilarTestObjectTestObject')
+			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilarTestObjectTestObject')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be similar but different. " + 
-				"expected image was saved int file ${expectedSnapshot.toString()} " + 
+				"images are expected to be similar but different. " +
+				"expected image was saved int file ${expectedSnapshot.toString()} " +
 				"actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
@@ -368,12 +368,12 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreDifferent()
 		File expectedSnapshot, actualSnapshot
 		if (!result) {
-			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
-			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilar(TestObject,TestObject)')
+			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilarTestObjectTestObject')
+			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilarTestObjectTestObject')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but similar. " +
-				"expected image was saved int file ${expectedSnapshot.toString()} " + 
+				"expected image was saved int file ${expectedSnapshot.toString()} " +
 				"actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
@@ -385,14 +385,22 @@ class ScreenshotDriver {
 	private static File saveActualImageSnapshot(ImageDifference imgDifference, String methodName) {
 		File actualSnapshot = resolveSnapshotFile(snapshotsDir, methodName, 'actual')
 		println ">>>>>> actualSnapshot.class.getSimpleName() = ${actualSnapshot.class.getSimpleName()}"
-		File parent = actualSnapshot.getParentFile() 
-		if (parent.mkdirs()) {
-			ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
+		File parent = actualSnapshot.getParentFile()
+		println ">>>>>> parent.class.getSimpleName() = ${parent.class.getSimpleName()}"
+		boolean b = parent.mkdirs()
+		if (b) {
+			println ">>>>>> imgDifference.getActualImage().class.getSimpleName() = ${imgDifference.getActualImage().class.getSimpleName()}"
+			println ">>>>>> actualSnapshot.class.getSimpleName() = ${actualSnapshot.class.getSimpleName()}"
+			println ">>>>>> actualSnapshot.toString() = ${actualSnapshot.toString()}"
+			boolean r = ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
+			if (!r) {
+				throw new IOException("failed to write actual image into ${actualSnapshot.toString()}")
+			}
 		} else {
 			throw new FileNotFoundException(parent.toString())
 		}
 	}
-	
+
 	private static File saveExpectedImageSnapshot(ImageDifference imgDifference, String methodName) {
 		File expectedSnapshot = resolveSnapshotFile(snapshotsDir, methodName, 'expected')
 		File parent = expectedSnapshot.getParentFile()
@@ -402,12 +410,12 @@ class ScreenshotDriver {
 			throw new FileNotFoundException(parent.toString())
 		}
 	}
-	
+
 	private static File resolveSnapshotFile(Path outputDir, String methodName, String identifier) {
 		Path parent = outputDir.resolve("${ScreenshotDriver.class.getName()}-snapshots").resolve("${getTimestampNow()}")
 		return parent.resolve("${methodName}_${identifier}.png").toFile()
 	}
-	
+
 	/**
 	 * @return timestamp string of now in the format yyyyMMdd_HHmmss
 	 */
@@ -415,8 +423,8 @@ class ScreenshotDriver {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
-		
-			
+
+
 	/**
 	 * accepts 2 BufferedImages as input, compare them, make a difference image,
 	 * and calcurate the ratio of difference of the 2 input images.
