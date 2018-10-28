@@ -73,6 +73,7 @@ class ScreenshotDriverCompareImagesTest {
 	 * @date 27 Oct 2018
 	 * @author kazurayam
 	 */
+	@Ignore
 	@Test
 	void test_saveProfilePicture() {
 		String xpathStr = makeXPathToPhoto(6)
@@ -119,6 +120,7 @@ class ScreenshotDriverCompareImagesTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	void test_verifyImagesAreSimilar() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
@@ -135,7 +137,7 @@ class ScreenshotDriverCompareImagesTest {
 
 	@Ignore
 	@Test
-	void test_verifyImagesAreSimilar_falseyCase() {
+	void test_verifyImagesAreSimilar_willFail() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(1)
@@ -147,7 +149,8 @@ class ScreenshotDriverCompareImagesTest {
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
 		assertFalse("image in ${url_} at ${xpathStr} is expected to besimilar to the image at ${expectedImage.toString()} but different in fact", result)
 	}
-
+	
+	@Ignore
 	@Test
 	void test_verifyImagesAreDifferent() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
@@ -161,10 +164,10 @@ class ScreenshotDriverCompareImagesTest {
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
 		assertTrue("image in ${url_} at ${xpathStr} is not different enought from to the image at ${expectedImage.toString()}", result)
 	}
+
 	
-	@Ignore
 	@Test
-	void test_verifyImagesAreDifferent_falseyCase() {
+	void test_verifyImagesAreDifferent_willFail() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)

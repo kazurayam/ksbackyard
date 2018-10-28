@@ -176,12 +176,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
          , 	flowControl)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffenet"(
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
     	TestObject expected	
      , 	TestObject actual	
      , 	Double criteriaPercent	
      , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDiffenet(
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual
          , 	criteriaPercent
@@ -274,20 +274,20 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
          , 	actual)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffenet"(
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
     	TestObject expected	
      , 	TestObject actual	
      , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDiffenet(
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual
          , 	criteriaPercent)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffenet"(
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
     	TestObject expected	
      , 	TestObject actual	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDiffenet(
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual)
 }
