@@ -142,12 +142,12 @@ class ScreenshotDriverCompareImagesTest {
 	}
 
 	@Test
-	void test_verifyImagesAreSimilar_willFail() {
+	void test_verifyImagesAreSimilar_falseyCase() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(1)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 50.0
+		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
@@ -169,12 +169,12 @@ class ScreenshotDriverCompareImagesTest {
 
 
 	@Test
-	void test_verifyImagesAreDifferent_willFail() {
+	void test_verifyImagesAreDifferent_falseyCase() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 50.0
+		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)

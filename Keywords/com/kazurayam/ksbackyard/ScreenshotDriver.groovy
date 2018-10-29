@@ -292,15 +292,15 @@ class ScreenshotDriver {
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreSimilar()
-		File actualSnapshot
+		FileTrio fileTrio
 		if (!result) {
-			actualSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(File,TestObject)-actual')
+			fileTrio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(File,TestObject)')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be similar but are different," +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image is located in the file ${expected.toString()}," +
-				" the actual image was saved into file ${actualSnapshot.toString()}",
+				" the expected image is located in the file ${fileTrio.getExpected().toString()}," +
+				" the actual image was saved into file ${fileTrio.getActual().toString()}",
 				result, flowControl)
 		return result
 	}
@@ -322,15 +322,15 @@ class ScreenshotDriver {
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
-		File actualSnapshot
+		FileTrio trio
 		if (!result) {
-			actualSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreDifferent(File,TestObject)-actual')
+			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(File,TestObject)')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but are similar," +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image is located in the file ${expected.toString()}," +
-				" the actual image was saved into file ${actualSnapshot.toString()}",
+				" the expected image is located in the file ${trio.getExpected().toString()}," +
+				" the actual image was saved into file ${trio.getActual().toString()}",
 				result, flowControl)
 		return result
 	}
@@ -345,16 +345,15 @@ class ScreenshotDriver {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are similar?
 		boolean result = imgDifference.imagesAreSimilar()
-		File expectedSnapshot, actualSnapshot
+		FileTrio trio
 		if (!result) {
-			expectedSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-expected')
-			actualSnapshot   = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-actual')
+			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be similar but different, " +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image was saved into file ${expectedSnapshot.toString()} " +
-				" the actual image was saved into file ${actualSnapshot.toString()}",
+				" the expected image was saved into file ${trio.getExpected().toString()} " +
+				" the actual image was saved into file ${trio.getActual().toString()}",
 				result, flowControl)
 		return result
 	}
@@ -368,16 +367,15 @@ class ScreenshotDriver {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are different?
 		boolean result = imgDifference.imagesAreDifferent()
-		File expectedSnapshot, actualSnapshot
+		FileTrio trio
 		if (!result) {
-			expectedSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-expected')
-			actualSnapshot   = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-actual')
+			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but similar. " +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image was saved into file ${expectedSnapshot.toString()} " +
-				" the actual image was saved into file ${actualSnapshot.toString()}",
+				" the expected image was saved into file ${trio.getExpected().toString()} " +
+				" the actual image was saved into file ${trio.getActual().toString()}",
 				result, flowControl)
 		return result
 	}
@@ -385,12 +383,22 @@ class ScreenshotDriver {
 	/**
 	 * utility method to save snapshot of the image
 	 */
-	private static File saveImageSnapshot(ImageDifference imgDifference, String identifier) {
-		File actualSnapshot = resolveSnapshotFile(identifier)
-		File parent = actualSnapshot.getParentFile()
-		parent.mkdirs()
+	private static FileTrio saveImageSnapshots(ImageDifference imgDifference, String identifier) {
+		FileTrio trio = new FileTrio()
+		//
+		File expectedSnapshot = resolveSnapshotFile(identifier + ".expected")
+		ImageIO.write(imgDifference.getActualImage(), "PNG", expectedSnapshot)
+		trio.setExpected(expectedSnapshot)
+		//
+		File actualSnapshot = resolveSnapshotFile(identifier + ".actual")
 		ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
-		return actualSnapshot
+		trio.setActual(actualSnapshot)
+		//
+		File diffSnapshot = resolveSnapshotFile(identifier + ".diff(${imgDifference.getRatioAsString()})")
+		ImageIO.write(imgDifference.getActualImage(), "PNG", diffSnapshot)
+		trio.setDiff(diffSnapshot)
+		//
+		return trio
 	}
 
 	private static File resolveSnapshotFile(String identifier) {
@@ -399,6 +407,7 @@ class ScreenshotDriver {
 			snapshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve("tmp").resolve("ScreenshotDriver-snapshots")
 		}
 		parent = snapshotsDir.resolve("${getTimestampNow()}")
+		parent.toFile().mkdirs()
 		return parent.resolve("${identifier}.png").toFile()
 	}
 
@@ -408,6 +417,36 @@ class ScreenshotDriver {
 	private static getTimestampNow() {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
+	}
+
+	/**
+	 * encloses 3 File objects; expected, actual and diff
+	 * 
+	 * @author kazurayam
+	 *
+	 */
+	static class FileTrio {
+		private File expected_
+		private File actual_
+		private File diff_
+		void setExpected(File expected) {
+			this.expected_ = expected
+		}
+		void setActual(File actual) {
+			this.actual_ = actual
+		}
+		void setDiff(File diff) {
+			this.diff_ = diff
+		}
+		File getExpected() {
+			return expected_
+		}
+		File getActual() {
+			return actual_
+		}
+		File getDiff() {
+			return diff_
+		}
 	}
 
 }
