@@ -29,8 +29,14 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 class ScreenshotDriverCompareImagesTest {
 
 	private static WebDriver driver_
-	private static String url_ = 'https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio'
+	private static String url_
 	private static Path workdir_
+
+	static {
+		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
+		Path targetHTML = projectDir.resolve('src/test/resources/fixture/Visual Testing in Katalon Studio - Katalon Q&A.html')
+		url_ = targetHTML.toUri().toURL().toExternalForm()
+	}
 
 	/*
 	 * 1. initialize directory where we output PNG files
@@ -173,7 +179,7 @@ class ScreenshotDriverCompareImagesTest {
 		String xpathStr = makeXPathToPhoto(6)
 
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 75.0
+		Double criteriaPercent = 95.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)

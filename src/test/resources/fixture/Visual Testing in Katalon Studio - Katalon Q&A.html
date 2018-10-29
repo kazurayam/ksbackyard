@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio -->
+<html lang="en" class=" "><script type="text/javascript" async="" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/analytics.js.ダウンロード"></script><script type="text/javascript" async="" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/analytics.min.js.ダウンロード"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Core CSS -->
+    <link href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/bootstrap.min.css" rel="stylesheet">
+    <title>Visual Testing in Katalon Studio - Katalon Q&amp;A</title>
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/style.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/vanillicon.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/editor.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/childtagslist.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/tag.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/buttonbar.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/prettify.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/custom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/custom_katalon.css" media="all">
+  <link rel="stylesheet" type="text/css" href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/spoilers.css" media="all">
+  <link rel="canonical" href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katalon Q&amp;A">
+  <meta property="og:title" itemprop="name" content="Visual Testing in Katalon Studio">
+  <meta property="og:url" content="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio">
+  <meta name="description" property="og:description" itemprop="description" content="I have created a project at * https://github.com/kazurayam/VisualTestingInKatalonStudio">
+  <meta property="og:image" itemprop="image" content="https://github.com/kazurayam/VisualTestingInKatalonStudio/raw/master/docs/images/Production_CURA_Homepage.png">
+  <meta property="og:image" itemprop="image" content="https://github.com/kazurayam/VisualTestingInKatalonStudio/raw/master/docs/images/Development_CURA_Homepage.png">
+  <meta property="og:image" itemprop="image" content="https://github.com/kazurayam/VisualTestingInKatalonStudio/raw/master/docs/images/Materials_index.png">
+  <meta property="og:image" itemprop="image" content="https://github.com/kazurayam/VisualTestingInKatalonStudio/raw/master/docs/images/ImageDiff_CURA_Homepage.png">
+  <script type="text/javascript">gdn=window.gdn||{};gdn.meta={
+    "Roles": [
+        "Member"
+    ],
+    "ConfirmDeleteCommentHeading": "Delete Comment",
+    "ConfirmDeleteCommentText": "Are you sure you want to delete this comment?",
+    "Spoiler": "Spoiler",
+    "show": "show",
+    "hide": "hide",
+    "emoji": {
+        "assetPath": "\/resources\/emoji",
+        "format": "<img class=\"emoji\" src=\"%1$s\" title=\"%2$s\" alt=\"%2$s\" height=\"20\" \/>",
+        "emoji": {
+            "smile": "smile.png",
+            "smiley": "smiley.png",
+            "wink": "wink.png",
+            "blush": "blush.png",
+            "neutral": "neutral.png",
+            "relaxed": "relaxed.png",
+            "grin": "grin.png",
+            "joy": "joy.png",
+            "sweat_smile": "sweat_smile.png",
+            "lol": "lol.png",
+            "innocent": "innocent.png",
+            "naughty": "naughty.png",
+            "yum": "yum.png",
+            "relieved": "relieved.png",
+            "love": "love.png",
+            "sunglasses": "sunglasses.png",
+            "smirk": "smirk.png",
+            "expressionless": "expressionless.png",
+            "unamused": "unamused.png",
+            "sweat": "sweat.png",
+            "pensive": "pensive.png",
+            "confused": "confused.png",
+            "confounded": "confounded.png",
+            "kissing": "kissing.png",
+            "kissing_heart": "kissing_heart.png",
+            "kissing_smiling_eyes": "kissing_smiling_eyes.png",
+            "kissing_closed_eyes": "kissing_closed_eyes.png",
+            "tongue": "tongue.png",
+            "disappointed": "disappointed.png",
+            "worried": "worried.png",
+            "angry": "angry.png",
+            "rage": "rage.png",
+            "cry": "cry.png",
+            "persevere": "persevere.png",
+            "triumph": "triumph.png",
+            "frowning": "frowning.png",
+            "anguished": "anguished.png",
+            "fearful": "fearful.png",
+            "weary": "weary.png",
+            "sleepy": "sleepy.png",
+            "tired_face": "tired_face.png",
+            "grimace": "grimace.png",
+            "bawling": "bawling.png",
+            "open_mouth": "open_mouth.png",
+            "hushed": "hushed.png",
+            "cold_sweat": "cold_sweat.png",
+            "scream": "scream.png",
+            "astonished": "astonished.png",
+            "flushed": "flushed.png",
+            "sleeping": "sleeping.png",
+            "dizzy": "dizzy.png",
+            "no_mouth": "no_mouth.png",
+            "mask": "mask.png",
+            "star": "star.png",
+            "cookie": "cookie.png",
+            "warning": "warning.png",
+            "mrgreen": "mrgreen.png",
+            "heart": "heart.png",
+            "heartbreak": "heartbreak.png",
+            "kiss": "kiss.png",
+            "+1": "+1.png",
+            "-1": "-1.png",
+            "grey_question": "grey_question.png",
+            "trollface": "trollface.png",
+            "error": "grey_question.png"
+        }
+    },
+    "DiscussionID": "9799",
+    "Category": "Tips and Tricks",
+    "QuotesFolding": "1",
+    "AnalyticsTask": "tick",
+    "TagHint": "Start to type...",
+    "ButtonBarLinkUrl": "Enter your URL:",
+    "ButtonBarImageUrl": "Enter image URL:",
+    "ButtonBarBBCodeHelpText": "You can use <b><a href=\"http:\/\/en.wikipedia.org\/wiki\/BBCode\" target=\"_new\">BBCode<\/a><\/b> in your post.",
+    "ButtonBarHtmlHelpText": "You can use <b><a href=\"http:\/\/htmlguide.drgrog.com\/cheatsheet.php\" target=\"_new\">Simple HTML<\/a><\/b> in your post.",
+    "ButtonBarMarkdownHelpText": "You can use <b><a href=\"http:\/\/en.wikipedia.org\/wiki\/Markdown\" target=\"_new\">Markdown<\/a><\/b> in your post.",
+    "InputFormat": "Wysiwyg",
+    "editorVersion": "1.7.7",
+    "editorPluginAssets": "\/plugins\/editor",
+    "wysiwygHelpText": "You are using <a href=\"https:\/\/en.wikipedia.org\/wiki\/WYSIWYG\" target=\"_new\">WYSIWYG<\/a> in your post.",
+    "bbcodeHelpText": "You can use <a href=\"http:\/\/en.wikipedia.org\/wiki\/BBCode\" target=\"_new\">BBCode<\/a> in your post.",
+    "htmlHelpText": "You can use <a href=\"http:\/\/htmlguide.drgrog.com\/cheatsheet.php\" target=\"_new\">Simple HTML<\/a> in your post.",
+    "markdownHelpText": "You can use <a href=\"http:\/\/en.wikipedia.org\/wiki\/Markdown\" target=\"_new\">Markdown<\/a> in your post.",
+    "textHelpText": "You are using plain text in your post.",
+    "editorWysiwygCSS": "\/plugins\/editor\/design\/wysiwyg.css",
+    "canUpload": 1,
+    "maxUploadSize": 2097152,
+    "editorFileInputName": "editorupload",
+    "allowedFileExtensions": "[\"txt\",\"jpg\",\"jpeg\",\"gif\",\"png\",\"bmp\",\"tiff\",\"ico\",\"zip\",\"gz\",\"tar.gz\",\"tgz\",\"psd\",\"ai\",\"fla\",\"pdf\",\"doc\",\"xls\",\"ppt\",\"docx\",\"xlsx\",\"log\",\"rar\",\"7z\"]",
+    "maxFileUploads": "20",
+    "LastCommentID": 24486,
+    "TransportError": "A fatal error occurred while processing the request.<br \/>The server returned the following response: %s",
+    "TransientKey": "7bXIWurIx82GXEHz",
+    "WebRoot": "https:\/\/forum.katalon.com\/",
+    "UrlFormat": "\/{Path}",
+    "Path": "discussion\/9799\/visual-testing-in-katalon-studio",
+    "Args": "",
+    "ResolvedPath": "vanilla\/discussion\/index",
+    "ResolvedArgs": {
+        "DiscussionID": "9799",
+        "DiscussionStub": "visual-testing-in-katalon-studio",
+        "Page": ""
+    },
+    "SignedIn": 1,
+    "SetHourOffset": 9,
+    "ConfirmHeading": "Confirm",
+    "ConfirmText": "Are you sure you want to do that?",
+    "Okay": "Okay",
+    "Cancel": "Cancel",
+    "Search": "Search"
+};</script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.min.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.form.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.popup.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.gardenhandleajaxform.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.atwho.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/global.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.autosize.min.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/autosave.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/discussion.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/spoilers.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/prettify.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/quotes.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/buttonbar.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.hotkeys.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/editor.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.ui.widget.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.iframe-transport.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.fileupload.js.ダウンロード" type="text/javascript"></script>
+  <script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/custom.js.ダウンロード" type="text/javascript"></script>
+  <script type="text/javascript">jQuery(function ($) {
+
+            function init() {
+                $('.Message').each(function () {
+                    if ($(this).data('GooglePrettify')) {
+                        return;
+                    }
+                    $(this).data('GooglePrettify', '1');
+
+                    pre = $('pre', this).addClass('prettyprint');
+
+                    // Let prettyprint determine styling, rather than the editor.
+                    $('code', this).removeClass('CodeInline');
+                    pre.removeClass('CodeBlock');
+
+                    prettyPrint();
+
+                    pre.removeClass('prettyprint');
+                });
+            }
+
+            $(document).on('CommentAdded PreviewLoaded popupReveal', init);
+            init();
+        });</script>
+    
+    <!-- Custom Fonts -->
+    <link href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/icon" rel="stylesheet">
+    <link href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/css" rel="stylesheet">
+
+    <!-- add meta tag about duplicate URL -->
+    <link rel="canonical" href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio">
+    <!-- END add meta tag about duplicate URL -->
+
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("ytGGq12MxQr8GZEJbLM4jzQY3SmbTqlr");
+  analytics.page();
+  }}();
+</script>
+
+
+<script async="" type="text/javascript" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/wysihtml5-0.4.0pre.js.ダウンロード"></script><script async="" type="text/javascript" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/advanced.js.ダウンロード"></script><script async="" type="text/javascript" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/jquery.wysihtml5_size_matters.js.ダウンロード"></script></head>
+<body id="vanilla_discussion_index" class="Vanilla Discussion Index Section-Discussion Section-Category-tips-and-tricks editor-active" style="">
+    <nav class="navbar navbar-default topnav" role="navigation">
+        <div class="container topnav menu">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="https://www.katalon.com/">
+                    <img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/logo_kat_white.png" alt="Katalon">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-navbar-main-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="kat-dropdown dropdown">
+                        <a>Products</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://www.katalon.com/katalon-studio/">Katalon Studio</a></li>
+                            <li><a href="https://www.katalon.com/katalon-analytics/">Katalon Analytics</a></li>
+                            <li><a href="https://www.katalon.com/resources-center/blog/katalon-automation-recorder/">Katalon Recorder</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="kat-dropdown dropdown">
+                        <a href="https://docs.katalon.com/index.html" onclick="window.open(&#39;https://docs.katalon.com/index.html&#39;)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://docs.katalon.com/katalon-studio/docs/overview.html" target="_blank">Manuals</a></li>
+                            <li><a href="https://docs.katalon.com/katalon-studio/tutorials/quick_start.html" target="_blank">Tutorials</a></li>
+                            <li><a href="https://github.com/katalon-studio-samples" target="_blank">Sample Projects</a></li>
+                            <li><a href="https://docs.katalon.com/katalon-studio/new/all-versions.html" target="_blank">What's New</a></li>
+                            <li>
+                                <a href="https://docs.katalon.com/katalon-studio/videos/katalon_studio_5_5_beta.html" target="_blank">Videos</a>
+                            </li>
+                            <li>
+                                <a href="https://docs.katalon.com/faqs/licensing.html" target="_blank">FAQs</a>
+                            </li>
+                                                    </ul>
+                    </li>
+                                        
+                    <li><a href="https://forum.katalon.com/entry/jsconnect?client_id=katalon-studio&amp;Target=%2F" target="_blank">Forum</a></li>
+                    <li>
+                        <a href="https://www.katalon.com/support-service-options" target="">Services</a>
+                    </li>
+                    <li class="kat-dropdown dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://www.katalon.com/about-us">About Us</a>
+                            </li>
+                            <li>
+                                <a href="https://www.katalon.com/partners-and-contributors">Partner &amp; Contributors</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="btn-join-beta">
+                        <a id="download-btn-header" href="https://www.katalon.com/download" class="btn btn-download btn-top" onclick="kat.clickDownloadBtn(&#39;Navigation Bar&#39;)">Free Download</a>
+                    </li>
+                    <li>
+                        <div class="MeBox Mebox_header"><div class="WhoIs"><div class="MeMenu"><span class="ToggleFlyout Sprite Sprite16"><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a><div class="Flyout MenuItems"><ul><li><a href="https://forum.katalon.com/profile/4280/kazurayam" class="Username">kazurayam</a></li><div class="badge_user">
+                    <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                    <div class="title-badge">Katalon Evangelist</div></div><li class="border-separate"></li><li class="EditProfileWrap link-editprofile"><a href="https://forum.katalon.com/profile/edit" class="EditProfileLink"><span class="Sprite SpEditProfile"></span> Edit Profile</a></li><li class="SignInOutWrap SignOutWrap link-signout"><a href="https://forum.katalon.com/entry/signout?TransientKey=7bXIWurIx82GXEHz"><span class="Sprite SpSignOut"></span> Sign Out</a></li></ul></div></span></div></div></div>
+                    </li>
+                    
+                                            
+<!--
+                    <li>
+                        <a class="page-scroll" href="#katalon-login" title="Sign in">Sign in</a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="banner-forum">
+        <div class="container text-center">
+            <h1>Welcome to Katalon Community</h1>
+            <form action="https://forum.katalon.com/search">
+            <div class="div_input_global_search">
+                <input class="input_global_search placeholder" name="Search" placeholder="How can we help?">
+                <input type="submit" class="button_search_global_search" value="">
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="Head" id="Head">
+        <div class="container">
+            <nav class="row menu_head_2">
+                <div class="col-md-9 nav-icon">
+                    <ul class="mobile-close">
+                                                                                                                                                                                                <li><a href="https://forum.katalon.com/discussions" class=""><img style="width: 24px; height: 25px" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/home_inactive@2x.png"></a></li>
+                        
+                        <li><a href="https://forum.katalon.com/categories/katalon-studio" class=" active_navigation">Katalon Studio</a></li>
+                        <li><a href="https://forum.katalon.com/categories/katalon-recorder" class=" ">Katalon Recorder</a></li>
+                        <li><a href="https://forum.katalon.com/categories/katalon-analytics" class=" ">Katalon Analytics</a></li>
+                        <li><a href="https://forum.katalon.com/categories/katalon-events" class=" ">Katalon Events</a></li>
+                                                
+                    </ul>
+                    <!--
+                    <a class="search" href="#search"><i class="icon icon-search"></i></a>
+                    -->
+
+                    
+                    <!--
+<form method="get" action="/katalon-faq-vanilla/search">
+<div>
+<input type="text" id="Form_Search" name="Search" value="" placeholder="Search" accesskey="/" class="InputBox placeholder"><input type="submit" id="Form_Go" name="" value="Go" class="Button">
+</div>
+</form>
+                    -->
+                </div>
+                <div class="col-md-3 nav-icon">
+                                        <span class="mobile-close">
+                        <div class="MeBox"><div class="WhoIs"><div class="MeMenu"><span class="ToggleFlyout" rel="/profile/notificationspopin"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="MeButton FlyoutButton js-clear-notifications" title="Notifications"><span class="Sprite Sprite16 SpNotifications"></span><em>Notifications</em></a><span class="Arrow SpFlyoutHandle"></span><div class="Flyout FlyoutMenu"></div></span><span class="ToggleFlyout" rel="/messages/popin"><a href="https://forum.katalon.com/messages/all" class="MeButton FlyoutButton" title="Inbox"><span class="Sprite Sprite16 SpInbox"></span><em>Inbox</em></a><span class="Arrow SpFlyoutHandle"></span><div class="Flyout FlyoutMenu"></div></span><span class="ToggleFlyout"><a href="https://forum.katalon.com/profile/edit" class="MeButton FlyoutButton" title="Account Options"><span class="Sprite Sprite16 SpOptions"></span><div></div></a><span class="Arrow SpFlyoutHandle"></span><div class="Flyout MenuItems"><ul><li><div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div style="max-width: 170px;"><div><a href="https://forum.katalon.com/profile/4280/kazurayam" class="Username">kazurayam</a></div><div class="badge_user">
+            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+            <div class="title-badge">Katalon Evangelist</div></div></div></li><li><a href="https://forum.katalon.com/profile/4280/kazurayam" class="MeButton FlyoutButton js-clear-notifications" title="Notifications"><span>Notifications</span></a></li><li><a href="https://forum.katalon.com/messages/all" class="MeButton FlyoutButton" title="Inbox"><span>Inbox</span></a></li><li class="border-separate"></li><li class="EditProfileWrap link-editprofile"><a href="https://forum.katalon.com/profile/edit" class="EditProfileLink"><span class="Sprite SpEditProfile"></span> Edit Profile</a></li><li class="SignInOutWrap SignOutWrap link-signout"><a href="https://forum.katalon.com/entry/signout?TransientKey=7bXIWurIx82GXEHz"><span class="Sprite SpSignOut"></span> Sign Out</a></li></ul></div></span></div></div></div>
+
+                    </span>
+                                                                            </div>
+            </nav>
+        </div>
+    </div>
+    <div id="Body" class="Container">
+
+                                <div class="Row">
+            <div class="col-12 BreadcrumbsWrapper"><span class="Breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="CrumbLabel CrumbLabel HomeCrumb"><a href="https://forum.katalon.com/discussions" itemprop="url"><span itemprop="title">Forum</span></a></span> <span itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="Crumb">›</span> <span class="CrumbLabel Category-katalon-studio"><a href="https://forum.katalon.com/categories/katalon-studio" itemprop="url"><span itemprop="title">Katalon Studio</span></a></span> <span itemprop="child" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="Crumb">›</span> <span class="CrumbLabel Category-tips-and-tricks Last"><a href="https://forum.katalon.com/categories/tips-and-tricks" itemprop="url"><span itemprop="title">Tips and Tricks</span></a></span> </span></span></span></div>
+        </div>
+                        <div class="Row">
+            <div class="col-9" id="Content">
+                <div class="ContentColumn">
+                    <div class="DismissMessage CasualMessage"><a href="https://forum.katalon.com/dashboard/message/dismiss/10/7bXIWurIx82GXEHz?Target=discussion/9799/visual-testing-in-katalon-studio" class="Dismiss">×</a><div style="background: #00A9FF!important; padding: 10px 24px; margin: -16px;"><strong>New Katalon Forum structure. </strong><strong><a href="https://forum.katalon.com/discussion/10392/new-katalon-forum-structure-check-it-out">Check it out!</a></strong></div></div><div class="MessageList Discussion"><!-- Page Title -->
+<div id="Item_0" class="PageTitle"><div class="Options"><a href="https://forum.katalon.com/discussion/bookmark/9799/7bXIWurIx82GXEHz?Target=discussion%2F9799%2Fvisual-testing-in-katalon-studio" class="Hijack Bookmark" title="Bookmark">Bookmark</a>
+
+</div></div>
+
+<div id="Discussion_9799" class="Item ItemDiscussion">
+    <div class="Discussion">
+        <div class="Item-Header DiscussionHeader">
+            <div class="AuthorWrap">
+            <span class="Author">
+                <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                            </span>
+            <div>
+
+            </div>
+            </div>
+
+            <div class="Meta DiscussionMeta">
+            <div class="MItem DateCreated">
+                09/23/2018            </div>
+                <span class="MItem"> <span title="Edited September 24, 2018 4:00PM by Katalon Studio." class="DateUpdated">edited September 24</span> </span>                            </div>
+        </div>
+                <!-- add this div to separator title and body -->
+        <div style="clear: both;"></div>
+
+        <h1 class="title_header_detail_discussion">Visual Testing in Katalon Studio</h1>
+        <div style="clear: both;"></div>
+        <!-- END add this div to separator title and body -->
+        <div class="Item-BodyWrap">
+            <div class="Item-Body">
+                <div class="Message">
+                    I have created a project at<br><ul><li><a href="https://github.com/kazurayam/VisualTestingInKatalonStudio" target="_blank" rel="nofollow">https://github.com/kazurayam/VisualTestingInKatalonStudio</a></li></ul>Please refer to this Github repository for running codes and description in detail.<br><br>----<br><h1>Problem to solve</h1><p>What do I mean by the word&nbsp;<em>Visutal Testing</em>? Any toolset that provides a solution to my requirements as follows, I would regard it a&nbsp;<em>Visual Testing</em>&nbsp;solution.</p><ul><li>Often I have to look at the pages of a Web site. Maybe I am a developer, a designer, a tester or just a fan of the site.</li><li>I want to look at as many pages of the site as possible. Wide coverage matters.</li><li>I want to compare the view of 2 environments; e.g. Production and Development.</li><li>I want to take full-page screen shots of all pages as evidence</li><li>After taking screenshots, I want to check them to find out if there are any differences in view between the two.</li></ul><p>If the target Web site has 100 pages, it would take me more than 60 minutes to run through. It's too tiring, too boring. I don't like doing the job everyday! Therefore I would add the final term:</p><ul><li>I want to automate it.</li></ul><p>I just want to be notified if 2 environments have any significant enough visual differences now. I would not require the tool to be equipped with full fledged debugging functionalities. Preferably it should be free of charge.</p><h1>Solution</h1><p>As for the file path problem, I have developed another project titled:</p><ul><li><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/UsingMaterialsInKatalonStudio">UsingMaterialsInKatalonStudio</a></li></ul><p>This project demonstrates how to take multiple sets of web page screen shots and store them into a well-structured file system tree. This demo project uses another GitHub repository:</p><ul><li><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/Materials"><code>Materials</code></a></li></ul><p>This project provides a jar file which implements&nbsp;<code>MaterialRepository</code>&nbsp;= well-defined file tree and provides access methods.</p><p>As for the full-page screenshot problem, I found that the library&nbsp;<a rel="nofollow" target="_blank" href="https://github.com/yandex-qatools/ashot"><code>aShot</code></a>&nbsp;solves like a charm. I wrote a report how I utilized aShot in Katalon Studio:</p><ul><li><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/EntirePageScreenshotByAShotInKatalonStudio">Entire page screenshot by aShot in Katalon Studio</a></li></ul><p>I was impressed that aShot provides&nbsp;<a rel="nofollow" target="_blank" href="https://github.com/yandex-qatools/ashot/blob/master/src/main/java/ru/yandex/qatools/ashot/comparison/ImageDiff.java">ImageDiff</a>. This utility class enables me to check very easily how much differences there are amongst 2 images. I wanted to use&nbsp;<code>ImageDiff</code>&nbsp;in Katalon Studio. So I have developed another GibHub repository:</p><ul><li><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/ksbackyard"><code>ksbackyard</code></a></li></ul><p>In there I have developed Katalon Custume Keyword&nbsp;<a rel="nofollow" target="_blank" href="https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy">com.kazurayam.ksbackyard.ScreenshotDriver</a>. ScreenshotDriver is just a small wrapper for aShot. This makes it a bit easier to use aShot functionality in Katalon Test Cases.</p><p>I have integrated those external resources to build a toolset of 'Visual Testing' in Katalon Studio.</p><p>------------------</p><h2>Input</h2><p>The Test Suite Collection&nbsp;<code>Executes</code>&nbsp;calls Test Suite&nbsp;<code>Main/TS1</code>&nbsp;twice; each time targeting the following URLs:</p><ol><li><a rel="nofollow" target="_blank" href="http://demoaut.katalon.com/">http://demoaut.katalon.com/</a>&nbsp;--- called&nbsp;<em>Production environment</em></li><li><a rel="nofollow" target="_blank" href="http://demoaut-mimic.kazurayam.com/">http://demoaut-mimic.kazurayam.com/</a>&nbsp;--- called&nbsp;<em>Development environment</em></li></ol><p><b>Output</b><br></p><p>The tool creates screen shots of the Input site and compare them, for example:</p><h3><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/tree/master#production-page"></a>Production page</h3><p><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/blob/master/docs/images/Production_CURA_Homepage.png"><a href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Production_CURA_Homepage.png" target="_blank"><img alt="Production" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Production_CURA_Homepage.png"></a></a>|</p><h3><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/tree/master#development-page"></a>Development page</h3><p><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/blob/master/docs/images/Development_CURA_Homepage.png"><a href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Development_CURA_Homepage.png" target="_blank"><img alt="Development" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Development_CURA_Homepage.png"></a></a>|</p><h3><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/tree/master#indexhtml"></a>index.html</h3><p>The test suite collection generates&nbsp;<code>./Materials/index.html</code>. This HTML shows a list of source images plus the images as comparison result.</p><p>File path:&nbsp;<code>&lt;projectDir&gt;/Materials/index.html</code>&nbsp;<a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/blob/master/docs/images/Materials_index.png"><a href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Materials_index.png" target="_blank"><img alt="index" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/Materials_index.png"></a></a></p><h3><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/tree/master#imagediff"></a>ImageDiff</h3><p>If you click the line with purple background color, you will see a ImageDiff with a lot of red-portion. The red portion shows the differences between the two source images.</p><h2><a rel="nofollow" target="_blank" href="https://github.com/kazurayam/VisualTestingInKatalonStudio/blob/master/docs/images/ImageDiff_CURA_Homepage.png"><a href="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/ImageDiff_CURA_Homepage.png" target="_blank"><img alt="ImageDiff" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/ImageDiff_CURA_Homepage.png" title="Image: https://github.com/kazurayam/VisualTestingInKatalonStudio/raw/master/docs/images/ImageDiff_CURA_Homepage.png"></a></a></h2>                </div>
+                <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  ">13</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Discussion_9799" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>            </div>
+        </div>
+    </div>
+</div>
+</div><div class="CommentsWrap"><div class="BeforeCommentHeading"><div class="P PagerWrap PageControls paginator-at-top"><div style="clear: both;"></div></div></div><div class="DataBox DataBox-Comments"><h2 class="CommentHeading">Comments</h2>    <ul class="MessageList DataList Comments">
+                <li class="Item Alt ItemComment" id="Comment_23080">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="Andrej Podhajský" href="https://forum.katalon.com/profile/2584/Andrej%20Podhajsk%C3%BD" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/n2KB5XWEC86ND.jpg" alt="Andrej Podhajský" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/2584/Andrej%20Podhajsk%C3%BD" class="FullName">Andrej Podhajský</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/23/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            wow. cool! +1                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23080_1" onclick="post_vote(&#39;23080&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;2584&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote hide">0</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23080&#39;, &#39;9799&#39;, &#39;2584&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23080" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item ItemComment" id="Comment_23088">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="Russ Thomas" href="https://forum.katalon.com/profile/4015/Russ%20Thomas" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/n1MEPNKCKLENM.jpg" alt="Russ Thomas" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4015/Russ%20Thomas" class="FullName">Russ Thomas</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/24/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            Awesome work Kaz! Upvoted.<br>                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23088_1" onclick="post_vote(&#39;23088&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;4015&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote hide">0</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23088&#39;, &#39;9799&#39;, &#39;4015&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23088" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Alt ItemComment" id="Comment_23177">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="Tester X" href="https://forum.katalon.com/profile/10817/Tester%20X" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/e54f2bad07fbea2817a13db0208f61af.png" alt="Tester X" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/10817/Tester%20X" class="FullName">Tester X</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/1.png"></div>
+                            <div class="title-badge">Katalon Apprentice</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/25/2018            </div>
+                        <span class="MItem"> <span title="Edited September 26, 2018 12:23AM by Tester X." class="DateUpdated">edited September 26</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            KATALON É ZICA<br><br>Congratz for the work guys!                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23177_1" onclick="post_vote(&#39;23177&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;10817&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote ">1</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23177&#39;, &#39;9799&#39;, &#39;10817&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23177" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item ItemComment" id="Comment_23185">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="Drunda Nibel" href="https://forum.katalon.com/profile/6655/Drunda%20Nibel" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/e55388eb102ce7fe86962bb965e0f010.png" alt="Drunda Nibel" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/6655/Drunda%20Nibel" class="FullName">Drunda Nibel</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/2.png"></div>
+                            <div class="title-badge">Katalon Ambassador</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/25/2018            </div>
+                        <span class="MItem"> <span title="Edited September 26, 2018 2:30AM by Drunda Nibel." class="DateUpdated">edited September 26</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            <div>Thank you kazurayam, for this once again very practical solution proposal for my current, not yet mentioned challenge&nbsp;at exactly the right moment! <img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/smile.png" title=":)" alt=":)" height="20"><br><br></div><div>However, I've just gotten a little away from the idea of actually tackling my problem with the ashot library, i.e. purely graphically based. Since I stumbled across the Galen framework, my claim is actually more in the direction you mentioned, that I would like to get some&nbsp;more debugging information about which concrete web elements deviate from my expected values in position and/or dimension.&nbsp;I think I'll first try to see if I can move forward with this approach. But I'm very sure that your solution will be a great addition, so many thanks again for your great work!</div>                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23185_1" onclick="post_vote(&#39;23185&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;6655&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote hide">0</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23185&#39;, &#39;9799&#39;, &#39;6655&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23185" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Alt ItemComment" id="Comment_23230">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="MaKatalon" href="https://forum.katalon.com/profile/10407/MaKatalon" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/e94ca314ba46f09ce076c7a9309aa5bb.png" alt="MaKatalon" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/10407/MaKatalon" class="FullName">MaKatalon</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/1.png"></div>
+                            <div class="title-badge">Katalon Apprentice</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/26/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            Congrats&nbsp; Kazurayam. May I know if this works on mobile testing? With different size of screen&nbsp;&nbsp;                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23230_1" onclick="post_vote(&#39;23230&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;10407&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote hide">0</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23230&#39;, &#39;9799&#39;, &#39;10407&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23230" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Mine ItemComment" id="Comment_23252">
+            <div class="Comment">
+
+                                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/23252" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               09/26/2018            </div>
+                        <span class="MItem"> <span title="Edited October 4, 2018 9:19AM by kazurayam." class="DateUpdated">edited October 4</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            MaKatalon,<br><br>On PC using desktop browser, I have tested 3 view port sizes: 1600x900, 1024x768, 375x677 (=iPhone6 size). You can change the size by <a rel="nofollow" target="_blank" href="https://docs.katalon.com/display/KD/%5BWebUI%5D+Set+View+Port+Size">WebUI.setViewPortSize(width, height)</a><br><br>----<br><br>You asked me "if this works on mobile testing?"&nbsp; &nbsp;--- well I am not sure how I should answer to it. The only part I am concerned about is the takeEntirePage() method of ScreenshotDriver class<br><ul><li><a href="https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy" target="_blank" rel="nofollow">https://github.com/kazurayam/ksbackyard/blob/master/Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy</a></li></ul>This method requires org.openqa.selenium.WebDriver instance as 1st argument, depends on aShot.&nbsp; According to <a href="https://github.com/yandex-qatools/ashot;%C2%A0" target="_blank" rel="nofollow">https://github.com/yandex-qatools/ashot;&nbsp;</a>;<br><blockquote class="Quote">aShot supports taking a screenshot of a WebElement on different platforms (i.e. desktop browsers, iOS Simulator Mobile Safari, Android Emulator Browser) as documented at&nbsp;</blockquote>So, VisualTestingInKatalonStudio should be able to test WebUI on&nbsp;iOS Simulator Mobile Safari, Android Emulator Browser.<br><br>----<br><br>Do you want to use this with "Appium" ? --- well. I do not know much about Mobile App testing.<br><br>                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  hide">0</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23252" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Alt ItemComment" id="Comment_23593">
+            <div class="Comment">
+
+                                <div class="Options">
+                                    </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="Hesham Saber" href="https://forum.katalon.com/profile/11449/Hesham%20Saber" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nXZ5L8XGKRRR8.jpg" alt="Hesham Saber" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/11449/Hesham%20Saber" class="FullName">Hesham Saber</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/1.png"></div>
+                            <div class="title-badge">Katalon Apprentice</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/03/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            thanks for your work<br>i tried earlier to use ashot in my project but i failed ( didn't know the reason that time )<br>so, what exactly step by step should i do to merge your project to mine ?                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible " id="Upvote_btn_23593_1" onclick="post_vote(&#39;23593&#39;, &#39;4280&#39;, &#39;1&#39;, &#39;11449&#39;)">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote hide">0</div>
+                </a>
+                            <a class="ReactButton Bestanswered Visible" onclick="post_best_answered(&#39;23593&#39;, &#39;9799&#39;, &#39;11449&#39;, &#39;4280&#39;)"><span class="BestansweredSprite Bestanswered"></span> Best Answer</a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23593" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Mine ItemComment" id="Comment_23601">
+            <div class="Comment">
+
+                                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/23601" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/03/2018            </div>
+                        <span class="MItem"> <span title="Edited October 4, 2018 9:21AM by kazurayam." class="DateUpdated">edited October 4</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            Writing a step-by-step instruction how to build your own "Visual Testing in Katalon Studio" --- this is a very tough task for me; much more difficult than writing codes. I haven't written it yet.&nbsp;<br><br>Download the zip of the ”VisualTestingInKatalonStudio" project and see how it is built. That's all I can say now.<br><br>Katalon Experts would be able to cook my project into parts, digest it, and pickup what they need to transplant into their own projects. I hope they do so.<br>
+
+<br>I think that the Custom Keyword <code>com.kazurayam.ksbackyard.ScreenshotDriver</code> is immature, poorly written. I would refactor it soon.                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  hide">0</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23601" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Alt Mine ItemComment" id="Comment_23602">
+            <div class="Comment">
+
+                                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/23602" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/03/2018            </div>
+                        <span class="MItem"> <span title="Edited October 4, 2018 1:50PM by kazurayam." class="DateUpdated">edited October 4</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            Hesham,<br><br>If the AShot is your current issue, then the following demo project would be useful for you:<ul><li><a href="https://forum.katalon.com/discussion/8733/taking-entire-page-screenshot-using-ashot-in-katalon-studio" target="_blank" rel="nofollow">https://forum.katalon.com/discussion/8733/taking-entire-page-screenshot-using-ashot-in-katalon-studio</a><br></li></ul>This demo project is focused how to take full-page screenshot with AShot.<br><br>My "Visual Testing in Katalon Studio" is far more complicated than this. It would not be easy to digest.                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  ">1</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_23602" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Mine ItemComment" id="Comment_24369">
+            <div class="Comment">
+
+                                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/24369" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/17/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            I wrote 2 more posts where I used AShot library to verify slideshow and YouTube video.<br><ul><li><a href="https://forum.katalon.com/discussion/10193/testing-slideshow-in-katalon-studio" target="_blank" rel="nofollow">https://forum.katalon.com/discussion/10193/testing-slideshow-in-katalon-studio</a></li><li><a href="https://forum.katalon.com/discussion/10208/testing-youtube-video-in-katalon-studio" target="_blank" rel="nofollow">https://forum.katalon.com/discussion/10208/testing-youtube-video-in-katalon-studio</a></li></ul>Just for your interest.                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  hide">0</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_24369" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Alt Mine ItemComment" id="Comment_24379">
+            <div class="Comment">
+
+                                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/24379" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/17/2018            </div>
+                                                                    </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            I wrote another tips:<br><ul><li><a href="https://forum.katalon.com/discussion/10211/materials-a-library-that-resolves-output-file-paths-in-a-well-structured-format" target="_blank" rel="nofollow">https://forum.katalon.com/discussion/10211/materials-a-library-that-resolves-output-file-paths-in-a-well-structured-format</a></li></ul>This post introduces the <b>Materials</b> library which is used in my VisualTestingInKatalonStudio project.                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  hide">0</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_24379" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+                <li class="Item Mine ItemComment" id="Comment_24486">
+            <div class="Comment">
+
+                <span id="latest"></span>                <div class="Options">
+                    <span class="ToggleFlyout OptionsMenu"><span class="OptionsTitle" title="Options">Options</span><span class="Arrow SpFlyoutHandle"></span><ul class="Flyout MenuItems"><li><a href="https://forum.katalon.com/post/editcomment/24486" class="EditComment">Edit</a></li></ul></span>                </div>
+                                <div class="Item-Header CommentHeader">
+                    <div class="AuthorWrap">
+            <span class="Author">
+               <div><a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a></div><div><div class="user_fullname_discussion"><a href="https://forum.katalon.com/profile/4280/kazurayam" class="FullName">kazurayam</a></div><div class="badge_user">
+                            <div class="icon-badge"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/4.png"></div>
+                            <div class="title-badge">Katalon Evangelist</div></div></div>            </span>
+            <span class="AuthorInfo">
+                             </span>
+                    </div>
+                    <div class="Meta CommentMeta CommentInfo">
+            <div class="MItem DateCreated">
+               10/18/2018            </div>
+                        <span class="MItem"> <span title="Edited October 18, 2018 11:58PM by kazurayam." class="DateUpdated">edited October 18</span> </span>                                            </div>
+                </div>
+                <div class="Item-BodyWrap">
+                    <div class="Item-Body">
+                        <div class="Message">
+                            One more use case of the Materials library<br><ul><li><a href="https://forum.katalon.com/discussion/10245/logging-http-response-headers-and-bodies-of-web-service-materials-applied" target="_blank" rel="nofollow">https://forum.katalon.com/discussion/10245/logging-http-response-headers-and-bodies-of-web-service-materials-applied</a></li></ul>Here I used it for testing RESTful API                        </div>
+                        <div class="Reactions">                <a class="ReactButton Upvote Visible" style="opacity: 0.3; text-decoration: none; cursor: normal">
+                    <span class="UpvoteSprite Bestanswered"></span> Upvote
+                    <div class="number_of_vote  hide">0</div>
+                </a>
+                <a href="https://forum.katalon.com/post/quote/9799/Comment_24486" class="ReactButton Quote Visible"><span class="ReactSprite ReactQuote"></span> Quote</a> </div>                    </div>
+                </div>
+            </div>
+        </li>
+            </ul>
+</div><div class="P PagerWrap PageControls"></div></div><div class="MessageForm CommentForm FormTitleWrapper">
+    <!-- <h2 class="H">Leave a Comment</h2> -->
+
+    <div class="CommentFormWrap">
+                    <div class="Form-HeaderWrap">
+                <div class="Form-Header">
+            <span class="Author">
+                <a title="kazurayam" href="https://forum.katalon.com/profile/4280/kazurayam" class="PhotoWrap"><img src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/nG7UISAA9ZGKU.jpg" alt="kazurayam" class="ProfilePhoto ProfilePhotoMedium"></a><a href="https://forum.katalon.com/profile/4280/kazurayam" class="Username">kazurayam</a>            </span>
+                </div>
+            </div>
+                <div class="Form-BodyWrap">
+            <div class="Form-Body">
+                <div class="FormWrapper FormWrapper-Condensed">
+                    <form id="Form_Comment" method="post" action="https://forum.katalon.com/post/comment/">
+<div>
+<input type="hidden" id="Form_TransientKey" name="TransientKey" value="7bXIWurIx82GXEHz"><input type="hidden" id="Form_hpt" name="hpt" value="" style="display: none;"><input type="hidden" id="Form_DiscussionID" name="DiscussionID" value="9799"><input type="hidden" id="Form_CommentID" name="CommentID" value=""><input type="hidden" id="Form_DraftID" name="DraftID" value=""><div class="ButtonBar">
+    <div class="BarWrap"><span class="ButtonWrap ButtonBarBold" title="Bold, ctrl+B"><span>bold</span></span><span class="ButtonWrap ButtonBarItalic" title="Italic, ctrl+I"><span>italic</span></span><span class="ButtonWrap ButtonBarUnderline" title="Underline, ctrl+U"><span>underline</span></span><span class="ButtonWrap ButtonBarStrike" title="Strike, ctrl+S"><span>strike</span></span><span class="ButtonWrap ButtonBarCode" title="Code, ctrl+O"><span>code</span></span><span class="ButtonWrap ButtonBarImage" title="Image"><span>image</span></span><span class="ButtonWrap ButtonBarUrl" title="Url, ctrl+L"><span>url</span></span><span class="ButtonWrap ButtonBarQuote" title="Quote, ctrl+Q"><span>quote</span></span><span class="ButtonWrap ButtonBarSpoiler ButtonOff" title="Spoiler"><span>spoiler</span></span></div>
+</div>
+<div class="bodybox-wrap"><div class="editor editor-format-wysiwyg editor-uploads editor-desktop"><span class="editor-action icon icon-bold editor-dialog-fire-close" data-wysihtml5-command="bold" title="Bold" data-editor="{&quot;action&quot;:&quot;bold&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-italic editor-dialog-fire-close" data-wysihtml5-command="italic" title="Italic" data-editor="{&quot;action&quot;:&quot;italic&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-strikethrough editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="strikethrough" title="Strikethrough" data-editor="{&quot;action&quot;:&quot;strike&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-list-ol editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="insertOrderedList" title="Ordered list" data-editor="{&quot;action&quot;:&quot;orderedlist&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-list-ul editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="insertUnorderedList" title="Unordered list" data-editor="{&quot;action&quot;:&quot;unorderedlist&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-sep sep-headers editor-optional-button"></span><div class="editor-dropdown editor-dropdown-default editor-action-headers"><span class="editor-action icon icon-paragraph editor-dd-format" title="Format" data-editor="{&quot;action&quot;:&quot;format&quot;,&quot;value&quot;:&quot;&quot;}"><span class="icon icon-caret-down"></span></span><div class="editor-insert-dialog Flyout MenuItems"><a class="editor-action editor-action-heading1 editor-dialog-fire-close post-font-size-h1" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" title="Heading 1" data-editor="{&quot;action&quot;:&quot;heading1&quot;,&quot;value&quot;:&quot;h1&quot;}" href="javascript:;" unselectable="on">Heading 1</a><a class="editor-action editor-action-heading2 editor-dialog-fire-close post-font-size-h2" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" title="Heading 2" data-editor="{&quot;action&quot;:&quot;heading2&quot;,&quot;value&quot;:&quot;h2&quot;}" href="javascript:;" unselectable="on">Heading 2</a><div class="editor-action editor-action-separator editor-dialog-fire-close dd-separator" data-editor="{&quot;action&quot;:&quot;separator&quot;,&quot;value&quot;:&quot;&quot;}"></div><a class="editor-action editor-action-blockquote editor-dialog-fire-close " data-wysihtml5-command="blockquote" data-wysihtml5-command-value="blockquote" title="Quote" data-editor="{&quot;action&quot;:&quot;blockquote&quot;,&quot;value&quot;:&quot;blockquote&quot;}" href="javascript:;" unselectable="on">Quote</a><a class="editor-action editor-action-code editor-dialog-fire-close " data-wysihtml5-command="code" data-wysihtml5-command-value="code" title="Code" data-editor="{&quot;action&quot;:&quot;code&quot;,&quot;value&quot;:&quot;code&quot;}" href="javascript:;" unselectable="on">Code</a><a class="editor-action editor-action-spoiler editor-dialog-fire-close " data-wysihtml5-command="spoiler" data-wysihtml5-command-value="spoiler" title="Spoiler" data-editor="{&quot;action&quot;:&quot;spoiler&quot;,&quot;value&quot;:&quot;spoiler&quot;}" href="javascript:;" unselectable="on">Spoiler</a></div></div><span class="editor-sep sep-media editor-optional-button"></span><div class="editor-dropdown editor-dropdown-default editor-action-emoji"><span class="editor-action icon icon-smile editor-dd-emoji" title="Emoji" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;&quot;}"><span class="icon icon-caret-down"></span></span><div class="editor-insert-dialog Flyout MenuItems"><span class="editor-action emoji-smile editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :) " title=":)" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:)&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/smile.png" title=":)" alt=":)" height="20"></span><span class="editor-action emoji-lol editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :D " title=":D" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:D&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/lol.png" title=":D" alt=":D" height="20"></span><span class="editor-action emoji-disappointed editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :( " title=":(" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:(&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/disappointed.png" title=":(" alt=":(" height="20"></span><span class="editor-action emoji-wink editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" ;) " title=";)" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;;)&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/wink.png" title=";)" alt=";)" height="20"></span><span class="editor-action emoji-confused editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :/ " title=":/" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:\/&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/confused.png" title=":/" alt=":/" height="20"></span><span class="editor-action emoji-open_mouth editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :o " title=":o" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:o&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/open_mouth.png" title=":o" alt=":o" height="20"></span><span class="editor-action emoji-confounded editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :s " title=":s" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:s&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/confounded.png" title=":s" alt=":s" height="20"></span><span class="editor-action emoji-stuck_out_tongue editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :p " title=":p" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:p&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/tongue.png" title=":p" alt=":p" height="20"></span><span class="editor-action emoji-cry editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :&#39;( " title=":&#39;(" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:&#39;(&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/cry.png" title=":&#39;(" alt=":&#39;(" height="20"></span><span class="editor-action emoji-neutral editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :| " title=":|" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:|&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/neutral.png" title=":|" alt=":|" height="20"></span><span class="editor-action emoji-sunglasses editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" B) " title="B)" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;B)&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/sunglasses.png" title="B)" alt="B)" height="20"></span><span class="editor-action emoji-grimace editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :# " title=":#" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:#&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/grimace.png" title=":#" alt=":#" height="20"></span><span class="editor-action emoji-kiss editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" :* " title=":*" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;:*&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/kiss.png" title=":*" alt=":*" height="20"></span><span class="editor-action emoji-heart editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" &lt;3 " title="&lt;3" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;&lt;3&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/heart.png" title="&lt;3" alt="&lt;3" height="20"></span><span class="editor-action emoji-innocent editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" o:) " title="o:)" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;o:)&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/innocent.png" title="o:)" alt="o:)" height="20"></span><span class="editor-action emoji-naughty editor-dialog-fire-close emoji-wrap" data-wysihtml5-command="insertHTML" data-wysihtml5-command-value=" &gt;:) " title="&gt;:)" data-editor="{&quot;action&quot;:&quot;emoji&quot;,&quot;value&quot;:&quot;&gt;:)&quot;}" href="javascript:;" unselectable="on"><img class="emoji" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/naughty.png" title="&gt;:)" alt="&gt;:)" height="20"></span></div></div><div class="editor-dropdown editor-dropdown-link"><span class="editor-action icon icon-link editor-dd-link editor-optional-button" data-wysihtml5-command="createLink" title="Url" data-editor="{&quot;action&quot;:&quot;url&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"><span class="icon icon-caret-down"></span></span><div class="editor-insert-dialog Flyout MenuItems" data-wysihtml5-dialog="createLink">
+                     <input class="InputBox editor-input-url" data-wysihtml5-dialog-field="href" value="http://">
+                      <div class="MenuButtons">
+                      <input type="button" data-wysihtml5-dialog-action="save" class="Button editor-dialog-fire-close" value="OK">
+                      <input type="button" data-wysihtml5-dialog-action="cancel" class="Button Cancel editor-dialog-fire-close" value="Cancel">
+                      </div>
+                   </div></div><div class="editor-dropdown editor-dropdown-upload"><span class="editor-action icon icon-file editor-dd-upload" title="Attach image/file" data-editor="{&quot;action&quot;:&quot;upload&quot;,&quot;value&quot;:&quot;&quot;}"><span class="icon icon-caret-down"></span></span><div class="editor-insert-dialog Flyout MenuItems editor-file-image">
+                     <div id="drop-cue-dropdown" class="drop-section file-drop can-drop">
+                        Drop image/file
+                     </div>
+                     <div class="drop-section file-input">
+                        <span class="file-or">or</span> <input type="file" name="editorupload[]" multiple="">
+                     </div>
+                     <div class="drop-section image-input" title="Paste the URL of an image to quickly embed it.">
+                        <input class="InputBox editor-input-image placeholder" placeholder="Image URL">
+                     </div>
+                  </div></div><span class="editor-sep sep-align editor-optional-button"></span><span class="editor-action icon icon-align-left editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="justifyLeft" title="Align left" data-editor="{&quot;action&quot;:&quot;alignleft&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-align-center editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="justifyCenter" title="Align center" data-editor="{&quot;action&quot;:&quot;aligncenter&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-align-right editor-dialog-fire-close editor-optional-button" data-wysihtml5-command="justifyRight" title="Align right" data-editor="{&quot;action&quot;:&quot;alignright&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-sep sep-switches editor-optional-button"></span><span class="editor-action icon icon-source editor-toggle-source editor-dialog-fire-close editor-optional-button" data-wysihtml5-action="change_view" title="Toggle HTML view" data-editor="{&quot;action&quot;:&quot;togglehtml&quot;,&quot;value&quot;:&quot;&quot;}" href="javascript:;" unselectable="on"></span><span class="editor-action icon icon-resize-full editor-toggle-fullpage-button editor-dialog-fire-close editor-optional-button" title="Toggle full page" data-editor="{&quot;action&quot;:&quot;fullpage&quot;,&quot;value&quot;:&quot;&quot;}"></span><span class="editor-action icon icon-adjust editor-toggle-lights-button editor-dialog-fire-close editor-optional-button" title="Toggle lights" data-editor="{&quot;action&quot;:&quot;lights&quot;,&quot;value&quot;:&quot;&quot;}"></span></div><div class="editor-upload-progress"></div><div class="editor-upload-attention">Drop image/file</div><input type="hidden" id="Form_Format" name="Format" value="Wysiwyg"><div class="TextBoxWrapper editor-dialog-fire-close"><textarea id="Form_Body" name="Body" table="Comment" tabindex="1" fileupload="" class="TextBox BodyBox textarea-autosize" format="Wysiwyg" rows="6" cols="100" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 64px; display: none;"></textarea><input type="hidden" name="_wysihtml5_mode" value="1"><iframe class="wysihtml5-sandbox vanilla-editor-text-1540776173223 editor-dropzone-init" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" title="WYSIWYG editor" style="display: inline-block; background-color: rgb(255, 255, 255); border-collapse: separate; border-color: rgb(209, 209, 209); border-style: solid; border-width: 1px; clear: none; float: none; margin: 0px 0px 6px; outline: rgb(51, 51, 51) none 0px; outline-offset: 0px; padding: 0px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: baseline; text-align: start; box-sizing: border-box; box-shadow: none; border-radius: 4px; width: 100%; height: 64px; min-height: 44px;" src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/saved_resource.html"></iframe><div class="ButtonBarMarkupHint">You can use <b><a href="http://htmlguide.drgrog.com/cheatsheet.php" target="_new">Simple HTML</a></b> in your post.</div></div><div class="editor-upload-previews"></div></div><div class="CommentOptions List Inline"></div><div class="Buttons">
+<span class="Back"><a href="https://forum.katalon.com/">Home</a> <span class="Bullet">•</span> <a href="https://forum.katalon.com/categories/tips-and-tricks">Tips and Tricks</a></span> <a href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio?#" class="Button PreviewButton">Preview</a>
+ <a href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio?#" class="Button WriteButton Hidden">Edit</a>
+ <a href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio?#" class="Button DraftButton">Save Draft</a>
+<input type="submit" id="Form_Post" name="Post" value="Post" class="Button Primary CommentButton" tabindex="2">
+</div>
+</div>
+</form>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+                        <div class="col-3 PanelColumn" id="Panel">
+                
+                <div class="BoxButtons BoxNewDiscussion"><a href="https://forum.katalon.com/post/discussion/tips-and-tricks" class="NewDiscussion">START A TOPIC</a></div><!-- <div class="BoxFilter BoxDiscussionFilter">
+    <ul class="FilterMenu">
+        <li class="AllCategories"><a href="/categories"><span class="Sprite SpAllCategories"></span> Categories</a></li>         <li class="Discussions"><a href="/discussions" class=""><span class="Sprite SpDiscussions"></span> Recent Discussions</a></li>
+        <li class="Activities"><a href="/activity" class=""><span class="Sprite SpActivity"></span> Activity</a></li>                    <li class="MyBookmarks"><a href="/discussions/bookmarked"><span class="Sprite SpBookmarks"></span> My Bookmarks<span class="Aside"><span class="Count">14</span></span></a></li>
+                    <li class="MyDiscussions"><a href="/discussions/mine"><span class="Sprite SpMyDiscussions"></span> My Discussions<span class="Aside"><span class="Count">79</span></span></a></li>
+                    <li class="MyDrafts"><a href="/drafts"><span class="Sprite SpMyDrafts"></span> My Drafts<span class="Aside"><span class="Count">51</span></span></a></li>
+            </ul>
+</div> -->
+    <!-- <div class="Box BoxCategories">
+        <h4>Categories</h4>        <ul class="PanelInfo PanelCategories">
+            <li><a href="/categories" class="ItemLink"><span class="Aside"><span class="Count"><span title="6,744 discussions" class="Number">6.7K</span></span></span> All Categories</a></li><li class="ClearFix Heading Category-katalon-events"><span class="Aside"><span class="Count"><span title="24 discussions" class="Number">24</span></span></span> Katalon Events</li>
+<li class="ClearFix Heading Category-katalon-studio"><span class="Aside"><span class="Count"><span title="7,496 discussions" class="Number">7.5K</span></span></span> Katalon Studio</li>
+<li class="ClearFix Depth2 Category-web-testing"><a href="https://forum.katalon.com/categories/web-testing" class="ItemLink"><span class="Aside"><span class="Count"><span title="2,677 discussions" class="Number">2.7K</span></span></span> Web Testing</a></li>
+<li class="ClearFix Depth2 Category-mobile-testing"><a href="https://forum.katalon.com/categories/mobile-testing" class="ItemLink"><span class="Aside"><span class="Count"><span title="706 discussions" class="Number">706</span></span></span> Mobile Testing</a></li>
+<li class="ClearFix Depth2 Category-api-testing"><a href="https://forum.katalon.com/categories/api-testing" class="ItemLink"><span class="Aside"><span class="Count"><span title="290 discussions" class="Number">290</span></span></span> API / Web Services Testing</a></li>
+<li class="ClearFix Depth2 Category-bdd-testing"><a href="https://forum.katalon.com/categories/bdd-testing" class="ItemLink"><span class="Aside"><span class="Count"><span title="20 discussions" class="Number">20</span></span></span> BDD Testing</a></li>
+<li class="ClearFix Depth2 Category-test-executions-and-integrations"><a href="https://forum.katalon.com/categories/test-executions-and-integrations" class="ItemLink"><span class="Aside"><span class="Count"><span title="724 discussions" class="Number">724</span></span></span> Test Executions and Integrations</a></li>
+<li class="ClearFix Depth2 Category-katalon-studio-bug-reports"><a href="https://forum.katalon.com/categories/katalon-studio-bug-reports" class="ItemLink"><span class="Aside"><span class="Count"><span title="705 discussions" class="Number">705</span></span></span> Bug Reports</a></li>
+<li class="ClearFix Depth2 Category-katalon-studio-feature-suggestions"><a href="https://forum.katalon.com/categories/katalon-studio-feature-suggestions" class="ItemLink"><span class="Aside"><span class="Count"><span title="557 discussions" class="Number">557</span></span></span> Feature / Improvement Suggestions</a></li>
+<li class="ClearFix Depth2 Active Category-tips-and-tricks"><a href="https://forum.katalon.com/categories/tips-and-tricks" class="ItemLink"><span class="Aside"><span class="Count"><span title="120 discussions" class="Number">120</span></span></span> Tips and Tricks</a></li>
+<li class="ClearFix Depth2 Category-beta-release-feedback"><a href="https://forum.katalon.com/categories/beta-release-feedback" class="ItemLink"><span class="Aside"><span class="Count"><span title="53 discussions" class="Number">53</span></span></span> Beta Release Feedback</a></li>
+<li class="ClearFix Heading Category-katalon-recorder"><span class="Aside"><span class="Count"><span title="772 discussions" class="Number">772</span></span></span> Katalon Recorder</li>
+<li class="ClearFix Depth2 Category-katalon-recorder-discussions"><a href="https://forum.katalon.com/categories/katalon-recorder-discussions" class="ItemLink"><span class="Aside"><span class="Count"><span title="543 discussions" class="Number">543</span></span></span> General Discussions</a></li>
+<li class="ClearFix Depth2 Category-katalon-recorder-bug-reports"><a href="https://forum.katalon.com/categories/katalon-recorder-bug-reports" class="ItemLink"><span class="Aside"><span class="Count"><span title="155 discussions" class="Number">155</span></span></span> Bug Reports</a></li>
+<li class="ClearFix Depth2 Category-katalon-recorder-feature-suggestions"><a href="https://forum.katalon.com/categories/katalon-recorder-feature-suggestions" class="ItemLink"><span class="Aside"><span class="Count"><span title="74 discussions" class="Number">74</span></span></span> Feature / Improvement Suggestions</a></li>
+<li class="ClearFix Heading Category-katalon-analytics"><span class="Aside"><span class="Count"><span title="96 discussions" class="Number">96</span></span></span> Katalon Analytics</li>
+<li class="ClearFix Depth2 Category-katalon-analytics-discussions"><a href="https://forum.katalon.com/categories/katalon-analytics-discussions" class="ItemLink"><span class="Aside"><span class="Count"><span title="36 discussions" class="Number">36</span></span></span> General Discussions</a></li>
+<li class="ClearFix Depth2 Category-katalon-analytics-bug-reports"><a href="https://forum.katalon.com/categories/katalon-analytics-bug-reports" class="ItemLink"><span class="Aside"><span class="Count"><span title="38 discussions" class="Number">38</span></span></span> Bug Reports</a></li>
+<li class="ClearFix Depth2 Category-katalon-analytics-feature-suggestions"><a href="https://forum.katalon.com/categories/katalon-analytics-feature-suggestions" class="ItemLink"><span class="Aside"><span class="Count"><span title="22 discussions" class="Number">22</span></span></span> Feature / Improvement Suggestions</a></li>
+        </ul>
+    </div> -->
+        <!-- <div class="Box">
+            <h4>In this Discussion</h4>            <ul class="PanelInfo">
+                                    <li>
+                        <a href="/profile/11449/"><span class="Aside"><span><time title="October  3, 2018  4:34PM" datetime="2018-10-03T07:34:09+00:00">October 3</time></span></span> <span><span class="Username">eng.hesham.saber@gmail.com</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/4280/"><span class="Aside"><span><time title="October 18, 2018 11:57PM" datetime="2018-10-18T14:57:41+00:00">October 18</time></span></span> <span><span class="Username">kazuaki.urayama@gmail.com</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/10407/"><span class="Aside"><span><time title="September 27, 2018 12:04AM" datetime="2018-09-26T15:04:47+00:00">September 27</time></span></span> <span><span class="Username">maximilien_ng@yahoo.com</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/6655/"><span class="Aside"><span><time title="September 26, 2018  2:20AM" datetime="2018-09-25T17:20:52+00:00">September 26</time></span></span> <span><span class="Username">drundanibel@hotmail.com</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/10817/"><span class="Aside"><span><time title="September 26, 2018 12:22AM" datetime="2018-09-25T15:22:55+00:00">September 26</time></span></span> <span><span class="Username">testerblabla@uol.com.br</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/4015/"><span class="Aside"><span><time title="September 24, 2018 12:22PM" datetime="2018-09-24T03:22:20+00:00">September 24</time></span></span> <span><span class="Username">russ.thomas@qsius.com</span></span></a>                    </li>
+                                    <li>
+                        <a href="/profile/2584/"><span class="Aside"><span><time title="September 23, 2018  6:18PM" datetime="2018-09-23T09:18:06+00:00">September 23</time></span></span> <span><span class="Username">apodhajsky@gmail.com</span></span></a>                    </li>
+                            </ul>
+        </div> -->
+        
+
+                <div class="module_top_topics">
+            <div class="title_module_top_topic">
+                TOP TOPICS
+            </div>
+   
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/4056/katalon-automation-recorder-quickstart/">
+                    Katalon Automation Recorder Quickstart
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/1915/is-there-a-way-in-katalon-to-wait-for-a-certain-number-of-seconds-/">
+                    Is there a way in Katalon to wait() for a certain number of seconds ?
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/4013/exporting-test-cases-and-test-suites/">
+                    Exporting Test Cases and Test Suites
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/1945/how-to-handle-dynamic-xpath-/">
+                    How to handle dynamic xpath ?
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/2319/using-variables-in-test-objects/">
+                    Using variables in Test Objects
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/5909/stale-element-reference-element-is-not-attached-to-the-page-document/">
+                    Stale element reference: element is not attached to the page document.
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/5380/groovy-error-unable-to-resolve-class-internalglobalvariable/">
+                    Groovy Error: Unable to resolve class internal.GlobalVariable
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/2023/using-global-variables-on-test-cases/">
+                    Using Global Variables on Test Cases
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/4220/how-to-import-selenium-ide-test-cases-into-katalon-studio/">
+                    How to import Selenium IDE test cases into Katalon Studio
+                </a>
+            </div>
+        
+            <div class="item_top_topics">
+                <a href="https://forum.katalon.com/discussion/2353/can-i-install-katalon-studio-in-ubuntu-/">
+                    Can i install Katalon studio in Ubuntu ?
+                </a>
+            </div>
+        </div>
+            </div>
+                    </div>
+    </div>
+    <footer>
+        <div class="Container">
+            <div class="Row footer">
+                <div class="col-6">
+                    <a href="https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio#" id="back-to-top" title="Back to top"><i class="icon icon-chevron-up"></i></a>
+
+                    © 2018 Copyright.
+                    Powered by <a target="_blank" href="http://vanillaforums.org/">VanillaForums</a>, Designed by <a target="_blank" href="http://katalon.com/" title="katalon.com">Katalon</a>. 
+                </div>
+                <div class="col-6 right-text">
+                     
+                </div>
+            </div>
+        </div>
+        
+    </footer>
+<!--
+<div id="search">
+    <button class="modal-close"></button>
+    <form method="get" action="/search">
+<div>
+<input type="text" id="Form_Search" name="Search" value="" placeholder="Search" accesskey="/" class="InputBox" /><input type="submit" id="Form_Go" name="" value="Go" class="Button" />
+</div>
+</form>
+</div>
+-->
+<div id="mobile-menu">
+    <button class="modal-close"></button>
+    <ul>
+        <li><a href="https://forum.katalon.com/discussions" class="">All Discussions</a></li>
+        <li><a href="https://forum.katalon.com/categories" class="">Categories</a></li>
+        <li><a href="https://forum.katalon.com/categories/what-s-new" class=" ">What's new</a></li>
+        <li><a href="https://forum.katalon.com/categories/faqs" class=" ">FAQs</a></li>
+        
+        <li><a href="https://forum.katalon.com/profile" class="">kazuaki.urayama@gmail.com</a></li>
+        <li><a href="https://forum.katalon.com/messages/inbox" class="">Inbox</a></li>
+        <li><a href="https://forum.katalon.com/discussions/bookmarked" class="HasCount">My Bookmarks <span class="Count">14</span></a></li>
+        
+        <li><a href="https://forum.katalon.com/entry/signout?TransientKey=7bXIWurIx82GXEHz" rel="nofollow" class="SignOut">Sign Out</a></li>
+    </ul>
+</div>
+
+
+<script src="./Visual Testing in Katalon Studio - Katalon Q&amp;A_files/bootstrap.min.js.ダウンロード"></script>
+<script>
+$(document).ready(function(){
+    $('#Content .CategoryList li').each(function(){
+        var excludeList = ['Category_1', 'Category_48', 'Category_49'];
+        var ele = $(this);
+        if ($.inArray(ele.attr('id'), excludeList) >= 0) { 
+            ele.hide();
+        }
+    });
+
+    $(window).scroll(function() {
+        $('li.dropdown').hover(function() {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+        }, function() {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+    });
+});
+
+$('body').show();
+$('.version').text(NProgress.version);
+NProgress.start();
+setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+</script>
+ 
+
+<textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; overflow-wrap: break-word; overflow: hidden; transition: none 0s ease 0s; height: 0px !important; min-height: 0px !important; font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 22.5px; width: 654.688px;" class="autosizejs" id="autosizejs"></textarea><div id="atwho-container"><div id="atwho-ground-Form_Body"><div class="atwho-view" id="at-view-64"><ul class="atwho-view-ul"></ul></div></div><div id="atwho-ground-Form_Body"><div class="atwho-view" id="at-view-58"><ul class="atwho-view-ul"></ul></div></div><div id="atwho-ground-1"><div class="atwho-view" id="at-view-64"><ul class="atwho-view-ul"></ul></div></div><div id="atwho-ground-2"><div class="atwho-view" id="at-view-58"><ul class="atwho-view-ul"></ul></div></div></div></body></html>
