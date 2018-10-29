@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
-import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
+import com.kazurayam.ksbackyard.ImageDifference
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory

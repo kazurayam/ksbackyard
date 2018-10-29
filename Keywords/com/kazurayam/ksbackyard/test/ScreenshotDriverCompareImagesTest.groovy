@@ -11,13 +11,13 @@ import java.nio.file.Paths
 
 import javax.imageio.ImageIO
 
+import org.apache.commons.io.FileUtils
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
-import org.openqa.selenium.WebDriver
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -28,7 +28,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 class ScreenshotDriverCompareImagesTest {
 
-	private static WebDriver driver_
 	private static String url_
 	private static Path workdir_
 
@@ -45,7 +44,11 @@ class ScreenshotDriverCompareImagesTest {
 	@BeforeClass
 	static void beforeClass() {
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverCompareImagesTest')
+		if (Files.exists(workdir_)) {
+			FileUtils.deleteDirectory(workdir_.toFile())
+		}
 		Files.createDirectories(workdir_)
+		ScreenshotDriver.snapshotsDir = workdir_.resolve('snapshotsDir')
 		WebUI.openBrowser('')
 	}
 
@@ -79,7 +82,6 @@ class ScreenshotDriverCompareImagesTest {
 	 * @date 27 Oct 2018
 	 * @author kazurayam
 	 */
-	@Ignore
 	@Test
 	void test_saveProfilePicture() {
 		String xpathStr = makeXPathToPhoto(6)
@@ -126,49 +128,43 @@ class ScreenshotDriverCompareImagesTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	void test_verifyImagesAreSimilar() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
-
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
 		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent)
-		assertTrue("image in ${url_} at ${xpathStr} is not similar to the image at ${expectedImage.toString()}", result)
+		assertTrue("image in URL ${url_} at xpath ${xpathStr} is not similar to the image at file ${expectedImage.toString()}", result)
 	}
 
-	@Ignore
 	@Test
 	void test_verifyImagesAreSimilar_willFail() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(1)
-
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 5.0
+		Double criteriaPercent = 50.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
-		assertFalse("image in ${url_} at ${xpathStr} is expected to besimilar to the image at ${expectedImage.toString()} but different in fact", result)
+		assertFalse("image in URL ${url_} at xpath ${xpathStr} is expected to be similar to the image at file ${expectedImage.toString()} but different in fact", result)
 	}
 
-	@Ignore
 	@Test
 	void test_verifyImagesAreDifferent() {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/andrej.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
-
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 75.0
+		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
-		assertTrue("image in ${url_} at ${xpathStr} is not different enought from to the image at ${expectedImage.toString()}", result)
+		assertTrue("image in URL ${url_} at xpath ${xpathStr} is not different enough from the image at file ${expectedImage.toString()}", result)
 	}
 
 
@@ -177,13 +173,13 @@ class ScreenshotDriverCompareImagesTest {
 		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
 				'src/test/resources/fixture/images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
-
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
-		Double criteriaPercent = 95.0
+		Double criteriaPercent = 50.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
-		assertTrue("image in ${url_} at ${xpathStr} is expected to be different from to the image at ${expectedImage.toString()} but similar in fact", result)
+		assertFalse("image in URL ${url_} at xpath ${xpathStr} is expected to be different from the image at file ${expectedImage.toString()} but similar in fact",
+				result)
 	}
 
 

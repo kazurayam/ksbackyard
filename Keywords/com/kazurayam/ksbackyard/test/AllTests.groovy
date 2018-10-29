@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses
 @SuiteClasses([
 	AssertTest.class,
 	ImageCollectionDifferTest.class,
+	ImageDifferenceTest.class,
 	QuietBrowserTest.class,
 	RunConfigurationWrapperTest.class,
 	ScreenshotDriverTest.class,

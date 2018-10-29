@@ -24,7 +24,7 @@ hs_err_pid*
 Libs/TempTestCase*.groovy
 Libs/TempTestSuite*.groovy
 /Reports/
-/Materials/
+
 settings/internal/com.kms.katalon.integration.analytics.properties
 settings/internal/com.kms.katalon.integration.jira.properties
 
@@ -40,4 +40,7 @@ settings/internal/com.kms.katalon.integration.jira.properties
 # OS X
 .DS_Store
 
-/tmp
+# kazurayam's preference
+/Materials/
+/build/
+/tmp/

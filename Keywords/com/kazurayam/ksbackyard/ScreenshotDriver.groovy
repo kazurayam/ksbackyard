@@ -1,7 +1,6 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -21,8 +20,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
-import ru.yandex.qatools.ashot.comparison.ImageDiff
-import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
@@ -37,7 +34,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies
  */
 class ScreenshotDriver {
 
-	static Path snapshotsDir = Paths.get(RunConfiguration.getProjectDir(), 'tmp')
+	static public Path snapshotsDir
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
@@ -297,11 +294,13 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreSimilar()
 		File actualSnapshot
 		if (!result) {
-			actualSnapshot = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSimilar(File,TestObject)')
+			actualSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(File,TestObject)-actual')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"acutual image (saved into ${actualSnapshot.toString()}) is not " +
-				"similar enough to ${expected.toString()}",
+				"images are expected to be similar but are different," +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image is located in the file ${expected.toString()}," +
+				" the actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
 	}
@@ -319,17 +318,19 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreDifferent(
 			File expected,
 			TestObject actual,
-			Double criteriaPercent = 65.0,
+			Double criteriaPercent = 5.0,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
 		File actualSnapshot
 		if (!result) {
-			actualSnapshot = saveActualImageSnapshot(imgDifference, 'verifyImagesAreDifferent_File_TestObject_')
+			actualSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreDifferent(File,TestObject)-actual')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"actual image (saved into ${actualSnapshot.toString()}) is not " +
-				"different enough from ${expected.toString()}",
+				"images are expected to be different but are similar," +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image is located in the file ${expected.toString()}," +
+				" the actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
 	}
@@ -339,20 +340,21 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreSimilar(
 			TestObject expected,
 			TestObject actual,
-			Double criteriaPercent = 5.0,
+			Double criteriaPercent = 10.0,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are similar?
 		boolean result = imgDifference.imagesAreSimilar()
 		File expectedSnapshot, actualSnapshot
 		if (!result) {
-			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilarTestObjectTestObject')
-			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilarTestObjectTestObject')
+			expectedSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-expected')
+			actualSnapshot   = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-actual')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be similar but different. " +
-				"expected image was saved int file ${expectedSnapshot.toString()} " +
-				"actual image was saved into file ${actualSnapshot.toString()}",
+				"images are expected to be similar but different, " +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image was saved into file ${expectedSnapshot.toString()} " +
+				" the actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
 	}
@@ -361,20 +363,21 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreDifferent(
 			TestObject expected,
 			TestObject actual,
-			Double criteriaPercent = 65.0,
+			Double criteriaPercent = 10.0,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are different?
 		boolean result = imgDifference.imagesAreDifferent()
 		File expectedSnapshot, actualSnapshot
 		if (!result) {
-			expectedSnapshot = saveExpectedImageSnapshot(imgDifference, 'verifyImagesAreSimilarTestObjectTestObject')
-			actualSnapshot   = saveActualImageSnapshot(imgDifference, 'verifyImagesAreSmilarTestObjectTestObject')
+			expectedSnapshot = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-expected')
+			actualSnapshot   = saveImageSnapshot(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)-actual')
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but similar. " +
-				"expected image was saved int file ${expectedSnapshot.toString()} " +
-				"actual image was saved into file ${actualSnapshot.toString()}",
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image was saved into file ${expectedSnapshot.toString()} " +
+				" the actual image was saved into file ${actualSnapshot.toString()}",
 				result, flowControl)
 		return result
 	}
@@ -382,38 +385,21 @@ class ScreenshotDriver {
 	/**
 	 * utility method to save snapshot of the image
 	 */
-	private static File saveActualImageSnapshot(ImageDifference imgDifference, String methodName) {
-		File actualSnapshot = resolveSnapshotFile(snapshotsDir, methodName, 'actual')
-		println ">>>>>> actualSnapshot.class.getSimpleName() = ${actualSnapshot.class.getSimpleName()}"
+	private static File saveImageSnapshot(ImageDifference imgDifference, String identifier) {
+		File actualSnapshot = resolveSnapshotFile(identifier)
 		File parent = actualSnapshot.getParentFile()
-		println ">>>>>> parent.class.getSimpleName() = ${parent.class.getSimpleName()}"
-		boolean b = parent.mkdirs()
-		if (b) {
-			println ">>>>>> imgDifference.getActualImage().class.getSimpleName() = ${imgDifference.getActualImage().class.getSimpleName()}"
-			println ">>>>>> actualSnapshot.class.getSimpleName() = ${actualSnapshot.class.getSimpleName()}"
-			println ">>>>>> actualSnapshot.toString() = ${actualSnapshot.toString()}"
-			boolean r = ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
-			if (!r) {
-				throw new IOException("failed to write actual image into ${actualSnapshot.toString()}")
-			}
-		} else {
-			throw new FileNotFoundException(parent.toString())
-		}
+		parent.mkdirs()
+		ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
+		return actualSnapshot
 	}
 
-	private static File saveExpectedImageSnapshot(ImageDifference imgDifference, String methodName) {
-		File expectedSnapshot = resolveSnapshotFile(snapshotsDir, methodName, 'expected')
-		File parent = expectedSnapshot.getParentFile()
-		if (parent.mkdirs()) {
-			ImageIO.write(imgDifference.getExpectedImage(), "PNG", expectedSnapshot)
-		} else {
-			throw new FileNotFoundException(parent.toString())
+	private static File resolveSnapshotFile(String identifier) {
+		Path parent
+		if (snapshotsDir == null) {
+			snapshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve("tmp").resolve("ScreenshotDriver-snapshots")
 		}
-	}
-
-	private static File resolveSnapshotFile(Path outputDir, String methodName, String identifier) {
-		Path parent = outputDir.resolve("${ScreenshotDriver.class.getName()}-snapshots").resolve("${getTimestampNow()}")
-		return parent.resolve("${methodName}_${identifier}.png").toFile()
+		parent = snapshotsDir.resolve("${getTimestampNow()}")
+		return parent.resolve("${identifier}.png").toFile()
 	}
 
 	/**
@@ -424,106 +410,4 @@ class ScreenshotDriver {
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
 
-
-	/**
-	 * accepts 2 BufferedImages as input, compare them, make a difference image,
-	 * and calcurate the ratio of difference of the 2 input images.
-	 */
-	static class ImageDifference {
-
-		private BufferedImage expectedImage_
-		private BufferedImage actualImage_
-		private BufferedImage diffImage_
-		private Double ratio_ = 0.0        // percentage
-		private Double criteria_ = 1.0     // percentage
-
-		ImageDifference(BufferedImage expected, BufferedImage actual) {
-			expectedImage_ = expected
-			actualImage_ = actual
-			ImageDiff imgDiff = makeImageDiff(expectedImage_, actualImage_)
-			ratio_ = calculateRatioPercent(imgDiff)
-			diffImage_ = imgDiff.getMarkedImage()
-		}
-
-		private ImageDiff makeImageDiff(BufferedImage expected, BufferedImage actual) {
-			Screenshot expectedScreenshot = new Screenshot(expected)
-			Screenshot actualScreenshot = new Screenshot(actual)
-			ImageDiff imgDiff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
-			return imgDiff
-		}
-
-		BufferedImage getExpectedImage() {
-			expectedImage_
-		}
-
-		BufferedImage getActualImage() {
-			actualImage_
-		}
-
-		BufferedImage getDiffImage() {
-			return diffImage_
-		}
-
-		void setCriteria(Double criteria) {
-			criteria_ = criteria
-		}
-
-		Double getCriteria() {
-			return criteria_
-		}
-
-		/**
-		 * 
-		 * @return e.g. 0.23% or 90.0%
-		 */
-		Double getRatio() {
-			return ratio_
-		}
-
-		/**
-		 * @return e.g. "0.23" or "90.00"
-		 */
-		String getRatioAsString(String fmt = '%1$.2f') {
-			return String.format(fmt, this.getRatio())
-		}
-
-		/**
-		 * 
-		 * Round up 0.0001 to 0.01
-		 * 
-		 * @param diff
-		 * @return
-		 */
-		private Double calculateRatioPercent(ImageDiff diff) {
-			boolean hasDiff = diff.hasDiff()
-			if (!hasDiff) {
-				return 0.0
-			}
-			int diffSize = diff.getDiffSize()
-			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
-			Double diffRatio = diff.getDiffSize() / area * 100
-			BigDecimal bd = new BigDecimal(diffRatio)
-			BigDecimal bdUP = bd.setScale(2, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
-			return bdUP.doubleValue()
-		}
-
-
-		/**
-		 * @return true if the expected image and the actual image pair has 
-		 *         greater difference than the criteria = these are different enough,
-		 *         otherwise false.
-		 */
-		Boolean imagesAreDifferent() {
-			return (ratio_ > criteria_)
-		}
-
-		/**
-		 * @return true if the expected image and the actual image pair has
-		 *         smaller difference than the criteria = these are similar enough,
-		 *         otherwise false.
-		 */
-		Boolean imagesAreSimilar() {
-			return (ratio_ <= criteria_)
-		}
-	}
 }
