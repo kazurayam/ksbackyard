@@ -5,7 +5,7 @@ import java.util.stream.Collectors
 
 import javax.imageio.ImageIO
 
-import com.kazurayam.ksbackyard.ImageDifference
+import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
 
 import com.kazurayam.materials.ExecutionProfile
 import com.kazurayam.materials.FileType

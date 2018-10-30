@@ -19,7 +19,7 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import com.kazurayam.ksbackyard.ImageDifference
+import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
@@ -54,7 +54,6 @@ class ImageDifferenceTest {
 		WebUI.openBrowser('')
 		image1_ = saveProfilePicture(1, "andrej.png")
 		image6_ = saveProfilePicture(6, "kazurayam.png")
-		
 	}
 
 	@Before

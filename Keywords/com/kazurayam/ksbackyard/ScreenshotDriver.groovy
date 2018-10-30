@@ -22,7 +22,8 @@ import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
-
+import ru.yandex.qatools.ashot.comparison.ImageDiff
+import ru.yandex.qatools.ashot.comparison.ImageDiffer
 // import com.kazurayam.ksbackyard.test.ashot.AShotMock
 
 /**
@@ -275,35 +276,6 @@ class ScreenshotDriver {
 		return imgDifference
 	}
 
-	/**
-	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
-	 * and check if images are SIMILAR enough.
-	 * When failed, the actual image is saved into file of which path is shown in the error message.
-	 * 
-	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
-	 * @param actualImage of TestObject which points HTML element in question
-	 * @return true if expectedImage and actualImage are similar enough; difference ratio < criteriaPercent
-	 */
-	@Keyword
-	static Boolean verifyImagesAreSimilar(
-			File expected,
-			TestObject actual,
-			Double criteriaPercent = 5.0,
-			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		boolean result = imgDifference.imagesAreSimilar()
-		FileTrio fileTrio
-		if (!result) {
-			fileTrio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(File,TestObject)')
-		}
-		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be similar but are different," +
-				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image is located in the file ${fileTrio.getExpected().toString()}," +
-				" the actual image was saved into file ${fileTrio.getActual().toString()}",
-				result, flowControl)
-		return result
-	}
 
 	/**
 	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
@@ -322,10 +294,7 @@ class ScreenshotDriver {
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
-		FileTrio trio
-		if (!result) {
-			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(File,TestObject)')
-		}
+		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(File,TestObject)')
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but are similar," +
 				" difference=${imgDifference.getRatioAsString()}%," +
@@ -334,30 +303,7 @@ class ScreenshotDriver {
 				result, flowControl)
 		return result
 	}
-
-
-	@Keyword
-	static Boolean verifyImagesAreSimilar(
-			TestObject expected,
-			TestObject actual,
-			Double criteriaPercent = 10.0,
-			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		// check if these are similar?
-		boolean result = imgDifference.imagesAreSimilar()
-		FileTrio trio
-		if (!result) {
-			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
-		}
-		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be similar but different, " +
-				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image was saved into file ${trio.getExpected().toString()} " +
-				" the actual image was saved into file ${trio.getActual().toString()}",
-				result, flowControl)
-		return result
-	}
-
+			
 	@Keyword
 	static Boolean verifyImagesAreDifferent(
 			TestObject expected,
@@ -367,10 +313,7 @@ class ScreenshotDriver {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are different?
 		boolean result = imgDifference.imagesAreDifferent()
-		FileTrio trio
-		if (!result) {
-			trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
-		}
+		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(TestObject,TestObject)')
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but similar. " +
 				" difference=${imgDifference.getRatioAsString()}%," +
@@ -379,6 +322,53 @@ class ScreenshotDriver {
 				result, flowControl)
 		return result
 	}
+		
+	/**
+	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
+	 * and check if images are SIMILAR enough.
+	 * When failed, the actual image is saved into file of which path is shown in the error message.
+	 *
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return true if expectedImage and actualImage are similar enough; difference ratio < criteriaPercent
+	 */
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			File expected,
+			TestObject actual,
+			Double criteriaPercent = 5.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreSimilar()
+		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(File,TestObject)')
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be similar but are different," +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image is located in the file ${trio.getExpected().toString()}," +
+				" the actual image was saved into file ${trio.getActual().toString()}",
+				result, flowControl)
+		return result
+	}
+		
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			TestObject expected,
+			TestObject actual,
+			Double criteriaPercent = 10.0,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		// check if these are similar?
+		boolean result = imgDifference.imagesAreSimilar()
+		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be similar but different, " +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" the expected image was saved into file ${trio.getExpected().toString()} " +
+				" the actual image was saved into file ${trio.getActual().toString()}",
+				result, flowControl)
+		return result
+	}
+
 
 	/**
 	 * utility method to save snapshot of the image
@@ -387,7 +377,7 @@ class ScreenshotDriver {
 		FileTrio trio = new FileTrio()
 		//
 		File expectedSnapshot = resolveSnapshotFile(identifier + ".expected")
-		ImageIO.write(imgDifference.getActualImage(), "PNG", expectedSnapshot)
+		ImageIO.write(imgDifference.getExpectedImage(), "PNG", expectedSnapshot)
 		trio.setExpected(expectedSnapshot)
 		//
 		File actualSnapshot = resolveSnapshotFile(identifier + ".actual")
@@ -395,7 +385,7 @@ class ScreenshotDriver {
 		trio.setActual(actualSnapshot)
 		//
 		File diffSnapshot = resolveSnapshotFile(identifier + ".diff(${imgDifference.getRatioAsString()})")
-		ImageIO.write(imgDifference.getActualImage(), "PNG", diffSnapshot)
+		ImageIO.write(imgDifference.getDiffImage(), "PNG", diffSnapshot)
 		trio.setDiff(diffSnapshot)
 		//
 		return trio
@@ -449,4 +439,112 @@ class ScreenshotDriver {
 		}
 	}
 
+
+
+	/**
+	 * accepts 2 BufferedImages as input, compare them, make a difference image,
+	 * and calcurate the ratio of difference of the 2 input images.
+	 */
+	static class ImageDifference {
+
+		private BufferedImage expectedImage_
+		private BufferedImage actualImage_
+		private BufferedImage diffImage_
+		private Double ratio_ = 0.0        // percentage
+		private Double criteria_ = 1.0     // percentage
+
+		ImageDifference() {
+			expectedImage_ = null
+			actualImage_ = null
+		}
+
+		ImageDifference(BufferedImage expected, BufferedImage actual) {
+			expectedImage_ = expected
+			actualImage_ = actual
+			ImageDiff imgDiff = makeImageDiff(expectedImage_, actualImage_)
+			ratio_ = calculateRatioPercent(imgDiff)
+			diffImage_ = imgDiff.getMarkedImage()
+		}
+
+		private ImageDiff makeImageDiff(BufferedImage expected, BufferedImage actual) {
+			Screenshot expectedScreenshot = new Screenshot(expected)
+			Screenshot actualScreenshot = new Screenshot(actual)
+			ImageDiff imgDiff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
+			return imgDiff
+		}
+
+		BufferedImage getExpectedImage() {
+			expectedImage_
+		}
+
+		BufferedImage getActualImage() {
+			actualImage_
+		}
+
+		BufferedImage getDiffImage() {
+			return diffImage_
+		}
+
+		void setCriteria(Double criteria) {
+			criteria_ = criteria
+		}
+
+		Double getCriteria() {
+			return criteria_
+		}
+
+		/**
+		 *
+		 * @return e.g. 0.23% or 90.0%
+		 */
+		Double getRatio() {
+			return ratio_
+		}
+
+		/**
+		 * @return e.g. "0.23" or "90.00"
+		 */
+		String getRatioAsString(String fmt = '%1$.2f') {
+			return String.format(fmt, this.getRatio())
+		}
+
+		/**
+		 *
+		 * Round up 0.0001 to 0.01
+		 *
+		 * @param diff
+		 * @return
+		 */
+		private Double calculateRatioPercent(ImageDiff diff) {
+			boolean hasDiff = diff.hasDiff()
+			if (!hasDiff) {
+				return 0.0
+			}
+			int diffSize = diff.getDiffSize()
+			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
+			Double diffRatio = diff.getDiffSize() / area * 100
+			BigDecimal bd = new BigDecimal(diffRatio)
+			BigDecimal bdUP = bd.setScale(2, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
+			return bdUP.doubleValue()
+		}
+
+
+		/**
+		 * @return true if the expected image and the actual image pair has
+		 *         greater difference than the criteria = these are different enough,
+		 *         otherwise false.
+		 */
+		Boolean imagesAreDifferent() {
+			return (ratio_ > criteria_)
+		}
+
+		/**
+		 * @return true if the expected image and the actual image pair has
+		 *         smaller difference than the criteria = these are similar enough,
+		 *         otherwise false.
+		 */
+		Boolean imagesAreSimilar() {
+			return (ratio_ <= criteria_)
+		}
+	}
 }

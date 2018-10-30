@@ -22,7 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
-import com.kazurayam.ksbackyard.ImageDifference
+import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
 import com.kms.katalon.core.configuration.RunConfiguration
 
 class ScreenshotDriverTest {
