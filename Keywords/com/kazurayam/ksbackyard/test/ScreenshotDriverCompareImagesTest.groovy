@@ -30,25 +30,23 @@ class ScreenshotDriverCompareImagesTest {
 	private static String url_
 	private static Path workdir_
 
-	static {
-		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-		Path targetHTML = projectDir.resolve('src/test/resources/fixture/Visual Testing in Katalon Studio - Katalon Q&A.html')
-		url_ = targetHTML.toUri().toURL().toExternalForm()
-	}
-
 	/*
 	 * 1. initialize directory where we output PNG files
 	 * 2. open browser
 	 */
 	@BeforeClass
 	static void beforeClass() {
+		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
+		Path targetHTML = projectDir.resolve('src/test/resources/fixture/Visual Testing in Katalon Studio - Katalon Q&A.html')
+		url_ = targetHTML.toUri().toURL().toExternalForm()
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverCompareImagesTest')
 		if (Files.exists(workdir_)) {
 			FileUtils.deleteDirectory(workdir_.toFile())
 		}
 		Files.createDirectories(workdir_)
-		ScreenshotDriver.snapshotsDir = workdir_.resolve('snapshotsDir')
 		WebUI.openBrowser('')
+		//
+		ScreenshotDriver.alwaysSaveSnapshots_ = true
 	}
 
 	@Before
@@ -137,7 +135,12 @@ class ScreenshotDriverCompareImagesTest {
 		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
-		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
+		boolean result = ScreenshotDriver.verifyImagesAreSimilar(
+							expectedImage,
+							actualImage,
+							criteriaPercent,
+							workdir_,
+							FailureHandling.OPTIONAL)
 	}
 
 	@Ignore
@@ -151,7 +154,12 @@ class ScreenshotDriverCompareImagesTest {
 		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
-		boolean result = ScreenshotDriver.verifyImagesAreSimilar(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
+		boolean result = ScreenshotDriver.verifyImagesAreSimilar(
+							expectedImage,
+							actualImage,
+							criteriaPercent,
+							workdir_,
+							FailureHandling.OPTIONAL)
 	}
 
 	@Test
@@ -164,7 +172,12 @@ class ScreenshotDriverCompareImagesTest {
 		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
-		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
+		boolean result = ScreenshotDriver.verifyImagesAreDifferent(
+							expectedImage,
+							actualImage,
+							criteriaPercent,
+							workdir_,
+							FailureHandling.OPTIONAL)
 	}
 
 
@@ -179,7 +192,12 @@ class ScreenshotDriverCompareImagesTest {
 		Double criteriaPercent = 5.0
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
-		boolean result = ScreenshotDriver.verifyImagesAreDifferent(expectedImage, actualImage, criteriaPercent, FailureHandling.OPTIONAL)
+		boolean result = ScreenshotDriver.verifyImagesAreDifferent(
+							expectedImage,
+							actualImage,
+							criteriaPercent,
+							workdir_,
+							FailureHandling.OPTIONAL)
 	}
 
 

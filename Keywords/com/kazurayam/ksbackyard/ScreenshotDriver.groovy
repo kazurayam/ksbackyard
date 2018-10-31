@@ -1,6 +1,7 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -34,9 +35,9 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer
  *
  */
 class ScreenshotDriver {
-
-	static public Path snapshotsDir
-
+	
+	static Boolean alwaysSaveSnapshots_ = false
+	
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
 	 * returns it as a BufferedImage object.
@@ -238,10 +239,10 @@ class ScreenshotDriver {
 			BufferedImage expectedImage,
 			BufferedImage actualImage,
 			Double criteriaPercent) {
-		ImageDifference difference =
+		ImageDifference imgDifference =
 				new ImageDifference(expectedImage, actualImage)
-		difference.setCriteria(criteriaPercent)
-		return difference
+		imgDifference.setCriteria(criteriaPercent)
+		return imgDifference
 	}
 
 	/**
@@ -290,39 +291,47 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreDifferent(
 			File expected,
 			TestObject actual,
-			Double criteriaPercent = 5.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
-		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(File,TestObject)')
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreDifferent(File,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but are similar," +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image is located in the file ${trio.getExpected().toString()}," +
-				" the actual image was saved into file ${trio.getActual().toString()}",
+				" snapshots were saved in ${snapshotsDir.toString()}}",
 				result, flowControl)
 		return result
 	}
-			
+
 	@Keyword
 	static Boolean verifyImagesAreDifferent(
 			TestObject expected,
 			TestObject actual,
-			Double criteriaPercent = 10.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are different?
 		boolean result = imgDifference.imagesAreDifferent()
-		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreDifferent(TestObject,TestObject)')
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreDifferent(TestObject,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but similar. " +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image was saved into file ${trio.getExpected().toString()} " +
-				" the actual image was saved into file ${trio.getActual().toString()}",
+				" snapshots were saved in ${snapshotsDir.toString()}",
 				result, flowControl)
 		return result
 	}
-		
+
 	/**
 	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
 	 * and check if images are SIMILAR enough.
@@ -336,106 +345,97 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreSimilar(
 			File expected,
 			TestObject actual,
-			Double criteriaPercent = 5.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreSimilar()
-		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(File,TestObject)')
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreSimilar(File,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be similar but are different," +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image is located in the file ${trio.getExpected().toString()}," +
-				" the actual image was saved into file ${trio.getActual().toString()}",
+				" snapshots were saved in ${snapshotsDir.toString()}",
 				result, flowControl)
 		return result
 	}
-		
+
 	@Keyword
 	static Boolean verifyImagesAreSimilar(
 			TestObject expected,
 			TestObject actual,
-			Double criteriaPercent = 10.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		// check if these are similar?
 		boolean result = imgDifference.imagesAreSimilar()
-		FileTrio trio = saveImageSnapshots(imgDifference, 'verifyImagesAreSimilar(TestObject,TestObject)')
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreSimilar(TestObject,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be similar but different, " +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" the expected image was saved into file ${trio.getExpected().toString()} " +
-				" the actual image was saved into file ${trio.getActual().toString()}",
+				" snapshots were saved in ${snapshotsDir.toString()}",
 				result, flowControl)
 		return result
 	}
 
 
 	/**
-	 * utility method to save snapshot of the image
-	 */
-	private static FileTrio saveImageSnapshots(ImageDifference imgDifference, String identifier) {
-		FileTrio trio = new FileTrio()
-		//
-		File expectedSnapshot = resolveSnapshotFile(identifier + ".expected")
-		ImageIO.write(imgDifference.getExpectedImage(), "PNG", expectedSnapshot)
-		trio.setExpected(expectedSnapshot)
-		//
-		File actualSnapshot = resolveSnapshotFile(identifier + ".actual")
-		ImageIO.write(imgDifference.getActualImage(), "PNG", actualSnapshot)
-		trio.setActual(actualSnapshot)
-		//
-		File diffSnapshot = resolveSnapshotFile(identifier + ".diff(${imgDifference.getRatioAsString()})")
-		ImageIO.write(imgDifference.getDiffImage(), "PNG", diffSnapshot)
-		trio.setDiff(diffSnapshot)
-		//
-		return trio
-	}
-
-	private static File resolveSnapshotFile(String identifier) {
-		Path parent
-		if (snapshotsDir == null) {
-			snapshotsDir = Paths.get(RunConfiguration.getProjectDir()).resolve("tmp").resolve("ScreenshotDriver-snapshots")
-		}
-		parent = snapshotsDir.resolve("${getTimestampNow()}")
-		parent.toFile().mkdirs()
-		return parent.resolve("${identifier}.png").toFile()
-	}
-
-	/**
 	 * @return timestamp string of now in the format yyyyMMdd_HHmmss
 	 */
-	private static getTimestampNow() {
+	public static getTimestampNow() {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
 
+
 	/**
-	 * encloses 3 File objects; expected, actual and diff
+	 * encloses 3 Path objects; expected, actual and diff
+	 * resolves 3 file paths, writes images into files
 	 * 
 	 * @author kazurayam
 	 *
 	 */
-	static class FileTrio {
-		private File expected_
-		private File actual_
-		private File diff_
-		void setExpected(File expected) {
-			this.expected_ = expected
+	static class ImageDifferenceSerializer {
+
+		private ImageDifference imgDifference_
+		private Path outputDirectory_
+		private Path expected_
+		private Path actual_
+		private Path diff_
+
+		ImageDifferenceSerializer(ImageDifference imgDifference, Path outputDirectory, String identifier) {
+			imgDifference_ = imgDifference
+			outputDirectory_ = outputDirectory
+			expected_ = outputDirectory.resolve(identifier + ".expected.png")
+			actual_   = outputDirectory.resolve(identifier + ".actual.png")
+			diff_     = outputDirectory.resolve(identifier + ".diff(${imgDifference.getRatioAsString()}).png")
 		}
-		void setActual(File actual) {
-			this.actual_ = actual
-		}
-		void setDiff(File diff) {
-			this.diff_ = diff
-		}
-		File getExpected() {
+
+		Path getExpected() {
 			return expected_
 		}
-		File getActual() {
+
+		Path getActual() {
 			return actual_
 		}
-		File getDiff() {
+
+		Path getDiff() {
 			return diff_
+		}
+
+		void serialize() {
+			Files.createDirectories(outputDirectory_)
+			ImageIO.write(imgDifference_.getExpectedImage(), "PNG", expected_.toFile())
+			ImageIO.write(imgDifference_.getActualImage(),   "PNG", actual_.toFile())
+			ImageIO.write(imgDifference_.getDiffImage(),     "PNG", diff_.toFile())
 		}
 	}
 
