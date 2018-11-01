@@ -46,7 +46,7 @@ class ScreenshotDriverCompareImagesTest {
 		Files.createDirectories(workdir_)
 		WebUI.openBrowser('')
 		//
-		ScreenshotDriver.alwaysSaveSnapshots_ = true
+		ScreenshotDriver.setForceSnapshots(true)
 	}
 
 	@Before
@@ -105,25 +105,26 @@ class ScreenshotDriverCompareImagesTest {
 	 * This test case method calls ScreeshotDriver.takeElementImage_mock(TestObject) method which
 	 * indirectly calls com.kazurayam.ksbackyard.test.ashot.AShotMock's method. 
 	 * I inserted debug-print statements into AShotMock to investicate the behavior of the AShot class.
+	 *
+	 @Ignore
+	 @Test
+	 void test_saveProfilePicture_byMock() {
+	 String xpathStr = makeXPathToPhoto(6)
+	 WebUI.navigateToUrl(url_)
+	 TestObject tObj = new TestObject()
+	 tObj.addProperty("xpath", ConditionType.EQUALS, xpathStr, true)
+	 boolean result = WebUI.verifyElementPresent(tObj, 20)
+	 if (result) {
+	 //WebUI.scrollToElement(tObj, 10)
+	 Path output = workdir_.resolve("kazurayam_mock.png")
+	 BufferedImage bi = ScreenshotDriver.takeElementImage_mock(tObj)
+	 ImageIO.write(bi, "PNG", output.toFile())
+	 assertTrue("${output.toString()} does not exist", Files.exists(output))
+	 } else {
+	 fail("Element is not present at ${xpathStr}")
+	 }
+	 }
 	 */
-	@Ignore
-	@Test
-	void test_saveProfilePicture_byMock() {
-		String xpathStr = makeXPathToPhoto(6)
-		WebUI.navigateToUrl(url_)
-		TestObject tObj = new TestObject()
-		tObj.addProperty("xpath", ConditionType.EQUALS, xpathStr, true)
-		boolean result = WebUI.verifyElementPresent(tObj, 20)
-		if (result) {
-			//WebUI.scrollToElement(tObj, 10)
-			Path output = workdir_.resolve("kazurayam_mock.png")
-			BufferedImage bi = ScreenshotDriver.takeElementImage_mock(tObj)
-			ImageIO.write(bi, "PNG", output.toFile())
-			assertTrue("${output.toString()} does not exist", Files.exists(output))
-		} else {
-			fail("Element is not present at ${xpathStr}")
-		}
-	}
 
 	@Test
 	void test_verifyImagesAreSimilar() {
