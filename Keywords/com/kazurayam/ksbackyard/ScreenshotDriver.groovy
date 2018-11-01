@@ -35,9 +35,9 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer
  *
  */
 class ScreenshotDriver {
-	
+
 	static Boolean alwaysSaveSnapshots_ = false
-	
+
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
 	 * returns it as a BufferedImage object.
@@ -49,7 +49,6 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @return BufferedImage
 	 */
-	@Keyword
 	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
 		int timeout = 500
 		Screenshot screenshot = new AShot().
@@ -94,11 +93,13 @@ class ScreenshotDriver {
 		return takeElementImage(webDriver, webElement)
 	}
 
+	/*
 	static BufferedImage takeElementImage_mock(TestObject testObject) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage_mock(webDriver, webElement)
 	}
+	 */
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
@@ -108,7 +109,6 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @param file
 	 */
-	@Keyword
 	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
 		ImageIO.write(image, "PNG", file)
@@ -131,8 +131,6 @@ class ScreenshotDriver {
 
 
 
-
-
 	/**
 	 * takes screenshot of the entire page targeted,
 	 * returns it as a BufferedImage object
@@ -142,7 +140,6 @@ class ScreenshotDriver {
 	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
 	 * @return BufferedImage
 	 */
-	@Keyword
 	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = 300) {
 		Screenshot screenshot = new AShot().
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
@@ -172,7 +169,6 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @param output
 	 */
-	@Keyword
 	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = 300) {
 		BufferedImage image = takeEntirePageImage(webDriver, timeout)
 		ImageIO.write(image, "PNG", file)
@@ -198,13 +194,9 @@ class ScreenshotDriver {
 	 * @param webDriver
 	 * @param file
 	 */
-	@Keyword
 	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = 300) {
 		saveEntirePageImage(webDriver, file, timeout)
 	}
-
-
-
 
 
 
@@ -220,7 +212,6 @@ class ScreenshotDriver {
 	 * @param criteriaPercent
 	 * @return
 	 */
-	@Keyword
 	static ImageDifference verifyImages(BufferedImage expectedImage,
 			BufferedImage actualImage, Double criteriaPercent) {
 		return compareImages(expectedImage, actualImage, criteriaPercent)
@@ -234,7 +225,6 @@ class ScreenshotDriver {
 	 * @param Double criteriaPercentage, e.g. 90.0%
 	 * @return ImageDifference object which represents how much different the input 2 images are
 	 */
-	@Keyword
 	static ImageDifference compareImages(
 			BufferedImage expectedImage,
 			BufferedImage actualImage,
@@ -250,7 +240,6 @@ class ScreenshotDriver {
 	 * @param actualImage of TestObject which points HTML element in question
 	 * @return ImageDifference object which contains comparison result
 	 */
-	@Keyword
 	static ImageDifference compareImages(
 			File expected,
 			TestObject actual,
@@ -266,7 +255,6 @@ class ScreenshotDriver {
 	 * @param actualImage of TestObject which points HTML element in question
 	 * @return ImageDifference object which contains comparison result
 	 */
-	@Keyword
 	static ImageDifference compareImages(
 			TestObject expected,
 			TestObject actual,

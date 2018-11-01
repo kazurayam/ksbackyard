@@ -136,11 +136,11 @@ class ScreenshotDriverCompareImagesTest {
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(
-							expectedImage,
-							actualImage,
-							criteriaPercent,
-							workdir_,
-							FailureHandling.OPTIONAL)
+				expectedImage,
+				actualImage,
+				criteriaPercent,
+				workdir_,
+				FailureHandling.OPTIONAL)
 	}
 
 	@Ignore
@@ -155,11 +155,11 @@ class ScreenshotDriverCompareImagesTest {
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreSimilar(
-							expectedImage,
-							actualImage,
-							criteriaPercent,
-							workdir_,
-							FailureHandling.OPTIONAL)
+				expectedImage,
+				actualImage,
+				criteriaPercent,
+				workdir_,
+				FailureHandling.OPTIONAL)
 	}
 
 	@Test
@@ -173,11 +173,11 @@ class ScreenshotDriverCompareImagesTest {
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(
-							expectedImage,
-							actualImage,
-							criteriaPercent,
-							workdir_,
-							FailureHandling.OPTIONAL)
+				expectedImage,
+				actualImage,
+				criteriaPercent,
+				workdir_,
+				FailureHandling.OPTIONAL)
 	}
 
 
@@ -193,11 +193,11 @@ class ScreenshotDriverCompareImagesTest {
 		WebUI.navigateToUrl(url_)
 		WebUI.verifyElementPresent(actualImage, 20)
 		boolean result = ScreenshotDriver.verifyImagesAreDifferent(
-							expectedImage,
-							actualImage,
-							criteriaPercent,
-							workdir_,
-							FailureHandling.OPTIONAL)
+				expectedImage,
+				actualImage,
+				criteriaPercent,
+				workdir_,
+				FailureHandling.OPTIONAL)
 	}
 
 

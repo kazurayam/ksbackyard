@@ -3,17 +3,11 @@
  * This class is generated automatically by Katalon Studio and should not be modified or deleted.
  */
 
-import org.openqa.selenium.WebDriver
-
-import org.openqa.selenium.WebElement
-
 import com.kms.katalon.core.testobject.TestObject
 
 import java.io.File
 
 import java.lang.Integer
-
-import java.awt.image.BufferedImage
 
 import java.lang.Double
 
@@ -27,29 +21,15 @@ import java.lang.Boolean
 
 import java.lang.Number
 
+import org.openqa.selenium.WebDriver
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
-    	WebDriver webDriver	
-     , 	WebElement webElement	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage(
-        	webDriver
-         , 	webElement)
-}
+import org.openqa.selenium.WebElement
+
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeElementImage(
         	testObject)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
-    	WebDriver webDriver	
-     , 	WebElement webElement	
-     , 	File file	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveElementImage(
-        	webDriver
-         , 	webElement
-         , 	file)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
@@ -61,27 +41,9 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
-    	WebDriver webDriver	
-     , 	Integer timeout	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
-        	webDriver
-         , 	timeout)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	Integer timeout	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
         	timeout)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
-    	WebDriver webDriver	
-     , 	File file	
-     , 	Integer timeout	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
-        	webDriver
-         , 	file
-         , 	timeout)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
@@ -92,56 +54,6 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
          , 	timeout)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
-    	WebDriver webDriver	
-     , 	File file	
-     , 	Integer timeout	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
-        	webDriver
-         , 	file
-         , 	timeout)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImages"(
-    	BufferedImage expectedImage	
-     , 	BufferedImage actualImage	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImages(
-        	expectedImage
-         , 	actualImage
-         , 	criteriaPercent)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
-    	BufferedImage expectedImage	
-     , 	BufferedImage actualImage	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
-        	expectedImage
-         , 	actualImage
-         , 	criteriaPercent)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
-    	File expected	
-     , 	TestObject actual	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
-        	expected
-         , 	actual
-         , 	criteriaPercent)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.compareImages"(
-    	TestObject expected	
-     , 	TestObject actual	
-     , 	Double criteriaPercent	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).compareImages(
-        	expected
-         , 	actual
-         , 	criteriaPercent)
-}
-
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
     	File expected	
      , 	TestObject actual	
@@ -196,12 +108,6 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
          , 	criteriaPercent
          , 	snapshotsDir
          , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
-    	WebDriver webDriver	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
-        	webDriver)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"() {
@@ -209,25 +115,9 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"() {
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
-    	WebDriver webDriver	
-     , 	File file	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
-        	webDriver
-         , 	file)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
     	File file	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
         	file)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
-    	WebDriver webDriver	
-     , 	File file	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
-        	webDriver
-         , 	file)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
