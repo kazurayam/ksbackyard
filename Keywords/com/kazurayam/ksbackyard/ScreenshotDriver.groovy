@@ -38,11 +38,11 @@ class ScreenshotDriver {
 	static private Boolean forceSnapshots_ = false
 
 	static void setForceSnapshots(Boolean wanted) {
-		forceSnapshots_ = wanted	
+		forceSnapshots_ = wanted
 	}
-	
+
 	static Path tmpDir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
-	
+
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
 	 * returns it as a BufferedImage object.
@@ -229,7 +229,7 @@ class ScreenshotDriver {
 	 * @return
 	 */
 	static ImageDifference verifyImages(BufferedImage expectedImage,
-			BufferedImage actualImage, Double criteriaPercent) 
+			BufferedImage actualImage, Double criteriaPercent)
 	{
 		return compareImages(expectedImage, actualImage, criteriaPercent)
 	}
@@ -306,7 +306,7 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreSimilar()
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
-					'verifyImagesAreSimilar(File,TestObject)')
+				'verifyImagesAreSimilar(File,TestObject)')
 		if (!result || forceSnapshots_) {
 			serializer.serialize()
 		}
@@ -317,7 +317,7 @@ class ScreenshotDriver {
 				result, flowControl)
 		return result
 	}
-		
+
 	/**
 	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
 	 * and check if images are DIFFERENT enough.
@@ -338,20 +338,20 @@ class ScreenshotDriver {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
 		ImageDifferenceSerializer serializer =
-				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(), 
-					'verifyImagesAreDifferent(File,TestObject)')
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
+				'verifyImagesAreDifferent(File,TestObject)')
 		if (!result || forceSnapshots_) {
 			serializer.serialize()
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
 				"images are expected to be different but are similar," +
 				" difference=${imgDifference.getRatioAsString()}%," +
-				" snapshots were saved in ${snapshotsDir.toString()}}",
+				" snapshots were saved in ${snapshotsDir.toString()}",
 				result, flowControl)
 		return result
 	}
 
-			
+
 	@Keyword
 	static Boolean verifyImagesAreSimilar(
 			TestObject expected,
@@ -365,7 +365,7 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreSimilar()
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
-					'verifyImagesAreSimilar(TestObject,TestObject)')
+				'verifyImagesAreSimilar(TestObject,TestObject)')
 		if (!result || forceSnapshots_) {
 			serializer.serialize()
 		}
@@ -376,7 +376,7 @@ class ScreenshotDriver {
 				result, flowControl)
 		return result
 	}
-		
+
 	@Keyword
 	static Boolean verifyImagesAreDifferent(
 			TestObject expected,
@@ -390,7 +390,7 @@ class ScreenshotDriver {
 		boolean result = imgDifference.imagesAreDifferent()
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
-					'verifyImagesAreDifferent(TestObject,TestObject)')
+				'verifyImagesAreDifferent(TestObject,TestObject)')
 		if (!result || forceSnapshots_) {
 			serializer.serialize()
 		}
@@ -430,7 +430,7 @@ class ScreenshotDriver {
 		private Path actual_
 		private Path diff_
 
-		ImageDifferenceSerializer(ImageDifference imgDifference, Path outputDirectory, String identifier) 
+		ImageDifferenceSerializer(ImageDifference imgDifference, Path outputDirectory, String identifier)
 		{
 			imgDifference_ = imgDifference
 			outputDirectory_ = outputDirectory
