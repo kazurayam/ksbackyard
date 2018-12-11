@@ -75,9 +75,9 @@ class ScreenshotDriverTest {
 	void test_takeElementImage() {
 		driver_.get(url_)
 		WebDriverWait wait = new WebDriverWait(driver_, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('div.banner-forum')));
-		WebElement banner = driver_.findElement(By.cssSelector('div.banner-forum'))
-		BufferedImage image = ScreenshotDriver.takeElementImage(driver_, banner)
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')));
+		WebElement logo = driver_.findElement(By.cssSelector('img#site-logo'))
+		BufferedImage image = ScreenshotDriver.takeElementImage(driver_, logo)
 		assertNotNull("image is null", image)
 	}
 
@@ -88,10 +88,10 @@ class ScreenshotDriverTest {
 	void test_saveElementImage() {
 		driver_.get(url_)
 		WebDriverWait wait = new WebDriverWait(driver_, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('div.banner-forum')));
-		WebElement banner = driver_.findElement(By.cssSelector('div.banner-forum'))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')));
+		WebElement logo = driver_.findElement(By.cssSelector('img#site-logo'))
 		Path output = workdir_.resolve("test_saveElementImage.png")
-		ScreenshotDriver.saveElementImage(driver_, banner, output.toFile())
+		ScreenshotDriver.saveElementImage(driver_, logo, output.toFile())
 		assertTrue("${output.toString()} does not exist", Files.exists(output))
 	}
 
@@ -102,7 +102,7 @@ class ScreenshotDriverTest {
 	void test_takeEntirePageImage() {
 		driver_.get(url_)
 		WebDriverWait wait = new WebDriverWait(driver_, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('div.banner-forum')));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')));
 		BufferedImage image = ScreenshotDriver.takeEntirePageImage(driver_, 100)
 		assertNotNull("image is null", image)
 	}
@@ -114,8 +114,8 @@ class ScreenshotDriverTest {
 	void test_saveEntirePageImage() {
 		driver_.get(url_)
 		WebDriverWait wait = new WebDriverWait(driver_, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('div.banner-forum')))
-		WebElement banner = driver_.findElement(By.cssSelector('div.banner-forum'))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')))
+		WebElement logo = driver_.findElement(By.cssSelector('img#site-logo'))
 		Path output = workdir_.resolve("test_saveEntirePageImage.png")
 		ScreenshotDriver.saveEntirePageImage(driver_, output.toFile(), 100)
 		assertTrue("${output.toString()} does not exist", Files.exists(output))

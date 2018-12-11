@@ -20,15 +20,15 @@ import com.kms.katalon.core.util.KeywordUtil
 
 /**
  * This class is designed to implement the "Visual Testing in Katalon Studio" feature.
- * 
+ *
  * This class uses the following 2 external libraries:
  * 1. AShot (https://github.com/yandex-qatools/ashot)
  * 2. Materials (https://github.com/kazurayam/Materials)
- * 
+ *
  * The makeImageCollectionDifferences() method provides the core value of this class.
  * This method accepts Materials (image files) to compare them, make differences, and
  * store the diff-images into files.
- * 
+ *
  * @author kazurayam
  */
 class ImageCollectionDiffer {
@@ -40,7 +40,7 @@ class ImageCollectionDiffer {
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param mr
 	 * @author kazurayam
 	 */
@@ -50,7 +50,7 @@ class ImageCollectionDiffer {
 	}
 
 	/*
-	 * Non-argument constructor is required to pass "Test Cases/Test/Prologue" 
+	 * Non-argument constructor is required to pass "Test Cases/Test/Prologue"
 	 * which calls `CustomKeywords."${className}.getClass"().getName()`
 	 */
 	ImageCollectionDiffer() {}
@@ -63,16 +63,19 @@ class ImageCollectionDiffer {
 		listener_ = listener
 	}
 
-
 	/**
-	 * compare 2 Material files in each MaterialPair object, create ImageDiff and
-	 * store the diff image files under the directory ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
-	 * The difference ratio is compared with the criteriaPercent given. marked FAILED if greater.
-	 * 
-	 * @param materialPairs created by com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
+	 * compare 2 Material files in each MaterialPair object,
+	 * create ImageDiff and store the diff image files under the directory
+	 * ./Materials/<tSuiteName>/yyyyMMdd_hhmmss/<tCaseName>.
+	 * The difference ratio is compared with the criteriaPercent given.
+	 * Will be marked FAILED if any of the pairs has greater difference.
+	 *
+	 * @param materialPairs created by
+	 *     com.kazurayam.materials.MaterialRpository#createMaterialPairs() method
 	 * @param tCaseName     created by com.kazurayam.materials.TCaseName(String)
-	 * @param criteriaPercent e.g. 3.00 percent. If the difference of a MaterialPair is greater than this, 
-	 *                        the MaterialPair is evaluated FAILED   
+	 * @param criteriaPercent e.g. 3.00 percent. If the difference of
+	 *     a MaterialPair is greater than this,
+	 *     the MaterialPair is evaluated FAILED
 	 */
 	void makeImageCollectionDifferences(
 			List<MaterialPair> materialPairs,
@@ -128,7 +131,7 @@ class ImageCollectionDiffer {
 
 
 	/**
-	 * 
+	 *
 	 * @author kazurayam
 	 *
 	 */
@@ -141,7 +144,7 @@ class ImageCollectionDiffer {
 	}
 
 	/**
-	 * 
+	 *
 	 * @author kazurayam
 	 *
 	 */
@@ -152,7 +155,7 @@ class ImageCollectionDiffer {
 		 *     Material actMate:                 'Materials/Main/TS1/20181014_131315/CURA_Homepage' created by TSuiteResult with 'develop' profile
 		 *     ImageDifference:                  6.71
 		 *     Double criteriaPercent:           3.0
-		 *      
+		 *
 		 * @return 'CURA_Homepage.20181014_131314_product-20181014_131315_develop.(6.71)FAILED.png'
 		 */
 		String resolveImageDifferenceFilename(
