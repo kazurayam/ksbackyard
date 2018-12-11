@@ -154,6 +154,7 @@ class ScreenshotDriver {
 	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = 300)
 	{
 		Screenshot screenshot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
 				takeScreenshot(webDriver)
 		return screenshot.getImage()
