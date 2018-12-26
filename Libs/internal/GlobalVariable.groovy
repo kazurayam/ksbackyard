@@ -36,11 +36,18 @@ public class GlobalVariable {
         allVariables.put('product', allVariables['default'] + ['URL' : 'https://katalon-demo-cura.herokuapp.com', 'MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_ID' : ''])
         
         String profileName = RunConfiguration.getExecutionProfile()
-        
         def selectedVariables = allVariables[profileName]
-        URL = selectedVariables['URL']
-        MATERIAL_REPOSITORY = selectedVariables['MATERIAL_REPOSITORY']
-        CURRENT_TESTCASE_ID = selectedVariables['CURRENT_TESTCASE_ID']
+		
+		for(object in selectedVariables){
+			String overridingGlobalVariable = RunConfiguration.getOverridingGlobalVariable(object.key)
+			if(overridingGlobalVariable != null){
+				selectedVariables.put(object.key, overridingGlobalVariable)
+			}
+		}
+
+        URL = selectedVariables["URL"]
+        MATERIAL_REPOSITORY = selectedVariables["MATERIAL_REPOSITORY"]
+        CURRENT_TESTCASE_ID = selectedVariables["CURRENT_TESTCASE_ID"]
         
     }
 }

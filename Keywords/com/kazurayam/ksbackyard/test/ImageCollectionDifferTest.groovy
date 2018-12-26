@@ -13,6 +13,7 @@ import org.junit.Test
 
 import com.kazurayam.ksbackyard.ImageCollectionDiffer
 import com.kazurayam.materials.ExecutionProfile
+import com.kazurayam.materials.FileType
 import com.kazurayam.materials.MaterialPair
 import com.kazurayam.materials.MaterialRepository
 import com.kazurayam.materials.MaterialRepositoryFactory
@@ -26,7 +27,7 @@ class ImageCollectionDifferTest {
 
 	@BeforeClass
 	static void beforeClass() {
-		FileUtils.deleteDirectory(fixture.toFile())
+		//FileUtils.deleteDirectory(fixture.toFile())
 		FileUtils.copyDirectory(source.toFile(), fixture.toFile())
 	}
 
@@ -48,11 +49,7 @@ class ImageCollectionDifferTest {
 		//
 		List<MaterialPair> materialPairs =
 				// we use Java 8 Stream API to filter entries
-				mr.createMaterialPairs(
-				new TSuiteName('Test Suites/Main/TS1'),
-				new ExecutionProfile('product'),
-				new ExecutionProfile('develop')
-				).stream().filter { mp ->
+				mr.createMaterialPairs(new TSuiteName('Test Suites/Main/TS1')).stream().filter { mp ->
 					mp.getLeft().getFileType() == FileType.PNG
 				}.collect(Collectors.toList())
 
