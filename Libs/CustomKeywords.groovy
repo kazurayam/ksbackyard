@@ -384,10 +384,6 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
         	testObject)
 }
 
-def static "com.kazurayam.ksbackyard.test.WebDriverFactory.createWebDriver"() {
-    (new com.kazurayam.ksbackyard.test.WebDriverFactory()).createWebDriver()
-}
-
 def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
     	String urlString	) {
     (new com.kazurayam.ksbackyard.URLParser()).queryParameters(

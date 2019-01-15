@@ -1,14 +1,19 @@
-package com.kazurayam.ksbackyard.test
+package com.kazurayam.ksbackyard
+
+import static org.hamcrest.CoreMatchers.*
+import static org.junit.Assert.*
 
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
 import org.junit.Test
-
-import com.kazurayam.ksbackyard.QuietBrowser
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.openqa.selenium.WebDriver
+
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+@RunWith(JUnit4.class)
 class QuietBrowserTest {
 
 	def url = 'http://demoaut.katalon.com/'
