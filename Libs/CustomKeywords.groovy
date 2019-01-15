@@ -23,6 +23,8 @@ import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
+import java.lang.Class
+
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	TestObject testObject	) {
@@ -390,6 +392,20 @@ def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
     	String urlString	) {
     (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
         	urlString)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
