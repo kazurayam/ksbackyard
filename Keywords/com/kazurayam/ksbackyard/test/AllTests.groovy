@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses
 
 @RunWith(Suite.class)
 @SuiteClasses([
-	AssertTest.class,
 	ImageCollectionDifferTest.class,
 	ImageDifferenceTest.class,
 	QuietBrowserTest.class,
