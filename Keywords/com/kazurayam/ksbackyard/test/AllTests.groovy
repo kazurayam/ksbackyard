@@ -9,7 +9,6 @@ import org.junit.runners.Suite.SuiteClasses
 	ImageCollectionDifferTest.class,
 	ImageDifferenceTest.class,
 	QuietBrowserTest.class,
-	RunConfigurationWrapperTest.class,
 	ScreenshotDriverTest.class,
 	ScreenshotDriverCompareImagesTest.class,
 	TestObjectSupportTest.class

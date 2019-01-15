@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard.test
+package com.kazurayam.ksbackyard
 
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
@@ -26,3 +26,4 @@ class RunConfigurationWrapperTest {
 		assertTrue(foo.endsWith(Paths.get("ksbackyard/tmp/foo.xlsx")))
 	}
 }
+
