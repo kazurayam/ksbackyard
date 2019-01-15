@@ -1,12 +1,13 @@
-package com.kazurayam.ksbackyard.test
+package com.kazurayam.ksbackyard
 
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-import com.kazurayam.ksbackyard.URLParser
-
+@RunWith(JUnit4.class)
 class URLParserTest {
 
 	def url = 'https://foo.bar.com/app.html?corp=efgh&code=59311102'
@@ -14,6 +15,7 @@ class URLParserTest {
 	@Test
 	void test_queryParameters() {
 		def params = URLParser.queryParameters(url)
+		//println "params: ${params}"
 		assertThat(params.size(), is(2))
 		assertTrue(params.containsKey('corp'))
 		assertThat(params.corp, is('efgh'))
@@ -29,7 +31,7 @@ class URLParserTest {
 
 	@Test
 	void test_queryParameter_code() {
-		def codeValue = URLParser.queryParameter(url, 'efgh')
+		def codeValue = URLParser.queryParameter(url, 'code')
 		assertThat(codeValue, is('59311102'))
 	}
 }

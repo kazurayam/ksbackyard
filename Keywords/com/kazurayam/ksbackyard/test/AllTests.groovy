@@ -13,8 +13,7 @@ import org.junit.runners.Suite.SuiteClasses
 	RunConfigurationWrapperTest.class,
 	ScreenshotDriverTest.class,
 	ScreenshotDriverCompareImagesTest.class,
-	TestObjectSupportTest.class,
-	URLParserTest.class
+	TestObjectSupportTest.class
 ])
 // please note. Difference of Groovy and Java here.
 // In Java, this will be written as @SuiteClasses({...}). Difference of Java and Groovy here.
