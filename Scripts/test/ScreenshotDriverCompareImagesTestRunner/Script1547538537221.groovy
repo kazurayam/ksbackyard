@@ -1,0 +1,3 @@
+import com.kazurayam.ksbackyard.ScreenshotDriverCompareImagesTest
+
+CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverCompareImagesTest.class)

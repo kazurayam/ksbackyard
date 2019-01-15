@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard.test
+package com.kazurayam.ksbackyard
 
 import static org.junit.Assert.assertTrue
 import static org.junit.Assert.fail
@@ -67,7 +67,7 @@ class ScreenshotDriverCompareImagesTest {
 
 
 	/**
-	 * Test saving a profile picture of mine from the URL 
+	 * Test saving a profile picture of mine from the URL
 	 * 'https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio'
 	 * The page is tall. The picture is located far downward in the page.
 	 * When I tried, the ScreenshotDriver#takeElementImage(TestObect) was not working well.
@@ -103,7 +103,7 @@ class ScreenshotDriverCompareImagesTest {
 
 	/**
 	 * This test case method calls ScreeshotDriver.takeElementImage_mock(TestObject) method which
-	 * indirectly calls com.kazurayam.ksbackyard.test.ashot.AShotMock's method. 
+	 * indirectly calls com.kazurayam.ksbackyard.test.ashot.AShotMock's method.
 	 * I inserted debug-print statements into AShotMock to investicate the behavior of the AShot class.
 	 *
 	 @Ignore
@@ -140,7 +140,7 @@ class ScreenshotDriverCompareImagesTest {
 				expectedImage,
 				actualImage,
 				criteriaPercent,
-				workdir_,
+				workdir_.toFile(),
 				FailureHandling.OPTIONAL)
 	}
 
@@ -159,7 +159,7 @@ class ScreenshotDriverCompareImagesTest {
 				expectedImage,
 				actualImage,
 				criteriaPercent,
-				workdir_,
+				workdir_.toFile(),
 				FailureHandling.OPTIONAL)
 	}
 
@@ -177,7 +177,7 @@ class ScreenshotDriverCompareImagesTest {
 				expectedImage,
 				actualImage,
 				criteriaPercent,
-				workdir_,
+				workdir_.toFile(),
 				FailureHandling.OPTIONAL)
 	}
 
@@ -197,7 +197,7 @@ class ScreenshotDriverCompareImagesTest {
 				expectedImage,
 				actualImage,
 				criteriaPercent,
-				workdir_,
+				workdir_.toFile(),
 				FailureHandling.OPTIONAL)
 	}
 
