@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard.test
+package com.kazurayam.ksbackyard
 
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
@@ -34,7 +34,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 class ScreenshotDriverTest {
 
 	private static WebDriver driver_
-	private static String url_ = "https://forum.katalon.com/discussions"
+	private static String url_ = "https://forum.katalon.com"
 	private static Path workdir_
 
 	/*
