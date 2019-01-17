@@ -11,6 +11,8 @@ import org.junit.runners.Suite.SuiteClasses
 // A difference between Java and Groovy is here.
 @SuiteClasses([
 	AssertTest.class,
+	ImageCollectionDifferTest.class,
+	ImageDifferenceTest.class,
 	QuietBrowserTest.class,
 	RunConfigurationWrapperTest.class,
 	ScreenshotDriverCompareImagesTest.class,

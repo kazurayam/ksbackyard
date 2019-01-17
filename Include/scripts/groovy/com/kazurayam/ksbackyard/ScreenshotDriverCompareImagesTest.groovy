@@ -43,7 +43,7 @@ class ScreenshotDriverCompareImagesTest {
 		url_ = targetHTML.toUri().toURL().toExternalForm()
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverCompareImagesTest')
 		if (Files.exists(workdir_)) {
-			FileUtils.deleteDirectory(workdir_.toFile())
+			FileUtils.deleteQuietly(workdir_.toFile())
 		}
 		Files.createDirectories(workdir_)
 		WebUI.openBrowser('')
