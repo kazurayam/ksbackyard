@@ -1,0 +1,4 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+makeIndex,,,2018-10-14 06:01:11,2018-10-14 06:01:13,2.093s,ERROR
+,,,,,,
+Test Cases/makeIndex,,,2018-10-14 06:01:13,2018-10-14 06:01:13,0.414s,ERROR

@@ -19,6 +19,8 @@ import java.lang.Boolean
 
 import java.lang.Number
 
+import java.lang.Class
+
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
@@ -206,6 +208,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -284,6 +292,20 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
@@ -380,16 +402,6 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
         	testObject)
-}
-
-def static "com.kazurayam.ksbackyard.test.WebDriverFactory.createWebDriver"() {
-    (new com.kazurayam.ksbackyard.test.WebDriverFactory()).createWebDriver()
-}
-
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {

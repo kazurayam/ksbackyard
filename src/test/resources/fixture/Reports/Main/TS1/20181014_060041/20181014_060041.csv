@@ -1,4 +1,0 @@
-Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
-TS1,,,2018-10-14 06:00:52,2018-10-14 06:00:54,1.983s,ERROR
-,,,,,,
-Test Cases/Main/Basic,,,2018-10-14 06:00:53,2018-10-14 06:00:54,0.820s,ERROR

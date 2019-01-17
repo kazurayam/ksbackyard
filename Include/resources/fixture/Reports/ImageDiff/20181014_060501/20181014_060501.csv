@@ -1,0 +1,6 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+ImageDiff,,,2018-10-14 06:07:18,2018-10-14 06:07:27,9.028s,FAILED
+,,,,,,
+Test Cases/ImageDiff,,,2018-10-14 06:07:21,2018-10-14 06:07:27,6.051s,FAILED
+Start listener action : beforeTestCase,,,2018-10-14 06:07:21,2018-10-14 06:07:21,0.018s,PASSED
+com.kazurayam.ksbackyard.ScreenshotDriver.makeDiffs,,,2018-10-14 06:07:21,2018-10-14 06:07:27,5.920s,FAILED
