@@ -18,7 +18,7 @@ import ru.yandex.qatools.ashot.cropper.ImageCropper;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 import ru.yandex.qatools.ashot.shooting.SimpleShootingStrategy;
 
-import com.kazurayam.ksbackyard.test.ashot.cropper.DefaultCropper_mock;
+import com.kazurayam.ksbackyard.ashot.cropper.DefaultCropper_mock;
 
 
 public class AShotMock extends AShot implements Serializable {

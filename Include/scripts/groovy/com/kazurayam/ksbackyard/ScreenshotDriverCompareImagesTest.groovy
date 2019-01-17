@@ -29,6 +29,7 @@ class ScreenshotDriverCompareImagesTest {
 
 	private static String url_
 	private static Path workdir_
+	private static Path fixturedir_
 
 	/*
 	 * 1. initialize directory where we output PNG files
@@ -37,7 +38,8 @@ class ScreenshotDriverCompareImagesTest {
 	@BeforeClass
 	static void beforeClass() {
 		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
-		Path targetHTML = projectDir.resolve('src/test/resources/fixture/Visual Testing in Katalon Studio - Katalon Q&A.html')
+		fixturedir_ = projectDir.resolve('Include/resources/fixture')
+		Path targetHTML = fixturedir_.resolve('Visual Testing in Katalon Studio - Katalon Q&A.html')
 		url_ = targetHTML.toUri().toURL().toExternalForm()
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverCompareImagesTest')
 		if (Files.exists(workdir_)) {
@@ -129,8 +131,7 @@ class ScreenshotDriverCompareImagesTest {
 	@Test
 	void test_verifyImagesAreSimilar() {
 		WebUI.comment(">>> test_verifyImagesAreSimilar started")
-		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
-				'src/test/resources/fixture/images/kazurayam.png').toFile()
+		File expectedImage = fixturedir_.resolve('images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
 		Double criteriaPercent = 5.0
@@ -148,8 +149,7 @@ class ScreenshotDriverCompareImagesTest {
 	@Test
 	void test_verifyImagesAreSimilar_failingCase() {
 		WebUI.comment(">>> test_verifyImagesAreSimilar_failingCase started")
-		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
-				'src/test/resources/fixture/images/kazurayam.png').toFile()
+		File expectedImage = fixturedir_.resolve('images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(1)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
 		Double criteriaPercent = 5.0
@@ -166,8 +166,7 @@ class ScreenshotDriverCompareImagesTest {
 	@Test
 	void test_verifyImagesAreDifferent() {
 		WebUI.comment(">>> test_verifyImagesAreDifferent started")
-		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
-				'src/test/resources/fixture/images/andrej.png').toFile()
+		File expectedImage = fixturedir_.resolve('images/andrej.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
 		Double criteriaPercent = 5.0
@@ -186,8 +185,7 @@ class ScreenshotDriverCompareImagesTest {
 	@Test
 	void test_verifyImagesAreDifferent_failingCase() {
 		WebUI.comment(">>> test_verifyImagesAreDifferent_failingCase started")
-		File expectedImage = Paths.get(RunConfiguration.getProjectDir(),
-				'src/test/resources/fixture/images/kazurayam.png').toFile()
+		File expectedImage = fixturedir_.resolve('images/kazurayam.png').toFile()
 		String xpathStr = makeXPathToPhoto(6)
 		TestObject actualImage = new TestObject().addProperty('xpath', ConditionType.EQUALS, xpathStr, true)
 		Double criteriaPercent = 5.0
