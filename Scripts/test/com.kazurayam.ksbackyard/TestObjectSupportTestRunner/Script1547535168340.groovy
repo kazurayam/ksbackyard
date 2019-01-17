@@ -1,0 +1,3 @@
+import com.kazurayam.ksbackyard.TestObjectSupportTest
+
+CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(TestObjectSupportTest.class)

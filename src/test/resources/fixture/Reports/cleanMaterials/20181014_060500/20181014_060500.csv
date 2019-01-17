@@ -1,8 +1,0 @@
-Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
-cleanMaterials,,,2018-10-14 06:05:08,2018-10-14 06:05:14,6.419s,PASSED
-,,,,,,
-Test Cases/cleanMaterials,,,2018-10-14 06:05:13,2018-10-14 06:05:14,0.767s,PASSED
-Start listener action : beforeTestCase,,,2018-10-14 06:05:13,2018-10-14 06:05:13,0.027s,PASSED
-Statement - mr = MATERIAL_REPOSITORY,,,2018-10-14 06:05:14,2018-10-14 06:05:14,0.001s,PASSED
-Statement - assert mr != null,,,2018-10-14 06:05:14,2018-10-14 06:05:14,0.002s,PASSED
-Statement - com.kazurayam.materials.Helpers.deleteDirectoryContents(mr.getBaseDir()),,,2018-10-14 06:05:14,2018-10-14 06:05:14,0.263s,PASSED
