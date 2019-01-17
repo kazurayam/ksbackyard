@@ -10,6 +10,8 @@ import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 import com.kazurayam.ksbackyard.ImageCollectionDiffer
 import com.kazurayam.materials.ExecutionProfile
@@ -20,6 +22,7 @@ import com.kazurayam.materials.MaterialRepositoryFactory
 import com.kazurayam.materials.TCaseName
 import com.kazurayam.materials.TSuiteName
 
+@RunWith(JUnit4.class)
 class ImageCollectionDifferTest {
 
 	static Path source  = Paths.get('./Include/resources/fixture')

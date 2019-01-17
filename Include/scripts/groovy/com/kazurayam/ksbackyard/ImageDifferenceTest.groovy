@@ -18,6 +18,8 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
 import com.kazurayam.ksbackyard.ScreenshotDriver
@@ -27,6 +29,7 @@ import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+@RunWith(JUnit4.class)
 class ImageDifferenceTest {
 
 	private static String url_
@@ -129,7 +132,7 @@ class ImageDifferenceTest {
 		assertFalse("expected images are different but" , difference.imagesAreSimilar())
 	}
 
-	@Ignore	
+	@Ignore
 	@Test
 	void test_intentionalFailure() {
 		fail("intentional failure")

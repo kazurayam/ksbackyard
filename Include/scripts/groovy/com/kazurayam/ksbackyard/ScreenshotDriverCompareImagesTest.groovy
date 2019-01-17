@@ -17,6 +17,8 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -25,6 +27,7 @@ import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+@RunWith(JUnit4.class)
 class ScreenshotDriverCompareImagesTest {
 
 	private static String url_

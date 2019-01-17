@@ -1,15 +1,19 @@
 package com.kazurayam.ksbackyard
 
 import static org.hamcrest.CoreMatchers.*
+
 import static org.junit.Assert.*
 
 import java.nio.file.Path
 import java.nio.file.Paths
 
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 import com.kazurayam.ksbackyard.RunConfigurationWrapper
 
+@RunWith(JUnit4.class)
 class RunConfigurationWrapperTest {
 
 	@Test

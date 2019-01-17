@@ -19,11 +19,11 @@ import java.lang.Boolean
 
 import java.lang.Number
 
+import java.lang.Class
+
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
-
-import java.lang.Class
 
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
@@ -208,6 +208,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -288,6 +294,20 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
          , 	actual)
 }
 
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
+}
+
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
     (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).getProjectDir()
 }
@@ -296,10 +316,6 @@ def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.resolveAgainstProje
     	String pathString	) {
     (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).resolveAgainstProjectDir(
         	pathString)
-}
-
-def static "com.kazurayam.ksbackyard.junit.WebUIKeywordMainPatch.overrideRunKeyword"() {
-    (new com.kazurayam.ksbackyard.junit.WebUIKeywordMainPatch()).overrideRunKeyword()
 }
 
 def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
@@ -386,26 +402,6 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
         	testObject)
-}
-
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
