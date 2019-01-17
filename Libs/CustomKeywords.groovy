@@ -298,6 +298,10 @@ def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.resolveAgainstProje
         	pathString)
 }
 
+def static "com.kazurayam.ksbackyard.junit.WebUIKeywordMainPatch.overrideRunKeyword"() {
+    (new com.kazurayam.ksbackyard.junit.WebUIKeywordMainPatch()).overrideRunKeyword()
+}
+
 def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
     	WebDriver driver	
      , 	WebElement video	

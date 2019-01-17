@@ -81,8 +81,8 @@ class ScreenshotDriverCompareImagesTest {
 	 */
 	@Test
 	void test_saveProfilePicture() {
+		WebUI.comment(">>> test_saveProfilePicture started")
 		String xpathStr = makeXPathToPhoto(6)
-
 		WebUI.navigateToUrl(url_)
 		TestObject tObj = new TestObject()
 		tObj.addProperty("xpath", ConditionType.EQUALS, xpathStr, true)

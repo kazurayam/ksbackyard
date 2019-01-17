@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard.test.ashot
+package com.kazurayam.ksbackyard.ashot
 
 import static java.util.Collections.singletonList;
 import static ru.yandex.qatools.ashot.coordinates.CoordsPreparationStrategy.intersectingWith;
