@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard
+package com.kazurayam.imagedifference
 
 import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertTrue
@@ -21,7 +21,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
+import com.kazurayam.imagedifference.ImageDifference
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
