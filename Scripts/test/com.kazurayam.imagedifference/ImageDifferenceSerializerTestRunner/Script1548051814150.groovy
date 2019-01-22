@@ -1,3 +1,0 @@
-import com.kazurayam.imagedifference.ImageDifferenceSerializerTest
-
-CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ImageDifferenceSerializerTest.class)
