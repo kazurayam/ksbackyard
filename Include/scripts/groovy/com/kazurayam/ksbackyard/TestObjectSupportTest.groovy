@@ -14,14 +14,67 @@ import com.kms.katalon.core.testobject.TestObject
 public class TestObjectSupportTest {
 
 	@Test
-	void test_jsonify() {
-		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment')
-		String json = TestObjectSupport.jsonifyActiveProperties(tObj)
+	void test_toJson() {
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
+		assertNotNull(tObj)
+		String json = TestObjectSupport.toJson(tObj)
 		println json
 		assertTrue(json.length() > 0)
-		assertTrue("name is missing", json.contains('name'))
-		assertTrue("condition is missing", json.contains('condition'))
-		assertTrue("value is missing", json.contains('value'))
-		assertTrue("isActive is missing", json.contains('isActive'))
+		assertTrue("objectId is missing", json.contains('objectId'))
+	}
+
+	@Test
+	void test_prettyPrint_BASIC() {
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
+		assertNotNull(tObj)
+		String json = TestObjectSupport.prettyPrint(tObj)
+		println json
+		assertTrue(json.length() > 0)
+		//assertTrue("objectId is missing", json.contains('objectId'))
+	}
+
+	@Test
+	void test_prettyPrint_XPATH() {
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')
+		assertNotNull(tObj)
+		String json = TestObjectSupport.prettyPrint(tObj)
+		println json
+		assertTrue(json.length() > 0)
+		//assertTrue("objectId is missing", json.contains('objectId'))
+	}
+
+	@Test
+	void test_prettyPrint_CSS() {
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')
+		assertNotNull(tObj)
+		String json = TestObjectSupport.prettyPrint(tObj)
+		println json
+		assertTrue(json.length() > 0)
+		//assertTrue("objectId is missing", json.contains('objectId'))
+		//assertTrue("#btn-make-appointment is missing", json.contains('#btn-make-appointment'))
+	}
+
+	@Test
+	void test_toBy_BASIC() {
+		fail()
+		
+	}
+
+	@Test
+	void test_toBy_CSS() {
+		fail()
+		
+	}
+
+	@Test
+	void test_toBy_XPATH() {
+		fail()
+		
+	}
+
+	@Test
+	void test_toBy_List() {
+		fail()
+		
 	}
 }
