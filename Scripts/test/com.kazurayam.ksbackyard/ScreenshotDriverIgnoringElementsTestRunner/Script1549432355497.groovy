@@ -1,0 +1,3 @@
+import com.kazurayam.ksbackyard.ScreenshotDriverIgnoringElementsTest
+
+CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverIgnoringElementsTest.class)

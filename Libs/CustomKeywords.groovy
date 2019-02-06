@@ -7,6 +7,8 @@ import com.kms.katalon.core.testobject.TestObject
 
 import java.io.File
 
+import com.kazurayam.ksbackyard.ScreenshotDriverOptions
+
 import java.lang.Integer
 
 import java.lang.Double
@@ -43,9 +45,23 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
+    	ScreenshotDriverOptions options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
+        	options)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	Integer timeout	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
         	timeout)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
+    	File file	
+     , 	ScreenshotDriverOptions options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
+        	file
+         , 	options)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(

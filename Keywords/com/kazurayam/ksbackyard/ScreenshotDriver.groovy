@@ -1,7 +1,6 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -15,7 +14,6 @@ import org.openqa.selenium.WebElement
 
 import com.kazurayam.imagedifference.ImageDifference
 import com.kazurayam.imagedifference.ImageDifferenceSerializer
-
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
@@ -27,9 +25,7 @@ import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
-import ru.yandex.qatools.ashot.comparison.ImageDiff
-import ru.yandex.qatools.ashot.comparison.ImageDiffer
-// import com.kazurayam.ksbackyard.test.ashot.AShotMock
+
 
 /**
  * Wraps the AShot API, WebDriver Screenshot utility. 
@@ -155,11 +151,20 @@ class ScreenshotDriver {
 	 * @param ignoredElementList 
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver,
-			List<By> ignoredElementList, Integer timeout = 300) {
-		// AShot aShot = new AShot().coordsProvider(new WebDriverCoodsProvider())
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, ScreenshotDriverOptions options)
+	{
+		int timeout = options.getTimeout()
+		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements()) 
+		AShot aShot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(ShootingStrategies.viewportPasting(timeout))
+		for (By by : byList) {
+			aShot = aShot.addIgnoredElement(by)
+		}
+		Screenshot screenshot = aShot.takeScreenshot(webDriver)
+		return screenshot.getImage()
 	}
-
+	
 	/**
 	 * takes screenshot of the entire page targeted,
 	 * returns it as a BufferedImage object
@@ -178,6 +183,19 @@ class ScreenshotDriver {
 		return screenshot.getImage()
 	}
 
+	//--------------
+	
+	/**
+	 * 
+	 * @param options
+	 * @return
+	 */
+	@Keyword
+	static BufferedImage takeEntirePageImage(ScreenshotDriverOptions options) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		return takeEntirePageImage(webDriver, options)	
+	}
+	
 	/**
 	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -192,6 +210,14 @@ class ScreenshotDriver {
 		return takeEntirePageImage(webDriver, timeout)
 	}
 
+	//-------------
+	
+	static void saveEntirePageImage(WebDriver webDriver, File file, ScreenshotDriverOptions options)
+	{
+		BufferedImage image = takeEntirePageImage(webDriver, options)
+		ImageIO.write(image, "PNG", file)	
+	}
+	
 	/**
 	 * take the screenshot of the entire page targeted,
 	 * and save it into the output file in PNG format.
@@ -206,6 +232,19 @@ class ScreenshotDriver {
 		ImageIO.write(image, "PNG", file)
 	}
 
+	//-------------
+	
+	/**
+	 * 
+	 * @param file
+	 * @param options
+	 */
+	@Keyword
+	static void saveEntirePageImage(File file, ScreenshotDriverOptions options) {
+		WebDriver driver = DriverFactory.getWebDriver()
+		saveEntirePageImage(driver, file, options)	
+	}
+	
 	/**
 	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -218,10 +257,14 @@ class ScreenshotDriver {
 		WebDriver driver = DriverFactory.getWebDriver()
 		saveEntirePageImage(driver, file, timeout)
 	}
-
+	
+	//-----------
+	
 	/**
 	 * similar to saveEntirePageImage(WebDriver, File, Integer)
+	 * 
 	 * @deprecated use saveEntirePageImage(File, Integer) instead
+	 * 
 	 * @param webDriver
 	 * @param file
 	 */
@@ -425,6 +468,6 @@ class ScreenshotDriver {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
-	
+
 
 }
