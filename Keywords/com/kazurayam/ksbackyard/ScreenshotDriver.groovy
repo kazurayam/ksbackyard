@@ -144,6 +144,7 @@ class ScreenshotDriver {
 		saveElementImage(webDriver, webElement, file)
 	}
 
+	//-----------------------------------------------------------------
 
 	/**
 	 * takes screenshot of the entire page 
@@ -176,7 +177,6 @@ class ScreenshotDriver {
 				takeScreenshot(webDriver)
 		return screenshot.getImage()
 	}
-
 
 	/**
 	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
@@ -219,8 +219,6 @@ class ScreenshotDriver {
 		saveEntirePageImage(driver, file, timeout)
 	}
 
-
-
 	/**
 	 * similar to saveEntirePageImage(WebDriver, File, Integer)
 	 * @deprecated use saveEntirePageImage(File, Integer) instead
@@ -232,11 +230,7 @@ class ScreenshotDriver {
 		saveEntirePageImage(webDriver, file, timeout)
 	}
 
-
-
-
-
-
+	//-----------------------------------------------------------------
 
 
 	/**
@@ -431,5 +425,6 @@ class ScreenshotDriver {
 		ZonedDateTime now = ZonedDateTime.now()
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
+	
 
 }

@@ -19,13 +19,13 @@ import java.lang.Boolean
 
 import java.lang.Number
 
-import java.lang.Class
-
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
 import java.util.List
+
+import java.lang.Class
 
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
@@ -210,12 +210,6 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
-}
-
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -294,20 +288,6 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
@@ -416,6 +396,26 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
     	java.util.List<TestObject> testObjectList	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
         	testObjectList)
+}
+
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
