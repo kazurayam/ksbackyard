@@ -2,6 +2,7 @@ package com.kazurayam.ksbackyard
 
 import org.openqa.selenium.By
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.testobject.SelectorMethod
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.testobject.TestObjectProperty
 import groovy.json.JsonOutput
@@ -56,13 +57,13 @@ class TestObjectSupport {
 		Objects.requireNonNull(testObject, "testObject must not be null")
 		switch (testObject.selectorMethod) {
 			case 'BASIC' :
-				return By.xpath(testObject.selectorCollection.BASIC) 
+				return By.xpath(testObject.getSelectorCollection()[SelectorMethod.BASIC])
 				break
 			case 'CSS' :
-				return By.cssSelector(testObject.selectorCollection.CSS)
+				return By.cssSelector(testObject.getSelectorCollection()[SelectorMethod.CSS])
 				break
 			case 'XPATH' :
-				return By.xpath(testObject.selectorCollection.XPATH)
+				return By.xpath(testObject.getSelectorCollection()[SelectorMethod.XPATH])
 				break
 		}
 		throw new IllegalArgumentException("unable to convert to By: " + prettyPrint(testObject))
@@ -76,6 +77,4 @@ class TestObjectSupport {
 		}
 		return list
 	}
-
-
 }

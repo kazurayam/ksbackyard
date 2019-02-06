@@ -4,7 +4,10 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
+import org.openqa.selenium.By
+
 import org.junit.Test
+import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -18,7 +21,7 @@ public class TestObjectSupportTest {
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.toJson(tObj)
-		println json
+		//println json
 		assertTrue(json.length() > 0)
 		assertTrue("objectId is missing", json.contains('objectId'))
 	}
@@ -28,7 +31,7 @@ public class TestObjectSupportTest {
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
-		println json
+		//println json
 		assertTrue(json.length() > 0)
 		//assertTrue("objectId is missing", json.contains('objectId'))
 	}
@@ -38,7 +41,7 @@ public class TestObjectSupportTest {
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
-		println json
+		//println json
 		assertTrue(json.length() > 0)
 		//assertTrue("objectId is missing", json.contains('objectId'))
 	}
@@ -48,33 +51,46 @@ public class TestObjectSupportTest {
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
-		println json
+		//println json
 		assertTrue(json.length() > 0)
 		//assertTrue("objectId is missing", json.contains('objectId'))
 		//assertTrue("#btn-make-appointment is missing", json.contains('#btn-make-appointment'))
 	}
 
+	
 	@Test
 	void test_toBy_BASIC() {
-		fail()
-		
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
+		//println ">>> " + TestObjectSupport.prettyPrint(tObj)
+		By by = TestObjectSupport.toBy(tObj)
+		println by
+		assertTrue(by.toString().contains("//a[@id = 'btn-make-appointment']"))
 	}
 
 	@Test
 	void test_toBy_CSS() {
-		fail()
-		
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')
+		By by = TestObjectSupport.toBy(tObj)
+		println by
+		assertTrue(by.toString().contains("#btn-make-appointment"))
 	}
 
 	@Test
 	void test_toBy_XPATH() {
-		fail()
-		
+		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')
+		By by = TestObjectSupport.toBy(tObj)
+		println by
+		assertTrue(by.toString().contains("//a[@id='btn-make-appointment']"))
 	}
 
 	@Test
 	void test_toBy_List() {
-		fail()
-		
+		List<TestObject> toList = new ArrayList<TestObject>()
+		toList.add(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC'))
+		toList.add(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS'))
+		toList.add(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH'))
+		List<By> byList = TestObjectSupport.toBy(toList)
+		println byList
+		assertEquals(3, byList.size())
 	}
 }
