@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_Make Appointment</name>
+   <name>a_Make Appointment_BASIC</name>
    <tag></tag>
    <elementGuidId>19872423-f54d-462e-87c1-81ac33cdb67b</elementGuidId>
    <selectorCollection>

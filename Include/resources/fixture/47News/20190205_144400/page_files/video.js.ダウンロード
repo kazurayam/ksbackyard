@@ -1,0 +1,14 @@
+$(function () {
+  $(window).on('load resize', function() {
+    var w = $(window).width();
+    var x = 768;
+    var $anchor = $("a.play-video");
+    if (w < x) {
+      $anchor.removeClass('playback');
+      $anchor.attr('data-lity', 'data-lity');
+    } else {
+      $anchor.addClass('playback');
+      $anchor.removeAttr('data-lity');
+    }
+  });
+});

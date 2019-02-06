@@ -25,6 +25,8 @@ import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
+import java.util.List
+
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	TestObject testObject	) {
@@ -398,10 +400,22 @@ def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill
         	video)
 }
 
-def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
     	TestObject testObject	) {
-    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toJson(
         	testObject)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
+    	TestObject testObject	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
+        	testObject)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
+    	java.util.List<TestObject> testObjectList	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
+        	testObjectList)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {

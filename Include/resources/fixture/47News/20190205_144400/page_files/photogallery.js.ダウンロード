@@ -1,0 +1,83 @@
+$(function () {
+  /**
+   * 取得する要素
+   * @type {string}
+   */
+  var isContentItems = '.list__item';
+  /**
+   * 取得要素を追加するコンテンツ
+   * @type {string}
+   */
+  var isContent = '.list';
+
+  /**
+   * 次のページのリンク
+   * @type {string}
+   */
+  var isLink = '.pager__next';
+
+  /**
+   * ローダーid
+   * @type {string}
+   */
+  var pageLoaderId = 'js-pageLoader';
+
+  /**
+   * ローダー挿入位置
+   * @type {string}
+   */
+  var listItemsId = '.js-postListItems';
+
+  /**
+   * readmore挿入位置
+   * @type {string}
+   */
+  var readMoreId = '#js-readmore';
+
+  /**
+   * ローダー
+   * @type {string}
+   */
+  var loderElement = '<div class="loader" id="' + pageLoaderId + '"><p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></p></div>';
+
+  var loadingPage = function () {
+    if (!$(isLink).get(0)) return;
+    if ($(isLink).data('next') == "") return;
+    var next = $(isLink).data('next');
+    $(isLink).remove();
+    $(listItemsId).append(loderElement);
+
+    var add = '?';
+    if (location.search) add = '&';
+    var nextPage = location.href + add + 'page='+ next;
+    
+    $.ajax({
+      type: 'GET',
+      url: nextPage,
+      dataType: 'html',
+    })
+      .done(function(response) {
+        var nextLink = $(response).find(isLink);
+        var contentItems = $(response).find(isContentItems);
+
+        $(isContent).append(contentItems);
+
+        if (nextLink.length > 0) {
+          $(listItemsId).append(nextLink);
+          nextLink.ready(function () {
+            imagesLazyLoad();
+            objectFitImages('img.fit, .main-post01 img.img-fluid, .main-post02 img, .main-post03 img, .video-' +
+              'thumb-list img.img-fluid, .maincat-thumb-list img.img-fluid, #photoCarousel .car' +
+              'ousel-item img');
+          });
+        }
+      })
+      .always(function() {
+        $("#" + pageLoaderId).remove();
+      });
+  };
+
+  $(document).on('click', readMoreId, function () {
+    loadingPage();
+  });
+});

@@ -1,0 +1,3 @@
+jQuery(document).ready(function($) {
+  $('.no-retina').attr('data-no-retina', true);
+});

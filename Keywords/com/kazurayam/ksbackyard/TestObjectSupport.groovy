@@ -1,53 +1,80 @@
 package com.kazurayam.ksbackyard
 
+import org.openqa.selenium.By
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.testobject.SelectorMethod
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.testobject.TestObjectProperty
+import groovy.json.JsonOutput
 
+/**
+ * Utility methods for Kataon's TestObject
+ * - converting TestObject to JSON
+ * - converting TestObject to Selenium By object
+ * 
+ * @author kazurayam
+ */
 class TestObjectSupport {
 
 	/**
-	 * convert a TestObject object into a String in JSON format
-	 * while filtering its active properties only
+	 * convert a TestObject object into a String in JSON format.
+	 * will list active properites only.
 	 * 
 	 * @param testObject
 	 * @return e.g.
 	 * <pre>
-	 [
-	 {"name":"class","condition":"equals","value":"android.widget.TextView","isActive":true},
-	 {"name":"instance","condition":"equals","value":"3","isActive":true},
-	 {"name":"text","condition":"equals","value":"App","isActive":true},
-	 {"name":"resource-id","condition":"equals","value":"android:id/text1","isActive":true}
-	 ]
-	 </pre>
+	 * {
+	 *     "objectId": "Page_CURA Healthcare Service/a_Make Appointment",
+	 *     "selectorMethod": "BASIC",
+	 *     "selectorCollection": {
+	 *         "BASIC": "//a[@id='btn']"
+	 *     }
+	 * }
+	 * </pre>
 	 */
 	@Keyword
-	static String jsonifyActiveProperties(TestObject testObject) {
-		List<TestObjectProperty> lst = testObject.getActiveProperties()
-		StringBuilder sb = new StringBuilder()
-		sb.append('[\n')
-		int count = 0
-		for (TestObjectProperty top : lst) {
-			if (count > 0) {
-				sb.append(',')
-				sb.append('\n')
-			}
-			sb.append('{')
-			sb.append('\"name\":')
-			sb.append("\"${top.getName()}\"")
-			sb.append(',')
-			sb.append('\"condition\":')
-			sb.append("\"${top.getCondition().toString()}\"")
-			sb.append(',')
-			sb.append('\"value\":')
-			sb.append("\"${top.getValue()}\"")
-			sb.append(',')
-			sb.append('\"isActive\":')
-			sb.append("${top.isActive()}")
-			sb.append('}')
-			count += 1
+	static String toJson(TestObject testObject) {
+		Objects.requireNonNull(testObject, "testObject must not be null")
+		String json = JsonOutput.toJson(testObject)
+		return json
+	}
+
+	static String prettyPrint(TestObject testObject) {
+		Objects.requireNonNull(testObject, "testObject must not be null")
+		String json = JsonOutput.toJson(testObject)
+		String pp = JsonOutput.prettyPrint(json)
+		return pp
+	}
+
+	/**
+	 * convert a Katalon's TestObject into a Selenium'S By object
+	 *
+	 * @param testObject
+	 * @return
+	 */
+	@Keyword
+	static By toBy(TestObject testObject) {
+		Objects.requireNonNull(testObject, "testObject must not be null")
+		switch (testObject.selectorMethod) {
+			case 'BASIC' :
+				return By.xpath(testObject.getSelectorCollection()[SelectorMethod.BASIC])
+				break
+			case 'CSS' :
+				return By.cssSelector(testObject.getSelectorCollection()[SelectorMethod.CSS])
+				break
+			case 'XPATH' :
+				return By.xpath(testObject.getSelectorCollection()[SelectorMethod.XPATH])
+				break
 		}
-		sb.append('\n]')
-		return sb.toString()
+		throw new IllegalArgumentException("unable to convert to By: " + prettyPrint(testObject))
+	}
+
+	@Keyword
+	static List<By> toBy(List<TestObject> testObjectList) {
+		List<By> list = new ArrayList<By>()
+		for (TestObject to : testObjectList) {
+			list.add(TestObjectSupport.toBy(to))
+		}
+		return list
 	}
 }

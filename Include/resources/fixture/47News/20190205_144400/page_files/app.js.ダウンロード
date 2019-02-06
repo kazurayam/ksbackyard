@@ -1,0 +1,216 @@
+/**
+ * Beaconリクエストを送信する
+ * @param opts
+ */
+beacon = function(opts) {
+  // Make sure we have a base object for opts
+  opts = opts || {};
+  // Setup defaults for options
+  opts.url = opts.url || null;
+  opts.vars = opts.vars || {};
+  opts.error = opts.error || function() {};
+  opts.success = opts.success || function() {};
+
+  // Split up vars object into an array
+  var varsArray = [];
+  for (var key in opts.vars) {
+    varsArray.push(key + '=' + opts.vars[key]);
+  }
+  // Build query string
+  var qString = varsArray.join('&');
+
+  // Create a beacon if a url is provided
+  if (opts.url) {
+    // Create a brand NEW image object
+    var beacon = new Image();
+    // Attach the event handlers to the image object
+    if (beacon.onerror) {
+      beacon.onerror = opts.error;
+    }
+    if (beacon.onload) {
+      beacon.onload = opts.success;
+    }
+
+    // Attach the src for the script call
+    beacon.src = opts.url + '?' + qString;
+  }
+};
+beacon({ url: '/api/v1/beacon', vars: { path: location.pathname } });
+
+/**
+ * Selecterの値でリダイレクトさせる
+ * @param selecter
+ */
+movieLatestNewsOnChange = function(selecter) {
+  window.location.href = selecter.value;
+};
+beacon({ url: '/api/v1/beacon', vars: { path: location.pathname } });
+
+/**
+ * 月刊アーカイブセレクター
+ * @param selector
+ */
+archiveOnChange = function(selector) {
+  if (!selector.value) {
+    return;
+  }
+
+  var path = location.pathname;
+  path = path.replace(/([^/]+?\.html)?/g, '');
+  window.location.href = path + '?period=' + selector.value;
+};
+
+/**
+ * @param path
+ * @returns {string}
+ */
+var getFirstParam = function (path) {
+  var params = path.split('/');
+  var firstParam = '';
+  if (params.length > 0) {
+    params.forEach(function (v, i) {
+      if (!firstParam && !!v) {
+        firstParam = v;
+      }
+    });
+  }
+
+  return firstParam;
+};
+
+var activeGlobalNav = function () {
+  var pathname = location.pathname;
+  var firstParam = getFirstParam(pathname);
+
+  var $globalNavLink = $('.global-nav a.nav-link');
+  if ($globalNavLink.length > 0) {
+    $globalNavLink.each(function (i, e) {
+      var href = $(e).attr('href');
+      if (!!href && '/'+firstParam === href) {
+        $(e).addClass('hover');
+      }
+    });
+  }
+};
+
+var activeSubNav = function () {
+  var pathname = location.pathname;
+  var replacePath = pathname ? pathname.replace(/\/[^\/]*\.html$/, '') : lpathname;
+  var active = false;
+  var $subNavLink = $('.content-header ul > li > a');
+  if ($subNavLink.length > 0) {
+    $subNavLink.each(function (i, e) {
+      var href = $(e).attr('href');
+      if (!!href && (href === pathname || href === replacePath) && !active) {
+        $(e).addClass('hover');
+        active = true;
+      }
+    });
+  }
+
+  if (!active) {
+    var $subNavItemLink = $('.content-header li.dropdown div.dropdown-menu a.dropdown-item');
+    if ($subNavItemLink.length > 0) {
+      $subNavItemLink.each(function (i, e) {
+        var itemHref = $(e).attr('href');
+        if (!!itemHref && (itemHref === pathname || itemHref === replacePath) && !active) {
+          var $parentSubNavLink = $(e).parent().closest('li.dropdown').children('a.dropdown-toggle').first();
+          if ($parentSubNavLink) {
+            $parentSubNavLink.addClass('hover');
+            active = true;
+          }
+        }
+      });
+    }
+  }
+};
+
+var setVrview = function () {
+  window.addEventListener('load', onVrViewLoad);
+  function onVrViewLoad() {
+    var image = $('#vrview').attr('data-image');
+    if (!!image) {
+      var vrView = new VRView.Player('#vrview', {
+        image: image,
+        width: '100%',
+        height: '100%',
+      });
+    }
+  }
+};
+
+var setCurrentUrlSelectedForSp = function () {
+  var pathInfo = location.pathname;
+  if (pathInfo) {
+    var $options = $('select#catlink>option');
+    var $label = $('div.btn-select>p.label');
+    var elements = pathInfo.split('/');
+    elements.shift();
+    var length = elements.length;
+    var isReplaced = false;
+    for (var i = 0; i < length; i++) {
+      if (isReplaced) {
+        break;
+      }
+      var urlLength = length - i;
+      var checkUrl = '';
+      for (var j = 0; j < urlLength; j++) {
+        checkUrl += '/' + elements[j];
+      }
+      checkUrl += location.search
+      $options.map(function() {
+        if (!isReplaced && (checkUrl === $(this).val() || checkUrl + '/' === $(this).val())) {
+          $options.attr('selected', false);
+          $(this).attr('selected', true);
+          $label.html($(this).text());
+          isReplaced = true;
+        }
+      });
+    }
+  }
+};
+
+var resizeCaption = function () {
+  $img = $('.image img');
+  if ($img.length > 0) {
+    $img.each(function () {
+      var $this = $(this);
+      $this[0].originSrc = $this[0].src;
+      $this[0].src = "";
+      $this.bind('load', function(){
+        var articleImageWidth = $(this).width();
+        $(this).closest('.image').children('.caption').css('max-width', articleImageWidth+'px');
+      });
+
+      $this[0].src = $this[0].originSrc;
+    });
+  }
+};
+
+var imagesLazyLoad = function () {
+  $('.lazy').Lazy({
+    effect: "fadeIn",
+    effectTime: 800,
+    threshold: 200,
+    afterLoad: function(element) {
+      objectFitImages(element);
+    }
+  });
+};
+
+$(function () {
+  $("header a[href^='/']").each(function () {
+    var href = $(this).attr('href');
+    if (href.length > 1) {
+      href = href.replace(/\/$/, "");
+      $(this).attr('href', href);
+    }
+  });
+
+  activeGlobalNav();
+  activeSubNav();
+  setVrview();
+  setCurrentUrlSelectedForSp();
+  resizeCaption();
+  imagesLazyLoad();
+});

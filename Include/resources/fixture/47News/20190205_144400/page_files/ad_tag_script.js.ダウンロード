@@ -1,0 +1,9 @@
+var hidePath = ["/special/"];
+var ad_tag = '<script type="text/javascript" src="https://js.mediams.mb.softbank.jp/t/266/227/a1266227.js"></script>';
+for(var i = 0; i < hidePath.length; i++){
+    if(location.pathname.indexOf(hidePath[i]) === 0){
+        ad_tag = "";
+    }
+}
+document.write(ad_tag);
+document.close();

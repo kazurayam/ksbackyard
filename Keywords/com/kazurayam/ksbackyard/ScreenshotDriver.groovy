@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter
 
 import javax.imageio.ImageIO
 
+import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
@@ -144,6 +145,19 @@ class ScreenshotDriver {
 	}
 
 
+	/**
+	 * takes screenshot of the entire page 
+	 * while ignoring some elements specified
+	 * returns it as a BufferedImage object
+	 * 
+	 * @param webDriver
+	 * @param ignoredElementList 
+	 * @return BufferedImage
+	 */
+	static BufferedImage takeEntirePageImage(WebDriver webDriver,
+			List<By> ignoredElementList, Integer timeout = 300) {
+		// AShot aShot = new AShot().coordsProvider(new WebDriverCoodsProvider())
+	}
 
 	/**
 	 * takes screenshot of the entire page targeted,
