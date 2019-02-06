@@ -54,8 +54,7 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement)
-	{
+	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
 		int timeout = 500
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
@@ -94,8 +93,7 @@ class ScreenshotDriver {
 	 * @return
 	 */
 	@Keyword
-	static BufferedImage takeElementImage(TestObject testObject)
-	{
+	static BufferedImage takeElementImage(TestObject testObject) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
@@ -118,8 +116,7 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @param file
 	 */
-	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file)
-	{
+	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
 		ImageIO.write(image, "PNG", file)
 	}
@@ -133,8 +130,7 @@ class ScreenshotDriver {
 	 * @param file
 	 */
 	@Keyword
-	static void saveElementImage(TestObject testObject, File file)
-	{
+	static void saveElementImage(TestObject testObject, File file) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject,30)
 		saveElementImage(webDriver, webElement, file)
@@ -154,17 +150,18 @@ class ScreenshotDriver {
 	static BufferedImage takeEntirePageImage(WebDriver webDriver, ScreenshotDriverOptions options)
 	{
 		int timeout = options.getTimeout()
-		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements()) 
+		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements())
 		AShot aShot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout))
 		for (By by : byList) {
 			aShot = aShot.addIgnoredElement(by)
+			println "added ignored element ${by}"
 		}
 		Screenshot screenshot = aShot.takeScreenshot(webDriver)
 		return screenshot.getImage()
 	}
-	
+
 	/**
 	 * takes screenshot of the entire page targeted,
 	 * returns it as a BufferedImage object
@@ -184,7 +181,7 @@ class ScreenshotDriver {
 	}
 
 	//--------------
-	
+
 	/**
 	 * 
 	 * @param options
@@ -193,9 +190,9 @@ class ScreenshotDriver {
 	@Keyword
 	static BufferedImage takeEntirePageImage(ScreenshotDriverOptions options) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
-		return takeEntirePageImage(webDriver, options)	
+		return takeEntirePageImage(webDriver, options)
 	}
-	
+
 	/**
 	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -211,13 +208,13 @@ class ScreenshotDriver {
 	}
 
 	//-------------
-	
+
 	static void saveEntirePageImage(WebDriver webDriver, File file, ScreenshotDriverOptions options)
 	{
 		BufferedImage image = takeEntirePageImage(webDriver, options)
-		ImageIO.write(image, "PNG", file)	
+		ImageIO.write(image, "PNG", file)
 	}
-	
+
 	/**
 	 * take the screenshot of the entire page targeted,
 	 * and save it into the output file in PNG format.
@@ -233,7 +230,7 @@ class ScreenshotDriver {
 	}
 
 	//-------------
-	
+
 	/**
 	 * 
 	 * @param file
@@ -242,9 +239,9 @@ class ScreenshotDriver {
 	@Keyword
 	static void saveEntirePageImage(File file, ScreenshotDriverOptions options) {
 		WebDriver driver = DriverFactory.getWebDriver()
-		saveEntirePageImage(driver, file, options)	
+		saveEntirePageImage(driver, file, options)
 	}
-	
+
 	/**
 	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -257,9 +254,9 @@ class ScreenshotDriver {
 		WebDriver driver = DriverFactory.getWebDriver()
 		saveEntirePageImage(driver, file, timeout)
 	}
-	
+
 	//-----------
-	
+
 	/**
 	 * similar to saveEntirePageImage(WebDriver, File, Integer)
 	 * 

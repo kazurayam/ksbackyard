@@ -54,7 +54,7 @@ class ScreenshotDriverIgnoringElementsTest {
 		}
 		Files.createDirectories(workdir_)
 		WebUI.openBrowser('')
-		WebUI.setViewPortSize(1280, 4000)
+		WebUI.setViewPortSize(1280, 3700)
 		//
 		ScreenshotDriver.setForceSnapshots(true)
 	}
@@ -79,21 +79,27 @@ class ScreenshotDriverIgnoringElementsTest {
 		TestObject mainBnr = findTestObject('Object Repository/Page_47News/div_main-bnr')
 		TestObject sidebar = findTestObject('Object Repository/Page_47News/div_sidebar')
 		
-		boolean result = WebUI.verifyElementPresent(mainBnr, 10, FailureHandling.OPTIONAL)
-		if (result) {
-			WebUI.delay(1)
-			ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().
+		boolean mainBnrPresent = WebUI.verifyElementPresent(mainBnr, 10, FailureHandling.OPTIONAL)
+		boolean sidebarPresent = WebUI.verifyElementPresent(sidebar, 10, FailureHandling.OPTIONAL)
+		if (mainBnrPresent) {
+			if (sidebarPresent) {
+				WebUI.delay(1)
+				ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().
 						timeout(300).
 						addIgnoredElement(mainBnr).
 						addIgnoredElement(sidebar).
 						build()
 						
-			ScreenshotDriver.saveEntirePageImage(output.toFile(), options)
+				ScreenshotDriver.saveEntirePageImage(output.toFile(), options)
 			
-			assertTrue("failed to create ${output.toString()}", Files.exists(output))
-			int minimumLength = 100_000
-			assertTrue("output.toFile().length=${output.toFile().length()} is less than minimum",
-				output.toFile().length() > minimumLength)
+				assertTrue("failed to create ${output.toString()}", Files.exists(output))
+				int minimumLength = 100_000
+				assertTrue("output.toFile().length=${output.toFile().length()} is less than minimum",
+							output.toFile().length() > minimumLength)
+				
+			} else {
+				fail("${sidebar} is not present in ${url_}")
+			}
 		} else {
 			fail("${mainBnr} is not present in ${url_}")
 		}
