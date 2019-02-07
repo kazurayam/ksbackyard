@@ -10,7 +10,7 @@ import org.junit.Test
 import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.testobject.TestObject
 
 @RunWith(JUnit4.class)
@@ -18,6 +18,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_toJson() {
+		WebUI.comment("test_toJson")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.toJson(tObj)
@@ -28,6 +29,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_prettyPrint_BASIC() {
+		WebUI.comment("test_prettyPrint_BASIC")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
@@ -38,6 +40,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_prettyPrint_XPATH() {
+		WebUI.comment("test_prettyPrint_XPATH")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
@@ -48,6 +51,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_prettyPrint_CSS() {
+		WebUI.comment("test_prettyPrint_CSS")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')
 		assertNotNull(tObj)
 		String json = TestObjectSupport.prettyPrint(tObj)
@@ -57,9 +61,10 @@ public class TestObjectSupportTest {
 		//assertTrue("#btn-make-appointment is missing", json.contains('#btn-make-appointment'))
 	}
 
-	
+
 	@Test
 	void test_toBy_BASIC() {
+		WebUI.comment("test_toBy_BASIC")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')
 		//println ">>> " + TestObjectSupport.prettyPrint(tObj)
 		By by = TestObjectSupport.toBy(tObj)
@@ -69,6 +74,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_toBy_CSS() {
+		WebUI.comment("test_toBy_CSS")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')
 		By by = TestObjectSupport.toBy(tObj)
 		println by
@@ -77,6 +83,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_toBy_XPATH() {
+		WebUI.comment("test_toBy_XPATH")
 		TestObject tObj = findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')
 		By by = TestObjectSupport.toBy(tObj)
 		println by
@@ -85,6 +92,7 @@ public class TestObjectSupportTest {
 
 	@Test
 	void test_toBy_List() {
+		WebUI.comment("test_toBy_List")
 		List<TestObject> toList = new ArrayList<TestObject>()
 		toList.add(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC'))
 		toList.add(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS'))
