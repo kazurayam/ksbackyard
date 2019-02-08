@@ -10,12 +10,14 @@ import org.junit.runners.JUnit4
 
 import com.kms.katalon.core.testobject.TestObject
 
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+
 @RunWith(JUnit4.class)
 public class ScreenshotDriverOptionsTest {
 
 	@Test
 	void test_toString() {
-		ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().
+		Options options = new Options.Builder().
 				timeout(100).
 				build()
 		String s = options.toString()
@@ -25,14 +27,14 @@ public class ScreenshotDriverOptionsTest {
 
 	@Test
 	void test_getTimeout_default() {
-		ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().build()
+		Options options = new Options.Builder().build()
 		int timeout = options.getTimeout()
 		assertEquals(300, timeout)
 	}
 
 	@Test
 	void test_setTimeout() {
-		ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().timeout(100).build()
+		Options options = new Options.Builder().timeout(100).build()
 		int timeout = options.getTimeout()
 		assertEquals(100, timeout)
 	}
@@ -40,7 +42,7 @@ public class ScreenshotDriverOptionsTest {
 
 	@Test
 	void test_addIgnoredElement() {
-		ScreenshotDriverOptions options = new ScreenshotDriverOptions.Builder().
+		Options options = new Options.Builder().
 				addIgnoredElement(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_BASIC')).
 				addIgnoredElement(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_CSS')).
 				addIgnoredElement(findTestObject('Object Repository/Page_CURA Healthcare Service/a_Make Appointment_XPATH')).

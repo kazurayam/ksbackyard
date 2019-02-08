@@ -21,6 +21,7 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+import groovy.json.JsonOutput
 import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
@@ -147,7 +148,7 @@ class ScreenshotDriver {
 	 * @param ignoredElementList 
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver, ScreenshotDriverOptions options)
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Options options)
 	{
 		int timeout = options.getTimeout()
 		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements())
@@ -188,7 +189,7 @@ class ScreenshotDriver {
 	 * @return
 	 */
 	@Keyword
-	static BufferedImage takeEntirePageImage(ScreenshotDriverOptions options) {
+	static BufferedImage takeEntirePageImage(Options options) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		return takeEntirePageImage(webDriver, options)
 	}
@@ -209,7 +210,7 @@ class ScreenshotDriver {
 
 	//-------------
 
-	static void saveEntirePageImage(WebDriver webDriver, File file, ScreenshotDriverOptions options)
+	static void saveEntirePageImage(WebDriver webDriver, File file, Options options)
 	{
 		BufferedImage image = takeEntirePageImage(webDriver, options)
 		ImageIO.write(image, "PNG", file)
@@ -237,7 +238,7 @@ class ScreenshotDriver {
 	 * @param options
 	 */
 	@Keyword
-	static void saveEntirePageImage(File file, ScreenshotDriverOptions options) {
+	static void saveEntirePageImage(File file, Options options) {
 		WebDriver driver = DriverFactory.getWebDriver()
 		saveEntirePageImage(driver, file, options)
 	}
@@ -466,5 +467,60 @@ class ScreenshotDriver {
 		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
 	}
 
+
+
+	/**
+	 * 
+	 */
+	static class Options {
+
+		private int timeout
+		private List<TestObject> ignoredElements
+
+		static class Builder {
+
+			private int timeout
+			private List<TestObject> ignoredElements
+
+			Builder() {
+				timeout = 300   // default is 300 milli seconds
+				ignoredElements = new ArrayList<TestObject>()   // no elements to ignore
+			}
+			Builder timeout(int value) {
+				if (value < 0) throw new IllegalArgumentException("value(${value}) must not be negative")
+				if (value > 1000) throw new IllegalArgumentException("value(${value}) is regared milli-seconds.")
+				this.timeout = value
+				return this
+			}
+			Builder addIgnoredElement(TestObject testObject) {
+				Objects.requireNonNull(testObject, "testObject must not be null")
+				this.ignoredElements.add(testObject)
+				return this
+			}
+			Options build() {
+				return new Options(this)
+			}
+		}
+
+		private Options(Builder builder) {
+			this.timeout = builder.timeout
+			this.ignoredElements = builder.ignoredElements
+		}
+
+		int getTimeout() {
+			return this.timeout
+		}
+
+		List<TestObject> getIgnoredElements() {
+			return this.ignoredElements
+		}
+
+		@Override
+		String toString() {
+			String s = JsonOutput.toJson(this)
+			String pp = JsonOutput.prettyPrint(s)
+			return pp
+		}
+	}
 
 }

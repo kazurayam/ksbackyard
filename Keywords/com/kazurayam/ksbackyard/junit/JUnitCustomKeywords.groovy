@@ -17,8 +17,6 @@ import com.kms.katalon.core.model.FailureHandling
  * A test case can call this Custom Keyword to execute a class annotated with JUnit4's &#64;Test.
  * In other words, you can execute a JUnit-based test within Katalon Studio.
  *
- *
- *
  * I read and learned https://github.com/katalon-studio/katalon-studio-testing-framework/blob/master/Include/scripts/groovy/com/kms/katalon/core/cucumber/keyword/CucumberBuiltinKeywords.groovy
  * This class is almost the same as com.kms.katalon.core.cucumber.keyword.CucumberBuiltingKeywords.
  *
