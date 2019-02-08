@@ -168,7 +168,7 @@ class ScreenshotDriver {
 	}
 
 	// In which color should we paint WebElements to ignore
-	static Color PAINT_IT_COLOR = Color.DARK_GRAY
+	static Color PAINT_IT_COLOR = Color.LIGHT_GRAY
 
 	/**
 	 * 

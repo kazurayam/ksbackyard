@@ -12,7 +12,7 @@ public class VersionTest {
 
 	@Test
 	void testGetVersion() {
-		def expected = 'ksbackyard 0.21.0'
+		def expected = 'ksbackyard 0.22.0'
 		def actual = Version.getVersion()
 		assertThat(actual, is(expected))
 	}
