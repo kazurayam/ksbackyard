@@ -1,0 +1,3 @@
+import com.kazurayam.ksbackyard.ScreenshotDriverOptionsTest
+
+CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverOptionsTest.class)

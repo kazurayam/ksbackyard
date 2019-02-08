@@ -7,6 +7,8 @@ import com.kms.katalon.core.testobject.TestObject
 
 import java.io.File
 
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+
 import java.lang.Integer
 
 import java.lang.Double
@@ -19,13 +21,13 @@ import java.lang.Boolean
 
 import java.lang.Number
 
-import java.lang.Class
-
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
 import java.util.List
+
+import java.lang.Class
 
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
@@ -43,9 +45,23 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
+    	Options options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
+        	options)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	Integer timeout	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
         	timeout)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
+    	File file	
+     , 	Options options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
+        	file
+         , 	options)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
@@ -210,12 +226,6 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
-}
-
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -294,20 +304,6 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
@@ -416,6 +412,26 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
     	java.util.List<TestObject> testObjectList	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
         	testObjectList)
+}
+
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {

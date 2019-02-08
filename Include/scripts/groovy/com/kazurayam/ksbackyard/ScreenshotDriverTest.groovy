@@ -28,7 +28,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
-import com.kazurayam.ksbackyard.ScreenshotDriver.ImageDifference
+import com.kazurayam.imagedifference.ImageDifference
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI

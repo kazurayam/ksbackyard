@@ -1,7 +1,8 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
-import java.nio.file.Files
+import java.awt.Color
+import java.awt.Graphics2D
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -13,6 +14,8 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
+import com.kazurayam.imagedifference.ImageDifference
+import com.kazurayam.imagedifference.ImageDifferenceSerializer
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
@@ -20,13 +23,13 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+import groovy.json.JsonOutput
 import ru.yandex.qatools.ashot.AShot
+import ru.yandex.qatools.ashot.coordinates.Coords
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
-import ru.yandex.qatools.ashot.comparison.ImageDiff
-import ru.yandex.qatools.ashot.comparison.ImageDiffer
-// import com.kazurayam.ksbackyard.test.ashot.AShotMock
+
 
 /**
  * Wraps the AShot API, WebDriver Screenshot utility. 
@@ -55,8 +58,7 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement)
-	{
+	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
 		int timeout = 500
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
@@ -95,8 +97,7 @@ class ScreenshotDriver {
 	 * @return
 	 */
 	@Keyword
-	static BufferedImage takeElementImage(TestObject testObject)
-	{
+	static BufferedImage takeElementImage(TestObject testObject) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject, 30)
 		return takeElementImage(webDriver, webElement)
@@ -119,8 +120,7 @@ class ScreenshotDriver {
 	 * @param webElement
 	 * @param file
 	 */
-	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file)
-	{
+	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
 		ImageIO.write(image, "PNG", file)
 	}
@@ -134,13 +134,13 @@ class ScreenshotDriver {
 	 * @param file
 	 */
 	@Keyword
-	static void saveElementImage(TestObject testObject, File file)
-	{
+	static void saveElementImage(TestObject testObject, File file) {
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		WebElement webElement = WebUI.findWebElement(testObject,30)
 		saveElementImage(webDriver, webElement, file)
 	}
 
+	//-----------------------------------------------------------------
 
 	/**
 	 * takes screenshot of the entire page 
@@ -151,9 +151,41 @@ class ScreenshotDriver {
 	 * @param ignoredElementList 
 	 * @return BufferedImage
 	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver,
-			List<By> ignoredElementList, Integer timeout = 300) {
-		// AShot aShot = new AShot().coordsProvider(new WebDriverCoodsProvider())
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Options options)
+	{
+		int timeout = options.getTimeout()
+		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements())
+		AShot aShot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(ShootingStrategies.viewportPasting(timeout))
+		for (By by : byList) {
+			aShot = aShot.addIgnoredElement(by)
+			println "added ignored element ${by}"
+		}
+		Screenshot screenshot = aShot.takeScreenshot(webDriver)
+		//return screenshot.getImage()
+		return censor(screenshot)
+	}
+
+	// In which color should we paint WebElements to ignore
+	static Color PAINT_IT_COLOR = Color.LIGHT_GRAY
+
+	/**
+	 * 
+	 */
+	static BufferedImage censor(Screenshot screenshot) {
+		BufferedImage bi = screenshot.getImage()
+		Graphics2D g2D = bi.createGraphics()
+		g2D.setColor(PAINT_IT_COLOR)
+		Set<Coords> paintedAreas = screenshot.getIgnoredAreas()
+		for (Coords rect : paintedAreas) {
+			int x = (int)rect.getX()
+			int y = (int)rect.getY()
+			int width = (int)rect.getWidth()
+			int height = (int)rect.getHeight()
+			g2D.fillRect(x, y, width, height)
+		}
+		return bi
 	}
 
 	/**
@@ -174,6 +206,18 @@ class ScreenshotDriver {
 		return screenshot.getImage()
 	}
 
+	//--------------
+
+	/**
+	 * 
+	 * @param options
+	 * @return
+	 */
+	@Keyword
+	static BufferedImage takeEntirePageImage(Options options) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		return takeEntirePageImage(webDriver, options)
+	}
 
 	/**
 	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
@@ -187,6 +231,14 @@ class ScreenshotDriver {
 	{
 		WebDriver webDriver = DriverFactory.getWebDriver()
 		return takeEntirePageImage(webDriver, timeout)
+	}
+
+	//-------------
+
+	static void saveEntirePageImage(WebDriver webDriver, File file, Options options)
+	{
+		BufferedImage image = takeEntirePageImage(webDriver, options)
+		ImageIO.write(image, "PNG", file)
 	}
 
 	/**
@@ -203,6 +255,19 @@ class ScreenshotDriver {
 		ImageIO.write(image, "PNG", file)
 	}
 
+	//-------------
+
+	/**
+	 * 
+	 * @param file
+	 * @param options
+	 */
+	@Keyword
+	static void saveEntirePageImage(File file, Options options) {
+		WebDriver driver = DriverFactory.getWebDriver()
+		saveEntirePageImage(driver, file, options)
+	}
+
 	/**
 	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
 	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
@@ -216,11 +281,13 @@ class ScreenshotDriver {
 		saveEntirePageImage(driver, file, timeout)
 	}
 
-
+	//-----------
 
 	/**
 	 * similar to saveEntirePageImage(WebDriver, File, Integer)
+	 * 
 	 * @deprecated use saveEntirePageImage(File, Integer) instead
+	 * 
 	 * @param webDriver
 	 * @param file
 	 */
@@ -229,11 +296,7 @@ class ScreenshotDriver {
 		saveEntirePageImage(webDriver, file, timeout)
 	}
 
-
-
-
-
-
+	//-----------------------------------------------------------------
 
 
 	/**
@@ -430,159 +493,59 @@ class ScreenshotDriver {
 	}
 
 
+
 	/**
-	 * encloses 3 Path objects; expected, actual and diff
-	 * resolves 3 file paths, writes images into files
 	 * 
-	 * @author kazurayam
-	 *
 	 */
-	static class ImageDifferenceSerializer {
+	static class Options {
 
-		private ImageDifference imgDifference_
-		private Path outputDirectory_
-		private Path expected_
-		private Path actual_
-		private Path diff_
+		private int timeout
+		private List<TestObject> ignoredElements
 
-		ImageDifferenceSerializer(ImageDifference imgDifference, Path outputDirectory, String identifier)
-		{
-			imgDifference_ = imgDifference
-			outputDirectory_ = outputDirectory
-			expected_ = outputDirectory.resolve(identifier + ".expected.png")
-			actual_   = outputDirectory.resolve(identifier + ".actual.png")
-			diff_     = outputDirectory.resolve(identifier + ".diff(${imgDifference.getRatioAsString()}).png")
-		}
+		static class Builder {
 
-		Path getExpected() {
-			return expected_
-		}
+			private int timeout
+			private List<TestObject> ignoredElements
 
-		Path getActual() {
-			return actual_
-		}
-
-		Path getDiff() {
-			return diff_
-		}
-
-		void serialize() {
-			Files.createDirectories(outputDirectory_)
-			ImageIO.write(imgDifference_.getExpectedImage(), "PNG", expected_.toFile())
-			ImageIO.write(imgDifference_.getActualImage(),   "PNG", actual_.toFile())
-			ImageIO.write(imgDifference_.getDiffImage(),     "PNG", diff_.toFile())
-		}
-	}
-
-
-
-	/**
-	 * accepts 2 BufferedImages as input, compare them, make a difference image,
-	 * and calcurate the ratio of difference of the 2 input images.
-	 */
-	static class ImageDifference {
-
-		private BufferedImage expectedImage_
-		private BufferedImage actualImage_
-		private BufferedImage diffImage_
-		private Double ratio_ = 0.0        // percentage
-		private Double criteria_ = 1.0     // percentage
-
-		ImageDifference()
-		{
-			expectedImage_ = null
-			actualImage_ = null
-		}
-
-		ImageDifference(BufferedImage expected, BufferedImage actual)
-		{
-			expectedImage_ = expected
-			actualImage_ = actual
-			ImageDiff imgDiff = makeImageDiff(expectedImage_, actualImage_)
-			ratio_ = calculateRatioPercent(imgDiff)
-			diffImage_ = imgDiff.getMarkedImage()
-		}
-
-		private ImageDiff makeImageDiff(BufferedImage expected, BufferedImage actual)
-		{
-			Screenshot expectedScreenshot = new Screenshot(expected)
-			Screenshot actualScreenshot = new Screenshot(actual)
-			ImageDiff imgDiff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot)
-			return imgDiff
-		}
-
-		BufferedImage getExpectedImage() {
-			expectedImage_
-		}
-
-		BufferedImage getActualImage() {
-			actualImage_
-		}
-
-		BufferedImage getDiffImage() {
-			return diffImage_
-		}
-
-		void setCriteria(Double criteria) {
-			criteria_ = criteria
-		}
-
-		Double getCriteria() {
-			return criteria_
-		}
-
-		/**
-		 *
-		 * @return e.g. 0.23% or 90.0%
-		 */
-		Double getRatio() {
-			return ratio_
-		}
-
-		/**
-		 * @return e.g. "0.23" or "90.00"
-		 */
-		String getRatioAsString(String fmt = '%1$.2f') {
-			return String.format(fmt, this.getRatio())
-		}
-
-		/**
-		 *
-		 * Round up 0.0001 to 0.01
-		 *
-		 * @param diff
-		 * @return
-		 */
-		private Double calculateRatioPercent(ImageDiff diff) {
-			boolean hasDiff = diff.hasDiff()
-			if (!hasDiff) {
-				return 0.0
+			Builder() {
+				timeout = 300   // default is 300 milli seconds
+				ignoredElements = new ArrayList<TestObject>()   // no elements to ignore
 			}
-			int diffSize = diff.getDiffSize()
-			int area = diff.getMarkedImage().getWidth() * diff.getMarkedImage().getHeight()
-			Double diffRatio = diff.getDiffSize() / area * 100
-			BigDecimal bd = new BigDecimal(diffRatio)
-			BigDecimal bdUP = bd.setScale(2, BigDecimal.ROUND_UP);  // 0.001 -> 0.01
-			return bdUP.doubleValue()
+			Builder timeout(int value) {
+				if (value < 0) throw new IllegalArgumentException("value(${value}) must not be negative")
+				if (value > 1000) throw new IllegalArgumentException("value(${value}) is regared milli-seconds.")
+				this.timeout = value
+				return this
+			}
+			Builder addIgnoredElement(TestObject testObject) {
+				Objects.requireNonNull(testObject, "testObject must not be null")
+				this.ignoredElements.add(testObject)
+				return this
+			}
+			Options build() {
+				return new Options(this)
+			}
 		}
 
-
-		/**
-		 * @return true if the expected image and the actual image pair has
-		 *         greater difference than the criteria = these are different enough,
-		 *         otherwise false.
-		 */
-		Boolean imagesAreDifferent() {
-			return (ratio_ > criteria_)
+		private Options(Builder builder) {
+			this.timeout = builder.timeout
+			this.ignoredElements = builder.ignoredElements
 		}
 
-		/**
-		 * @return true if the expected image and the actual image pair has
-		 *         smaller difference than the criteria = these are similar enough,
-		 *         otherwise false.
-		 */
-		Boolean imagesAreSimilar() {
-			return (ratio_ <= criteria_)
+		int getTimeout() {
+			return this.timeout
+		}
+
+		List<TestObject> getIgnoredElements() {
+			return this.ignoredElements
+		}
+
+		@Override
+		String toString() {
+			String s = JsonOutput.toJson(this)
+			String pp = JsonOutput.prettyPrint(s)
+			return pp
 		}
 	}
+
 }
