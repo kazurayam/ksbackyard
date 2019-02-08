@@ -37,7 +37,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
  *
  */
 @RunWith(JUnit4.class)
-class ScreenshotDriverIgnoringElementsTest {
+class ScreenshotDriverCensoringTest {
 
 	private static String url_
 	private static Path fixturedir_
@@ -49,7 +49,7 @@ class ScreenshotDriverIgnoringElementsTest {
 		fixturedir_ = projectDir.resolve('Include/resources/fixture')
 		Path targetHTML = fixturedir_.resolve('47News/20190205_144400/page.html')
 		url_ = targetHTML.toUri().toURL().toExternalForm()
-		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverIgnoringElementsTest')
+		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverCencoringTest')
 		if (Files.exists(workdir_)) {
 			FileUtils.deleteQuietly(workdir_.toFile())
 		}
@@ -72,8 +72,8 @@ class ScreenshotDriverIgnoringElementsTest {
 	}
 
 	@Test
-	void test_save47News_ignoringElements() {
-		WebUI.comment(">>> test_save47News_ignoreingElements")
+	void test_censor_47News() {
+		WebUI.comment(">>> test_cencor_47News")
 		WebUI.navigateToUrl(url_)
 
 		Path output = workdir_.resolve("47News_top.png")

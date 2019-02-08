@@ -1,6 +1,8 @@
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
+import java.awt.Color
+import java.awt.Graphics2D
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -23,6 +25,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import groovy.json.JsonOutput
 import ru.yandex.qatools.ashot.AShot
+import ru.yandex.qatools.ashot.coordinates.Coords
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
@@ -160,7 +163,29 @@ class ScreenshotDriver {
 			println "added ignored element ${by}"
 		}
 		Screenshot screenshot = aShot.takeScreenshot(webDriver)
-		return screenshot.getImage()
+		//return screenshot.getImage()
+		return censor(screenshot)
+	}
+
+	// In which color should we paint WebElements to ignore
+	static Color PAINT_IT_COLOR = Color.DARK_GRAY
+
+	/**
+	 * 
+	 */
+	static BufferedImage censor(Screenshot screenshot) {
+		BufferedImage bi = screenshot.getImage()
+		Graphics2D g2D = bi.createGraphics()
+		g2D.setColor(PAINT_IT_COLOR)
+		Set<Coords> paintedAreas = screenshot.getIgnoredAreas()
+		for (Coords rect : paintedAreas) {
+			int x = (int)rect.getX()
+			int y = (int)rect.getY()
+			int width = (int)rect.getWidth()
+			int height = (int)rect.getHeight()
+			g2D.fillRect(x, y, width, height)
+		}
+		return bi
 	}
 
 	/**

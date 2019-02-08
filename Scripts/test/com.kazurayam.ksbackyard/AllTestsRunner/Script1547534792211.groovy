@@ -3,6 +3,7 @@ import com.kazurayam.ksbackyard.ImageCollectionDifferTest
 import com.kazurayam.ksbackyard.RunConfigurationWrapperTest
 import com.kazurayam.ksbackyard.QuietBrowserTest
 import com.kazurayam.ksbackyard.ScreenshotDriverTest
+import com.kazurayam.ksbackyard.ScreenshotDriverCensoringTest
 import com.kazurayam.ksbackyard.ScreenshotDriverCompareImagesTest
 import com.kazurayam.ksbackyard.ScreenshotDriverOptionsTest
 import com.kazurayam.ksbackyard.TestObjectSupportTest
@@ -14,6 +15,7 @@ CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitR
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(QuietBrowserTest.class)
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(RunConfigurationWrapperTest.class)
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverTest.class)
+CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverCensoringTest.class)
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverCompareImagesTest.class)
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverOptionsTest.class)
 CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(TestObjectSupportTest.class)

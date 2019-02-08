@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ScreenshotDriverIgnoringElementsTestRunner</name>
+   <name>ScreenshotDriverCensoringTestRunner</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>3d8b575e-7f93-4576-98f5-cba1b01f8cc7</testCaseGuid>
