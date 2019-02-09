@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard.junit
+package com.kazurayam.junit4ks
 
 import java.text.MessageFormat
 

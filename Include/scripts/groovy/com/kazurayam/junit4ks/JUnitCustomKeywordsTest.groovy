@@ -1,4 +1,5 @@
-package com.kazurayam.ksbackyard.junit
+package com.kazurayam.junit4ks
+
 
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static org.hamcrest.CoreMatchers.*
@@ -36,8 +37,8 @@ public class JUnitCustomKeywordsTest {
 
 	@Test
 	public void test_findTestObject() {
-		WebUI.navigateToUrl("http://demoaut.katalon.com/appointment")
-		TestObject to = findTestObject("Page_CURA Healthcare Service/a_Make Appointment")
+		WebUI.navigateToUrl("https://katalon-demo-cura.herokuapp.com/")
+		TestObject to = findTestObject("Page_CURA Healthcare Service/a_Make Appointment_BASIC")
 		WebUI.verifyElementPresent(to, 10)
 	}
 }
