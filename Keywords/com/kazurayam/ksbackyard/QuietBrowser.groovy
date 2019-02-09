@@ -19,7 +19,6 @@ import com.kms.katalon.core.network.ProxyInformation
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.driver.WebUIDriverType
 
-
 class QuietBrowser {
 
 	static ProxyInformation proxyInformation = RunConfiguration.getProxyInformation()

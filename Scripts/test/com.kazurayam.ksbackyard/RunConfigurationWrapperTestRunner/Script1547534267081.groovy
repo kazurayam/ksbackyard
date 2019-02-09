@@ -1,3 +1,3 @@
 import com.kazurayam.ksbackyard.RunConfigurationWrapperTest
 
-CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(RunConfigurationWrapperTest.class)
+CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(RunConfigurationWrapperTest.class)

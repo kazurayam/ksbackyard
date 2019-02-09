@@ -1,0 +1,39 @@
+$(function () {
+  var $name = $('input#Name');
+  var $nameKana = $('input#Kana');
+  var $email = $('input#InputEmail1');
+  var $type = $('select#Select');
+  var $message = $('textarea#Textarea');
+  var $submit = $('button#contact_submit');
+
+  if (!$name.get(0)) return;
+
+  function inputCheck() {
+    if ($name.val().length > 0
+      && $nameKana.val().length > 0
+      && $email.val().length > 0
+      && $type.val().length > 0
+      && $message.val().length > 0) {
+      $submit.prop('disabled', false);
+    } else {
+      $submit.prop('disabled', true);
+    }
+  }
+
+  $name.on('keyup', function () {
+    inputCheck();
+  });
+  $nameKana.on('keyup', function () {
+    inputCheck();
+  });
+  $email.on('keyup', function () {
+    inputCheck();
+  });
+  $type.change(function () {
+    inputCheck();
+  });
+  $message.on('keyup', function () {
+    inputCheck();
+  });
+  inputCheck();
+});

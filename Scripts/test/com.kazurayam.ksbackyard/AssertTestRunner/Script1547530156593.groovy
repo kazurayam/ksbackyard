@@ -1,3 +1,3 @@
 import com.kazurayam.ksbackyard.AssertTest
 
-CustomKeywords.'com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner'(AssertTest.class)
+CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(AssertTest.class)

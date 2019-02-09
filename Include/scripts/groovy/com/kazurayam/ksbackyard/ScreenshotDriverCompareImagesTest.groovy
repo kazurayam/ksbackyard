@@ -20,7 +20,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.ConditionType

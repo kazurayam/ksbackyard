@@ -7,6 +7,8 @@ import com.kms.katalon.core.testobject.TestObject
 
 import java.io.File
 
+import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+
 import java.lang.Integer
 
 import java.lang.Double
@@ -19,11 +21,13 @@ import java.lang.Boolean
 
 import java.lang.Number
 
-import java.lang.Class
-
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
+
+import java.lang.Class
+
+import java.util.List
 
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
@@ -41,9 +45,23 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage"(
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
+    	Options options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
+        	options)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePageImage"(
     	Integer timeout	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePageImage(
         	timeout)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
+    	File file	
+     , 	Options options	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).saveEntirePageImage(
+        	file
+         , 	options)
 }
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
@@ -294,20 +312,6 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
          , 	actual)
 }
 
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.junit.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	) {
-    (new com.kazurayam.ksbackyard.junit.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass)
-}
-
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
     (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).getProjectDir()
 }
@@ -398,10 +402,36 @@ def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill
         	video)
 }
 
-def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
+def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.junit4ks.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass
+         , 	flowControl)
+}
+
+def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
+    	Class junitRunnerClass	) {
+    (new com.kazurayam.junit4ks.JUnitCustomKeywords()).runWithJUnitRunner(
+        	junitRunnerClass)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
     	TestObject testObject	) {
-    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toJson(
         	testObject)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
+    	TestObject testObject	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
+        	testObject)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
+    	java.util.List<TestObject> testObjectList	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
+        	testObjectList)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {

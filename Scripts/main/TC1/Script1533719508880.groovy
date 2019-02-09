@@ -14,7 +14,7 @@ WebUI.setViewPortSize(1024, 768)
 
 WebUI.navigateToUrl(GlobalVariable.URL)
 
-WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment'),
+WebUI.verifyElementPresent(findTestObject('Page_CURA Healthcare Service/a_Make Appointment_BASIC'),
 	10, FailureHandling.STOP_ON_FAILURE)
 
 WebUI.delay(1)
