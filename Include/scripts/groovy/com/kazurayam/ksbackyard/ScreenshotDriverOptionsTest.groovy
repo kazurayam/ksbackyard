@@ -29,7 +29,7 @@ public class ScreenshotDriverOptionsTest {
 	void test_getTimeout_default() {
 		Options options = new Options.Builder().build()
 		int timeout = options.getTimeout()
-		assertEquals(300, timeout)
+		assertEquals(500, timeout)
 	}
 
 	@Test
