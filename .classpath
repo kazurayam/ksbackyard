@@ -105,9 +105,9 @@
 	<classpathentry kind="lib" path="/Applications/Katalon Studio.app/Contents/Eclipse/plugins/wsdl4j_1.6.2.jar"/>
 	<classpathentry kind="lib" path="/Applications/Katalon Studio.app/Contents/Eclipse/plugins/com.google.oauth-client.google-oauth-client_1.22.0.jar"/>
 	<classpathentry kind="lib" path="/Applications/Katalon Studio.app/Contents/Eclipse/plugins/com.google.http-client.google-http-client_1.22.0.jar"/>
-	<classpathentry kind="lib" path="/Users/urayamakazuaki/katalon-workspace/ksbackyard/Drivers/Materials-0.26.0.jar"/>
-	<classpathentry kind="lib" path="/Users/urayamakazuaki/katalon-workspace/ksbackyard/Drivers/ImageDifference-0.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/urayamakazuaki/katalon-workspace/ksbackyard/Drivers/ImageDifference-0.8.0.jar"/>
 	<classpathentry kind="lib" path="/Users/urayamakazuaki/katalon-workspace/ksbackyard/Drivers/ashot-1.5.4.jar"/>
+	<classpathentry kind="lib" path="/Users/urayamakazuaki/katalon-workspace/ksbackyard/Drivers/Materials-0.36.1.jar"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

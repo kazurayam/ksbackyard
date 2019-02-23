@@ -147,20 +147,18 @@ class ScreenshotDriverTest {
 		wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='btn-make-appointment']")))
 		BufferedImage actualImage = ScreenshotDriver.takeEntirePageImage(driver_)
 		//
-		ImageDifference difference = ScreenshotDriver.verifyImages(expectedImage, actualImage, 3.0)
+		ImageDifference difference = ScreenshotDriver.verifyImages(expectedImage, actualImage)
 		//
-		assertTrue("${expectedUrl} and ${actualUrl} look similar", difference.imagesAreDifferent())
+		assertTrue("${expectedUrl} and ${actualUrl} look similar", difference.imagesAreDifferent(3.0))
 		// assert ImageDifference properties
 		assertTrue("difference returned null expectedImage", difference.getExpectedImage() != null)
 		assertTrue("difference returned null actualImage", difference.getActualImage() != null)
 		assertTrue("difference returned null diffImage", difference.getDiffImage() != null)
-		assertTrue("difference returned criteria ${difference.getCriteria()} != 3.0",
-				difference.getCriteria() == 3.0)
 		assertTrue("difference returned ratio ${difference.getRatio()} which is unexpected",
 				difference.getRatio() > 0 && difference.getRatio() < 10.0)
 		//assertTrue("difference returned ratioAsString ${difference.getRatioAsString()}", difference.getRatioAsString() == '6.05')
-		assertTrue("difference returned ${difference.imagesAreDifferent()} for imagesAreDifferent()",
-				difference.imagesAreDifferent())
+		assertTrue("difference returned ${difference.imagesAreDifferent(3.0)} for imagesAreDifferent()",
+				difference.imagesAreDifferent(3.0))
 	}
 
 

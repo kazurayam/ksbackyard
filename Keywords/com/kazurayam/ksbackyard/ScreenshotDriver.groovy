@@ -277,10 +277,9 @@ class ScreenshotDriver {
 	 * @param criteriaPercent
 	 * @return
 	 */
-	static ImageDifference verifyImages(BufferedImage expectedImage,
-			BufferedImage actualImage, Double criteriaPercent)
+	static ImageDifference verifyImages(BufferedImage expectedImage, BufferedImage actualImage)
 	{
-		return compareImages(expectedImage, actualImage, criteriaPercent)
+		return compareImages(expectedImage, actualImage)
 	}
 
 	/**
@@ -291,14 +290,9 @@ class ScreenshotDriver {
 	 * @param Double criteriaPercentage, e.g. 90.0%
 	 * @return ImageDifference object which represents how much different the input 2 images are
 	 */
-	static ImageDifference compareImages(
-			BufferedImage expectedImage,
-			BufferedImage actualImage,
-			Double criteriaPercent)
+	static ImageDifference compareImages(BufferedImage expectedImage, BufferedImage actualImage)
 	{
-		ImageDifference imgDifference =
-				new ImageDifference(expectedImage, actualImage)
-		imgDifference.setCriteria(criteriaPercent)
+		ImageDifference imgDifference = new ImageDifference(expectedImage, actualImage)
 		return imgDifference
 	}
 
@@ -307,14 +301,11 @@ class ScreenshotDriver {
 	 * @param actualImage of TestObject which points HTML element in question
 	 * @return ImageDifference object which contains comparison result
 	 */
-	static ImageDifference compareImages(
-			File expected,
-			TestObject actual,
-			Double criteriaPercent)
+	static ImageDifference compareImages(File expected, TestObject actual)
 	{
 		BufferedImage exp = ImageIO.read(expected)
 		BufferedImage act = takeElementImage(actual)
-		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
+		ImageDifference imgDifference = compareImages(exp, act)
 		return imgDifference
 	}
 
@@ -323,14 +314,11 @@ class ScreenshotDriver {
 	 * @param actualImage of TestObject which points HTML element in question
 	 * @return ImageDifference object which contains comparison result
 	 */
-	static ImageDifference compareImages(
-			TestObject expected,
-			TestObject actual,
-			Double criteriaPercent)
+	static ImageDifference compareImages(TestObject expected, TestObject actual)
 	{
 		BufferedImage exp = takeElementImage(expected)
 		BufferedImage act = takeElementImage(actual)
-		ImageDifference imgDifference = compareImages(exp, act, criteriaPercent)
+		ImageDifference imgDifference = compareImages(exp, act)
 		return imgDifference
 	}
 
@@ -351,8 +339,8 @@ class ScreenshotDriver {
 			File snapshotsDir = tmpDir_,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE)
 	{
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		boolean result = imgDifference.imagesAreSimilar()
+		ImageDifference imgDifference = compareImages(expected, actual)
+		boolean result = imgDifference.imagesAreSimilar(criteriaPercent)
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
 				'verifyImagesAreSimilar(File,TestObject)')
@@ -384,8 +372,8 @@ class ScreenshotDriver {
 			File snapshotsDir = tmpDir_,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE)
 	{
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		boolean result = imgDifference.imagesAreDifferent()
+		ImageDifference imgDifference = compareImages(expected, actual)
+		boolean result = imgDifference.imagesAreDifferent(criteriaPercent)
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
 				'verifyImagesAreDifferent(File,TestObject)')
@@ -409,9 +397,9 @@ class ScreenshotDriver {
 			File snapshotsDir = tmpDir_,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE)
 	{
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		ImageDifference imgDifference = compareImages(expected, actual)
 		// check if these are similar?
-		boolean result = imgDifference.imagesAreSimilar()
+		boolean result = imgDifference.imagesAreSimilar(criteriaPercent)
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
 				'verifyImagesAreSimilar(TestObject,TestObject)')
@@ -434,9 +422,9 @@ class ScreenshotDriver {
 			File snapshotsDir = tmpDir_,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE)
 	{
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		ImageDifference imgDifference = compareImages(expected, actual)
 		// check if these are different?
-		boolean result = imgDifference.imagesAreDifferent()
+		boolean result = imgDifference.imagesAreDifferent(criteriaPercent)
 		ImageDifferenceSerializer serializer =
 				new ImageDifferenceSerializer(imgDifference, snapshotsDir.toPath(),
 				'verifyImagesAreDifferent(TestObject,TestObject)')
@@ -471,7 +459,7 @@ class ScreenshotDriver {
 	static class Options {
 
 		static private int DEFAULT_SCROLLING_TIMEOUT = 500
-		
+
 		private int timeout
 		private List<TestObject> ignoredElements
 
@@ -494,8 +482,8 @@ class ScreenshotDriver {
 					throw new IllegalArgumentException("value(${value}) must not be negative")
 				}
 				if (value > DEFAULT_SCROLLING_TIMEOUT * 10) {
-					throw new IllegalArgumentException("value(${value}) must be less than " + 
-						"or equal to ${DEFAULT_SCROLLING_TIMEOUT * 10} milli-seconds.")
+					throw new IllegalArgumentException("value(${value}) must be less than " +
+					"or equal to ${DEFAULT_SCROLLING_TIMEOUT * 10} milli-seconds.")
 				}
 				this.timeout = value
 				return this
