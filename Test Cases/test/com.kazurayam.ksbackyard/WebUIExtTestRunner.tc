@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>OpenChromeWithCustomProfile</name>
+   <name>WebUIExtTestRunner</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>f145a85c-68db-4d27-9849-1420120e2e47</testCaseGuid>
+   <testCaseGuid>91a29ab1-5efd-4fde-a31b-3de5d80354b2</testCaseGuid>
 </TestCaseEntity>
