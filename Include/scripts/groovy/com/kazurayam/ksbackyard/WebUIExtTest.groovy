@@ -23,8 +23,9 @@ public class WebUIExtTest {
 	@Test
 	void test_openWebDriverWithPredefinedUserProfile() {
 		WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
-		String userProfile = 'Profile 2'
-		WebDriver driver = WebUIExt.openWebDriverWithPredefinedUserProfile(executedBrowser, userProfile, FailureHandling.CONTINUE_ON_FAILURE)
+		// https://forum.katalon.com/t/open-browser-with-custom-profile/19268/5
+		String profileDirectory = 'Default'
+		WebDriver driver = WebUIExt.openWebDriverWithPredefinedUserProfile(executedBrowser, profileDirectory, FailureHandling.CONTINUE_ON_FAILURE)
 		if (driver != null) {
 			DriverFactory.changeWebDriver(driver)
 			WebUI.closeBrowser()

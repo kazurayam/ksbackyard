@@ -310,11 +310,11 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
 
 def static "com.kazurayam.ksbackyard.WebUIExt.openWebDriverWithPredefinedUserProfile"(
     	WebUIDriverType executedBrowser	
-     , 	String userProfile	
+     , 	String profileDirectory	
      , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.WebUIExt()).openWebDriverWithPredefinedUserProfile(
         	executedBrowser
-         , 	userProfile
+         , 	profileDirectory
          , 	flowControl)
 }
 

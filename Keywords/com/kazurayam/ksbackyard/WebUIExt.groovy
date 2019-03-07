@@ -27,7 +27,7 @@ public class WebUIExt {
 	 * @return
 	 */
 	@Keyword
-	static WebDriver openWebDriverWithPredefinedUserProfile(WebUIDriverType executedBrowser, String userProfile, FailureHandling flowControl) {
+	static WebDriver openWebDriverWithPredefinedUserProfile(WebUIDriverType executedBrowser, String profileDirectory, FailureHandling flowControl) {
 		WebDriver webDriver = null
 		Path logsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('logs')
 		Files.createDirectories(logsDir)
@@ -42,22 +42,22 @@ public class WebUIExt {
 				System.setProperty('webdriver.chrome.driver', DriverFactory.getChromeDriverPath())
 				System.setProperty('webdriver.chrome.logfile', logsDir.resolve('chromedriver.log').toString())
 				Path chromeProfilePath = getChromeProfilePath()
-				Path predefinedUserProfile = chromeProfilePath.resolve(userProfile)
-				if (Files.exists(predefinedUserProfile)) {
+				Path profileDirectoryPath = chromeProfilePath.resolve(profileDirectory)
+				if (Files.exists(profileDirectoryPath)) {
 					ChromeOptions chromeOptions = new ChromeOptions()
 					chromeOptions.addArguments("user-data-dir=" + chromeProfilePath.toString())
-					chromeOptions.addArguments("profile-directory=${userProfile}")
+					chromeOptions.addArguments("profile-directory=${profileDirectory}")
 					// The following lines are copy&pasted from 
 					// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
-					chromeOptions.addArguments("start-maximized"); // open Browser in maximized mode
-					chromeOptions.addArguments("disable-infobars"); // disabling infobars
-					chromeOptions.addArguments("--disable-extensions"); // disabling extensions
-					chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
-					chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-					chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
+					chromeOptions.addArguments("start-maximized")           // open Browser in maximized mode
+					chromeOptions.addArguments("disable-infobars")          // disabling infobars
+					//chromeOptions.addArguments("--disable-extensions")      // disabling extensions
+					chromeOptions.addArguments("--disable-gpu")             // applicable to windows os only
+					chromeOptions.addArguments("--disable-dev-shm-usage")   // overcome limited resource problems
+					chromeOptions.addArguments("--no-sandbox")              // Bypass OS security model
 					webDriver = new ChromeDriver(chromeOptions)
 				} else {
-					Assert.stepFailed("userProfile \"${userProfile}\" is not predefined", flowControl)
+					Assert.stepFailed("userProfile \"${profileDirectory}\" is not predefined", flowControl)
 				}
 				break
 			default:
