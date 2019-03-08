@@ -434,6 +434,12 @@ def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeProfilePath"
     (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeProfilePath()
 }
 
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeProfileDirectoryOf"(
+    	String userName	) {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeProfileDirectoryOf(
+        	userName)
+}
+
 def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toJson(

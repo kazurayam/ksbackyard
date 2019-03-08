@@ -103,4 +103,11 @@ public class BrowserWithCachedData {
 			"Windows, Mac, Linux are supported. Other platforms are not supported.")
 		}
 	}
+	
+	@Keyword
+	static Path getChromeProfileDirectoryOf(String userName) {
+		Path userDataDir = BrowserWithCachedData.getChromeProfilePath()
+		// use lambda and stream to filter Preferences files
+		throw new UnsupportedOperationException("TODO")
+	}
 }

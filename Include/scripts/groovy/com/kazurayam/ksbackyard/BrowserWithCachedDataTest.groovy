@@ -1,10 +1,13 @@
 package com.kazurayam.ksbackyard
 
+import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -21,6 +24,7 @@ public class BrowserWithCachedDataTest {
 	@Before
 	void setup() {}
 
+	@Ignore
 	@Test
 	void test_openChromeDriver_diretory_Default() {
 		WebDriver driver = BrowserWithCachedData.openChromeDriver(
@@ -30,6 +34,13 @@ public class BrowserWithCachedDataTest {
 			WebUI.setViewPortSize(800, 600)
 			WebUI.closeBrowser()
 		}
+	}
+	
+	@Test
+	void test_getChromeProfileDirectoryOf() {
+		String user = 'Katalon'
+		Path profileDirectory = BrowserWithCachedData.getChromeProfileDirectoryOf(user)
+		assertThat(Files.exists(profileDirectory), is(true))
 	}
 
 }
