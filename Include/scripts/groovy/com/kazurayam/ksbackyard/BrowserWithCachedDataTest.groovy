@@ -1,5 +1,6 @@
 package com.kazurayam.ksbackyard
 
+import java.nio.file.Paths
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
@@ -15,19 +16,18 @@ import com.kms.katalon.core.webui.driver.WebUIDriverType
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 @RunWith(JUnit4.class)
-public class WebUIExtTest {
-	
+public class BrowserWithCachedDataTest {
+
 	@Before
 	void setup() {}
-	
+
 	@Test
-	void test_openWebDriverWithPredefinedUserProfile() {
-		WebUIDriverType executedBrowser = DriverFactory.getExecutedBrowser()
-		// https://forum.katalon.com/t/open-browser-with-custom-profile/19268/5
-		String profileDirectory = 'Default'
-		WebDriver driver = WebUIExt.openWebDriverWithPredefinedUserProfile(executedBrowser, profileDirectory, FailureHandling.CONTINUE_ON_FAILURE)
+	void test_openChromeDriver_diretory_Default() {
+		WebDriver driver = BrowserWithCachedData.openChromeDriver(
+								Paths.get('Default'),
+								FailureHandling.CONTINUE_ON_FAILURE)
 		if (driver != null) {
-			DriverFactory.changeWebDriver(driver)
+			WebUI.setViewPortSize(800, 600)
 			WebUI.closeBrowser()
 		}
 	}

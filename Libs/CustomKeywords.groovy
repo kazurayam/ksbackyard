@@ -21,13 +21,13 @@ import java.lang.Boolean
 
 import java.lang.Number
 
-import com.kms.katalon.core.webui.driver.WebUIDriverType
-
 import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
 import java.lang.Class
+
+import java.nio.file.Path
 
 import java.util.List
 
@@ -228,6 +228,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -306,20 +312,6 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
-}
-
-def static "com.kazurayam.ksbackyard.WebUIExt.openWebDriverWithPredefinedUserProfile"(
-    	WebUIDriverType executedBrowser	
-     , 	String profileDirectory	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.WebUIExt()).openWebDriverWithPredefinedUserProfile(
-        	executedBrowser
-         , 	profileDirectory
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.WebUIExt.getChromeProfilePath"() {
-    (new com.kazurayam.ksbackyard.WebUIExt()).getChromeProfilePath()
 }
 
 def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
@@ -426,6 +418,22 @@ def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
         	junitRunnerClass)
 }
 
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+    	Path profileDirectoryName	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+        	profileDirectoryName
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeDriverPath"() {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeDriverPath()
+}
+
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeProfilePath"() {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeProfilePath()
+}
+
 def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
     	TestObject testObject	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toJson(
@@ -442,12 +450,6 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
     	java.util.List<TestObject> testObjectList	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
         	testObjectList)
-}
-
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
