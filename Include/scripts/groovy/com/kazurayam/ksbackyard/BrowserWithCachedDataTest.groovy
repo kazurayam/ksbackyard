@@ -1,11 +1,10 @@
 package com.kazurayam.ksbackyard
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
+
+import java.nio.file.Files
+import java.nio.file.Path
 
 import org.junit.Before
 import org.junit.Ignore
@@ -13,28 +12,31 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.chrome.ChromeOptions
 
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.webui.driver.DriverFactory
-import com.kms.katalon.core.webui.driver.WebUIDriverType
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-
-import com.kazurayam.ksbackyard.BrowserWithCachedData
 import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfile
 import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfileFinder
+import com.kms.katalon.core.model.FailureHandling
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+/**
+ * @author urayamakazuaki
+ *
+ */
 @RunWith(JUnit4.class)
 public class BrowserWithCachedDataTest {
 
 	@Before
 	void setup() {}
 
+	@Ignore
 	@Test
 	void test_getUserDataDirectory() {
 		Path userDataDirectory = BrowserWithCachedData.getUserDataDirectory()
 		assertThat(Files.exists(userDataDirectory), is(true))
 	}
 
+	@Ignore
 	@Test
 	void test_ChromeProfile() {
 		// when:
@@ -47,13 +49,16 @@ public class BrowserWithCachedDataTest {
 		assertThat(defaultProfile.getProfilePath(), is(defaultProfileDirectory))
 	}
 
+	@Ignore
 	@Test
 	void test_ChromeProfileFinder_getChromeProfiles() {
 		List<ChromeProfile> chromeProfiles = ChromeProfileFinder.getChromeProfiles()
 		assertTrue(chromeProfiles.size() > 0)
 	}
 
+
 	@Test
+	@Ignore
 	void test_ChromeProfileFinder_listChromeProfiles() {
 		String text = ChromeProfileFinder.listChromeProfiles()
 		println text
@@ -62,14 +67,15 @@ public class BrowserWithCachedDataTest {
 
 	@Test
 	void test_ChromeProfileFinder_getChromeProfile() {
-		String userName = 'Katalon'
-		ChromeProfile cp = ChromeProfileFinder.getChromeProfile(userName)
+		ChromeProfile cp = ChromeProfileFinder.getChromeProfile('Katalon')
 		assertThat(cp, is(notNullValue()))
+		assertThat(cp.getName(), is('Katalon'))
 	}
-	
+
 	@Test
 	void test_openChromeDriver() {
-		WebDriver driver = BrowserWithCachedData.openChromeDriver('Katalon', FailureHandling.CONTINUE_ON_FAILURE)
+		ChromeOptions defaultChromeOptions = BrowserWithCachedData.defaultChromeOptions()
+		WebDriver driver = BrowserWithCachedData.openChromeDriver('Katalon')
 		WebUI.delay(2)
 		WebUI.closeBrowser()
 	}

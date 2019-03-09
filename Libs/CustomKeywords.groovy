@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement
 
 import java.lang.Class
 
+import org.openqa.selenium.chrome.ChromeOptions
+
 import java.util.List
 
 
@@ -417,10 +419,26 @@ def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
 }
 
 def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+    	String userName	) {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+        	userName)
+}
+
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
     	String userName	
+     , 	ChromeOptions defaultChromeOptions	) {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+        	userName
+         , 	defaultChromeOptions)
+}
+
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+    	String userName	
+     , 	ChromeOptions defaultChromeOptions	
      , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
         	userName
+         , 	defaultChromeOptions
          , 	flowControl)
 }
 

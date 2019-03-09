@@ -19,6 +19,19 @@ import groovy.json.JsonSlurper
 
 public class BrowserWithCachedData {
 
+	@Keyword
+	static WebDriver openChromeDriver(String userName) {
+		ChromeOptions defaultChromeOptions = BrowserWithCachedData.defaultChromeOptions()
+		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
+		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+	}
+
+	@Keyword
+	static WebDriver openChromeDriver(String userName, ChromeOptions defaultChromeOptions) {
+		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
+		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+	}
+
 	/**
 	 * Based on the post https://forum.katalon.com/t/open-browser-with-custom-profile/19268 by Thanh To
 	 * 
@@ -30,7 +43,14 @@ public class BrowserWithCachedData {
 	 * @return
 	 */
 	@Keyword
-	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
+	static WebDriver openChromeDriver(
+			String userName,
+			ChromeOptions defaultChromeOptions,
+			FailureHandling flowControl) {
+		Objects.requireNonNull(userName, "userName must not be null")
+		Objects.requireNonNull(defaultChromeOptions, "defaultChromeOptions must not be null")
+		Objects.requireNonNull(flowControl, "flowControl must not be null")
+		//
 		Path logsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
 		Files.createDirectories(logsDir)
 		System.setProperty('webdriver.chrome.logfile', logsDir.resolve('chromedriver.log').toString())
@@ -44,17 +64,9 @@ public class BrowserWithCachedData {
 		//
 		if (profileDirectory != null) {
 			if (Files.exists(profileDirectory) && profileDirectory.toFile().canWrite()) {
-				ChromeOptions chromeOptions = new ChromeOptions()
+				ChromeOptions chromeOptions = defaultChromeOptions
 				chromeOptions.addArguments("user-data-dir=" + userDataDirectory.toString())
 				chromeOptions.addArguments("profile-directory=${profileDirectory.getFileName().toString()}")
-				// The following lines are copy&pasted from
-				// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
-				chromeOptions.addArguments("start-maximized")           // open Browser in maximized mode
-				chromeOptions.addArguments("disable-infobars")          // disabling infobars
-				//chromeOptions.addArguments("--disable-extensions")      // disabling extensions
-				chromeOptions.addArguments("--disable-gpu")             // applicable to windows os only
-				chromeOptions.addArguments("--disable-dev-shm-usage")   // overcome limited resource problems
-				chromeOptions.addArguments("--no-sandbox")              // Bypass OS security model
 				WebDriver driver = new ChromeDriver(chromeOptions)
 				DriverFactory.changeWebDriver(driver)
 				return driver
@@ -62,12 +74,27 @@ public class BrowserWithCachedData {
 				Assert.stepFailed("Profile directory \"${profileDirectory.toString()}\" is not present", flowControl)
 			}
 		} else {
-			Assert.stepFailed("Profile directory for userName \"${userName}\" is not found " + 
-				"under ${userDataDirectory.toString()}.\n" + ChromeProfileFinder.listChromeProfiles()
-				)
+			Assert.stepFailed("Profile directory for userName \"${userName}\" is not found " +
+					"under ${userDataDirectory.toString()}.\n" + ChromeProfileFinder.listChromeProfiles()
+					)
 		}
 	}
 
+	/**
+	 * 
+	 */
+	static ChromeOptions defaultChromeOptions() {
+		ChromeOptions chromeOptions = new ChromeOptions()
+		// The following lines are copy&pasted from
+		// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
+		chromeOptions.addArguments("start-maximized")           // open Browser in maximized mode
+		chromeOptions.addArguments("disable-infobars")          // disabling infobars
+		//chromeOptions.addArguments("--disable-extensions")      // disabling extensions
+		chromeOptions.addArguments("--disable-gpu")             // applicable to windows os only
+		chromeOptions.addArguments("--disable-dev-shm-usage")   // overcome limited resource problems
+		chromeOptions.addArguments("--no-sandbox")              // Bypass OS security model
+		// https://github.com/SeleniumHQ/selenium/issues/4961
+	}
 
 	/**
 	 * https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver#requirements
@@ -130,7 +157,7 @@ public class BrowserWithCachedData {
 			}
 			return chromeProfiles
 		}
-		
+
 		static String listChromeProfiles() {
 			List<ChromeProfile> chromeProfiles = getChromeProfiles()
 			Collections.sort(chromeProfiles)
@@ -148,14 +175,14 @@ public class BrowserWithCachedData {
 			}
 			return sb.toString()
 		}
-		
+
 		/**
 		 * 
 		 * @param name
 		 * @return
 		 */
 		static ChromeProfile getChromeProfile(String name) {
-			List<ChromeProfile> chromeProfiles = this.getChromeProfiles() 
+			List<ChromeProfile> chromeProfiles = this.getChromeProfiles()
 			for (ChromeProfile cProfile: chromeProfiles) {
 				if (cProfile.getName().equals(name)) {
 					return cProfile
@@ -163,7 +190,7 @@ public class BrowserWithCachedData {
 			}
 			return null
 		}
-		
+
 		/**
 		 * 
 		 * @return
