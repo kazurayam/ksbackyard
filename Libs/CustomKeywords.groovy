@@ -27,8 +27,6 @@ import org.openqa.selenium.WebElement
 
 import java.lang.Class
 
-import java.nio.file.Path
-
 import java.util.List
 
 
@@ -419,10 +417,10 @@ def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
 }
 
 def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
-    	Path profileDirectoryName	
+    	String userName	
      , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
-        	profileDirectoryName
+        	userName
          , 	flowControl)
 }
 
@@ -430,14 +428,14 @@ def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeDriverPath"(
     (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeDriverPath()
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeProfilePath"() {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeProfilePath()
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getUserDataDirectory"() {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getUserDataDirectory()
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeProfileDirectoryOf"(
-    	String userName	) {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeProfileDirectoryOf(
-        	userName)
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getProfileDirectory"(
+    	String name	) {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getProfileDirectory(
+        	name)
 }
 
 def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
