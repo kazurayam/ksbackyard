@@ -1,3 +1,0 @@
-import com.kazurayam.ksbackyard.WebDriverFactoryTest
-
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(WebDriverFactoryTest.class)

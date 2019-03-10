@@ -12,7 +12,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 //WebUI.openBrowser('')
-WebDriver driver = CustomKeywords.'com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver'('Katalon', FailureHandling.STOP_ON_FAILURE)
+WebDriver driver = CustomKeywords.'com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver'('Katalon', FailureHandling.STOP_ON_FAILURE)
 DriverFactory.changeWebDriver(driver)
 
 WebUI.setViewPortSize(1024, 768)

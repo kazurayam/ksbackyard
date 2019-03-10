@@ -22,9 +22,9 @@ import com.kms.katalon.core.util.KeywordUtil
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
-public class WebDriverFactory {
+public class ChromeDriverFactory {
 
-	static Logger logger_ = LoggerFactory.getLogger(WebDriverFactory.class)
+	static Logger logger_ = LoggerFactory.getLogger(ChromeDriverFactory.class)
 
 	static {
 		// wea add toJsonText method to ChromeOptions class
@@ -35,7 +35,7 @@ public class WebDriverFactory {
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName) {
-		ChromeOptions myChromeOptions = WebDriverFactory.myChromeOptions()
+		ChromeOptions myChromeOptions = ChromeDriverFactory.myChromeOptions()
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
 		return openChromeDriver(userName, myChromeOptions, flowControl)
 	}
@@ -48,7 +48,7 @@ public class WebDriverFactory {
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
-		ChromeOptions myChromeOptions = WebDriverFactory.myChromeOptions()
+		ChromeOptions myChromeOptions = ChromeDriverFactory.myChromeOptions()
 		return openChromeDriver(userName, myChromeOptions, flowControl)
 	}
 
@@ -77,12 +77,12 @@ public class WebDriverFactory {
 		System.setProperty('webdriver.chrome.logfile', chromeDriverLog.toString())
 		System.setProperty("webdriver.chrome.verboseLogging", "true")
 		//
-		Path chromeDriverPath = WebDriverFactory.getChromeDriverPath()
+		Path chromeDriverPath = ChromeDriverFactory.getChromeDriverPath()
 		System.setProperty('webdriver.chrome.driver', chromeDriverPath.toString())
 		//
-		Path userDataDirectory = WebDriverFactory.getUserDataDirectory()
+		Path userDataDirectory = ChromeDriverFactory.getChromeUserDataDirectory()
 		//
-		Path profileDirectory = WebDriverFactory.getProfileDirectory(userName)
+		Path profileDirectory = ChromeDriverFactory.getChromeProfileDirectory(userName)
 		//
 		if (profileDirectory != null) {
 			if (Files.exists(profileDirectory) && profileDirectory.toFile().canWrite()) {
@@ -146,12 +146,12 @@ public class WebDriverFactory {
 	 * @returns path of the directory in which Google Chrome's Profile directories are located
 	 */
 	@Keyword
-	static Path getUserDataDirectory() {
-		return ChromeProfileFinder.getUserDataDirectory()
+	static Path getChromeUserDataDirectory() {
+		return ChromeProfileFinder.getChromeUserDataDirectory()
 	}
 
 	@Keyword
-	static Path getProfileDirectory(String name) {
+	static Path getChromeProfileDirectory(String name) {
 		Objects.requireNonNull(name, "name must not be null")
 		ChromeProfile cProfile = ChromeProfileFinder.getChromeProfile(name)
 		if (cProfile != null) {
@@ -175,10 +175,10 @@ public class WebDriverFactory {
 		chromePreferences.put('download.default_directory', downloads.toString())
 		// disable flash and pdf viewer
 		chromePreferences.put('plugins.plugins_disabled',
-			[
-				'Adobe Flash Player',
-				'Chrome PDF Viewer'
-			])
+				[
+					'Adobe Flash Player',
+					'Chrome PDF Viewer'
+				])
 		return chromePreferences
 	}
 
@@ -188,7 +188,7 @@ public class WebDriverFactory {
 	static ChromeOptions myChromeOptions() {
 		ChromeOptions options = new ChromeOptions()
 		// set location of the Chrome Browser's binary
-		options.setBinary(WebDriverFactory.getChromeBinaryPath().toString());
+		options.setBinary(ChromeDriverFactory.getChromeBinaryPath().toString());
 		// set my chrome preferences
 		options.setExperimentalOption('prefs', myChromePreferences())
 		// The following lines are copy&pasted from
@@ -228,7 +228,7 @@ public class WebDriverFactory {
 		 */
 		static List<ChromeProfile> getChromeProfiles() {
 			List<ChromeProfile> chromeProfiles = new ArrayList<ChromeProfile>()
-			Path userDataDirectory = WebDriverFactory.getUserDataDirectory()
+			Path userDataDirectory = ChromeDriverFactory.getChromeUserDataDirectory()
 			List<Path> dirStream = Files.list(userDataDirectory).collect(Collectors.toList());
 			for (Path dir : dirStream) {
 				if (Files.exists(dir.resolve('Preferences'))) {
@@ -276,7 +276,7 @@ public class WebDriverFactory {
 		 * 
 		 * @return
 		 */
-		static Path getUserDataDirectory() {
+		static Path getChromeUserDataDirectory() {
 			if (OSIdentifier.isWindows()) {
 				// It is important that this chromeProfilesPath ends with User Data and not with the profile folder
 				// %HOME%\AppData\Local\Google\Chrome\User Data

@@ -13,5 +13,5 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-String str = CustomKeywords.'com.kazurayam.ksbackyard.WebDriverFactory.listChromeProfiles'()
+String str = CustomKeywords.'com.kazurayam.ksbackyard.ChromeDriverFactory.listChromeProfiles'()
 WebUI.comment("list of pairs of Chrome user and profile:\n" + str)
