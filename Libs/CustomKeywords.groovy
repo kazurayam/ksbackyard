@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement
 
 import java.lang.Class
 
+import org.openqa.selenium.chrome.ChromeOptions
+
 import java.util.List
 
 
@@ -414,6 +416,56 @@ def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
     	Class junitRunnerClass	) {
     (new com.kazurayam.junit4ks.JUnitCustomKeywords()).runWithJUnitRunner(
         	junitRunnerClass)
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
+    	String userName	) {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
+        	userName)
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	ChromeOptions chromeOptions	) {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
+        	userName
+         , 	chromeOptions)
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
+        	userName
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	ChromeOptions chromeOptions	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
+        	userName
+         , 	chromeOptions
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getChromeBinaryPath"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getChromeBinaryPath()
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getChromeDriverPath"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getChromeDriverPath()
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getUserDataDirectory"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getUserDataDirectory()
+}
+
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getProfileDirectory"(
+    	String name	) {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getProfileDirectory(
+        	name)
 }
 
 def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(

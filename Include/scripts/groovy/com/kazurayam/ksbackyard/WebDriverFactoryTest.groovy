@@ -63,7 +63,7 @@ public class WebDriverFactoryTest {
 
 	@Test
 	void test_defaultChromeOptions() {
-		ChromeOptions cp = WebDriverFactory.defaultChromeOptions()
+		ChromeOptions cp = WebDriverFactory.myChromeOptions()
 		String cpJson = cp.toJsonText()
 		//println "#test_defaultChromeOpitons cp=${cpJson}"
 		assertTrue(cpJson.length() > 0)
@@ -78,7 +78,7 @@ public class WebDriverFactoryTest {
 
 	@Test
 	void test_openChromeDriver() {
-		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
+		ChromeOptions defaultChromeOptions = WebDriverFactory.myChromeOptions()
 		WebDriver driver = WebDriverFactory.openChromeDriver('Katalon')
 		assertThat(driver, is(notNullValue()))
 		DriverFactory.changeWebDriver(driver)

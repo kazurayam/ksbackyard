@@ -8,6 +8,8 @@ import java.util.stream.Collectors
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.remote.CapabilityType
+import org.openqa.selenium.remote.DesiredCapabilities
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -33,21 +35,21 @@ public class WebDriverFactory {
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName) {
-		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
+		ChromeOptions myChromeOptions = WebDriverFactory.myChromeOptions()
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
-		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+		return openChromeDriver(userName, myChromeOptions, flowControl)
 	}
 
 	@Keyword
-	static WebDriver openChromeDriver(String userName, ChromeOptions defaultChromeOptions) {
+	static WebDriver openChromeDriver(String userName, ChromeOptions chromeOptions) {
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
-		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+		return openChromeDriver(userName, chromeOptions, flowControl)
 	}
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
-		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
-		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+		ChromeOptions myChromeOptions = WebDriverFactory.myChromeOptions()
+		return openChromeDriver(userName, myChromeOptions, flowControl)
 	}
 
 	/**
@@ -63,10 +65,10 @@ public class WebDriverFactory {
 	@Keyword
 	static WebDriver openChromeDriver(
 			String userName,
-			ChromeOptions defaultChromeOptions,
+			ChromeOptions chromeOptions,
 			FailureHandling flowControl) {
 		Objects.requireNonNull(userName, "userName must not be null")
-		Objects.requireNonNull(defaultChromeOptions, "defaultChromeOptions must not be null")
+		Objects.requireNonNull(chromeOptions, "chromeOptions must not be null")
 		Objects.requireNonNull(flowControl, "flowControl must not be null")
 		//
 		Path logsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
@@ -84,11 +86,12 @@ public class WebDriverFactory {
 		//
 		if (profileDirectory != null) {
 			if (Files.exists(profileDirectory) && profileDirectory.toFile().canWrite()) {
-				ChromeOptions chromeOptions = defaultChromeOptions
+				// use the Profile as specified
 				chromeOptions.addArguments("user-data-dir=" + userDataDirectory.toString())
 				chromeOptions.addArguments("profile-directory=${profileDirectory.getFileName().toString()}")
 				KeywordUtil.logInfo("#openChromeDriver chromeOptions=" + chromeOptions.toJsonText())
-				WebDriver driver = new ChromeDriver(chromeOptions)
+				DesiredCapabilities cap = myChromeDesiredCapabilities(chromeOptions)
+				WebDriver driver = new ChromeDriver(cap)
 				return driver
 			} else {
 				Assert.stepFailed("Profile directory \"${profileDirectory.toString()}\" is not present", flowControl)
@@ -159,16 +162,38 @@ public class WebDriverFactory {
 	}
 
 	/**
+	 * 	
+	 * @return
+	 */
+	static Map<String, Object> myChromePreferences() {
+		Map<String, Object> chromePreferences = new HashMap<>()
+		// Below two preference settings will disable popup dialog when download file
+		chromePreferences.put('profile.default_content_settings.popups', 0)
+		chromePreferences.put('download.prompt_for_download', false)
+		// set directory to save files
+		Path downloads = Paths.get(System.getProperty('user.home'), 'Downloads')
+		chromePreferences.put('download.default_directory', downloads.toString())
+		// disable flash and pdf viewer
+		chromePreferences.put('plugins.plugins_disabled',
+			[
+				'Adobe Flash Player',
+				'Chrome PDF Viewer'
+			])
+		return chromePreferences
+	}
+
+	/**
 	 *
 	 */
-	static ChromeOptions defaultChromeOptions() {
+	static ChromeOptions myChromeOptions() {
 		ChromeOptions options = new ChromeOptions()
 		// set location of the Chrome Browser's binary
 		options.setBinary(WebDriverFactory.getChromeBinaryPath().toString());
-
+		// set my chrome preferences
+		options.setExperimentalOption('prefs', myChromePreferences())
 		// The following lines are copy&pasted from
 		// https://github.com/SeleniumHQ/selenium/issues/4961
-		options.addArguments("--headless")
+		options.addArguments("--headless")     // necessary for working around the "(unknown error: DevToolsActivePort file doesn't exist)"
 		options.addArguments("window-size=1024,768")
 		options.addArguments("--no-sandbox")
 
@@ -179,6 +204,16 @@ public class WebDriverFactory {
 		options.addArguments("disable-dev-shm-usage")   // overcome limited resource problems
 		//
 		return options
+	}
+
+	/**
+	 *
+	 */
+	static DesiredCapabilities myChromeDesiredCapabilities(ChromeOptions chromeOptions) {
+		DesiredCapabilities cap = DesiredCapabilities.chrome()
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions)
+		return cap
 	}
 
 	/**
