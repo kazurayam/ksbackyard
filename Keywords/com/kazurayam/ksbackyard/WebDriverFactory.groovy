@@ -43,7 +43,7 @@ public class WebDriverFactory {
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
 		return openChromeDriver(userName, defaultChromeOptions, flowControl)
 	}
-	
+
 	@Keyword
 	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
 		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
