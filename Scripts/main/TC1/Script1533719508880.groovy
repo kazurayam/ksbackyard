@@ -2,13 +2,18 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import java.nio.file.Path
 
+import org.openqa.selenium.WebDriver
+
 import com.kazurayam.materials.MaterialRepository
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.openBrowser('')
+//WebUI.openBrowser('')
+WebDriver driver = CustomKeywords.'com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver'('Katalon', FailureHandling.STOP_ON_FAILURE)
+DriverFactory.changeWebDriver(driver)
 
 WebUI.setViewPortSize(1024, 768)
 

@@ -14,8 +14,8 @@ import org.junit.runners.JUnit4
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
-import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfile
-import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfileFinder
+import com.kazurayam.ksbackyard.WebDriverFactory.ChromeProfile
+import com.kazurayam.ksbackyard.WebDriverFactory.ChromeProfileFinder
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -24,21 +24,21 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
  *
  */
 @RunWith(JUnit4.class)
-public class BrowserWithCachedDataTest {
+public class WebDriverFactoryTest {
 
 	@Before
 	void setup() {}
 
 	@Test
 	void test_getUserDataDirectory() {
-		Path userDataDirectory = BrowserWithCachedData.getUserDataDirectory()
+		Path userDataDirectory = WebDriverFactory.getUserDataDirectory()
 		assertThat(Files.exists(userDataDirectory), is(true))
 	}
 
 	@Test
 	void test_ChromeProfile() {
 		// when:
-		Path defaultProfileDirectory = BrowserWithCachedData.getUserDataDirectory().resolve('Default')
+		Path defaultProfileDirectory = WebDriverFactory.getUserDataDirectory().resolve('Default')
 		ChromeProfile defaultProfile = new ChromeProfile(defaultProfileDirectory)
 		// then:
 		assertThat(defaultProfile, is(notNullValue()))
@@ -63,7 +63,7 @@ public class BrowserWithCachedDataTest {
 
 	@Test
 	void test_defaultChromeOptions() {
-		ChromeOptions cp = BrowserWithCachedData.defaultChromeOptions()
+		ChromeOptions cp = WebDriverFactory.defaultChromeOptions()
 		String cpJson = cp.toJsonText()
 		//println "#test_defaultChromeOpitons cp=${cpJson}"
 		assertTrue(cpJson.length() > 0)
@@ -78,8 +78,8 @@ public class BrowserWithCachedDataTest {
 
 	@Test
 	void test_openChromeDriver() {
-		ChromeOptions defaultChromeOptions = BrowserWithCachedData.defaultChromeOptions()
-		WebDriver driver = BrowserWithCachedData.openChromeDriver('Katalon')
+		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
+		WebDriver driver = WebDriverFactory.openChromeDriver('Katalon')
 		assertThat(driver, is(notNullValue()))
 		DriverFactory.changeWebDriver(driver)
 		WebUI.navigateToUrl('http://demoaut.katalon.com/')

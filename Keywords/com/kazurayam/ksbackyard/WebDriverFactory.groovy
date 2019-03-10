@@ -20,9 +20,9 @@ import com.kms.katalon.core.util.KeywordUtil
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
-public class BrowserWithCachedData {
+public class WebDriverFactory {
 
-	static Logger logger_ = LoggerFactory.getLogger(BrowserWithCachedData.class)
+	static Logger logger_ = LoggerFactory.getLogger(WebDriverFactory.class)
 
 	static {
 		// wea add toJsonText method to ChromeOptions class
@@ -33,7 +33,7 @@ public class BrowserWithCachedData {
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName) {
-		ChromeOptions defaultChromeOptions = BrowserWithCachedData.defaultChromeOptions()
+		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
 		return openChromeDriver(userName, defaultChromeOptions, flowControl)
 	}
@@ -41,6 +41,12 @@ public class BrowserWithCachedData {
 	@Keyword
 	static WebDriver openChromeDriver(String userName, ChromeOptions defaultChromeOptions) {
 		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
+		return openChromeDriver(userName, defaultChromeOptions, flowControl)
+	}
+	
+	@Keyword
+	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
+		ChromeOptions defaultChromeOptions = WebDriverFactory.defaultChromeOptions()
 		return openChromeDriver(userName, defaultChromeOptions, flowControl)
 	}
 
@@ -69,12 +75,12 @@ public class BrowserWithCachedData {
 		System.setProperty('webdriver.chrome.logfile', chromeDriverLog.toString())
 		System.setProperty("webdriver.chrome.verboseLogging", "true")
 		//
-		Path chromeDriverPath = BrowserWithCachedData.getChromeDriverPath()
+		Path chromeDriverPath = WebDriverFactory.getChromeDriverPath()
 		System.setProperty('webdriver.chrome.driver', chromeDriverPath.toString())
 		//
-		Path userDataDirectory = BrowserWithCachedData.getUserDataDirectory()
+		Path userDataDirectory = WebDriverFactory.getUserDataDirectory()
 		//
-		Path profileDirectory = BrowserWithCachedData.getProfileDirectory(userName)
+		Path profileDirectory = WebDriverFactory.getProfileDirectory(userName)
 		//
 		if (profileDirectory != null) {
 			if (Files.exists(profileDirectory) && profileDirectory.toFile().canWrite()) {
@@ -158,14 +164,14 @@ public class BrowserWithCachedData {
 	static ChromeOptions defaultChromeOptions() {
 		ChromeOptions options = new ChromeOptions()
 		// set location of the Chrome Browser's binary
-		options.setBinary(BrowserWithCachedData.getChromeBinaryPath().toString());
+		options.setBinary(WebDriverFactory.getChromeBinaryPath().toString());
 
 		// The following lines are copy&pasted from
 		// https://github.com/SeleniumHQ/selenium/issues/4961
 		options.addArguments("--headless")
 		options.addArguments("window-size=1024,768")
 		options.addArguments("--no-sandbox")
-		
+
 		//options.addArguments("--single-process")
 		options.addArguments("disable-infobars")        // disabling infobars
 		//chromeOptions.addArguments("disable-extensions")    // disabling extensions
@@ -187,7 +193,7 @@ public class BrowserWithCachedData {
 		 */
 		static List<ChromeProfile> getChromeProfiles() {
 			List<ChromeProfile> chromeProfiles = new ArrayList<ChromeProfile>()
-			Path userDataDirectory = BrowserWithCachedData.getUserDataDirectory()
+			Path userDataDirectory = WebDriverFactory.getUserDataDirectory()
 			List<Path> dirStream = Files.list(userDataDirectory).collect(Collectors.toList());
 			for (Path dir : dirStream) {
 				if (Files.exists(dir.resolve('Preferences'))) {

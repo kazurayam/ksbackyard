@@ -1,5 +1,4 @@
 import com.kazurayam.ksbackyard.AssertTest
-import com.kazurayam.ksbackyard.BrowserWithCachedData
 import com.kazurayam.ksbackyard.ImageCollectionDifferTest
 import com.kazurayam.ksbackyard.RunConfigurationWrapperTest
 import com.kazurayam.ksbackyard.OSIdentifierTest
@@ -11,9 +10,10 @@ import com.kazurayam.ksbackyard.ScreenshotDriverOptionsTest
 import com.kazurayam.ksbackyard.TestObjectSupportTest
 import com.kazurayam.ksbackyard.URLParserTest
 import com.kazurayam.ksbackyard.VersionTest
+import com.kazurayam.ksbackyard.WebDriverFactoryTest
+
 
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(AssertTest.class)
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(BrowserWithCachedData.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ImageCollectionDifferTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(OSIdentifierTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(QuietBrowserTest.class)
@@ -25,5 +25,6 @@ CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(S
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(TestObjectSupportTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(URLParserTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(VersionTest.class)
+CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(WebDriverFactoryTest.class)
 
 

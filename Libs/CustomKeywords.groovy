@@ -418,45 +418,45 @@ def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
         	junitRunnerClass)
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
     	String userName	) {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
         	userName)
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
     	String userName	
      , 	ChromeOptions defaultChromeOptions	) {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
         	userName
          , 	defaultChromeOptions)
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
+def static "com.kazurayam.ksbackyard.WebDriverFactory.openChromeDriver"(
     	String userName	
      , 	ChromeOptions defaultChromeOptions	
      , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).openChromeDriver(
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).openChromeDriver(
         	userName
          , 	defaultChromeOptions
          , 	flowControl)
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeBinaryPath"() {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeBinaryPath()
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getChromeBinaryPath"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getChromeBinaryPath()
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeDriverPath"() {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeDriverPath()
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getChromeDriverPath"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getChromeDriverPath()
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getUserDataDirectory"() {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getUserDataDirectory()
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getUserDataDirectory"() {
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getUserDataDirectory()
 }
 
-def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getProfileDirectory"(
+def static "com.kazurayam.ksbackyard.WebDriverFactory.getProfileDirectory"(
     	String name	) {
-    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getProfileDirectory(
+    (new com.kazurayam.ksbackyard.WebDriverFactory()).getProfileDirectory(
         	name)
 }
 
