@@ -26,6 +26,7 @@ import com.kms.katalon.core.util.KeywordUtil
  */
 class ImageCollectionDiffer {
 
+
 	private ICD delegate_
 
 	/**

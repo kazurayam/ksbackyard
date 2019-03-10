@@ -17,6 +17,8 @@ import com.kms.katalon.core.model.FailureHandling
 
 import java.lang.String
 
+import org.openqa.selenium.chrome.ChromeOptions
+
 import java.lang.Boolean
 
 import java.lang.Number
@@ -226,10 +228,54 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver"(
+    	String userName	) {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).openChromeDriver(
+        	userName)
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	ChromeOptions chromeOptions	) {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).openChromeDriver(
+        	userName
+         , 	chromeOptions)
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).openChromeDriver(
+        	userName
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver"(
+    	String userName	
+     , 	ChromeOptions chromeOptions	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).openChromeDriver(
+        	userName
+         , 	chromeOptions
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.getChromeBinaryPath"() {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).getChromeBinaryPath()
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.getChromeDriverPath"() {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).getChromeDriverPath()
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.getChromeUserDataDirectory"() {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).getChromeUserDataDirectory()
+}
+
+def static "com.kazurayam.ksbackyard.ChromeDriverFactory.getChromeProfileDirectory"(
+    	String name	) {
+    (new com.kazurayam.ksbackyard.ChromeDriverFactory()).getChromeProfileDirectory(
+        	name)
 }
 
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
@@ -432,6 +478,12 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
     	java.util.List<TestObject> testObjectList	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
         	testObjectList)
+}
+
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
