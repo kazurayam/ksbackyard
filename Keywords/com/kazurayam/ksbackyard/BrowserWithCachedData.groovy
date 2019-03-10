@@ -1,6 +1,5 @@
 package com.kazurayam.ksbackyard
 
-import java.nio.file.DirectoryStream
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -9,15 +8,27 @@ import java.util.stream.Collectors
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.webui.driver.DriverFactory
 
+import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 public class BrowserWithCachedData {
+
+	static Logger logger_ = LoggerFactory.getLogger(BrowserWithCachedData.class)
+
+	static {
+		// wea add toJsonText method to ChromeOptions class
+		ChromeOptions.metaClass.toJsonText = {
+			return JsonOutput.prettyPrint(JsonOutput.toJson(delegate.asMap()))
+		}
+	}
 
 	@Keyword
 	static WebDriver openChromeDriver(String userName) {
@@ -53,7 +64,9 @@ public class BrowserWithCachedData {
 		//
 		Path logsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
 		Files.createDirectories(logsDir)
-		System.setProperty('webdriver.chrome.logfile', logsDir.resolve('chromedriver.log').toString())
+		Path chromeDriverLog = logsDir.resolve('chromedriver.log')
+		System.setProperty('webdriver.chrome.logfile', chromeDriverLog.toString())
+		System.setProperty("webdriver.chrome.verboseLogging", "true")
 		//
 		Path chromeDriverPath = BrowserWithCachedData.getChromeDriverPath()
 		System.setProperty('webdriver.chrome.driver', chromeDriverPath.toString())
@@ -67,8 +80,8 @@ public class BrowserWithCachedData {
 				ChromeOptions chromeOptions = defaultChromeOptions
 				chromeOptions.addArguments("user-data-dir=" + userDataDirectory.toString())
 				chromeOptions.addArguments("profile-directory=${profileDirectory.getFileName().toString()}")
+				println("#openChromeDriver chromeOptions=" + chromeOptions.toJsonText())
 				WebDriver driver = new ChromeDriver(chromeOptions)
-				DriverFactory.changeWebDriver(driver)
 				return driver
 			} else {
 				Assert.stepFailed("Profile directory \"${profileDirectory.toString()}\" is not present", flowControl)
@@ -80,27 +93,12 @@ public class BrowserWithCachedData {
 		}
 	}
 
-	/**
-	 * 
-	 */
-	static ChromeOptions defaultChromeOptions() {
-		ChromeOptions chromeOptions = new ChromeOptions()
-		// The following lines are copy&pasted from
-		// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
-		chromeOptions.addArguments("start-maximized")           // open Browser in maximized mode
-		chromeOptions.addArguments("disable-infobars")          // disabling infobars
-		//chromeOptions.addArguments("--disable-extensions")      // disabling extensions
-		chromeOptions.addArguments("--disable-gpu")             // applicable to windows os only
-		chromeOptions.addArguments("--disable-dev-shm-usage")   // overcome limited resource problems
-		chromeOptions.addArguments("--no-sandbox")              // Bypass OS security model
-		// https://github.com/SeleniumHQ/selenium/issues/4961
-	}
 
 	/**
 	 * https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver#requirements
 	 */
 	@Keyword
-	static Path getChromeDriverPath() {
+	static Path getChromeBinaryPath() {
 		if (OSIdentifier.isWindows()) {
 			// "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 			return Paths.get("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe")
@@ -111,6 +109,24 @@ public class BrowserWithCachedData {
 		} else {
 			throw new IllegalStateException(
 			"Windows, Mac, Linux are supported. Other platforms are not supported")
+		}
+	}
+
+	@Keyword
+	static Path getChromeDriverPath() {
+		if (OSIdentifier.isWindows()) {
+			if (System.getenv('KATALON_HOME') != null) {
+				throw new UnsupportedOperationException("TODO")
+			} else {
+				throw new IllegalStateException("Environment variable \"KATALON_HOME\" is not defined")
+			}
+		} else if (OSIdentifier.isMac()) {
+			return Paths.get('/Applications/Katalon Studio.app/Contents/Eclipse/Configuration/resources/drivers/chromedriver_mac/chromedriver')
+		} else if (OSIdentifier.isUnix()) {
+			throw new UnsupportedOperationException("TODO")
+		} else {
+			throw new IllegalStateException(
+			"Windows, Mac, Linux are supported. Other platforms are not supported.")
 		}
 	}
 
@@ -133,6 +149,27 @@ public class BrowserWithCachedData {
 		} else {
 			return null
 		}
+	}
+
+	/**
+	 *
+	 */
+	static ChromeOptions defaultChromeOptions() {
+		ChromeOptions options = new ChromeOptions()
+		// set location of the Chrome Browser's binary
+		options.setBinary(BrowserWithCachedData.getChromeBinaryPath().toString());
+
+		// The following lines are copy&pasted from
+		// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
+		options.addArguments("no-sandbox")              // Bypass OS security model
+		options.addArguments("single-process")
+		options.addArguments("start-maximized")         // open Browser in maximized mode
+		options.addArguments("disable-infobars")        // disabling infobars
+		//chromeOptions.addArguments("disable-extensions")    // disabling extensions
+		options.addArguments("disable-gpu")             // applicable to windows os only
+		options.addArguments("disable-dev-shm-usage")   // overcome limited resource problems
+		//
+		return options
 	}
 
 	/**

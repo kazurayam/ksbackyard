@@ -442,6 +442,10 @@ def static "com.kazurayam.ksbackyard.BrowserWithCachedData.openChromeDriver"(
          , 	flowControl)
 }
 
+def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeBinaryPath"() {
+    (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeBinaryPath()
+}
+
 def static "com.kazurayam.ksbackyard.BrowserWithCachedData.getChromeDriverPath"() {
     (new com.kazurayam.ksbackyard.BrowserWithCachedData()).getChromeDriverPath()
 }

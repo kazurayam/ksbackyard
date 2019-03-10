@@ -16,7 +16,7 @@ import org.openqa.selenium.chrome.ChromeOptions
 
 import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfile
 import com.kazurayam.ksbackyard.BrowserWithCachedData.ChromeProfileFinder
-import com.kms.katalon.core.model.FailureHandling
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
@@ -29,14 +29,12 @@ public class BrowserWithCachedDataTest {
 	@Before
 	void setup() {}
 
-	@Ignore
 	@Test
 	void test_getUserDataDirectory() {
 		Path userDataDirectory = BrowserWithCachedData.getUserDataDirectory()
 		assertThat(Files.exists(userDataDirectory), is(true))
 	}
 
-	@Ignore
 	@Test
 	void test_ChromeProfile() {
 		// when:
@@ -49,7 +47,6 @@ public class BrowserWithCachedDataTest {
 		assertThat(defaultProfile.getProfilePath(), is(defaultProfileDirectory))
 	}
 
-	@Ignore
 	@Test
 	void test_ChromeProfileFinder_getChromeProfiles() {
 		List<ChromeProfile> chromeProfiles = ChromeProfileFinder.getChromeProfiles()
@@ -61,8 +58,15 @@ public class BrowserWithCachedDataTest {
 	@Ignore
 	void test_ChromeProfileFinder_listChromeProfiles() {
 		String text = ChromeProfileFinder.listChromeProfiles()
-		println text
 		assertTrue( text.length() > 0)
+	}
+
+	@Test
+	void test_defaultChromeOptions() {
+		ChromeOptions cp = BrowserWithCachedData.defaultChromeOptions()
+		String cpJson = cp.toJsonText()
+		//println "#test_defaultChromeOpitons cp=${cpJson}"
+		assertTrue(cpJson.length() > 0)
 	}
 
 	@Test
@@ -76,7 +80,10 @@ public class BrowserWithCachedDataTest {
 	void test_openChromeDriver() {
 		ChromeOptions defaultChromeOptions = BrowserWithCachedData.defaultChromeOptions()
 		WebDriver driver = BrowserWithCachedData.openChromeDriver('Katalon')
-		WebUI.delay(2)
+		assertThat(driver, is(notNullValue()))
+		DriverFactory.changeWebDriver(driver)
+		WebUI.navigateToUrl('http://demoaut.katalon.com/')
+		WebUI.delay(3)
 		WebUI.closeBrowser()
 	}
 }
