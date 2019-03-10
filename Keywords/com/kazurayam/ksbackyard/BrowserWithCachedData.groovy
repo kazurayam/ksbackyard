@@ -15,6 +15,7 @@ import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.webui.driver.DriverFactory
+import com.kms.katalon.core.util.KeywordUtil
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
@@ -80,7 +81,7 @@ public class BrowserWithCachedData {
 				ChromeOptions chromeOptions = defaultChromeOptions
 				chromeOptions.addArguments("user-data-dir=" + userDataDirectory.toString())
 				chromeOptions.addArguments("profile-directory=${profileDirectory.getFileName().toString()}")
-				println("#openChromeDriver chromeOptions=" + chromeOptions.toJsonText())
+				KeywordUtil.logInfo("#openChromeDriver chromeOptions=" + chromeOptions.toJsonText())
 				WebDriver driver = new ChromeDriver(chromeOptions)
 				return driver
 			} else {
@@ -160,10 +161,12 @@ public class BrowserWithCachedData {
 		options.setBinary(BrowserWithCachedData.getChromeBinaryPath().toString());
 
 		// The following lines are copy&pasted from
-		// https://stackoverflow.com/questions/50642308/org-openqa-selenium-webdriverexception-unknown-error-devtoolsactiveport-file-d
-		options.addArguments("no-sandbox")              // Bypass OS security model
-		options.addArguments("single-process")
-		options.addArguments("start-maximized")         // open Browser in maximized mode
+		// https://github.com/SeleniumHQ/selenium/issues/4961
+		options.addArguments("--headless")
+		options.addArguments("window-size=1024,768")
+		options.addArguments("--no-sandbox")
+		
+		//options.addArguments("--single-process")
 		options.addArguments("disable-infobars")        // disabling infobars
 		//chromeOptions.addArguments("disable-extensions")    // disabling extensions
 		options.addArguments("disable-gpu")             // applicable to windows os only
