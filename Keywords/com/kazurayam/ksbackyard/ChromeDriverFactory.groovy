@@ -124,14 +124,17 @@ public class ChromeDriverFactory {
 
 	@Keyword
 	static Path getChromeDriverPath() {
+		ApplicationInfo appInfo = new ApplicationInfo()
+		String katalonHome = appInfo.getKatalonHome()
 		if (OSIdentifier.isWindows()) {
-			if (System.getenv('KATALON_HOME') != null) {
-				throw new UnsupportedOperationException("TODO")
-			} else {
-				throw new IllegalStateException("Environment variable \"KATALON_HOME\" is not defined")
-			}
+			return Paths.get(katalonHome).resolve('configuration').
+					resolve('resources').resolve('drivers').
+					resolve('chromedriver_win32').resolve('chromedriver.exe')
 		} else if (OSIdentifier.isMac()) {
-			return Paths.get('/Applications/Katalon Studio.app/Contents/Eclipse/Configuration/resources/drivers/chromedriver_mac/chromedriver')
+			return Paths.get(katalonHome).resolve('Contents').
+					resolve('Eclipse').resolve('Configuration').
+					resolve('resources').resolve('drivers').
+					resolve('chromedriver_mac').resolve('chromedriver')
 		} else if (OSIdentifier.isUnix()) {
 			throw new UnsupportedOperationException("TODO")
 		} else {

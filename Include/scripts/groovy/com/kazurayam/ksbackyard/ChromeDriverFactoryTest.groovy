@@ -62,7 +62,7 @@ public class ChromeDriverFactoryTest {
 	}
 
 	@Test
-	void test_defaultChromeOptions() {
+	void test_myChromeOptions() {
 		ChromeOptions cp = ChromeDriverFactory.myChromeOptions()
 		String cpJson = cp.toJsonText()
 		//println "#test_defaultChromeOpitons cp=${cpJson}"
@@ -76,6 +76,13 @@ public class ChromeDriverFactoryTest {
 		assertThat(cp.getName(), is('Katalon'))
 	}
 
+	@Test
+	void test_getChromeDriverPath() {
+		Path chromeDriverPath = ChromeDriverFactory.getChromeDriverPath()
+		assertThat(chromeDriverPath, is(notNullValue()))
+		assertTrue(Files.exists(chromeDriverPath))	
+	}
+	
 	@Test
 	void test_openChromeDriver() {
 		ChromeOptions defaultChromeOptions = ChromeDriverFactory.myChromeOptions()
