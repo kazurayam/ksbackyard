@@ -228,6 +228,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	criteriaPercent)
 }
 
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
 def static "com.kazurayam.ksbackyard.ChromeDriverFactory.openChromeDriver"(
     	String userName	) {
     (new com.kazurayam.ksbackyard.ChromeDriverFactory()).openChromeDriver(
@@ -478,12 +484,6 @@ def static "com.kazurayam.ksbackyard.TestObjectSupport.toBy"(
     	java.util.List<TestObject> testObjectList	) {
     (new com.kazurayam.ksbackyard.TestObjectSupport()).toBy(
         	testObjectList)
-}
-
-def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
-    	String urlString	) {
-    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
-        	urlString)
 }
 
 def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
