@@ -26,7 +26,7 @@ import com.kms.katalon.core.util.KeywordUtil
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
-public class ChromeDriverFactory {
+public class ChromeDriverFactory implements ChromePreferencesResolver, ChromeOptionsResolver, DesiredCapabilitiesResolver {
 
 	static Logger logger_ = LoggerFactory.getLogger(ChromeDriverFactory.class)
 
@@ -37,25 +37,47 @@ public class ChromeDriverFactory {
 		}
 	}
 
-	ChromeDriverFactory() {}
+	private ChromePreferencesResolver chromePreferencesResolver_
+	private ChromeOptionsResolver chromeOptionsResolver_
+	private DesiredCapabilitiesResolver desiredCapabilitiesResolver_
 
-	@Keyword
-	static WebDriver openChromeDriver(String userName) {
-		ChromeOptions myChromeOptions = ChromeDriverFactory.myChromeOptions()
-		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
-		return openChromeDriver(userName, myChromeOptions, flowControl)
+	ChromeDriverFactory() {
+		chromePreferencesResolver_ = this
+		chromeOptionsResolver_ = this
+		desiredCapabilitiesResolver_ = this
 	}
 
-	@Keyword
-	static WebDriver openChromeDriver(String userName, ChromeOptions chromeOptions) {
-		FailureHandling flowControl = RunConfiguration.getDefaultFailureHandling()
-		return openChromeDriver(userName, chromeOptions, flowControl)
+	/**
+	 * You can inject your favorite Chrome preferences by setting a ChromePreferenceResolver instance
+	 *  
+	 * @param resolver
+	 */
+	void setChromePreferencesResolver(ChromePreferencesResolver resolver) {
+		Objects.requireNonNull(resolver, "ChromePreferencesResolver must not be null")
+		this.chromePreferencesResolver_ = resolver
 	}
 
+	/**
+	 * You can inject your favorites Chrome options by setting a ChromeOptionsResolver instance
+	 * @param resolver
+	 */
+	void setChromeOptionsResolver(ChromeOptionsResolver resolver) {
+		Objects.requireNonNull(resolver, "ChromeOptionsResolver must not be null")
+		this.chromeOptionsResolver_ = resolver
+	}
+
+	/**
+	 * You can inject your favorites Desired capabilities by setting a ChromeDesiredCapambilitiesResolver instance
+	 */
+	void setChromeDesiredCapabilitiesResolver(DesiredCapabilitiesResolver resolver) {
+		Objects.requireNonNull(resolver, "DesiredCapabilitiesResolver must not be null")
+		this.desiredCapabilitiesResolver_ = resolver
+	}
+
+
 	@Keyword
-	static WebDriver openChromeDriver(String userName, FailureHandling flowControl) {
-		ChromeOptions myChromeOptions = ChromeDriverFactory.myChromeOptions()
-		return openChromeDriver(userName, myChromeOptions, flowControl)
+	WebDriver openChromeDriverWithProfile(String userName) {
+		return openChromeDriverWithProfile(userName, RunConfiguration.getDefaultFailureHandling())
 	}
 
 	/**
@@ -69,12 +91,8 @@ public class ChromeDriverFactory {
 	 * @return
 	 */
 	@Keyword
-	static WebDriver openChromeDriver(
-			String userName,
-			ChromeOptions chromeOptions,
-			FailureHandling flowControl) {
+	WebDriver openChromeDriverWithProfile(String userName, FailureHandling flowControl) {
 		Objects.requireNonNull(userName, "userName must not be null")
-		Objects.requireNonNull(chromeOptions, "chromeOptions must not be null")
 		Objects.requireNonNull(flowControl, "flowControl must not be null")
 		//
 		Path logsDir = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
@@ -92,11 +110,15 @@ public class ChromeDriverFactory {
 		//
 		if (profileDirectory != null) {
 			if (Files.exists(profileDirectory) && profileDirectory.toFile().canWrite()) {
+				Map<String, Object> chromePreferences = this.chromePreferencesResolver_.resolveChromePreferences()
+				ChromeOptions chromeOptions = this.chromeOptionsResolver_.resolveChromeOptions(chromePreferences)
+
 				// use the Profile as specified
 				chromeOptions.addArguments("user-data-dir=" + userDataDirectory.toString())
 				chromeOptions.addArguments("profile-directory=${profileDirectory.getFileName().toString()}")
 				KeywordUtil.logInfo("#openChromeDriver chromeOptions=" + chromeOptions.toJsonText())
-				DesiredCapabilities cap = myChromeDesiredCapabilities(chromeOptions)
+
+				DesiredCapabilities cap = this.desiredCapabilitiesResolver_.resolveDesiredCapabilities(chromeOptions)
 				WebDriver driver = new ChromeDriver(cap)
 				return driver
 			} else {
@@ -108,6 +130,63 @@ public class ChromeDriverFactory {
 					)
 		}
 	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Override
+	Map<String, Object> resolveChromePreferences() {
+		Map<String, Object> chromePreferences = new HashMap<>()
+		// Below two preference settings will disable popup dialog when download file
+		chromePreferences.put('profile.default_content_settings.popups', 0)
+		chromePreferences.put('download.prompt_for_download', false)
+		// set directory to save files
+		Path downloads = Paths.get(System.getProperty('user.home'), 'Downloads')
+		chromePreferences.put('download.default_directory', downloads.toString())
+		// disable flash and pdf viewer
+		chromePreferences.put('plugins.plugins_disabled',
+				['Adobe Flash Player', 'Chrome PDF Viewer'])
+		return chromePreferences
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	ChromeOptions resolveChromeOptions(Map<String, Object> chromePreferences) {
+		ChromeOptions options = new ChromeOptions()
+		// set location of the Chrome Browser's binary
+		options.setBinary(ChromeDriverFactory.getChromeBinaryPath().toString());
+		// set my chrome preferences
+		options.setExperimentalOption('prefs', chromePreferences)
+		// The following lines are copy&pasted from
+		// https://github.com/SeleniumHQ/selenium/issues/4961
+		options.addArguments("--headless")     // necessary for working around the "(unknown error: DevToolsActivePort file doesn't exist)"
+		options.addArguments("window-size=1024,768")
+		options.addArguments("--no-sandbox")
+
+		//options.addArguments("--single-process")
+		options.addArguments("disable-infobars")        // disabling infobars
+		//chromeOptions.addArguments("disable-extensions")    // disabling extensions
+		options.addArguments("disable-gpu")             // applicable to windows os only
+		options.addArguments("disable-dev-shm-usage")   // overcome limited resource problems
+		//
+		return options
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	DesiredCapabilities resolveDesiredCapabilities(ChromeOptions chromeOptions) {
+		DesiredCapabilities cap = DesiredCapabilities.chrome()
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions)
+		return cap
+	}
+
+
 
 
 	/**
@@ -170,171 +249,5 @@ public class ChromeDriverFactory {
 		}
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	static Map<String, Object> myChromePreferences() {
-		Map<String, Object> chromePreferences = new HashMap<>()
-		// Below two preference settings will disable popup dialog when download file
-		chromePreferences.put('profile.default_content_settings.popups', 0)
-		chromePreferences.put('download.prompt_for_download', false)
-		// set directory to save files
-		Path downloads = Paths.get(System.getProperty('user.home'), 'Downloads')
-		chromePreferences.put('download.default_directory', downloads.toString())
-		// disable flash and pdf viewer
-		chromePreferences.put('plugins.plugins_disabled',
-				['Adobe Flash Player', 'Chrome PDF Viewer'])
-		return chromePreferences
-	}
 
-	/**
-	 *
-	 */
-	static ChromeOptions myChromeOptions() {
-		ChromeOptions options = new ChromeOptions()
-		// set location of the Chrome Browser's binary
-		options.setBinary(ChromeDriverFactory.getChromeBinaryPath().toString());
-		// set my chrome preferences
-		options.setExperimentalOption('prefs', myChromePreferences())
-		// The following lines are copy&pasted from
-		// https://github.com/SeleniumHQ/selenium/issues/4961
-		options.addArguments("--headless")     // necessary for working around the "(unknown error: DevToolsActivePort file doesn't exist)"
-		options.addArguments("window-size=1024,768")
-		options.addArguments("--no-sandbox")
-
-		//options.addArguments("--single-process")
-		options.addArguments("disable-infobars")        // disabling infobars
-		//chromeOptions.addArguments("disable-extensions")    // disabling extensions
-		options.addArguments("disable-gpu")             // applicable to windows os only
-		options.addArguments("disable-dev-shm-usage")   // overcome limited resource problems
-		//
-		return options
-	}
-
-	/**
-	 *
-	 */
-	static DesiredCapabilities myChromeDesiredCapabilities(ChromeOptions chromeOptions) {
-		DesiredCapabilities cap = DesiredCapabilities.chrome()
-		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
-		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions)
-		return cap
-	}
-
-	/**
-	 *
-	 * @author kazurayam
-	 *
-	 */
-	static final class ChromeProfileFinder {
-		private ChromeProfileFinder() {}
-		/*
-		 *
-		 */
-		static List<ChromeProfile> getChromeProfiles() {
-			List<ChromeProfile> chromeProfiles = new ArrayList<ChromeProfile>()
-			Path userDataDirectory = ChromeDriverFactory.getChromeUserDataDirectory()
-			List<Path> dirStream = Files.list(userDataDirectory).collect(Collectors.toList());
-			for (Path dir : dirStream) {
-				if (Files.exists(dir.resolve('Preferences'))) {
-					ChromeProfile cp = new ChromeProfile(dir)
-					chromeProfiles.add(cp)
-				}
-			}
-			return chromeProfiles
-		}
-
-		static String listChromeProfiles() {
-			List<ChromeProfile> chromeProfiles = getChromeProfiles()
-			Collections.sort(chromeProfiles)
-			StringBuilder sb = new StringBuilder()
-			sb.append(String.format("%-15s","user name"))
-			sb.append("\t|")
-			sb.append("profile path")
-			sb.append("\n")
-			sb.append(('-' * 15) + '\t|' + ('-' * 15) + "\n")
-			for (ChromeProfile cp : chromeProfiles) {
-				sb.append(String.format("%-15s",cp.getName()))
-				sb.append("\t|")
-				sb.append(cp.getProfilePath().getFileName().toString())
-				sb.append("\n")
-			}
-			return sb.toString()
-		}
-
-		/**
-		 *
-		 * @param name
-		 * @return
-		 */
-		static ChromeProfile getChromeProfile(String name) {
-			List<ChromeProfile> chromeProfiles = this.getChromeProfiles()
-			for (ChromeProfile cProfile: chromeProfiles) {
-				if (cProfile.getName().equals(name)) {
-					return cProfile
-				}
-			}
-			return null
-		}
-
-		/**
-		 *
-		 * @return
-		 */
-		static Path getChromeUserDataDirectory() {
-			if (OSIdentifier.isWindows()) {
-				// It is important that this chromeProfilesPath ends with User Data and not with the profile folder
-				// %HOME%\AppData\Local\Google\Chrome\User Data
-				return Paths.get('C:', 'Users', System.getProperty('user.name'),
-						'AppData', 'Local', 'Google', 'Chrome', 'User Data')
-			} else if (OSIdentifier.isMac()) {
-				// ~/Library/Application Support/Google/Chrome
-				return Paths.get(System.getProperty('user.home')).resolve('Library').
-						resolve('Application Support').resolve('Google').resolve('Chrome')
-			} else if (OSIdentifier.isUnix()) {
-				// ~/.config/google-chrome
-				return Paths.get(System.getProperty('user.home')).resolve('.config').
-						resolve('google-chrome')
-			} else {
-				throw new IllegalStateException(
-				"Windows, Mac, Linux are supported. Other platforms are not supported.")
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @author kazuraayam
-	 *
-	 */
-	static final class ChromeProfile implements Comparable<ChromeProfile> {
-		static final String PREFERENCES_FILE_NAME = 'Preferences'
-		private Path profilePath_ = null
-		private def preferences_ = null
-		private String name_ = null
-		ChromeProfile(Path profilePath) {
-			Path preferences = profilePath.resolve(PREFERENCES_FILE_NAME)
-			if (!Files.exists(preferences)) {
-				throw new IOException("${preferences.toString()} is not found")
-			}
-			this.profilePath_ = profilePath
-			JsonSlurper slurper = new JsonSlurper()
-			this.preferences_ = slurper.parse(preferences.toFile())
-			this.name_ = this.preferences_['profile']['name']
-		}
-		String getName() {
-			return this.name_
-		}
-		def getPreferences() {
-			return this.preferences_
-		}
-		Path getProfilePath() {
-			return this.profilePath_
-		}
-		@Override
-		int compareTo(ChromeProfile other) {
-			return this.getName().compareTo(other.getName())
-		}
-	}
 }

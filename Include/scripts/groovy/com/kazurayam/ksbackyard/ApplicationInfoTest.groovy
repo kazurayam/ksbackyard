@@ -32,7 +32,7 @@ public class ApplicationInfoTest {
 		ApplicationInfo appInfo = new ApplicationInfo()
 		appInfo.getAppProp().list(System.out)
 	}
-	
+
 	@Test
 	void test_KATALON_HOME_PATTERN() {
 		Matcher	m = ApplicationInfo.KATALON_HOME_PATTERN.matcher('#C:\\Katalon_Studio_Windows_64-5.10.1')
@@ -41,7 +41,7 @@ public class ApplicationInfoTest {
 		println "s=\"${s}\""
 		assertThat(s, is('C:\\Katalon_Studio_Windows_64-5.10.1'))
 	}
-	
+
 	@Test
 	void test_getKatalonHome() {
 		ApplicationInfo appInfo = new ApplicationInfo()

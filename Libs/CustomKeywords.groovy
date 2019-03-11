@@ -29,8 +29,6 @@ import java.lang.Class
 
 import java.util.List
 
-import org.openqa.selenium.chrome.ChromeOptions
-
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
     	TestObject testObject	) {
@@ -436,35 +434,17 @@ def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
         	urlString)
 }
 
-def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriver"(
+def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriverWithProfile"(
     	String userName	) {
-    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriver(
+    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriverWithProfile(
         	userName)
 }
 
-def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriver"(
-    	String userName	
-     , 	ChromeOptions chromeOptions	) {
-    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriver(
-        	userName
-         , 	chromeOptions)
-}
-
-def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriver"(
+def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriverWithProfile"(
     	String userName	
      , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriver(
+    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriverWithProfile(
         	userName
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.openChromeDriver"(
-    	String userName	
-     , 	ChromeOptions chromeOptions	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory()).openChromeDriver(
-        	userName
-         , 	chromeOptions
          , 	flowControl)
 }
 

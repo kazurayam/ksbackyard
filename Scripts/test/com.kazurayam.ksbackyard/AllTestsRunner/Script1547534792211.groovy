@@ -1,4 +1,5 @@
 import com.kazurayam.ksbackyard.AssertTest
+import com.kazurayam.ksbackyard.ApplicationInfoTest
 import com.kazurayam.ksbackyard.ImageCollectionDifferTest
 import com.kazurayam.ksbackyard.RunConfigurationWrapperTest
 import com.kazurayam.ksbackyard.OSIdentifierTest
@@ -13,6 +14,7 @@ import com.kazurayam.ksbackyard.VersionTest
 
 
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(AssertTest.class)
+CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ApplicationInfoTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ImageCollectionDifferTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(OSIdentifierTest.class)
 CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(QuietBrowserTest.class)
