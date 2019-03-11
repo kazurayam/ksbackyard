@@ -1,4 +1,8 @@
-package com.kazurayam.ksbackyard
+package com.kazurayam.ksbackyard.webdriver
+
+import com.kazurayam.ksbackyard.ApplicationInfo
+import com.kazurayam.ksbackyard.Assert
+import com.kazurayam.ksbackyard.OSIdentifier
 
 import java.nio.file.Files
 import java.nio.file.Path
@@ -33,6 +37,8 @@ public class ChromeDriverFactory {
 		}
 	}
 
+	ChromeDriverFactory() {}
+
 	@Keyword
 	static WebDriver openChromeDriver(String userName) {
 		ChromeOptions myChromeOptions = ChromeDriverFactory.myChromeOptions()
@@ -54,10 +60,10 @@ public class ChromeDriverFactory {
 
 	/**
 	 * Based on the post https://forum.katalon.com/t/open-browser-with-custom-profile/19268 by Thanh To
-	 * 
+	 *
 	 * Chrome's User Data directory is OS dependent. The User Data Diretory is described in the document
 	 * https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md#Current-Location
-	 * 
+	 *
 	 * @param userProfile
 	 * @param flowControl
 	 * @return
@@ -145,7 +151,7 @@ public class ChromeDriverFactory {
 
 	/**
 	 * as described https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md
-	 * 
+	 *
 	 * @returns path of the directory in which Google Chrome's Profile directories are located
 	 */
 	@Keyword
@@ -165,7 +171,7 @@ public class ChromeDriverFactory {
 	}
 
 	/**
-	 * 	
+	 *
 	 * @return
 	 */
 	static Map<String, Object> myChromePreferences() {
@@ -178,10 +184,7 @@ public class ChromeDriverFactory {
 		chromePreferences.put('download.default_directory', downloads.toString())
 		// disable flash and pdf viewer
 		chromePreferences.put('plugins.plugins_disabled',
-				[
-					'Adobe Flash Player',
-					'Chrome PDF Viewer'
-				])
+				['Adobe Flash Player', 'Chrome PDF Viewer'])
 		return chromePreferences
 	}
 
@@ -220,14 +223,14 @@ public class ChromeDriverFactory {
 	}
 
 	/**
-	 * 
+	 *
 	 * @author kazurayam
 	 *
 	 */
 	static final class ChromeProfileFinder {
 		private ChromeProfileFinder() {}
 		/*
-		 * 
+		 *
 		 */
 		static List<ChromeProfile> getChromeProfiles() {
 			List<ChromeProfile> chromeProfiles = new ArrayList<ChromeProfile>()
@@ -261,7 +264,7 @@ public class ChromeDriverFactory {
 		}
 
 		/**
-		 * 
+		 *
 		 * @param name
 		 * @return
 		 */
@@ -276,7 +279,7 @@ public class ChromeDriverFactory {
 		}
 
 		/**
-		 * 
+		 *
 		 * @return
 		 */
 		static Path getChromeUserDataDirectory() {
@@ -301,7 +304,7 @@ public class ChromeDriverFactory {
 	}
 
 	/**
-	 * 
+	 *
 	 * @author kazuraayam
 	 *
 	 */

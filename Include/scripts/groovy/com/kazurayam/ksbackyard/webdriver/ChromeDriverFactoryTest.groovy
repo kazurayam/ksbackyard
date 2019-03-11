@@ -1,4 +1,4 @@
-package com.kazurayam.ksbackyard
+package com.kazurayam.ksbackyard.webdriver
 
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
@@ -14,8 +14,8 @@ import org.junit.runners.JUnit4
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
-import com.kazurayam.ksbackyard.ChromeDriverFactory.ChromeProfile
-import com.kazurayam.ksbackyard.ChromeDriverFactory.ChromeProfileFinder
+import com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.ChromeProfile
+import com.kazurayam.ksbackyard.webdriver.ChromeDriverFactory.ChromeProfileFinder
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -80,9 +80,9 @@ public class ChromeDriverFactoryTest {
 	void test_getChromeDriverPath() {
 		Path chromeDriverPath = ChromeDriverFactory.getChromeDriverPath()
 		assertThat(chromeDriverPath, is(notNullValue()))
-		assertTrue(Files.exists(chromeDriverPath))	
+		assertTrue(Files.exists(chromeDriverPath))
 	}
-	
+
 	@Test
 	void test_openChromeDriver() {
 		ChromeOptions defaultChromeOptions = ChromeDriverFactory.myChromeOptions()
