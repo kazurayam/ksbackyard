@@ -1,8 +1,8 @@
 package com.kazurayam.ksbackyard
 
-import java.awt.image.BufferedImage
 import java.awt.Color
 import java.awt.Graphics2D
+import java.awt.image.BufferedImage
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.ZonedDateTime
@@ -24,9 +24,10 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import groovy.json.JsonOutput
+import net.coobird.thumbnailator.Thumbnails
 import ru.yandex.qatools.ashot.AShot
-import ru.yandex.qatools.ashot.coordinates.Coords
 import ru.yandex.qatools.ashot.Screenshot
+import ru.yandex.qatools.ashot.coordinates.Coords
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
 
@@ -134,8 +135,19 @@ class ScreenshotDriver {
 			println "added ignored element ${by}"
 		}
 		Screenshot screenshot = aShot.takeScreenshot(webDriver)
-		//return screenshot.getImage()
-		return censor(screenshot)
+
+		// paint specific web elements in the page with grey color
+		BufferedImage censored = censor(screenshot)
+
+		BufferedImage result
+		// if required, resize the image to make its byte-size smaller
+		println "options.getWidth() is ${options.getWidth()}"
+		if (options.getWidth() > 0) {
+			result = resize(censored, options.getWidth())
+		} else {
+			result = censored
+		}
+		return result
 	}
 
 	// In which color should we paint WebElements to ignore
@@ -157,6 +169,26 @@ class ScreenshotDriver {
 			g2D.fillRect(x, y, width, height)
 		}
 		return bi
+	}
+
+	/**
+	 * Resize the source image to have the given width while retaining the aspect ratio unchanged
+	 * 
+	 * This method utilizes the Thumbnailator library (https://github.com/coobird/thumbnailator)
+	 * 
+	 * @param sourceImage raw Sreenshot image
+	 * @param targetWidth resize the sourceImage to this width, retaining the aspect ratio unchanged
+	 * @return resized image
+	 */
+	static BufferedImage resize(BufferedImage sourceImage, int targetWidth) {
+		if (targetWidth < 0) return sourceImage
+		int sourceWidth  = sourceImage.getWidth()
+		int sourceHeight = sourceImage.getHeight()
+		int targetHeight = (int)Math.round((sourceHeight * targetWidth * 1.0) / sourceWidth)
+		BufferedImage targetBI = Thumbnails.of(sourceImage).
+											size(targetWidth, targetHeight).
+											asBufferedImage()
+		return targetBI
 	}
 
 	/**
@@ -459,18 +491,22 @@ class ScreenshotDriver {
 	static class Options {
 
 		static private int DEFAULT_SCROLLING_TIMEOUT = 500
+		static private int MAXIMUM_IMAGE_WIDTH = 4000
 
 		private int timeout
 		private List<TestObject> ignoredElements
+		private int width
 
 		static class Builder {
 
 			private int timeout
 			private List<TestObject> ignoredElements
+			private int width
 
 			Builder() {
 				timeout = DEFAULT_SCROLLING_TIMEOUT
 				ignoredElements = new ArrayList<TestObject>()   // no elements to ignore
+				width = -1  // not specified
 			}
 			/**
 			 * set scrolling timeout 
@@ -493,6 +529,16 @@ class ScreenshotDriver {
 				this.ignoredElements.add(testObject)
 				return this
 			}
+			Builder width(int value) {
+				if (value <= 0) {
+					throw new IllegalArgumentException("value(${value}) must not be negative or equal to 0")
+				}
+				if (value > MAXIMUM_IMAGE_WIDTH) {
+					throw new IllegalArgumentException("value(${value}) must be less than or equal to ${MAXIMUM_IMAGE_WIDTH}")
+				}
+				this.width = value
+				return this
+			}
 			Options build() {
 				return new Options(this)
 			}
@@ -501,6 +547,7 @@ class ScreenshotDriver {
 		private Options(Builder builder) {
 			this.timeout = builder.timeout
 			this.ignoredElements = builder.ignoredElements
+			this.width = builder.width
 		}
 
 		int getTimeout() {
@@ -509,6 +556,10 @@ class ScreenshotDriver {
 
 		List<TestObject> getIgnoredElements() {
 			return this.ignoredElements
+		}
+
+		int getWidth() {
+			return this.width
 		}
 
 		@Override
