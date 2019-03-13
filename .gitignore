@@ -46,3 +46,6 @@ settings/internal/com.kms.katalon.integration.jira.properties
 /Materials/
 /build/
 /tmp/
+
+build/
+.gradle/
