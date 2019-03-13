@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
-import com.kazurayam.materials.imagedifference.ImageDifference
+import com.kazurayam.imagedifference.ImageDifference
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
@@ -13,7 +13,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
  * This class implements Custom Keywords operational in Katalon Studio.
- * The keywords are useful to verify how a YouTube video is working. 
+ * The keywords are useful to verify how a YouTube video is working.
  *
  * @author kazurayam
  *
@@ -23,7 +23,7 @@ class YouTubeVideoVerifier {
 	/**
 	 * This method accepts a WebDriver instance and a WebElement object as video.
 	 * This method checks if the video is autoplayed or not.
-	 * 
+	 *
 	 * What it actually does is as follows:
 	 * 1. when the video is loaded, push the playButton so that the video will stopped
 	 * 2. 1st screenshot is taken.
@@ -97,7 +97,7 @@ class YouTubeVideoVerifier {
 	/**
 	 * This method accepts a WebDriver instance and a WebElement object as video.
 	 * This method checks if the video starts and stay still (no motion)or not.
-	 * 
+	 *
 	 * What it actually does is as follows:
 	 * 1. when the video is loaded, 1st screenshot is taken.
 	 * 2. wait for some seconds
