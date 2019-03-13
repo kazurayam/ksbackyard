@@ -110,6 +110,7 @@
 	<classpathentry kind="lib" path="C:/Users/qcq0264/katalon-workspace/ksbackyard/Drivers/ImageDifference-0.8.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/qcq0264/katalon-workspace/ksbackyard/Drivers/Materials-0.36.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/qcq0264/katalon-workspace/ksbackyard/Drivers/thumbnailator-0.4.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/qcq0264/katalon-workspace/ksbackyard/Drivers/webdriverfactory4ks-all.jar"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

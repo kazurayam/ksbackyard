@@ -186,8 +186,8 @@ class ScreenshotDriver {
 		int sourceHeight = sourceImage.getHeight()
 		int targetHeight = (int)Math.round((sourceHeight * targetWidth * 1.0) / sourceWidth)
 		BufferedImage targetBI = Thumbnails.of(sourceImage).
-											size(targetWidth, targetHeight).
-											asBufferedImage()
+				size(targetWidth, targetHeight).
+				asBufferedImage()
 		return targetBI
 	}
 
