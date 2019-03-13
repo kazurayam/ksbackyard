@@ -1,0 +1,3 @@
+import com.kazurayam.ksbackyard.ScreenshotDriverResizingTest
+
+CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverResizingTest.class)
