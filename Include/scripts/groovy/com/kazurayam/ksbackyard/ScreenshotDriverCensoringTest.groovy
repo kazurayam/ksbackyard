@@ -58,7 +58,7 @@ class ScreenshotDriverCensoringTest {
 		Files.createDirectories(workdir_)
 		//WebUI.openBrowser('')
 		ChromeDriverFactory cdFactory = new ChromeDriverFactory()
-		WebDriver driver = cdFactory.openChromeDriverWithProfile('Katalon')
+		WebDriver driver = cdFactory.openChromeDriver()
 		DriverFactory.changeWebDriver(driver)
 		WebUI.setViewPortSize(1280, 800)
 		//
