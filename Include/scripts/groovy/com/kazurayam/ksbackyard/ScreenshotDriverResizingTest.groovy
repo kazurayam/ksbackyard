@@ -19,14 +19,18 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.openqa.selenium.WebDriver
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kazurayam.ksbackyard.ScreenshotDriver.Options
+import com.kazurayam.webdriverfactory4ks.ChromeDriverFactory
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.driver.DriverFactory
+
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 /**
@@ -47,15 +51,17 @@ class ScreenshotDriverResizingTest {
 	static void beforeClass() {
 		Path projectDir = Paths.get(RunConfiguration.getProjectDir())
 		fixturedir_ = projectDir.resolve('Include/resources/fixture')
-		Path targetHTML = fixturedir_.resolve('47News/20190205_144400/page.html')
-		url_ = targetHTML.toUri().toURL().toExternalForm()
+		url_ = 'https://www.47news.jp/'
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverResizingTest')
 		if (Files.exists(workdir_)) {
 			FileUtils.deleteQuietly(workdir_.toFile())
 		}
 		Files.createDirectories(workdir_)
-		WebUI.openBrowser('')
-		WebUI.setViewPortSize(1280, 960)
+		//WebUI.openBrowser('')
+		ChromeDriverFactory cdFactory = new ChromeDriverFactory()
+		WebDriver driver = cdFactory.openChromeDriverWithProfile('Katalon')
+		DriverFactory.changeWebDriver(driver)
+		WebUI.setViewPortSize(1280, 800)
 		//
 		ScreenshotDriver.setForceSnapshots(true)
 	}
