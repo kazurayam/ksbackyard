@@ -42,10 +42,15 @@ settings/internal/com.kms.katalon.integration.jira.properties
 # OS X
 .DS_Store
 
-# kazurayam's preference
+# Katalon Studio
 /Materials/
 /build/
 /tmp/
 
+# Eclipse
+.classpath
+.settings
+
+# Gradle
 build/
 .gradle/
