@@ -11,15 +11,27 @@ ext {
 
 configurations {
     generateDocs
+
+    compile.exclude group: 'org.seleniumhq.selenium'
+    compile.exclude group: 'commons-io'
+    compile.exclude group: 'com.google.code.gson'
+    compile.exclude group: 'org.hamcrest'
+    compile.exclude group: 'junit'
+    compile.exclude group: 'org.mockito'
 }
 
 repositories {
     jcenter()
     mavenCentral()
 }
+
 dependencies {
+    // https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot
+    compile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '1.5.4'
+
     generateDocs "org.codehaus.groovy:groovy-all:${groovyVersion}"
 }
+
 sourceSets {
     main {
         groovy {
@@ -29,8 +41,12 @@ sourceSets {
     }
 }
 
+shadowJar {
+    exclude 'Temp*.class'
+}
+
 katalon {
-    dependencyPrefix = "com.katalon"
+    dependencyPrefix = "com.kazurayam"
     minimize = false
 }
 
