@@ -25,8 +25,6 @@ import org.openqa.selenium.WebDriver
 
 import org.openqa.selenium.WebElement
 
-import java.lang.Class
-
 import java.util.List
 
 
@@ -400,20 +398,6 @@ def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill
     	TestObject video	) {
     (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
         	video)
-}
-
-def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.junit4ks.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass
-         , 	flowControl)
-}
-
-def static "com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner"(
-    	Class junitRunnerClass	) {
-    (new com.kazurayam.junit4ks.JUnitCustomKeywords()).runWithJUnitRunner(
-        	junitRunnerClass)
 }
 
 def static "com.kazurayam.ksbackyard.TestObjectSupport.toJson"(
