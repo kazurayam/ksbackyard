@@ -6,6 +6,7 @@
    <UUID>37e68fc1-ffaa-49eb-b3ed-f65855a84b62</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
+   <projectFileLocation>/Users/kazuakiurayama/katalon-workspace/ksbackyard/ksbackyard.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
