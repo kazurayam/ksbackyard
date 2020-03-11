@@ -1,4 +1,0 @@
-import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
-import com.kazurayam.ksbackyard.RunConfigurationWrapperTest
-
-runWithJUnitRunner(RunConfigurationWrapperTest.class)
