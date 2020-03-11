@@ -130,36 +130,6 @@ class ScreenshotDriverTest {
 		assertTrue("${output.toString()} does not exist", Files.exists(output))
 	}
 
-	/**
-	 * test verifyImages(BufferedImage, BufferedImage, Double)
-	 */
-	@Test
-	void test_verifyImages() {
-		String expectedUrl = 'https://katalon-demo-cura.herokuapp.com/'
-		driver_.get(expectedUrl)
-		WebDriverWait wait = new WebDriverWait(driver_, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='btn-make-appointment']")))
-		BufferedImage expectedImage = ScreenshotDriver.takeEntirePageImage(driver_)
-		//
-		String actualUrl = 'http://demoaut-mimic.kazurayam.com'
-		driver_.get(actualUrl)
-		WebDriverWait wait2 = new WebDriverWait(driver_, 10);
-		wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='btn-make-appointment']")))
-		BufferedImage actualImage = ScreenshotDriver.takeEntirePageImage(driver_)
-		//
-		ImageDifference difference = ScreenshotDriver.verifyImages(expectedImage, actualImage)
-		//
-		assertTrue("${expectedUrl} and ${actualUrl} look similar", difference.imagesAreDifferent(3.0))
-		// assert ImageDifference properties
-		assertTrue("difference returned null expectedImage", difference.getExpectedImage() != null)
-		assertTrue("difference returned null actualImage", difference.getActualImage() != null)
-		assertTrue("difference returned null diffImage", difference.getDiffImage() != null)
-		assertTrue("difference returned ratio ${difference.getRatio()} which is unexpected",
-				difference.getRatio() > 0 && difference.getRatio() < 10.0)
-		//assertTrue("difference returned ratioAsString ${difference.getRatioAsString()}", difference.getRatioAsString() == '6.05')
-		assertTrue("difference returned ${difference.imagesAreDifferent(3.0)} for imagesAreDifferent()",
-				difference.imagesAreDifferent(3.0))
-	}
 
 
 	static class WebDriverFactory {

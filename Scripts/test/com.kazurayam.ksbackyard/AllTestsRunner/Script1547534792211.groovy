@@ -5,7 +5,6 @@ import com.kazurayam.ksbackyard.AssertTest
 import com.kazurayam.ksbackyard.OSIdentifierTest
 import com.kazurayam.ksbackyard.QuietBrowserTest
 import com.kazurayam.ksbackyard.ScreenshotDriverCensoringTest
-import com.kazurayam.ksbackyard.ScreenshotDriverCompareImagesTest
 import com.kazurayam.ksbackyard.ScreenshotDriverOptionsTest
 import com.kazurayam.ksbackyard.ScreenshotDriverResizingTest
 import com.kazurayam.ksbackyard.ScreenshotDriverTest
@@ -17,7 +16,6 @@ runWithJUnitRunner(AssertTest.class)
 runWithJUnitRunner(OSIdentifierTest.class)
 runWithJUnitRunner(QuietBrowserTest.class)
 runWithJUnitRunner(ScreenshotDriverCensoringTest.class)
-runWithJUnitRunner(ScreenshotDriverCompareImagesTest.class)
 runWithJUnitRunner(ScreenshotDriverOptionsTest.class)
 runWithJUnitRunner(ScreenshotDriverResizingTest.class)
 runWithJUnitRunner(ScreenshotDriverTest.class)
