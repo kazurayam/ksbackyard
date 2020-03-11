@@ -12,12 +12,12 @@ ext {
 configurations {
     generateDocs
 
-    compile.exclude group: 'org.seleniumhq.selenium'
-    compile.exclude group: 'commons-io'
-    compile.exclude group: 'com.google.code.gson'
-    compile.exclude group: 'org.hamcrest'
-    compile.exclude group: 'junit'
-    compile.exclude group: 'org.mockito'
+    implementation.exclude group: 'org.seleniumhq.selenium'
+    implementation.exclude group: 'commons-io'
+    implementation.exclude group: 'com.google.code.gson'
+    implementation.exclude group: 'org.hamcrest'
+    implementation.exclude group: 'junit'
+    implementation.exclude group: 'org.mockito'
 }
 
 repositories {
@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot
-    compile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '1.5.4'
+    implementation group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '1.5.4'
 
     generateDocs "org.codehaus.groovy:groovy-all:${groovyVersion}"
 }
@@ -52,7 +52,7 @@ katalon {
 
 task groovydoc(type: Groovydoc, overwrite:true) {
     source = sourceSets.main.groovy
-    classpath = configurations.compile
+    classpath = configurations.compileClasspath
     groovyClasspath = project.configurations.generateDocs
     include 'com/kazurayam/ksbackyard/*'
     exclude '**/*Test.groovy'
