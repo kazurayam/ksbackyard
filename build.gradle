@@ -5,6 +5,10 @@ plugins {
     id "com.katalon.gradle-plugin" version "0.0.6"
 }
 
+group = 'com.kazurayam'
+jar.archiveBaseName = "ksbackyard"
+version = '0.37.0'
+
 ext {
     groovyVersion   = '2.4.7'
 }
