@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>ImageCollectionDifferTestRunner</name>
+   <name>skelton</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>affb2db9-17b6-47df-89fc-66bc87925a8a</testCaseGuid>
+   <testCaseGuid>cbe90dfd-7ba4-46d2-8e77-a8bc695fda5d</testCaseGuid>
 </TestCaseEntity>

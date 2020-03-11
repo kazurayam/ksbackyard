@@ -2,7 +2,6 @@ import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 
 import com.kazurayam.ksbackyard.AssertTest
-import com.kazurayam.ksbackyard.ImageCollectionDifferTest
 import com.kazurayam.ksbackyard.OSIdentifierTest
 import com.kazurayam.ksbackyard.QuietBrowserTest
 import com.kazurayam.ksbackyard.ScreenshotDriverCensoringTest
@@ -15,7 +14,6 @@ import com.kazurayam.ksbackyard.URLParserTest
 
 
 runWithJUnitRunner(AssertTest.class)
-runWithJUnitRunner(ImageCollectionDifferTest.class)
 runWithJUnitRunner(OSIdentifierTest.class)
 runWithJUnitRunner(QuietBrowserTest.class)
 runWithJUnitRunner(ScreenshotDriverCensoringTest.class)
