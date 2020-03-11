@@ -1,3 +1,4 @@
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 import com.kazurayam.ksbackyard.TestObjectSupportTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(TestObjectSupportTest.class)
+runWithJUnitRunner(TestObjectSupportTest.class)

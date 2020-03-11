@@ -1,3 +1,4 @@
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 import com.kazurayam.ksbackyard.VersionTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(VersionTest.class)
+runWithJUnitRunner(VersionTest.class)

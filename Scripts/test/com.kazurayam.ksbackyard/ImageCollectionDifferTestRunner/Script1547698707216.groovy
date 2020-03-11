@@ -1,3 +1,5 @@
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
+
 import com.kazurayam.ksbackyard.ImageCollectionDifferTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ImageCollectionDifferTest.class)
+runWithJUnitRunner(ImageCollectionDifferTest.class)

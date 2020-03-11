@@ -1,3 +1,4 @@
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 import com.kazurayam.ksbackyard.ScreenshotDriverResizingTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(ScreenshotDriverResizingTest.class)
+runWithJUnitRunner(ScreenshotDriverResizingTest.class)

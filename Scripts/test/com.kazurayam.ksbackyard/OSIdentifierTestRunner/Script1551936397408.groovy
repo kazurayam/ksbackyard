@@ -1,3 +1,4 @@
+import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 import com.kazurayam.ksbackyard.OSIdentifierTest
 
-CustomKeywords.'com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner'(OSIdentifierTest.class)
+runWithJUnitRunner(OSIdentifierTest.class)
