@@ -23,7 +23,6 @@ import org.openqa.selenium.WebDriver
 
 import com.kazurayam.ksbackyard.ScreenshotDriver
 import com.kazurayam.ksbackyard.ScreenshotDriver.Options
-import com.kazurayam.webdriverfactory4ks.ChromeDriverFactory
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.ConditionType
@@ -56,10 +55,7 @@ class ScreenshotDriverCensoringTest {
 			FileUtils.deleteQuietly(workdir_.toFile())
 		}
 		Files.createDirectories(workdir_)
-		//WebUI.openBrowser('')
-		ChromeDriverFactory cdFactory = new ChromeDriverFactory()
-		WebDriver driver = cdFactory.openChromeDriver()
-		DriverFactory.changeWebDriver(driver)
+		WebUI.openBrowser('')
 		WebUI.setViewPortSize(1280, 800)
 		//
 		ScreenshotDriver.setForceSnapshots(true)
