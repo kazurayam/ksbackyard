@@ -19,6 +19,3 @@ runWithJUnitRunner(ScreenshotDriverResizingTest.class)
 runWithJUnitRunner(ScreenshotDriverTest.class)
 runWithJUnitRunner(TestObjectSupportTest.class)
 runWithJUnitRunner(URLParserTest.class)
-
-
-
