@@ -21,7 +21,6 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import groovy.json.JsonOutput
-import net.coobird.thumbnailator.Thumbnails
 import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
 import ru.yandex.qatools.ashot.coordinates.Coords
@@ -169,25 +168,6 @@ class ScreenshotDriver {
 		return bi
 	}
 
-	/**
-	 * Resize the source image to have the given width while retaining the aspect ratio unchanged
-	 * 
-	 * This method utilizes the Thumbnailator library (https://github.com/coobird/thumbnailator)
-	 * 
-	 * @param sourceImage raw Sreenshot image
-	 * @param targetWidth resize the sourceImage to this width, retaining the aspect ratio unchanged
-	 * @return resized image
-	 */
-	static BufferedImage resize(BufferedImage sourceImage, int targetWidth) {
-		if (targetWidth < 0) return sourceImage
-		int sourceWidth  = sourceImage.getWidth()
-		int sourceHeight = sourceImage.getHeight()
-		int targetHeight = (int)Math.round((sourceHeight * targetWidth * 1.0) / sourceWidth)
-		BufferedImage targetBI = Thumbnails.of(sourceImage).
-				size(targetWidth, targetHeight).
-				asBufferedImage()
-		return targetBI
-	}
 
 	/**
 	 * takes screenshot of the entire page targeted,
@@ -297,6 +277,31 @@ class ScreenshotDriver {
 		saveEntirePageImage(webDriver, file, timeout)
 	}
 
+	/**
+	 * Resize the source image to have the given width while retaining the aspect ratio unchanged
+	 *
+	 * @param sourceImage raw Screenshot image
+	 * @param targetWidth resize the sourceImage to this width, retaining the aspect ratio unchanged
+	 * @return resized image
+	 */
+	static BufferedImage resize(BufferedImage sourceImage, int targetWidth) {
+		if (targetWidth < 0) return sourceImage
+		int sourceWidth  = sourceImage.getWidth()
+		int sourceHeight = sourceImage.getHeight()
+		int targetHeight = (int)Math.round((sourceHeight * targetWidth * 1.0) / sourceWidth)
+		
+		// create output image
+		BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, sourceImage.getType())
+		
+		// scales the input image to the output image
+		Graphics2D g2d = outputImage.createGraphics();
+		g2d.drawImage(sourceImage, 0, 0, targetWidth, targetHeight, null)
+		g2d.dispose()
+		
+		return outputImage
+	}
+
+
 	//-----------------------------------------------------------------
 
 	/**
@@ -394,5 +399,6 @@ class ScreenshotDriver {
 			return pp
 		}
 	}
+	
 
 }
