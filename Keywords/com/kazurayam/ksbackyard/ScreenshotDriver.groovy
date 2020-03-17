@@ -14,6 +14,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
+import com.kazurayam.ks.testobject.TestObjectExtension
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.testobject.TestObject
@@ -122,7 +123,7 @@ class ScreenshotDriver {
 	static BufferedImage takeEntirePageImage(WebDriver webDriver, Options options)
 	{
 		int timeout = options.getTimeout()
-		List<By> byList = TestObjectSupport.toBy(options.getIgnoredElements())
+		List<By> byList = TestObjectExtension.toBy(options.getIgnoredElements())
 		AShot aShot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
 				shootingStrategy(ShootingStrategies.viewportPasting(timeout))
@@ -289,15 +290,15 @@ class ScreenshotDriver {
 		int sourceWidth  = sourceImage.getWidth()
 		int sourceHeight = sourceImage.getHeight()
 		int targetHeight = (int)Math.round((sourceHeight * targetWidth * 1.0) / sourceWidth)
-		
+
 		// create output image
 		BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, sourceImage.getType())
-		
+
 		// scales the input image to the output image
 		Graphics2D g2d = outputImage.createGraphics();
 		g2d.drawImage(sourceImage, 0, 0, targetWidth, targetHeight, null)
 		g2d.dispose()
-		
+
 		return outputImage
 	}
 
@@ -399,6 +400,6 @@ class ScreenshotDriver {
 			return pp
 		}
 	}
-	
+
 
 }

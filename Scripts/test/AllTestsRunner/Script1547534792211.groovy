@@ -1,5 +1,4 @@
 import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
-import static com.kazurayam.junit4ks.JUnitCustomKeywords.runWithJUnitRunner
 
 import com.kazurayam.ksbackyard.AssertTest
 import com.kazurayam.ksbackyard.QuietBrowserTest
@@ -7,7 +6,6 @@ import com.kazurayam.ksbackyard.ScreenshotDriverCensoringTest
 import com.kazurayam.ksbackyard.ScreenshotDriverOptionsTest
 import com.kazurayam.ksbackyard.ScreenshotDriverResizingTest
 import com.kazurayam.ksbackyard.ScreenshotDriverTest
-import com.kazurayam.ksbackyard.TestObjectSupportTest
 import com.kazurayam.ksbackyard.URLParserTest
 
 
@@ -17,5 +15,4 @@ runWithJUnitRunner(ScreenshotDriverCensoringTest.class)
 runWithJUnitRunner(ScreenshotDriverOptionsTest.class)
 runWithJUnitRunner(ScreenshotDriverResizingTest.class)
 runWithJUnitRunner(ScreenshotDriverTest.class)
-runWithJUnitRunner(TestObjectSupportTest.class)
 runWithJUnitRunner(URLParserTest.class)
