@@ -12,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxProfile
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 
-import com.kazurayam.materials.FileType
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.network.ProxyInformation
@@ -100,8 +99,8 @@ class QuietBrowser {
 		Path downloads = Paths.get(System.getProperty('user.home'), 'Downloads')
 		profile.setPreference("browser.download.dir", downloads.toString())
 
-		// set preference not to show file download donfirmation dialog
-		def mimeTypes = FileType.getAllMimeTypesAsString()
+		// set preference not to show file download confirmation dialog
+		def mimeTypes = getAllMimeTypesAsString()
 		println "mimeTypes=${mimeTypes}"
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk", mimeTypes)
 		profile.setPreference("browser.helperApps.neverAsk.openFile", mimeTypes)
@@ -124,5 +123,42 @@ class QuietBrowser {
 		sb.append("proxyInformation.getUsername()           = ${proxyInformation.getUsername()}\n")
 		sb.append("proxyInformation.getPassword()           = ${proxyInformation.getPassword()}\n")
 		return sb.toString()
+	}
+	
+	private static String getAllMimeTypesAsString() {
+		return [
+			"application/gzip",
+			"application/java-archive",
+			"application/json",
+			"application/msexcel",
+			"application/msword",
+			"application/octet-stream",
+			"application/pdf",
+			"application/vnd-ms-office",
+			"application/vnd-xls",
+			"application/vnd.ms-excel",
+			"application/vnd.ms-powerpoint",
+			"application/vnd.openxmlformats-officedocument.presentationml.presentation",
+			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+			"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+			"application/x-dos_mx_excel",
+			"application/x-excel",
+			"application/x-ms-excel",
+			"application/x-msexcel",
+			"application/x-tar",
+			"application/x-xls",
+			"application/x-zip-compressed",
+			"application/xls",
+			"application/xml",
+			"application/zip",
+			"application/zlib",
+			"image/bmp",
+			"image/gif",
+			"image/jpeg",
+			"image/png",
+			"image/svg+xml",
+			"text/csv",
+			"text/plain",
+			"text/xml"].join(",")
 	}
 }
