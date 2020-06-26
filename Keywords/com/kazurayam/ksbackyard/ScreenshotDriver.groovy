@@ -91,7 +91,9 @@ class ScreenshotDriver {
 	 */
 	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
 		BufferedImage image = takeElementImage(webDriver, webElement)
-		ImageIO.write(image, "PNG", file)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
 	}
 
 
@@ -220,7 +222,9 @@ class ScreenshotDriver {
 	static void saveEntirePageImage(WebDriver webDriver, File file, Options options)
 	{
 		BufferedImage image = takeEntirePageImage(webDriver, options)
-		ImageIO.write(image, "PNG", file)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
 	}
 
 	/**
@@ -234,7 +238,9 @@ class ScreenshotDriver {
 	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
 	{
 		BufferedImage image = takeEntirePageImage(webDriver, timeout)
-		ImageIO.write(image, "PNG", file)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
 	}
 
 	//-------------

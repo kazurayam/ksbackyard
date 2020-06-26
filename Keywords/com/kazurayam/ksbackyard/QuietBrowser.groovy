@@ -18,6 +18,7 @@ import com.kms.katalon.core.network.ProxyInformation
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.driver.WebUIDriverType
 
+@Deprecated
 class QuietBrowser {
 
 	static ProxyInformation proxyInformation = RunConfiguration.getProxyInformation()
@@ -124,7 +125,7 @@ class QuietBrowser {
 		sb.append("proxyInformation.getPassword()           = ${proxyInformation.getPassword()}\n")
 		return sb.toString()
 	}
-	
+
 	private static String getAllMimeTypesAsString() {
 		return [
 			"application/gzip",
@@ -159,6 +160,7 @@ class QuietBrowser {
 			"image/svg+xml",
 			"text/csv",
 			"text/plain",
-			"text/xml"].join(",")
+			"text/xml"
+		].join(",")
 	}
 }
