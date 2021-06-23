@@ -37,124 +37,29 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies
  */
 class ScreenshotDriver {
 
+	/**
+	 * 
+	 */
 	static private Boolean forceSnapshots_ = false
+
+	/**
+	 * 
+	 */
 	static private int DEFAULT_SCROLLING_TIMEOUT = 500
 
-	static void setForceSnapshots(Boolean wanted) {
-		forceSnapshots_ = wanted
-	}
-
-	static Path tmpDir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
-
-	/**
-	 * takes screenshot of the specified WebElement in the target WebPage,
-	 * returns it as a BufferedImage object.
-	 * 
-	 * If the specified webElement is not found, then screenshot of whole page
-	 * will be returned.
-	 * 
-	 * @param webDriver
-	 * @param webElement
-	 * @return BufferedImage
+	/*
+	 * In which color should we paint WebElements to ignore
 	 */
-	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement) {
-		Screenshot screenshot = new AShot().
-				coordsProvider(new WebDriverCoordsProvider()).
-				shootingStrategy(ShootingStrategies.viewportPasting(DEFAULT_SCROLLING_TIMEOUT)).
-				takeScreenshot(webDriver, webElement)
-		return screenshot.getImage()
-	}
-
-
-	/**
-	 * provides the same function as takeElementImage(WebDriver, WebElement).
-	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
-	 * 
-	 * @param testObject
-	 * @return
-	 */
-	@Keyword
-	static BufferedImage takeElementImage(TestObject testObject) {
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		WebElement webElement = WebUI.findWebElement(testObject, 30)
-		return takeElementImage(webDriver, webElement)
-	}
-
-
-	/**
-	 * takes screenshot of the specified WebElement in the target WebPage,
-	 * and save it into the output file in PNG format.
-	 *
-	 * @param webDriver
-	 * @param webElement
-	 * @param file
-	 */
-	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
-		BufferedImage image = takeElementImage(webDriver, webElement)
-		new FileOutputStream(file).withCloseable { res ->
-			ImageIO.write(image, "PNG", res)
-		}
-	}
-
-
-	/**
-	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
-	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
-	 * 
-	 * @param testObject
-	 * @param file
-	 */
-	@Keyword
-	static void saveElementImage(TestObject testObject, File file) {
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		WebElement webElement = WebUI.findWebElement(testObject,30)
-		saveElementImage(webDriver, webElement, file)
-	}
-
-	//-----------------------------------------------------------------
-
-	/**
-	 * takes screenshot of the entire page 
-	 * while ignoring some elements specified
-	 * returns it as a BufferedImage object
-	 * 
-	 * @param webDriver
-	 * @param ignoredElementList 
-	 * @return BufferedImage
-	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver, Options options)
-	{
-		int timeout = options.getTimeout()
-		List<By> byList = TestObjectExtension.toBy(options.getIgnoredElements())
-		AShot aShot = new AShot().
-				coordsProvider(new WebDriverCoordsProvider()).
-				shootingStrategy(ShootingStrategies.viewportPasting(timeout))
-		for (By by : byList) {
-			aShot = aShot.addIgnoredElement(by)
-			println "added ignored element ${by}"
-		}
-		Screenshot screenshot = aShot.takeScreenshot(webDriver)
-
-		// paint specific web elements in the page with grey color
-		BufferedImage censored = censor(screenshot)
-
-		BufferedImage result
-		// if required, resize the image to make its byte-size smaller
-		println "options.getWidth() is ${options.getWidth()}"
-		if (options.getWidth() > 0) {
-			result = resize(censored, options.getWidth())
-		} else {
-			result = censored
-		}
-		return result
-	}
-
-	// In which color should we paint WebElements to ignore
 	static Color PAINT_IT_COLOR = Color.LIGHT_GRAY
 
 	/**
-	 * censor means 検閲 in Japanese.
 	 * 
+	 */
+	static Path tmpDir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp')
+
+	/**
+	 * censor means 検閲 in Japanese.
+	 *
 	 */
 	static BufferedImage censor(Screenshot screenshot) {
 		BufferedImage bi = screenshot.getImage()
@@ -171,118 +76,6 @@ class ScreenshotDriver {
 		return bi
 	}
 
-
-	/**
-	 * takes screenshot of the entire page targeted,
-	 * returns it as a BufferedImage object
-	 *
-	 * @param webDriver
-	 * @param webElement
-	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
-	 * @return BufferedImage
-	 */
-	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
-	{
-		Screenshot screenshot = new AShot().
-				coordsProvider(new WebDriverCoordsProvider()).
-				shootingStrategy(ShootingStrategies.viewportPasting(timeout)).
-				takeScreenshot(webDriver)
-		return screenshot.getImage()
-	}
-
-	//--------------
-
-	/**
-	 * 
-	 * @param options
-	 * @return
-	 */
-	@Keyword
-	static BufferedImage takeEntirePageImage(Options options) {
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		return takeEntirePageImage(webDriver, options)
-	}
-
-	/**
-	 * provides the same function as takeEntirePageImage(WebDriver, Integer)
-	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
-	 * 
-	 * @timeout millisecond, wait for page to displayed stable after scrolling downward
-	 * @return
-	 */
-	@Keyword
-	static BufferedImage takeEntirePageImage(Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
-	{
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		return takeEntirePageImage(webDriver, timeout)
-	}
-
-	//-------------
-
-	static void saveEntirePageImage(WebDriver webDriver, File file, Options options)
-	{
-		BufferedImage image = takeEntirePageImage(webDriver, options)
-		new FileOutputStream(file).withCloseable { res ->
-			ImageIO.write(image, "PNG", res)
-		}
-	}
-
-	/**
-	 * take the screenshot of the entire page targeted,
-	 * and save it into the output file in PNG format.
-	 *
-	 * @param webDriver
-	 * @param webElement
-	 * @param output
-	 */
-	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
-	{
-		BufferedImage image = takeEntirePageImage(webDriver, timeout)
-		new FileOutputStream(file).withCloseable { res ->
-			ImageIO.write(image, "PNG", res)
-		}
-	}
-
-	//-------------
-
-	/**
-	 * 
-	 * @param file
-	 * @param options
-	 */
-	@Keyword
-	static void saveEntirePageImage(File file, Options options) {
-		WebDriver driver = DriverFactory.getWebDriver()
-		saveEntirePageImage(driver, file, options)
-	}
-
-	/**
-	 * provides the same function as saveEntirePageImage(WebDriver, File, Integer)
-	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
-	 * 
-	 * @param file
-	 */
-	@Keyword
-	static void saveEntirePageImage(File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
-	{
-		WebDriver driver = DriverFactory.getWebDriver()
-		saveEntirePageImage(driver, file, timeout)
-	}
-
-	//-----------
-
-	/**
-	 * similar to saveEntirePageImage(WebDriver, File, Integer)
-	 * 
-	 * @deprecated use saveEntirePageImage(File, Integer) instead
-	 * 
-	 * @param webDriver
-	 * @param file
-	 */
-	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
-	{
-		saveEntirePageImage(webDriver, file, timeout)
-	}
 
 	/**
 	 * Resize the source image to have the given width while retaining the aspect ratio unchanged
@@ -308,19 +101,153 @@ class ScreenshotDriver {
 		return outputImage
 	}
 
-
-	//-----------------------------------------------------------------
+	/**
+	 * takes screenshot of the specified WebElement in the target WebPage,
+	 * and save it into the output file in PNG format.
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param file
+	 */
+	static void saveElementImage(WebDriver webDriver, WebElement webElement, File file) {
+		BufferedImage image = takeElementImage(webDriver, webElement)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
+	}
 
 	/**
-	 * @return timestamp string of now in the format yyyyMMdd_HHmmss
+	 * provides the same function as saveElementImage(WebDriver, WebElement, File)
+	 * The WebDriver object is resolved by calling DriverFactory.getWebDriver()
+	 *
+	 * @param testObject
+	 * @param file
 	 */
-	public static getTimestampNow()
-	{
-		ZonedDateTime now = ZonedDateTime.now()
-		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
+	@Keyword
+	static void saveElementImage(TestObject testObject, File file) {
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		WebElement webElement = WebUI.findWebElement(testObject,30)
+		saveElementImage(webDriver, webElement, file)
+	}
+
+	static void saveEntirePageImage(WebDriver webDriver, File file, Options options) {
+		BufferedImage image = takeEntirePageImage(webDriver, options)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
+	}
+
+	/**
+	 * take the screenshot of the entire page targeted,
+	 * and save it into the output file in PNG format.
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param output
+	 */
+	static void saveEntirePageImage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT) {
+		BufferedImage image = takeEntirePageImage(webDriver, timeout)
+		new FileOutputStream(file).withCloseable { res ->
+			ImageIO.write(image, "PNG", res)
+		}
+	}
+
+	/**
+	 * 
+	 * @param wanted
+	 */
+	static void setForceSnapshots(Boolean wanted) {
+		forceSnapshots_ = wanted
 	}
 
 
+	/**
+	 * takes screenshot of the specified WebElement in the target WebPage,
+	 * returns it as a BufferedImage object.
+	 * 
+	 * If the specified webElement is not found, then screenshot of whole page
+	 * will be returned.
+	 * 
+	 * @param webDriver
+	 * @param webElement
+	 * @return BufferedImage
+	 */
+	static BufferedImage takeElementImage(WebDriver webDriver, WebElement webElement, Options options = new Options.Builder().build()) {
+		int timeout = options.getTimeout()
+		float dpr = options.getDevicePixelRatio()
+		Screenshot screenshot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(
+					ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout)).
+				takeScreenshot(webDriver, webElement)
+		return screenshot.getImage()
+	}
+
+	/**
+	 * takes screenshot of the entire page 
+	 * while ignoring some elements specified
+	 * returns it as a BufferedImage object
+	 * 
+	 * @param webDriver
+	 * @param ignoredElementList 
+	 * @return BufferedImage
+	 */
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Options options) {
+		int timeout = options.getTimeout()
+		float dpr = options.getDevicePixelRatio()
+		List<By> byList = TestObjectExtension.toBy(options.getIgnoredElements())
+		AShot aShot = new AShot().
+				coordsProvider(new WebDriverCoordsProvider()).
+				shootingStrategy(
+					ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout))
+		for (By by : byList) {
+			aShot = aShot.addIgnoredElement(by)
+			//println "added ignored element ${by}"
+		}
+		Screenshot screenshot = aShot.takeScreenshot(webDriver)
+
+		// paint specific web elements in the page with grey color
+		BufferedImage censored = censor(screenshot)
+
+		BufferedImage result
+		// if required, resize the image to make its byte-size smaller
+		//println "options.getWidth() is ${options.getWidth()}"
+		if (options.getWidth() > 0) {
+			result = resize(censored, options.getWidth())
+		} else {
+			result = censored
+		}
+		return result
+	}
+
+	/**
+	 * takes screenshot of the entire page targeted,
+	 * returns it as a BufferedImage object
+	 *
+	 * @param webDriver
+	 * @param webElement
+	 * @param timeout millisecond, wait for page to be displayed stable after scrolling downward
+	 * @return BufferedImage
+	 */
+	static BufferedImage takeEntirePageImage(WebDriver webDriver, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
+	{
+		Options options = new Options.Builder().timeout(timeout).build()
+		return takeEntirePageImage(webDriver, options)
+	}
+
+
+	/**
+	 * similar to saveEntirePageImage(WebDriver, File, Integer)
+	 * 
+	 * @deprecated use saveEntirePageImage(File, Integer) instead
+	 * 
+	 * @param webDriver
+	 * @param file
+	 */
+	static void takeEntirePage(WebDriver webDriver, File file, Integer timeout = DEFAULT_SCROLLING_TIMEOUT)
+	{
+		saveEntirePageImage(webDriver, file, timeout)
+	}
 
 	/**
 	 * 
@@ -333,17 +260,20 @@ class ScreenshotDriver {
 		private int timeout
 		private List<TestObject> ignoredElements
 		private int width
+		private float devicePixelRatio
 
 		static class Builder {
 
 			private int timeout
 			private List<TestObject> ignoredElements
 			private int width
+			private float devicePixelRatio
 
 			Builder() {
 				timeout = DEFAULT_SCROLLING_TIMEOUT
 				ignoredElements = new ArrayList<TestObject>()   // no elements to ignore
 				width = -1  // not specified
+				devicePixelRatio = 2.0f
 			}
 			/**
 			 * set scrolling timeout 
@@ -376,6 +306,10 @@ class ScreenshotDriver {
 				this.width = value
 				return this
 			}
+			Builder devicePixelRatio(float value) {
+				this.devicePixelRatio = value
+				return this
+			}
 			Options build() {
 				return new Options(this)
 			}
@@ -385,6 +319,7 @@ class ScreenshotDriver {
 			this.timeout = builder.timeout
 			this.ignoredElements = builder.ignoredElements
 			this.width = builder.width
+			this.devicePixelRatio = builder.devicePixelRatio
 		}
 
 		int getTimeout() {
@@ -399,6 +334,10 @@ class ScreenshotDriver {
 			return this.width
 		}
 
+		float getDevicePixelRatio() {
+			return this.devicePixelRatio
+		}
+
 		@Override
 		String toString() {
 			String s = JsonOutput.toJson(this)
@@ -406,6 +345,4 @@ class ScreenshotDriver {
 			return pp
 		}
 	}
-
-
 }

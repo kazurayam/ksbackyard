@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import org.apache.commons.io.FileUtils
 
 @RunWith(JUnit4.class)
 class ScreenshotDriverTest {
@@ -46,6 +47,9 @@ class ScreenshotDriverTest {
 	static void beforeClass() {
 		driver_ = WebDriverFactory.createWebDriver()
 		workdir_ = Paths.get(RunConfiguration.getProjectDir()).resolve('tmp/ScreenshotDriverTest')
+		if (Files.exists(workdir_)) {
+			FileUtils.deleteDirectory(workdir_.toFile())
+		}
 		Files.createDirectories(workdir_)
 	}
 
@@ -110,7 +114,8 @@ class ScreenshotDriverTest {
 		driver_.get(url_)
 		WebDriverWait wait = new WebDriverWait(driver_, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')));
-		BufferedImage image = ScreenshotDriver.takeEntirePageImage(driver_, 100)
+		ScreenshotDriver.Options options = new ScreenshotDriver.Options.Builder().timeout(100).devicePixelRatio(2.0f).build()
+		BufferedImage image = ScreenshotDriver.takeEntirePageImage(driver_, options)
 		assertNotNull("image is null", image)
 	}
 
@@ -124,7 +129,8 @@ class ScreenshotDriverTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector('img#site-logo')))
 		WebElement logo = driver_.findElement(By.cssSelector('img#site-logo'))
 		Path output = workdir_.resolve("test_saveEntirePageImage.png")
-		ScreenshotDriver.saveEntirePageImage(driver_, output.toFile(), 100)
+		ScreenshotDriver.Options options = new ScreenshotDriver.Options.Builder().timeout(100).devicePixelRatio(2.0f).build()
+		ScreenshotDriver.saveEntirePageImage(driver_, output.toFile(), options)
 		assertTrue("${output.toString()} does not exist", Files.exists(output))
 	}
 
