@@ -178,7 +178,7 @@ class ScreenshotDriver {
 		Screenshot screenshot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
 				shootingStrategy(
-					ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout)).
+				ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout)).
 				takeScreenshot(webDriver, webElement)
 		return screenshot.getImage()
 	}
@@ -199,7 +199,7 @@ class ScreenshotDriver {
 		AShot aShot = new AShot().
 				coordsProvider(new WebDriverCoordsProvider()).
 				shootingStrategy(
-					ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout))
+				ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), timeout))
 		for (By by : byList) {
 			aShot = aShot.addIgnoredElement(by)
 			//println "added ignored element ${by}"
